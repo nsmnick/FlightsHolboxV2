@@ -1,0 +1,23 @@
+composer.phar
+.env
+.DS_Store
+/vendor/
+/node_modules/
+
+# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
+# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
+# composer.lock
+
+/public/*
+!/public/.htaccess
+!/public/wp-config.php
+!/public/wp-content/
+!/public/wp-salt.php
+
+/public/wp-content/*
+# !/public/wp-content/uploads/
+!/public/wp-content/themes/
+
+/public/wp-content/themes/*
+!/public/wp-content/themes/flightsholbox/
+/public/wp-content/themes/flightsholbox/dist/

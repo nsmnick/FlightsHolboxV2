@@ -1,0 +1,31 @@
+@use "sass:math";
+@use "sass:color";
+
+@mixin set-vars($variables, $prefix: pf) {
+  :root {
+    @each $name, $value in $variables {
+      --#{$prefix}--#{$name}: #{$value};
+    }
+  }
+}
+
+@function get-var($name, $prefix: pf) {
+  @return var(--#{$prefix}--#{$name});
+}
+
+@function getrgb($color) {
+  @return #{red($color)} + " " + #{green($color)} + " " + #{blue($color)};
+}
+
+@function getcolor($name) {
+  @return get-var($name, "color");
+}
+
+@function getcolorrgb($name) {
+  @return get-var($name, "color-rgb");
+}
+
+@function to-rem($value) {
+  $rem-value: math.div($value, 16) + rem;
+  @return $rem-value;
+}

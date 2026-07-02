@@ -1,0 +1,131 @@
+.no-wrap {
+  white-space: nowrap;
+}
+
+.hide-mobile {
+  display: none !important;
+  background-color: red;
+
+  @include bp(lap) {
+    display: unset !important;
+  }
+}
+
+.hide-desktop {
+  display: unset !important;
+  background-color: Green;
+  @include bp(lap) {
+    display: none !important;
+  }
+}
+
+// Spacing
+
+.pt-40 {
+  padding-top: 40px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-60 {
+  margin-top: 60px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+// Styles for content areas across site
+
+.image-wrapper {
+  display: block;
+  margin: 1rem auto;
+
+  &--500 {
+    max-width: 50rem;
+  }
+
+  &--600 {
+    max-width: 60rem;
+  }
+
+  &--800 {
+    max-width: 80rem;
+  }
+
+  &--900 {
+    max-width: 90rem;
+  }
+}
+
+ul.styled-list {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+
+  li {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+
+    &:before {
+      content: "";
+      display: block;
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 50%;
+      background: $c-body-text;
+      position: absolute;
+      top: 1rem;
+      left: 0;
+    }
+
+    ul {
+      li {
+        padding-left: 1rem;
+
+        &:before {
+          content: "-";
+          display: block;
+          height: 0.5rem;
+          width: 0.5rem;
+          background-color: inherit;
+          border-radius: none;
+          //background: red;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  &--white {
+    li {
+      color: getcolor("white");
+
+      &:before {
+        background: getcolor("white");
+      }
+    }
+  }
+}

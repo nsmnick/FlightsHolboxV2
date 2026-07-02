@@ -1,0 +1,63 @@
+// @font-face {
+//   font-family: "montserrat";
+//   src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf") format("opentype");
+
+//   font-style: normal;
+//   font-display: auto;
+//   font-stretch: normal;
+//   -webkit-font-smoothing: antialiased;
+// }
+
+@font-face {
+  font-family: "montserrat";
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+    format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 200;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "montserrat";
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+    format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "montserrat";
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+    format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "montserrat";
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+    format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "montserrat";
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+    format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 800;
+  font-stretch: normal;
+}
+
+.tk-montserrat {
+  font-family: "montserrat", sans-serif;
+}

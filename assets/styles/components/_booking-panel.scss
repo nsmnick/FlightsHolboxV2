@@ -1,0 +1,141 @@
+.booking-panel {
+  background-color: $color-fh-navy;
+  position: relative;
+  z-index: 10;
+  padding: 28px 0 24px;
+
+  @include bp(lap) {
+    padding: 30px 0;
+  }
+
+  .container {
+    max-width: 1100px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @include bp(lap) {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+
+    &--button {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__label {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: get-font-family("main");
+    font-size: to-rem(11);
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+  }
+
+  // Shared styles for the generated <select> elements
+  select,
+  &__select {
+    width: 100%;
+    background-color: $color-white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: #888;
+    font-family: get-font-family("main");
+    font-size: to-rem(15);
+    padding: 12px 36px 12px 12px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s ease;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px 7px;
+
+    &:focus {
+      outline: none;
+      border-color: $color-fh-gold;
+    }
+
+    option {
+      background-color: $color-white;
+      color: $color-black;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    background-color: $color-fh-gold;
+    color: $color-black;
+    border: none;
+    border-radius: 4px;
+    font-family: get-font-family("main");
+    font-size: to-rem(14);
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: $color-black;
+      color: $color-fh-gold;
+    }
+
+    @include bp(lap) {
+      width: auto;
+      padding: 12px 36px;
+    }
+  }
+}
+
+.search-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  .search-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: get-font-family("main");
+    font-size: to-rem(13);
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    &::after {
+      content: "→";
+      font-size: to-rem(14);
+    }
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+}

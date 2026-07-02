@@ -1,0 +1,9 @@
+@mixin lhCrop($line-height) {
+  &::before {
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+    margin-top: calc((#{$line-height}px * 0.18) * -1);
+  }
+}

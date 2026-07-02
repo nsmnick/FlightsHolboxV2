@@ -1,0 +1,77 @@
+@mixin wysiwyg-styles($color: #ffffff) {
+  h2 {
+    color: $color;
+    font-size: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: $color;
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    color: $color;
+    font-size: 1.6rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  img {
+    display: block;
+    margin: 2rem auto 2rem;
+    max-width: 40rem;
+  }
+
+  ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    font-weight: 200;
+
+    li {
+      padding-left: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      font-weight: 200;
+
+      &:before {
+        content: '';
+        display: block;
+        height: 0.5rem;
+        width: 0.5rem;
+        border-radius: 50%;
+        background: $color;
+        position: absolute;
+        top: 1.2rem;
+        left: 0;
+      }
+
+      ul {
+        font-weight: 200;
+
+        li {
+          padding-left: 1rem;
+          font-weight: 200;
+
+          &:before {
+            content: '-';
+            display: block;
+            height: 0.5rem;
+            width: 0.5rem;
+            background-color: inherit;
+            border-radius: none;
+            background: $color;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}

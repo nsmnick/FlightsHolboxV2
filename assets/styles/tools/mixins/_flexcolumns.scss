@@ -1,0 +1,19 @@
+@mixin flex-columns($gap, $columns: 1) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: to-rem($gap);
+
+  > * {
+    @if $columns == 1 {
+      flex: 0 0 100%;
+    } @else {
+      flex: 0
+        0
+        calc((100% / $columns) - (to-rem($gap) * (($columns - 1) / $columns)));
+    }
+  }
+
+  & {
+    @content;
+  }
+}

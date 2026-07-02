@@ -1,0 +1,89 @@
+.share-container {
+  margin-top: 40px;
+
+  p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.social-channels {
+  display: flex;
+
+  flex-direction: column;
+  @include bp(lap) {
+    flex-direction: row;
+  }
+
+  align-items: center;
+  margin-bottom: 10px;
+
+  &__col {
+    flex: 0 0 auto;
+    margin-bottom: 10px;
+    @include bp(lap) {
+      margin-bottom: 0;
+    }
+
+    span {
+      display: none;
+      @include bp(lap) {
+        display: inline;
+        padding: 0 5px;
+      }
+    }
+  }
+  .social-icon {
+    height: 26px;
+    width: 26px;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    margin-right: 0px;
+    margin-top: 20px;
+    @include bp(lap) {
+      margin-top: 2px;
+      margin-right: 10px;
+    }
+    line-height: 1;
+
+    &--facebook {
+      background-image: url("../images/socials/icon-facebook.svg");
+    }
+
+    &--instagram {
+      background-image: url("../images/socials/icon-instagram.svg");
+    }
+
+    &--x {
+      background-image: url("../images/socials/icon-x.svg");
+    }
+
+    &--whatsapp {
+      background-image: url("../images/socials/icon-Whatsapp.svg");
+    }
+
+    &--email {
+      background-image: url("../images/socials/icon-email.svg");
+    }
+  }
+
+  a {
+    //height: 26px;
+    font-size: to-rem(16);
+    margin: 0;
+    //line-height: 1;
+  }
+
+  &--row {
+    flex-direction: row;
+    @include bp(lap) {
+      flex-direction: row;
+    }
+
+    .social-icon {
+      margin-right: 10px;
+    }
+  }
+}

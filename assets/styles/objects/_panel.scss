@@ -1,0 +1,12 @@
+.panel {
+  background-color: getcolor("white");
+  padding: 80px 0;
+
+  @include bp(desk) {
+    padding: 100px 0;
+  }
+
+  @include bp(wide) {
+    padding: 120px 0;
+  }
+}

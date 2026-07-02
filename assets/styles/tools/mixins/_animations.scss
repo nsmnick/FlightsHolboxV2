@@ -1,0 +1,134 @@
+@mixin anim-fade-in($duration: 2s, $delay: 0.4s, $timing: ease-out) {
+  // opacity: 1;
+  // transition: opacity $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transition: none;
+  // }
+}
+
+@mixin anim-fade-up(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 3rem,
+  $timing: ease-out
+) {
+  // opacity: 1;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateY(#{$distance});
+  //   transition: none;
+  // }
+}
+
+@mixin anim-fade-down(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 3rem,
+  $timing: ease-out
+) {
+  // opacity: 1;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateY(-#{$distance});
+  //   transition: none;
+  // }
+}
+
+@mixin anim-fade-right(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 3rem,
+  $timing: ease-out
+) {
+  // opacity: 1;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateX($distance);
+  //   transition: none;
+  // }
+}
+
+@mixin anim-fade-left(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 3rem,
+  $timing: ease-out
+) {
+  // opacity: 1;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateX(-#{$distance});
+  //   transition: none;
+  // }
+}
+
+@mixin anim-down-rotate(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 2rem,
+  $timing: ease-out,
+  $rotate: 20deg
+) {
+  // opacity: 1;
+  // transform-origin: center;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateY(-#{$distance}) rotate($rotate);
+  //   transition: none;
+  // }
+}
+
+@mixin anim-left-rotate(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 2rem,
+  $timing: ease-out,
+  $rotate: 20deg
+) {
+  // opacity: 1;
+  // transform-origin: center;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateX(#{$distance}) rotate($rotate);
+  //   transition: none;
+  // }
+}
+
+@mixin anim-right-rotate(
+  $duration: 1s,
+  $delay: 0.4s,
+  $distance: 2rem,
+  $timing: ease-out,
+  $rotate: 20deg
+) {
+  // opacity: 1;
+  // transform-origin: center;
+  // transition: opacity $duration $timing $delay,
+  //   transform $duration $timing $delay;
+
+  // &.is-hidden {
+  //   opacity: 0;
+  //   transform: translateX(-#{$distance}) rotate($rotate);
+  //   transition: none;
+  // }
+}

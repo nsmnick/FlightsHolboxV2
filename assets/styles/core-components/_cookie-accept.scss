@@ -1,0 +1,219 @@
+$background-color: getcolor("white");
+$boxshadow: getcolor("black");
+
+$text-color: getcolor("black");
+$hyperlink-color: getcolor("black");
+$hyperlink-hover-color: getcolor("dark-grey");
+
+$button-border-color: getcolor("black");
+$button-text-color: getcolor("white");
+$button-background-color: getcolor("black");
+$button-background-hover-color: getcolor("light-grey");
+
+$checkbox-border-color: getcolor("black");
+$checkbox-tick-color: getcolor("black");
+
+.cookie-accept {
+  display: none;
+  background-color: $background-color;
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  border: 0;
+  outline: 0;
+  box-shadow: 0 4px 2rem $boxshadow;
+  position: fixed;
+  inset-block: auto 0;
+  z-index: 10000;
+  box-sizing: border-box;
+
+  @include bp(lap) {
+    padding: 30px 40px;
+  }
+
+  &[open] {
+    display: block;
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &__container {
+    max-width: 1584px;
+    margin: 0 auto;
+  }
+
+  &__preface {
+    display: none;
+
+    &--show {
+      display: block;
+    }
+  }
+
+  &__manage {
+    display: none;
+
+    &--show {
+      display: block;
+    }
+  }
+
+  &__content {
+    margin-bottom: 20px;
+    color: $text-color;
+
+    @include bp(lap) {
+      margin-bottom: 30px;
+    }
+
+    > *:first-child {
+      margin-top: 0;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      margin-bottom: 15px;
+      font-size: to-rem(30);
+      color: $text-color;
+    }
+
+    h4 {
+      font-size: to-rem(16);
+      margin: 0 0 0.5rem;
+      color: $text-color;
+    }
+
+    h5 {
+      font-size: to-rem(20);
+      margin: 0 0 0.5rem;
+      font-weight: 500;
+      color: $text-color;
+    }
+
+    a {
+      color: $hyperlink-color;
+    }
+
+    p {
+      font-size: to-rem(15);
+      line-height: 1.3;
+      color: $text-color;
+      @include bp(lap) {
+        font-size: to-rem(17);
+      }
+    }
+  }
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+
+    @include bp(lap) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__button {
+    display: block;
+    background-color: $button-background-color;
+    color: $button-text-color;
+    text-transform: uppercase;
+    min-width: 200px;
+    border: 1px solid $button-border-color;
+    border-radius: 4px;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+    padding: 11px 20px 12px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 1;
+    white-space: nowrap;
+    font-size: to-rem(16);
+
+    font-weight: 400;
+    border-radius: 30px;
+
+    @include bp($button_transition_width) {
+      transition: all 200ms ease-in-out forwards;
+    }
+
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $button-background-hover-color;
+      color: getcolor("charcoal");
+    }
+  }
+
+  &__checkbox-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    input[type="checkbox"] {
+      display: block;
+      appearance: none;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    label {
+      display: block;
+      position: relative;
+      padding-left: 40px;
+      font-size: to-rem(14);
+      line-height: 1.3;
+      cursor: pointer;
+      @include bp(lap) {
+        font-size: to-rem(16);
+      }
+
+      span {
+        font-weight: 500;
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $checkbox-border-color;
+        position: absolute;
+        //top: 50%;
+        left: 0;
+        top: 0px;
+
+        // @include bp(lap) {
+        //   transform: translateY(-50%);
+        //   top: 50%;
+        // }
+      }
+    }
+
+    position: relative;
+    input:checked + label::after {
+      content: "";
+      display: block;
+      width: 5px;
+      height: 12px;
+      border: solid $checkbox-tick-color;
+      position: absolute;
+      //top: calc(50% + 2px);
+      top: 16px;
+      left: -3px;
+
+      border-width: 0 2px 2px 0;
+      transform: rotate(40deg) translateY(calc(-50% - 10px));
+    }
+  }
+}

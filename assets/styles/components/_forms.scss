@@ -1,0 +1,246 @@
+.gf-container {
+  &.border {
+    border: solid 1px getcolor("black");
+    border-radius: $border-radius-lg;
+    background-color: getcolor("white");
+    padding: 30px;
+  }
+
+  // remove asterick ledgend
+  .gform_required_legend {
+    display: none;
+  }
+
+  .gform_confirmation_message {
+    text-align: center !important;
+    color: getcolor("black") !important;
+    border: 2px solid getcolor("purple") !important;
+    border-radius: $border-radius-lg !important;
+    padding: 30px !important;
+
+    p {
+      text-align: center !important;
+    }
+  }
+
+  p {
+    text-align: left;
+    margin-bottom: 0;
+  }
+  p.privacy-text {
+    margin-top: 40px;
+    font-size: to-rem(12);
+    text-align: center;
+  }
+
+  .gform_validation_errors,
+  .gform_submission_error {
+    border-radius: 0rem !important;
+    background-color: getcolor("white") !important;
+    border: none !important;
+    padding: 10px 20px !important;
+  }
+  .validation_message {
+    border-radius: 0rem !important;
+    background-color: getcolor("white") !important;
+    border: none !important;
+    padding: 10px 20px !important;
+  }
+
+  // .gform-theme--foundation {
+  //   --gf-form-gap-y: 3rem;
+  // }
+
+  .gform_wrapper {
+    .gform_body {
+      text-align: left;
+    }
+
+    .gform_fields {
+      row-gap: 20px !important;
+    }
+
+    .gfield_html {
+      margin-top: 4rem;
+      color: getcolor("black");
+      text-align: center;
+      font-size: to-rem(15) !important;
+    }
+
+    .gfield_label {
+      padding-top: 0rem !important;
+      color: getcolor("black") !important;
+      font-weight: 600 !important;
+      padding-bottom: 0px !important;
+      text-align: left !important;
+      margin-bottom: 0px !important;
+      font-size: to-rem(17) !important;
+    }
+
+    .gfield_description {
+      a {
+        text-decoration: underline;
+      }
+    }
+
+    .gfield_required {
+      color: getcolor("red") !important;
+      font-size: to-rem(14) !important;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="checkbox"] {
+      background-color: transparent;
+      color: getcolor("black") !important;
+      border: 1px solid getcolor("black") !important;
+      background-color: getcolor("light-grey") !important;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+      padding: 12px !important;
+      font-size: to-rem(17) !important;
+      transition: border 0.2s ease;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border: solid 1px getcolor("purple") !important;
+      outline: none;
+      opacity: 1;
+    }
+
+    // input[type="radio"] {
+    //   background-color: transparent;
+    //   color: getcolor("black") !important;
+    //   border: 1px solid getcolor("black") !important;
+    //   box-shadow: none !important;
+    //   font-size: to-rem(18) !important;
+    // }
+
+    // .gfield_checkbox {
+    //   display: inline-block !important;
+    //   margin-right: 20px;
+
+    //   .gchoice {
+    //     width: fit-content;
+
+    //     margin-right: 20px;
+    //     margin-bottom: 10px;
+    //   }
+    // }
+
+    // .ginput_container_consent {
+    //   input[type="checkbox"] {
+    //     border: 1px solid getcolor("black") !important;
+    //   }
+    // }
+
+    select {
+      background-color: transparent;
+      color: getcolor("black") !important;
+      border: 1px solid getcolor("black") !important;
+      background-color: getcolor("light-grey") !important;
+      border-radius: 8px !important;
+      padding: 12px !important;
+      box-shadow: none !important;
+      font-size: to-rem(17) !important;
+    }
+
+    .gfield-choice-input {
+      border: none !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: getcolor("black");
+      font-size: to-rem(17) !important;
+    }
+
+    textarea {
+      border: 1px solid getcolor("black") !important;
+      background-color: transparent;
+      color: getcolor("black") !important;
+      padding: 12px !important;
+      //height: 30px !important;
+      background-color: getcolor("light-grey") !important;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+      font-size: to-rem(17) !important;
+    }
+
+    .gform_ajax_spinner {
+      box-sizing: border-box;
+      margin-top: 2.7rem;
+      margin-left: 16rem;
+      border: 0.3rem solid rgb(getcolorrgb("black") / 100%);
+      border-left: 0.3rem solid rgb(getcolorrgb("black") / 0%);
+      border-top: 0.3rem solid rgb(getcolorrgb("black") / 150%);
+      border-right: 0.3rem solid rgb(getcolorrgb("black") / 50%);
+      animation: spinner 1.1s infinite linear;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      z-index: 1;
+    }
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .gform-footer {
+    text-align: center;
+  }
+
+  .gform_button {
+    display: inline-block;
+    position: relative;
+
+    text-align: center;
+    text-decoration: none;
+    line-height: 1;
+    white-space: nowrap;
+    font-weight: 600 !important;
+    width: fit-content !important;
+
+    background-color: transparent !important;
+
+    color: getcolor("white") !important;
+    border: solid 2px getcolor("purple") !important;
+    background: getcolor("purple") !important;
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px !important;
+    transition: 0.1s all ease-in-out !important;
+
+    padding: 7px 20px 8px !important;
+    font-size: to-rem(16) !important;
+    //min-width: 220px;
+    @include bp(lap) {
+      padding: 15px 20px 16px !important;
+      font-size: to-rem(20) !important;
+    }
+
+    display: block;
+    margin: 0 auto !important;
+
+    &:hover {
+      //transition: 0.1s all ease-in-out;
+      background-color: getcolor("white") !important;
+      border: solid 2px getcolor("purple") !important;
+      color: getcolor("purple") !important;
+    }
+
+    &:focus {
+      outline: 0;
+      border-color: getcolor("purple") !important;
+    }
+  }
+}

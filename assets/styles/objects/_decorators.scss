@@ -1,0 +1,11 @@
+.wave-decorator {
+  width: 100%;
+  aspect-ratio: 1/0.068;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &--white-light-grey {
+    background-image: url("../images/wave-white-light-grey.jpg");
+  }
+}

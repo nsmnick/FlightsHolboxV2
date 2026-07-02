@@ -1,0 +1,45 @@
+// Site Colours
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+$color-light-grey: #f1f1ee;
+$color-grey: #d9d9d6;
+$color-dark-grey: #888888;      // muted/secondary text (original #888)
+
+// Flights Holbox brand colours
+$color-fh-gold: #e6af2a;        // accent, CTA buttons
+$color-fh-navy: #00467b;        // booking panel background
+$color-fh-dark: #1b161c;        // nav/header background
+$color-fh-charcoal: #464749;    // footer background
+
+// Generic Colours
+$c-body-text: $color-black;
+$c_hyperlink: $color-black;
+$c_hyperlink_hover: $color-black;
+
+$color-rgb-white: getrgb($color-white);
+$color-rgb-black: getrgb($color-black);
+
+@include set-vars(
+  (
+    "white": $color-white,
+    "black": $color-black,
+    "grey": $color-grey,
+    "dark-grey": $color-dark-grey,
+    "light-grey": $color-light-grey,
+    "fh-gold": $color-fh-gold,
+    "fh-navy": $color-fh-navy,
+    "fh-dark": $color-fh-dark,
+    "fh-charcoal": $color-fh-charcoal,
+  ),
+  "color"
+);
+
+@include set-vars(
+  (
+    "white": $color-rgb-white,
+    "black": $color-rgb-black,
+  ),
+  "color-rgb"
+);

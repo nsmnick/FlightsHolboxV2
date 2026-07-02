@@ -1,0 +1,237 @@
+// Styles for all WYSIWYG content areas.
+
+.wysiwyg-container {
+  //max-width: 1000px;
+  //margin: 0 auto 0;
+
+  h1 {
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 60px;
+
+    @include bp(wide) {
+      text-align: left;
+    }
+  }
+
+  h2 {
+    text-align: left;
+    margin-top: 26px;
+    margin-bottom: 16px;
+    letter-spacing: 3px;
+
+    @include bp(lap) {
+      margin-top: 34px;
+      margin-bottom: 22px;
+      font-size: to-rem(24);
+    }
+  }
+
+  // This is used on pages like terms and conditions where the h2 tag is the first in this section and does need a top margin.
+  > h2:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  h4 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  strong,
+  b {
+    font-weight: 700;
+  }
+
+  p:empty {
+    margin: 0;
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &--margin-top {
+    margin-top: 4rem;
+  }
+
+  .introduction-paragraph {
+    font-weight: 500;
+    font-size: to-rem(20);
+    line-height: 1.1;
+
+    @include bp(lap) {
+      font-size: to-rem(22);
+      line-height: 1.1;
+      //letter-spacing: -0.48px;
+    }
+  }
+
+  img {
+    display: block;
+    margin: 40px auto 40px;
+    max-width: 100%;
+    //border-radius: $border-radius-lg;
+  }
+
+  table {
+    border-collapse: collapse;
+
+    th {
+      font-weight: 400;
+      text-align: left;
+      border: solid 0.1rem rgba(255, 255, 255, 0.2);
+      padding: 5px;
+      @include bp(wide) {
+        padding: 10px;
+      }
+    }
+
+    td {
+      text-align: left;
+      font-weight: 300;
+      padding: 5px;
+      border: solid 0.1rem rgba(255, 255, 255, 0.2);
+      padding: 5px;
+      @include bp(lap) {
+        padding: 10px;
+      }
+    }
+  }
+
+  span.highlight {
+    color: getcolor("grey");
+    font-weight: 600;
+  }
+
+  blockquote {
+    margin: 100px 0px;
+    border-top: 1px solid getcolor("grey");
+    border-bottom: 1px solid getcolor("grey");
+
+    padding: 48px 0px;
+    padding-left: 16px;
+    position: relative;
+
+    @include bp(wide) {
+      padding: 56px 0px;
+    }
+
+    p {
+      font-size: to-rem(38);
+      line-height: to-rem(41);
+      margin: 0 0 32px;
+
+      @include bp(wide) {
+        font-size: to-rem(56);
+        line-height: 107%;
+        margin: 0 0 40px;
+      }
+    }
+
+    p:last-of-type {
+      margin: 0;
+      font-size: to-rem(21);
+      font-weight: 400;
+      line-height: to-rem(28);
+
+      @include bp(wide) {
+        font-size: to-rem(24);
+        line-height: to-rem(32);
+      }
+    }
+
+    &:before {
+      content: "“";
+      position: absolute;
+
+      left: 0px;
+      font-size: to-rem(41);
+      top: 54px;
+
+      @include bp(wide) {
+        font-size: to-rem(56);
+        left: -20px;
+        top: 70px;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 0;
+    padding-left: 10px;
+
+    li {
+      padding-left: 20px;
+      margin-bottom: 10px;
+      position: relative;
+
+      font-weight: 400;
+      @include bp(lap) {
+      }
+
+      &:before {
+        content: "";
+        display: block;
+        height: 5px;
+        width: 5px;
+        border-radius: 50%;
+        background: getcolor("black");
+        position: absolute;
+        top: 8px;
+        left: 0;
+        @include bp(lap) {
+          top: 10px;
+        }
+      }
+
+      ul {
+        font-weight: 400;
+
+        li {
+          padding-left: 10px;
+          font-weight: 400;
+
+          &:before {
+            content: "-";
+            display: block;
+            height: 5px;
+            width: 5px;
+            background-color: inherit;
+            border-radius: none;
+            background: $c-body-text;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  ol {
+    list-style: auto;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    font-weight: 400;
+
+    li {
+      padding-left: 5px;
+      margin-bottom: 15px;
+      position: relative;
+      font-weight: 400;
+    }
+  }
+}

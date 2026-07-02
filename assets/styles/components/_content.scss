@@ -1,0 +1,302 @@
+.content {
+  //
+  // Generic Component Classes
+  //
+
+  &.tp-none {
+    padding-top: 0px;
+    @include bp(lap) {
+      padding-top: 0px;
+    }
+  }
+
+  &.bp-none {
+    padding-bottom: 0px;
+    @include bp(lap) {
+      padding-bottom: 0px;
+    }
+  }
+
+  // Default
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  @include bp(lap) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  @include bp(desk) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  &.tp-large {
+    padding-top: 80px;
+    @include bp(lap) {
+      padding-top: 180px;
+    }
+    @include bp(desk) {
+      padding-top: 360px;
+    }
+  }
+
+  &.bp-large {
+    padding-bottom: 80px;
+    @include bp(lap) {
+      padding-bottom: 180px;
+    }
+    @include bp(desk) {
+      padding-bottom: 360px;
+    }
+  }
+
+  &.tp-small {
+    padding-top: 40px;
+    @include bp(lap) {
+      padding-top: 60px;
+    }
+    @include bp(desk) {
+      padding-top: 60px;
+    }
+  }
+
+  &.bp-small {
+    padding-bottom: 40px;
+    @include bp(lap) {
+      padding-bottom: 60px;
+    }
+    @include bp(desk) {
+      padding-bottom: 60px;
+    }
+  }
+
+  //
+  // Panel Decoration
+  //
+
+  &.br-all {
+    border-radius: $border-radius-lg;
+  }
+
+  &.br-bottom,
+  &.wave-top-br-bottom {
+    border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  }
+
+  &.br-top {
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+  }
+
+  //
+  // Generic Styles
+  //
+
+  .breadcrumb {
+    font-family: get-font-family("main");
+    font-weight: 400;
+    font-size: to-rem(12);
+    @include bp(lap) {
+      font-size: to-rem(14);
+    }
+    letter-spacing: -0.28px;
+
+    display: block;
+    color: getcolor("black");
+    position: relative;
+    z-index: 100;
+
+    a {
+      color: getcolor("black");
+      text-decoration: none;
+      font-weight: 400;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  p.meta-heading {
+    color: getcolor("black");
+    text-transform: uppercase;
+    font-size: 16px;
+    @include bp(lap) {
+      font-size: 20px;
+    }
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .main-heading {
+    line-height: 1.3;
+    font-weight: 600;
+    margin: 0 auto 30px;
+    letter-spacing: -0.59344px;
+
+    @include bp(lap) {
+      padding: 0px;
+    }
+  }
+
+  // span.cbar {
+  //   position: relative;
+  //   white-space: nowrap;
+  //   &::before {
+  //     content: "";
+  //     z-index: -1;
+  //     position: absolute;
+  //     left: 0;
+  //     bottom: -3px;
+  //     height: 5px;
+  //     width: 100%;
+  //     background: linear-gradient(
+  //       to right,
+  //       getcolor("yellow") 0%,
+  //       getcolor("yellow") 25%,
+  //       getcolor("green") 25%,
+  //       getcolor("green") 50%,
+  //       getcolor("red") 50%,
+  //       getcolor("red") 75%,
+  //       getcolor("blue") 75%,
+  //       getcolor("blue") 100% /* Blue ends at 100% */
+  //     );
+  //   }
+  // }
+
+  span.scribble {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+    white-space: nowrap;
+    //background-color: red;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      z-index: -1;
+      bottom: 2px; /* adjust for desired gap */
+      /* Full viewport width */
+      width: 100%;
+      height: 15px;
+
+      background-image: url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' width='100vw' height='24' viewBox='0 0 100 24' preserveAspectRatio='none'><path d='M0 16 Q 50 13, 100 16' \
+      stroke='%23f6e600' stroke-width='9' fill='none' stroke-linecap='round' stroke-opacity='0.85' /></svg>");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      /* Animation */
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    aspect-ratio: 1/0.562;
+    height: auto;
+    margin: 0 auto;
+
+    @include bp(lap) {
+      max-width: 1100px;
+    }
+
+    @include bp(wide) {
+      max-width: unset;
+    }
+
+    &--with-margin {
+      margin-bottom: 60px;
+      @include bp(lap) {
+        margin-bottom: 80px;
+      }
+
+      @include bp(wide) {
+        margin-bottom: 130px;
+      }
+    }
+
+    &--square-aspect {
+      aspect-ratio: 1/0.8;
+      max-width: 550px;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      object-fit: cover;
+      object-position: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      left: 0;
+    }
+  }
+
+  //
+  // Colours
+  //
+
+  &.bgc-stone {
+    background-color: getcolor("stone");
+  }
+
+  &.bgc-light-grey {
+    background-color: getcolor("light-grey");
+  }
+
+  &.bgc-mid-grey {
+    background-color: getcolor("mid-grey");
+  }
+
+  &.bgc-black {
+    background-color: getcolor("black");
+  }
+
+  &.bgc-white {
+    background-color: getcolor("white");
+  }
+
+  .c-red {
+    color: getcolor("red");
+  }
+
+  .c-blue {
+    color: getcolor("blue");
+  }
+
+  .c-yellow {
+    color: getcolor("yellow");
+  }
+
+  .c-green {
+    color: getcolor("green");
+  }
+
+  .c-purple {
+    color: getcolor("purple");
+  }
+
+  .c-black {
+    color: getcolor("black");
+  }
+
+  //
+  // Include Panels
+  //
+
+  @import "404-panel";
+}

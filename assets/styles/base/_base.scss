@@ -1,0 +1,142 @@
+html {
+  box-sizing: border-box;
+  overflow: hidden auto;
+  scroll-behavior: smooth;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a[x-apple-data-detectors="true"] {
+    color: inherit !important;
+    text-decoration: inherit !important;
+  }
+}
+
+body {
+  // background-color: get-color("white");
+  font-family: get-font-family("main");
+  //overflow: hidden auto
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+  // pointer-events: auto !important;
+  font-weight: 400;
+  line-height: 1.1;
+
+  color: getcolor("black");
+
+  font-size: to-rem(16);
+  line-height: to-rem(25);
+  @include bp(lap) {
+    font-size: to-rem(17);
+    line-height: to-rem(22);
+  }
+
+  // position: relative;
+}
+
+h1 {
+  font-family: get-font-family("main");
+  font-size: to-rem(30);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.34px;
+
+  @include bp(lap) {
+    font-size: to-rem(40);
+  }
+
+  @include bp(desk) {
+    font-size: to-rem(48);
+  }
+}
+
+h2 {
+  font-family: get-font-family("main");
+
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0 0 26px;
+
+  font-size: to-rem(24);
+  letter-spacing: -0.65752px; //background-color: red;
+  @include bp(lap) {
+    font-size: to-rem(33);
+  }
+
+  @include bp(desk) {
+    font-size: to-rem(33);
+  }
+}
+
+h3 {
+  font-family: get-font-family("main");
+  font-size: to-rem(20);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+
+  @include bp(lap) {
+    font-size: to-rem(22);
+  }
+
+  @include bp(desk) {
+    font-size: to-rem(22);
+  }
+}
+
+h4 {
+  font-size: to-rem(40);
+  font-weight: 400;
+
+  @include bp(desk) {
+    font-size: to-rem(64);
+  }
+}
+
+h5 {
+  font-size: to-rem(30);
+  font-weight: 400;
+  margin: 0;
+  line-height: 1;
+
+  @include bp(desk) {
+    font-size: to-rem(56);
+  }
+}
+
+h6 {
+  font-size: to-rem(20);
+  font-weight: 400;
+
+  @include bp(desk) {
+    font-size: to-rem(40);
+  }
+}
+
+p {
+  line-height: 1.5;
+  margin-top: 0;
+
+  &.description {
+    margin-bottom: 24px;
+  }
+}
+
+a {
+  color: getcolor("black");
+  text-decoration: underline;
+  font-weight: 600;
+
+  &:hover {
+    color: getcolor("fh-navy");
+    text-decoration: underline;
+  }
+}
+
+strong,
+b {
+  font-weight: 700;
+}

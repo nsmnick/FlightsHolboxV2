@@ -1,0 +1,40 @@
+@charset 'UTF-8';
+
+/* ITCSS style config
+
+- Settings - Globally-available settings, config switches, brand colours, etc.
+- Tools - Globally-available tools, public mixins, and helper functions.
+- Generic - Ground zero styles, low-specificity, far-reaching, resets, Normalize.css, etc.
+- Base - Unclassed HTML elements, H1–H6, basic links, lists, etc. Last layer we see type selectors (e.g. a {}, blockquote {}).
+- Objects - OOCSS, design patterns, no cosmetics. Begin using classes exclusively, agnostically named (e.g. .ui-list {}).
+- Components - Designed pieces of UI. Still only using classes. More explicitly named (e.g. .products-list {}).
+- Trumps - Overrides, helpers, utilities. Only affect one piece of the DOM at a time. Usually carry !important.
+*/
+
+// Settings
+@import "setup/setup";
+
+// Tools
+@import "tools/tools";
+
+// Generic
+@import "generic/generic";
+
+// Base
+@import "base/base";
+@import "base/helpers";
+
+// Objects
+@import "objects/objects";
+
+// Core Components
+@import "core-components/core-components";
+
+// Components
+@import "components/components";
+
+// Elements
+@import "elements/elements";
+
+// Trumps
+@import "trumps/trumps";

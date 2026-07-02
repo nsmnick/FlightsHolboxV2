@@ -1,0 +1,37 @@
+// This is the outer container that all panels that are not full width should have.  When they get to this size they have
+// no padding.
+.outer-container {
+  display: block;
+  width: auto;
+  float: none;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 0;
+}
+
+// This is the outer container that all panels that are not full width should have.  When they get to this size they have
+// no padding.
+.container {
+  display: block;
+  width: auto;
+  float: none;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @include bp(lap) {
+    max-width: 1470px;
+    padding: 0 64px;
+  }
+
+  @include bp(desk) {
+    max-width: 1400px;
+    padding: 0 85px;
+  }
+
+  &--narrow {
+    @include bp(lap) {
+      max-width: 1000px;
+      padding: 0 16px;
+    }
+  }
+}
