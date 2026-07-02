@@ -1,0 +1,74 @@
+@import "../setup/colors";
+
+.feature-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 480px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+
+    &__item {
+        flex: 1;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        background-color: $color-fh-dark;
+        min-height: 360px;
+
+        @media (min-width: 768px) {
+            min-height: 480px;
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.1) 100%
+        );
+    }
+
+    &__content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    &__heading {
+        color: $color-white;
+        font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    &__btn {
+        display: inline-block;
+        padding: 0.65rem 1.5rem;
+        background-color: $color-fh-gold;
+        color: $color-black;
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-decoration: none;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            background-color: $color-black;
+            color: $color-fh-gold;
+        }
+    }
+}

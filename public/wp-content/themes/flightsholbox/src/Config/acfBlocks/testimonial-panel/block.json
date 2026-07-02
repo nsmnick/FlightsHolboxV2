@@ -1,0 +1,17 @@
+{
+  "name": "acf/testimonial-panel",
+  "title": "Testimonial Panel",
+  "description": "Google review rating summary plus featured customer testimonials, with Review/AggregateRating schema markup",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3z' stroke='#000' stroke-width='2' stroke-linejoin='round'/></svg>",
+  "keywords": ["testimonial", "review", "google", "rating", "schema"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "testimonial-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

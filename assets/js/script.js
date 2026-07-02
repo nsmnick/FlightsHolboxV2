@@ -7,6 +7,7 @@ import initCookieAccept from "./cookie-accept";
 import initSliders from "./sliders";
 // import initHomeHeroVideo from "./home-hero-video";
 import initAccordion from "./accordion";
+import initFaqAccordions from "./faq-accordion";
 import initToggleContent from "./toggle-content";
 
 function ready(fn) {
@@ -25,6 +26,7 @@ ready(() => {
   featurePanel();
   initSliders();
   initAccordion();
+  initFaqAccordions();
   initToggleContent();
 
   let lastScrollY = window.scrollY;

@@ -1,0 +1,129 @@
+// Two hand-drawn blob outlines used as CSS masks — layered and rotated
+// differently per item so the "watercolor" edge reads as organic rather
+// than a perfect ring. Fill must be white: mask luminance treats white
+// as fully opaque, black as fully transparent.
+$image-column-panel-blob-1: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='white' d='M100,8 C136,4 172,24 186,58 C200,90 194,128 172,154 C150,180 114,196 80,190 C46,184 14,160 6,126 C-2,90 10,52 40,28 C58,14 80,11 100,8 Z'/%3E%3C/svg%3E";
+$image-column-panel-blob-2: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='white' d='M96,4 C130,10 168,30 184,64 C198,96 188,134 162,158 C136,182 98,192 64,182 C30,172 4,144 2,108 C0,74 20,40 52,20 C66,10 80,2 96,4 Z'/%3E%3C/svg%3E";
+
+.image-column-panel {
+  padding: 60px 0;
+
+  @include bp(desk) {
+    padding: 100px 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px 40px;
+    max-width: 420px;
+    margin: 0 auto;
+    justify-items: center;
+  }
+
+  &__grid--cols-2 {
+    @include bp(lap) {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 720px;
+      gap: 60px;
+    }
+  }
+
+  &__grid--cols-3 {
+    @include bp(lap) {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: none;
+      gap: 60px 40px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1;
+
+    &:nth-child(2) .image-column-panel__watercolor {
+      transform: rotate(12deg) scale(1.03);
+    }
+
+    &:nth-child(3) .image-column-panel__watercolor {
+      transform: rotate(-14deg) scale(0.97);
+    }
+  }
+
+  &__watercolor {
+    position: absolute;
+    inset: -8%;
+    z-index: 1;
+    filter: blur(3px);
+    opacity: 0.92;
+
+    mask-image: url($image-column-panel-blob-1);
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: url($image-column-panel-blob-1);
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 6%;
+      background-color: inherit;
+      opacity: 0.65;
+      transform: rotate(24deg);
+
+      mask-image: url($image-column-panel-blob-2);
+      mask-size: 100% 100%;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-image: url($image-column-panel-blob-2);
+      -webkit-mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+    }
+
+    &.bgc-gold {
+      background-color: getcolor("fh-gold");
+    }
+
+    &.bgc-navy {
+      background-color: getcolor("fh-navy");
+    }
+
+    &.bgc-dark {
+      background-color: getcolor("fh-dark");
+    }
+
+    &.bgc-charcoal {
+      background-color: getcolor("fh-charcoal");
+    }
+
+    &.bgc-white {
+      background-color: getcolor("white");
+    }
+  }
+
+  &__photo {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}

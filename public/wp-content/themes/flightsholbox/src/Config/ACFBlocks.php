@@ -22,6 +22,11 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/hero-panel');
         register_block_type(__DIR__ . '/acfBlocks/booking-panel');
         register_block_type(__DIR__ . '/acfBlocks/text-panel');
+        register_block_type(__DIR__ . '/acfBlocks/video-panel');
+        register_block_type(__DIR__ . '/acfBlocks/faq-panel');
+        register_block_type(__DIR__ . '/acfBlocks/image-column-panel');
+        register_block_type(__DIR__ . '/acfBlocks/feature-panel');
+        register_block_type(__DIR__ . '/acfBlocks/testimonial-panel');
     }
 
     // Remove WP default blocks and allocate which blocks can be used by pages and posts by default.
@@ -40,6 +45,11 @@ class ACFBlocks
                     'acf/hero-panel',
                     'acf/booking-panel',
                     'acf/text-panel',
+                    'acf/video-panel',
+                    'acf/faq-panel',
+                    'acf/image-column-panel',
+                    'acf/feature-panel',
+                    'acf/testimonial-panel',
                 );
             }
         }

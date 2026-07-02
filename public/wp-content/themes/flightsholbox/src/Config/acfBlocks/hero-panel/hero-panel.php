@@ -16,9 +16,9 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                 <?php foreach ($slides as $slide) : ?>
                     <div
                         class="hero-slider__slide"
-                        style="background-image: url('<?php echo esc_url($slide['slide_image']['url']); ?>')"
+                        style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($slide['slide_image'], 'full')); ?>')"
                         role="img"
-                        aria-label="<?php echo esc_attr($slide['slide_image']['alt'] ?? ''); ?>"
+                        aria-label="<?php echo esc_attr(get_post_meta($slide['slide_image'], '_wp_attachment_image_alt', true)); ?>"
                     ></div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -32,10 +32,8 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
             <a href="<?php echo esc_url(site_url()); ?>" class="hero-panel__logo-link">
                 <img
                     class="hero-panel__logo"
-                    src="<?php echo esc_url($logo['url']); ?>"
-                    alt="<?php echo esc_attr($logo['alt'] ?: get_bloginfo('name')); ?>"
-                    width="<?php echo esc_attr($logo['width']); ?>"
-                    height="<?php echo esc_attr($logo['height']); ?>"
+                    src="<?php echo esc_url(wp_get_attachment_image_url($logo, 'full')); ?>"
+                    alt="<?php echo esc_attr(get_post_meta($logo, '_wp_attachment_image_alt', true) ?: get_bloginfo('name')); ?>"
                 >
             </a>
         <?php endif; ?>

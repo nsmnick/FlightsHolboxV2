@@ -1,11 +1,11 @@
 {
-    "key": "group_6a465246bbac6",
-    "title": "Hero Panel",
+    "key": "group_6a466110ebe90",
+    "title": "Image Column Panel",
     "fields": [
         {
-            "key": "field_6a465a79ac588",
-            "label": "Hero Slides",
-            "name": "hero_slides",
+            "key": "field_6a4661112ae27",
+            "label": "Images",
+            "name": "images",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -18,16 +18,16 @@
             },
             "layout": "table",
             "pagination": 0,
-            "min": 0,
-            "max": 0,
+            "min": 1,
+            "max": 3,
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_6a465a86ac589",
-                    "label": "Slide Image",
-                    "name": "slide_image",
+                    "key": "field_6a4661472ae28",
+                    "label": "Image",
+                    "name": "image",
                     "aria-label": "",
                     "type": "image",
                     "instructions": "",
@@ -49,16 +49,16 @@
                     "mime_types": "",
                     "allow_in_bindings": 0,
                     "preview_size": "medium",
-                    "parent_repeater": "field_6a465a79ac588"
+                    "parent_repeater": "field_6a4661112ae27"
                 }
             ]
         },
         {
-            "key": "field_6a465aa9ac58a",
-            "label": "Hero Heading",
-            "name": "hero_heading",
+            "key": "field_6a466faf740a1",
+            "label": "Border Colour",
+            "name": "border_colour",
             "aria-label": "",
-            "type": "text",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -67,59 +67,23 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
+            "choices": {
+                "gold": "Gold",
+                "navy": "Navy",
+                "dark": "Dark",
+                "charcoal": "Charcoal",
+                "white": "White"
+            },
+            "default_value": "white",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
             "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
             "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6a465ab2ac58b",
-            "label": "Hero Intro",
-            "name": "hero_intro",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6a465ac0ac58c",
-            "label": "Hero Logo",
-            "name": "hero_logo",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
+            "create_options": 0,
+            "save_options": 0
         }
     ],
     "location": [
@@ -127,7 +91,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/hero-panel"
+                "value": "acf\/image-column-panel"
             }
         ]
     ],
@@ -143,5 +107,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1782995658
+    "modified": 1783001081
 }

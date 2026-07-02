@@ -1,0 +1,17 @@
+{
+  "name": "acf/faq-panel",
+  "title": "FAQ Panel",
+  "description": "Accordion FAQ with question and answer repeater",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='12' cy='12' r='10' stroke='#000' stroke-width='2'/><path d='M12 8v1m0 3v4' stroke='#000' stroke-width='2' stroke-linecap='round'/></svg>",
+  "keywords": ["faq", "accordion", "questions", "answers"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "faq-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

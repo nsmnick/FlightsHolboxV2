@@ -1,0 +1,132 @@
+// Fractional star rating with no image assets: a grey 5-star baseline,
+// overlaid by a gold 5-star layer clipped to `--rating` (0–100%).
+.stars {
+  --rating: 100%;
+  position: relative;
+  display: inline-block;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: 2px;
+
+  &::before {
+    content: "★★★★★";
+    display: block;
+    color: getcolor("grey");
+  }
+
+  &::after {
+    content: "★★★★★";
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: var(--rating);
+    overflow: hidden;
+    white-space: nowrap;
+    color: getcolor("fh-gold");
+  }
+
+  &--small {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+}
+
+.testimonial-panel {
+  padding: 60px 0;
+
+  @include bp(desk) {
+    padding: 100px 0;
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &__summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  &__summary-text {
+    font-weight: 600;
+    color: getcolor("black");
+  }
+
+  &__summary-link {
+    color: getcolor("fh-navy");
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+
+    @include bp(lap) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp(desk) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+.testimonial-card {
+  margin: 0;
+  padding: 30px;
+  background-color: getcolor("light-grey");
+  border-radius: $border-radius-lg;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__text {
+    margin: 0;
+    flex-grow: 1;
+    color: getcolor("dark-grey");
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__avatar,
+  &__avatar-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: getcolor("fh-gold");
+    color: getcolor("white");
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &__avatar-img {
+    object-fit: cover;
+    display: block;
+  }
+
+  &__name {
+    font-weight: 600;
+    color: getcolor("black");
+  }
+}

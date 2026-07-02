@@ -7,6 +7,7 @@ require_once get_stylesheet_directory() . '/src/Autoloader.php';
 
 \Theme\Config\ACFBlocks::init();
 \Theme\Config\Plugins\ACFPro\ACFPro::init();
+\Theme\Config\GoogleReviews::init();
 
 class Theme_Setup
 {
@@ -297,6 +298,46 @@ function fh_register_post_types()
         'show_tagcloud'    => false,
         'hierarchical'     => true,
         'show_in_rest'     => true,
+    ]);
+
+    register_post_type('airports', [
+        'labels' => [
+            'name'          => __('Airports'),
+            'singular_name' => __('Airport'),
+            'menu_name'     => __('Airports'),
+            'add_new'       => __('Add New Airport'),
+            'add_new_item'  => __('Add New Airport'),
+            'edit_item'     => __('Edit Airport'),
+            'all_items'     => __('All Airports'),
+            'not_found'     => __('No Airports found.'),
+        ],
+        'menu_icon'     => 'dashicons-airplane',
+        'public'        => true,
+        'has_archive'   => true,
+        'rewrite'       => ['slug' => 'airports'],
+        'supports'      => ['title', 'thumbnail'],
+        'menu_position' => 8,
+        'show_in_rest'  => true,
+    ]);
+
+    register_post_type('activities', [
+        'labels' => [
+            'name'          => __('Activities'),
+            'singular_name' => __('Activity'),
+            'menu_name'     => __('Activities'),
+            'add_new'       => __('Add New Activity'),
+            'add_new_item'  => __('Add New Activity'),
+            'edit_item'     => __('Edit Activity'),
+            'all_items'     => __('All Activities'),
+            'not_found'     => __('No Activities found.'),
+        ],
+        'menu_icon'     => 'dashicons-palmtree',
+        'public'        => true,
+        'has_archive'   => true,
+        'rewrite'       => ['slug' => 'activities'],
+        'supports'      => ['title', 'thumbnail'],
+        'menu_position' => 9,
+        'show_in_rest'  => true,
     ]);
 }
 

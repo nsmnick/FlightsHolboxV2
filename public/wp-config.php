@@ -84,6 +84,10 @@ $table_prefix = 'wp_';
 
 /* Add any custom values between this line and the "stop editing" line. */
 
+// Server-side only — never expose this key to the browser. Restrict it in
+// Google Cloud Console to this server's IP and to the Places API only.
+define( 'GOOGLE_PLACES_API_KEY', '' );
+
 
 
 /**

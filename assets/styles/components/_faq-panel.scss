@@ -1,0 +1,94 @@
+@import "../setup/colors";
+
+.faq-panel {
+    padding: 60px 0;
+
+    &__title {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        font-weight: 700;
+        color: $color-fh-navy;
+        margin: 0 0 2.5rem;
+        text-align: center;
+    }
+
+    &__accordion {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+}
+
+.faq-item {
+    overflow: hidden;
+    border-top: 1px solid $color-grey;
+
+    &:last-child {
+        border-bottom: 1px solid $color-grey;
+    }
+
+    &__summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        padding: 20px 0;
+        cursor: pointer;
+        user-select: none;
+        gap: 16px;
+
+        &::-webkit-details-marker { display: none; }
+
+        // Gold plus / minus icon
+        &::before,
+        &::after {
+            content: '';
+            flex-shrink: 0;
+            display: block;
+            width: 18px;
+            height: 2px;
+            border-radius: 2px;
+            background-color: $color-fh-gold;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        position: relative;
+        padding-right: 36px;
+
+        &::after {
+            transform: translateY(-50%) rotate(90deg);
+            transition: transform 0.3s ease;
+        }
+    }
+
+    &[open] .faq-item__summary::after {
+        transform: translateY(-50%) rotate(0deg);
+    }
+
+    &__question {
+        font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+        font-weight: 600;
+        color: $color-fh-dark;
+        line-height: 1.4;
+    }
+
+    &__content {
+        padding: 0 36px 24px 0;
+        color: $color-dark-grey;
+        font-size: clamp(0.875rem, 1.25vw, 1rem);
+        line-height: 1.7;
+
+        p {
+            margin: 0 0 0.75rem;
+            &:last-child { margin-bottom: 0; }
+        }
+
+        a {
+            color: $color-fh-navy;
+            text-decoration: underline;
+
+            &:hover { color: $color-fh-gold; }
+        }
+    }
+}
