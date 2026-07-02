@@ -11,7 +11,6 @@
 //    CMS editor.
 //
 // Optional setting in the block.json "acf" section: "hideFieldsInSidebar": true.
-echo 'This is a test';
 $show_image_in_editor = isset($block['example']['attributes']['data']['show_image_in_editor'])
     ? $block['example']['attributes']['data']['show_image_in_editor']
     : false;

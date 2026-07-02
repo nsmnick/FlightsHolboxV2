@@ -5,7 +5,7 @@
         {
             "key": "field_6a4652471acca",
             "label": "Heading",
-            "name": "heading",
+            "name": "hero_heading",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -45,5 +45,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1782993511
+    "modified": 1782994603
 }
