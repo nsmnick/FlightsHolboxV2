@@ -35,10 +35,21 @@
     }
   }
   .social-icon {
+    display: inline-block;
     height: 26px;
     width: 26px;
-    background-size: contain;
-    background-repeat: no-repeat;
+
+    // Icons are masked rather than plain background-images so they can be
+    // recoloured per-context via background-color (e.g. dark default here,
+    // white/gold when used on the dark footer — see _footer.scss).
+    background-color: getcolor("fh-dark");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    transition: background-color 0.2s ease;
 
     margin-right: 0px;
     margin-top: 20px;
@@ -49,23 +60,30 @@
     line-height: 1;
 
     &--facebook {
-      background-image: url("../images/socials/icon-facebook.svg");
+      mask-image: url("../images/socials/icon-facebook-mask.svg");
+      -webkit-mask-image: url("../images/socials/icon-facebook-mask.svg");
     }
 
     &--instagram {
-      background-image: url("../images/socials/icon-instagram.svg");
+      mask-image: url("../images/socials/icon-instagram-mask.svg");
+      -webkit-mask-image: url("../images/socials/icon-instagram-mask.svg");
     }
 
     &--x {
       background-image: url("../images/socials/icon-x.svg");
+      background-color: transparent;
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
     &--whatsapp {
-      background-image: url("../images/socials/icon-Whatsapp.svg");
+      mask-image: url("../images/socials/icon-whatsapp-mask.svg");
+      -webkit-mask-image: url("../images/socials/icon-whatsapp-mask.svg");
     }
 
     &--email {
-      background-image: url("../images/socials/icon-email.svg");
+      mask-image: url("../images/socials/icon-email-mask.svg");
+      -webkit-mask-image: url("../images/socials/icon-email-mask.svg");
     }
   }
 

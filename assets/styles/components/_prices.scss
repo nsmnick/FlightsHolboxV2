@@ -275,6 +275,100 @@
     color: $color-fh-charcoal;
     margin: 4px 0 0;
   }
+
+  &__book-btn {
+    display: block;
+    margin-top: 14px;
+    padding: 10px 16px;
+    background: $color-fh-navy;
+    color: $color-white;
+    font-size: to-rem(12);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: $color-fh-gold;
+      color: $color-fh-dark;
+    }
+  }
+}
+
+// ─── Booking form section ─────────────────────────────────────────────────────
+
+.prices-page__booking {
+  margin-top: 52px;
+  border-top: 3px solid $color-fh-gold;
+  padding-top: 44px;
+  scroll-margin-top: 80px;
+}
+
+.prices-page__booking-header {
+  margin-bottom: 32px;
+}
+
+.prices-page__booking-title {
+  font-size: to-rem(24);
+  font-weight: 700;
+  color: $color-fh-dark;
+  margin: 0 0 12px;
+}
+
+.prices-page__booking-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: to-rem(14);
+  color: $color-fh-charcoal;
+  margin: 0;
+}
+
+.prices-page__booking-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  background: $color-fh-navy;
+  color: $color-white;
+  font-size: to-rem(11);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-radius: 20px;
+}
+
+.prices-page__booking-price {
+  font-weight: 700;
+  color: $color-fh-navy;
+}
+
+// ─── Booking summary (inside GF field 16) ────────────────────────────────────
+
+.booking-summary-block {
+  background: rgba(0, 70, 123, 0.05);
+  border-left: 3px solid $color-fh-navy;
+  border-radius: 0 4px 4px 0;
+  padding: 16px 20px;
+  font-size: to-rem(14);
+  line-height: 1.6;
+
+  &__row {
+    color: $color-fh-charcoal;
+
+    strong { color: $color-fh-dark; }
+
+    &--total {
+      border-top: 1px solid rgba(0, 70, 123, 0.15);
+      margin-top: 10px;
+      padding-top: 10px;
+      font-size: to-rem(15);
+
+      strong { color: $color-fh-navy; }
+    }
+  }
 }
 
 // ─── Price table (all-prices page) ────────────────────────────────────────────

@@ -50,10 +50,10 @@
     transition: none;
     height: unset;
 
-    padding-left: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-right: 30px;
+    // No side padding of its own — .header-detail-container's
+    // justify-content: space-between plus .container's own gutter already
+    // give it correct, consistent edge spacing.
+    padding: 0;
 
     justify-content: flex-end;
 
@@ -275,8 +275,10 @@
       > .menu-item {
         padding: 0rem;
 
-        &:last-child {
-          //          padding-right: 0;
+        // Extra separation only when the last item is actually styled as a
+        // distinct CTA button — an ordinary link (e.g. "Contact Us") sitting
+        // last should keep the same uniform spacing as every other item.
+        &.button:last-child {
           margin-left: 30px;
         }
 

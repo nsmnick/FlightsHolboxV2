@@ -11,6 +11,10 @@ $people_term = ($people_id > 0) ? get_term($people_id, 'number_of_people') : nul
 
 $searched = $from_id || $to_id || $people_id;
 
+$booking_price_id  = isset($_GET['price_id'])  ? (int) $_GET['price_id']  : 0;
+$booking_trip_type = (isset($_GET['trip_type']) && in_array($_GET['trip_type'], ['one_way', 'round_trip']))
+    ? $_GET['trip_type'] : '';
+
 $tax_query = ['relation' => 'AND'];
 if ($from_id)   $tax_query[] = ['taxonomy' => 'locations_from',   'field' => 'term_id', 'terms' => $from_id];
 if ($to_id)     $tax_query[] = ['taxonomy' => 'locations_to',     'field' => 'term_id', 'terms' => $to_id];
@@ -33,6 +37,16 @@ function fh_format_price(float $base, float $tax_rate): array {
         'ex'  => '$' . number_format($base, 2),
         'inc' => '$' . number_format($inc, 2),
     ];
+}
+
+function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id, int $people_id): string {
+    return esc_url(site_url('/flights') . '?' . http_build_query(array_filter([
+        'locations_from'   => $from_id   ?: null,
+        'locations_to'     => $to_id     ?: null,
+        'number_of_people' => $people_id ?: null,
+        'price_id'         => $price_id,
+        'trip_type'        => $trip_type,
+    ])) . '#booking-form');
 }
 ?>
 
@@ -86,7 +100,7 @@ function fh_format_price(float $base, float $tax_rate): array {
                 <?php if (!empty($results)) : ?>
                     <div class="price-results">
                         <?php foreach ($results as $price_post) :
-                            $one_way_base  = (float) get_field('price_one_way',   $price_post->ID);
+                            $one_way_base  = (float) get_field('price_one_way',    $price_post->ID);
                             $rt_base       = (float) get_field('price_round_trip', $price_post->ID);
                             $tax_rate      = (float) (get_field('federal_tax_rate', $price_post->ID) ?: 16);
                             $price_note    = get_field('price_note', $price_post->ID);
@@ -130,6 +144,9 @@ function fh_format_price(float $base, float $tax_rate): array {
                                                 <span class="price-card__fare-tax-label">Including tax (<?php echo $tax_rate; ?>%)</span>
                                                 <span class="price-card__fare-amount price-card__fare-amount--inc"><?php echo $one_way['inc']; ?></span>
                                             </div>
+                                            <a href="<?php echo fh_book_url($price_post->ID, 'one_way', $from_id, $to_id, $people_id); ?>" class="price-card__book-btn">
+                                                Book One Way
+                                            </a>
                                         </div>
                                     <?php endif; ?>
 
@@ -147,6 +164,9 @@ function fh_format_price(float $base, float $tax_rate): array {
                                                 <span class="price-card__fare-tax-label">Including tax (<?php echo $tax_rate; ?>%)</span>
                                                 <span class="price-card__fare-amount price-card__fare-amount--inc"><?php echo $rt['inc']; ?></span>
                                             </div>
+                                            <a href="<?php echo fh_book_url($price_post->ID, 'round_trip', $from_id, $to_id, $people_id); ?>" class="price-card__book-btn">
+                                                Book Return Trip
+                                            </a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -162,6 +182,47 @@ function fh_format_price(float $base, float $tax_rate): array {
                             </div>
                         <?php endforeach; ?>
                     </div>
+
+                    <?php if ($booking_price_id && $booking_trip_type) :
+                        $book_post = get_post($booking_price_id);
+                        if ($book_post && $book_post->post_type === 'prices') :
+                            $book_froms  = get_the_terms($booking_price_id, 'locations_from');
+                            $book_tos    = get_the_terms($booking_price_id, 'locations_to');
+                            $book_people = get_the_terms($booking_price_id, 'number_of_people');
+                            $book_from   = (!empty($book_froms)  && !is_wp_error($book_froms))  ? $book_froms[0]->name  : '';
+                            $book_to     = (!empty($book_tos)    && !is_wp_error($book_tos))    ? $book_tos[0]->name    : '';
+                            $book_ppl    = (!empty($book_people) && !is_wp_error($book_people)) ? $book_people[0]->name : '';
+                            $book_base   = $booking_trip_type === 'one_way'
+                                ? (float) get_field('price_one_way',    $booking_price_id)
+                                : (float) get_field('price_round_trip', $booking_price_id);
+                            $book_tax    = (float) (get_field('federal_tax_rate', $booking_price_id) ?: 16);
+                            $book_inc    = round($book_base * (1 + $book_tax / 100), 2);
+                            $book_label  = $booking_trip_type === 'one_way' ? 'One Way' : 'Round Trip';
+
+                            $field_values = [
+                                'location_from' => $book_from,
+                                'location_to'   => $book_to,
+                                'no_of_people'  => $book_ppl,
+                                'cost_usd'      => $book_base,
+                                'cost_inc_tax'  => $book_inc,
+                                'return_trip'   => $book_label,
+                            ];
+                    ?>
+                        <div id="booking-form" class="prices-page__booking">
+                            <div class="prices-page__booking-header">
+                                <h2 class="prices-page__booking-title">Request Availability</h2>
+                                <p class="prices-page__booking-summary">
+                                    <span class="prices-page__booking-tag"><?php echo esc_html($book_label); ?></span>
+                                    <span><?php echo esc_html($book_from); ?> &rarr; <?php echo esc_html($book_to); ?></span>
+                                    &middot; <span><?php echo esc_html($book_ppl); ?></span>
+                                    &middot; <span class="prices-page__booking-price">$<?php echo number_format($book_inc, 2); ?> inc. tax</span>
+                                </p>
+                            </div>
+                            <div class="prices-page__booking-form">
+                                <?php gravity_form(1, false, false, false, $field_values, true); ?>
+                            </div>
+                        </div>
+                    <?php endif; endif; ?>
 
                 <?php else : ?>
                     <div class="prices-page__no-results">

@@ -416,13 +416,13 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (129,	'_transient_wp_styles_for_blocks',	'a:2:{s:4:\"hash\";s:32:\"2ad4f3bd70fb5c3aeb99268e39efff21\";s:6:\"blocks\";a:7:{s:32:\"0368537a03d4b05ed11f802c802c5153\";s:0:\"\";s:32:\"500888137eafa12a508de2c588d9ffdd\";s:46:\":root :where(.wp-block-icon svg){width: 24px;}\";s:32:\"a6036e6eb2ad2df7ed8860b807868647\";s:0:\"\";s:32:\"3b46efc0a10c1dae38f584ad199c3544\";s:120:\":where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}\";s:32:\"ab4df16c9e454bfed8a404309545590d\";s:120:\":where(.wp-block-term-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-term-template.is-layout-grid){gap: 1.25em;}\";s:32:\"68ec5cad52d993402775a7503ba9efb7\";s:102:\":where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}\";s:32:\"b8b4aa19e69b9b2de0f5c27097467bd6\";s:69:\":root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}\";}}',	'on'),
 (143,	'can_compress_scripts',	'0',	'on'),
 (154,	'current_theme',	'Flights Holbox',	'auto'),
-(155,	'theme_mods_flightsholbox',	'a:3:{i:0;b:0;s:18:\"nav_menu_locations\";a:1:{s:12:\"primary-menu\";i:3;}s:18:\"custom_css_post_id\";i:-1;}',	'on'),
+(155,	'theme_mods_flightsholbox',	'a:3:{i:0;b:0;s:18:\"nav_menu_locations\";a:3:{s:12:\"primary-menu\";i:3;s:19:\"footer-menu-pickups\";i:20;s:24:\"footer-menu-destinations\";i:19;}s:18:\"custom_css_post_id\";i:-1;}',	'on'),
 (156,	'theme_switched',	'',	'auto'),
 (162,	'_site_transient_wp_plugin_dependencies_plugin_data',	'a:0:{}',	'off'),
 (163,	'recently_activated',	'a:1:{s:61:\"wp-tripadvisor-review-slider/wp-tripadvisor-review-slider.php\";i:1783088191;}',	'off'),
 (168,	'finished_updating_comment_type',	'1',	'auto'),
 (169,	'acf_first_activated_version',	'6.8.1',	'on'),
-(170,	'acf_site_health',	'{\"version\":\"6.8.1\",\"plugin_type\":\"PRO\",\"update_source\":\"ACF Direct\",\"activated\":true,\"activated_url\":\"http:\\/\\/flightsholboxv1.local\",\"license_type\":\"Developer\",\"license_status\":\"active\",\"subscription_expires\":\"\",\"wp_version\":\"7.0\",\"mysql_version\":\"8.0.35\",\"is_multisite\":false,\"active_theme\":{\"name\":\"Flights Holbox\",\"version\":\"1\",\"theme_uri\":\"\",\"stylesheet\":false},\"active_plugins\":{\"advanced-custom-fields-pro\\/acf.php\":{\"name\":\"Advanced Custom Fields PRO\",\"version\":\"6.8.1\",\"plugin_uri\":\"https:\\/\\/www.advancedcustomfields.com\"},\"gravityforms\\/gravityforms.php\":{\"name\":\"Gravity Forms\",\"version\":\"2.10.0\",\"plugin_uri\":\"https:\\/\\/gravityforms.com\"}},\"ui_field_groups\":\"0\",\"php_field_groups\":\"0\",\"json_field_groups\":\"11\",\"rest_field_groups\":\"0\",\"all_location_rules\":[\"post_type==airports\",\"post_type==activities\",\"block==acf\\/booking-panel\",\"post_type==post\",\"block==acf\\/faq-panel\",\"block==acf\\/feature-panel\",\"block==acf\\/hero-panel\",\"block==acf\\/image-column-panel\",\"block==acf\\/testimonial-panel\",\"block==acf\\/text-panel\",\"block==acf\\/video-panel\"],\"field_groups_with_single_block_rule\":\"8\",\"field_groups_with_multiple_block_rules\":\"0\",\"field_groups_with_blocks_and_other_rules\":\"0\",\"number_of_fields_by_type\":{\"image\":2,\"wysiwyg\":2,\"repeater\":5,\"url\":2,\"text\":5,\"link\":1,\"select\":5},\"number_of_third_party_fields_by_type\":[],\"post_types_enabled\":true,\"ui_post_types\":\"0\",\"json_post_types\":\"0\",\"ui_taxonomies\":\"0\",\"json_taxonomies\":\"0\",\"ui_options_pages_enabled\":true,\"ui_options_pages\":\"0\",\"json_options_pages\":\"0\",\"php_options_pages\":\"4\",\"rest_api_format\":\"light\",\"registered_acf_blocks\":\"9\",\"blocks_per_api_version\":{\"v2\":9},\"blocks_per_acf_block_version\":{\"v2\":9},\"blocks_using_post_meta\":\"0\",\"blocks_using_auto_inline_editing\":\"0\",\"preload_blocks\":true,\"admin_ui_enabled\":true,\"field_type-modal_enabled\":true,\"field_settings_tabs_enabled\":false,\"shortcode_enabled\":false,\"registered_acf_forms\":\"0\",\"json_save_paths\":1,\"json_load_paths\":1,\"ai_enabled\":false,\"schema_support\":false,\"schema_ready_objects\":{\"blocks\":0,\"post_types\":0},\"datastore_enabled\":false,\"event_first_activated_pro\":1781295147,\"event_first_registered_block\":1782899738,\"event_first_created_field_group\":1782899830,\"has_had_blocks\":true,\"last_updated\":1783077838}',	'off'),
+(170,	'acf_site_health',	'{\"version\":\"6.8.1\",\"plugin_type\":\"PRO\",\"update_source\":\"ACF Direct\",\"activated\":true,\"activated_url\":\"http:\\/\\/flightsholboxv1.local\",\"license_type\":\"Developer\",\"license_status\":\"active\",\"subscription_expires\":\"\",\"wp_version\":\"7.0\",\"mysql_version\":\"8.0.35\",\"is_multisite\":false,\"active_theme\":{\"name\":\"Flights Holbox\",\"version\":\"1\",\"theme_uri\":\"\",\"stylesheet\":false},\"active_plugins\":{\"advanced-custom-fields-pro\\/acf.php\":{\"name\":\"Advanced Custom Fields PRO\",\"version\":\"6.8.1\",\"plugin_uri\":\"https:\\/\\/www.advancedcustomfields.com\"},\"gravityforms\\/gravityforms.php\":{\"name\":\"Gravity Forms\",\"version\":\"2.10.0\",\"plugin_uri\":\"https:\\/\\/gravityforms.com\"}},\"ui_field_groups\":\"0\",\"php_field_groups\":\"0\",\"json_field_groups\":\"11\",\"rest_field_groups\":\"0\",\"all_location_rules\":[\"post_type==airports\",\"post_type==activities\",\"block==acf\\/booking-panel\",\"post_type==post\",\"block==acf\\/faq-panel\",\"block==acf\\/feature-panel\",\"block==acf\\/hero-panel\",\"block==acf\\/image-column-panel\",\"block==acf\\/testimonial-panel\",\"block==acf\\/text-panel\",\"block==acf\\/video-panel\"],\"field_groups_with_single_block_rule\":\"8\",\"field_groups_with_multiple_block_rules\":\"0\",\"field_groups_with_blocks_and_other_rules\":\"0\",\"number_of_fields_by_type\":{\"image\":2,\"wysiwyg\":2,\"repeater\":5,\"url\":2,\"text\":5,\"link\":1,\"select\":5},\"number_of_third_party_fields_by_type\":[],\"post_types_enabled\":true,\"ui_post_types\":\"0\",\"json_post_types\":\"0\",\"ui_taxonomies\":\"0\",\"json_taxonomies\":\"0\",\"ui_options_pages_enabled\":true,\"ui_options_pages\":\"0\",\"json_options_pages\":\"0\",\"php_options_pages\":\"4\",\"rest_api_format\":\"light\",\"registered_acf_blocks\":\"9\",\"blocks_per_api_version\":{\"v2\":9},\"blocks_per_acf_block_version\":{\"v2\":9},\"blocks_using_post_meta\":\"0\",\"blocks_using_auto_inline_editing\":\"0\",\"preload_blocks\":true,\"admin_ui_enabled\":true,\"field_type-modal_enabled\":true,\"field_settings_tabs_enabled\":false,\"shortcode_enabled\":false,\"registered_acf_forms\":\"0\",\"json_save_paths\":1,\"json_load_paths\":1,\"ai_enabled\":false,\"schema_support\":false,\"schema_ready_objects\":{\"blocks\":0,\"post_types\":0},\"datastore_enabled\":false,\"event_first_activated_pro\":1781295147,\"event_first_registered_block\":1782899738,\"event_first_created_field_group\":1782899830,\"has_had_blocks\":true,\"last_updated\":1783099658,\"event_first_created_ui_options_page\":1783099658}',	'off'),
 (174,	'acf_version',	'6.8.1',	'auto'),
 (175,	'gf_db_version',	'2.10.0',	'off'),
 (176,	'rg_form_version',	'2.10.0',	'off'),
@@ -447,7 +447,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (275,	'acf_pro_license_status',	'a:11:{s:6:\"status\";s:6:\"active\";s:7:\"created\";i:0;s:6:\"expiry\";i:0;s:4:\"name\";s:9:\"Developer\";s:8:\"lifetime\";b:1;s:8:\"refunded\";b:0;s:17:\"view_licenses_url\";s:62:\"https://www.advancedcustomfields.com/my-account/view-licenses/\";s:23:\"manage_subscription_url\";s:0:\"\";s:9:\"error_msg\";s:0:\"\";s:10:\"next_check\";i:1783164238;s:16:\"legacy_multisite\";b:1;}',	'on'),
 (276,	'_transient_timeout_acf_plugin_updates',	'1783108542',	'off'),
 (277,	'_transient_acf_plugin_updates',	'a:5:{s:7:\"plugins\";a:1:{s:34:\"advanced-custom-fields-pro/acf.php\";a:12:{s:4:\"slug\";s:26:\"advanced-custom-fields-pro\";s:6:\"plugin\";s:34:\"advanced-custom-fields-pro/acf.php\";s:11:\"new_version\";s:5:\"6.8.5\";s:3:\"url\";s:36:\"https://www.advancedcustomfields.com\";s:6:\"tested\";s:3:\"7.0\";s:7:\"package\";s:380:\"https://connect.advancedcustomfields.com/v2/plugins/download?p=pro&s=plugin&version=6.8.5&token=eyJwIjoicHJvIiwiayI6ImIzSmtaWEpmYVdROU1UWTRPVGMyZkhSNWNHVTlaR1YyWld4dmNHVnlmR1JoZEdVOU1qQXhPUzB3T0MweU9TQXhNam93TVRvd05nPT0iLCJ3cF91cmwiOiJodHRwOlwvXC9mbGlnaHRzaG9sYm94djEubG9jYWwiLCJ3cF92ZXJzaW9uIjoiNy4wIiwid3BfbXVsdGlzaXRlIjowLCJwaHBfdmVyc2lvbiI6IjguMi4yOSIsImJsb2NrX2NvdW50IjozfQ==\";s:5:\"icons\";a:1:{s:7:\"default\";s:64:\"https://connect.advancedcustomfields.com/assets/icon-256x256.png\";}s:7:\"banners\";a:2:{s:3:\"low\";s:66:\"https://connect.advancedcustomfields.com/assets/banner-772x250.jpg\";s:4:\"high\";s:67:\"https://connect.advancedcustomfields.com/assets/banner-1544x500.jpg\";}s:8:\"requires\";s:3:\"6.2\";s:12:\"requires_php\";s:3:\"7.4\";s:12:\"release_date\";s:8:\"20260630\";s:13:\"license_valid\";b:1;}}s:9:\"no_update\";a:0:{}s:10:\"expiration\";i:172800;s:6:\"status\";i:1;s:7:\"checked\";a:1:{s:34:\"advanced-custom-fields-pro/acf.php\";s:5:\"6.8.1\";}}',	'off'),
-(292,	'_site_transient_update_core',	'O:8:\"stdClass\":4:{s:7:\"updates\";a:1:{i:0;O:8:\"stdClass\":10:{s:8:\"response\";s:6:\"latest\";s:8:\"download\";s:63:\"https://downloads.wordpress.org/release/en_GB/wordpress-7.0.zip\";s:6:\"locale\";s:5:\"en_GB\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:63:\"https://downloads.wordpress.org/release/en_GB/wordpress-7.0.zip\";s:10:\"no_content\";s:0:\"\";s:11:\"new_bundled\";s:0:\"\";s:7:\"partial\";s:0:\"\";s:8:\"rollback\";s:0:\"\";}s:7:\"current\";s:3:\"7.0\";s:7:\"version\";s:3:\"7.0\";s:11:\"php_version\";s:3:\"7.4\";s:13:\"mysql_version\";s:5:\"5.5.5\";s:11:\"new_bundled\";s:3:\"6.7\";s:15:\"partial_version\";s:0:\"\";}}s:12:\"last_checked\";i:1783094812;s:15:\"version_checked\";s:3:\"7.0\";s:12:\"translations\";a:0:{}}',	'off'),
+(292,	'_site_transient_update_core',	'O:8:\"stdClass\":4:{s:7:\"updates\";a:1:{i:0;O:8:\"stdClass\":10:{s:8:\"response\";s:6:\"latest\";s:8:\"download\";s:63:\"https://downloads.wordpress.org/release/en_GB/wordpress-7.0.zip\";s:6:\"locale\";s:5:\"en_GB\";s:8:\"packages\";O:8:\"stdClass\":5:{s:4:\"full\";s:63:\"https://downloads.wordpress.org/release/en_GB/wordpress-7.0.zip\";s:10:\"no_content\";s:0:\"\";s:11:\"new_bundled\";s:0:\"\";s:7:\"partial\";s:0:\"\";s:8:\"rollback\";s:0:\"\";}s:7:\"current\";s:3:\"7.0\";s:7:\"version\";s:3:\"7.0\";s:11:\"php_version\";s:3:\"7.4\";s:13:\"mysql_version\";s:5:\"5.5.5\";s:11:\"new_bundled\";s:3:\"6.7\";s:15:\"partial_version\";s:0:\"\";}}s:12:\"last_checked\";i:1783100749;s:15:\"version_checked\";s:3:\"7.0\";s:12:\"translations\";a:0:{}}',	'off'),
 (293,	'_site_transient_update_themes',	'O:8:\"stdClass\":5:{s:12:\"last_checked\";i:1783098019;s:7:\"checked\";a:5:{s:13:\"flightsholbox\";s:1:\"1\";s:16:\"twentytwentyfive\";s:3:\"1.5\";s:16:\"twentytwentyfour\";s:3:\"1.5\";s:17:\"twentytwentythree\";s:3:\"1.6\";s:15:\"twentytwentytwo\";s:3:\"2.1\";}s:8:\"response\";a:0:{}s:9:\"no_update\";a:4:{s:16:\"twentytwentyfive\";a:6:{s:5:\"theme\";s:16:\"twentytwentyfive\";s:11:\"new_version\";s:3:\"1.5\";s:3:\"url\";s:46:\"https://wordpress.org/themes/twentytwentyfive/\";s:7:\"package\";s:62:\"https://downloads.wordpress.org/theme/twentytwentyfive.1.5.zip\";s:8:\"requires\";s:3:\"6.7\";s:12:\"requires_php\";s:3:\"7.2\";}s:16:\"twentytwentyfour\";a:6:{s:5:\"theme\";s:16:\"twentytwentyfour\";s:11:\"new_version\";s:3:\"1.5\";s:3:\"url\";s:46:\"https://wordpress.org/themes/twentytwentyfour/\";s:7:\"package\";s:62:\"https://downloads.wordpress.org/theme/twentytwentyfour.1.5.zip\";s:8:\"requires\";s:3:\"6.4\";s:12:\"requires_php\";s:3:\"7.0\";}s:17:\"twentytwentythree\";a:6:{s:5:\"theme\";s:17:\"twentytwentythree\";s:11:\"new_version\";s:3:\"1.6\";s:3:\"url\";s:47:\"https://wordpress.org/themes/twentytwentythree/\";s:7:\"package\";s:63:\"https://downloads.wordpress.org/theme/twentytwentythree.1.6.zip\";s:8:\"requires\";s:3:\"6.1\";s:12:\"requires_php\";s:3:\"5.6\";}s:15:\"twentytwentytwo\";a:6:{s:5:\"theme\";s:15:\"twentytwentytwo\";s:11:\"new_version\";s:3:\"2.1\";s:3:\"url\";s:45:\"https://wordpress.org/themes/twentytwentytwo/\";s:7:\"package\";s:61:\"https://downloads.wordpress.org/theme/twentytwentytwo.2.1.zip\";s:8:\"requires\";s:3:\"5.9\";s:12:\"requires_php\";s:3:\"5.6\";}}s:12:\"translations\";a:0:{}}',	'off'),
 (351,	'_transient_timeout_acf_pro_validating_license',	'1783078738',	'off'),
 (352,	'_transient_acf_pro_validating_license',	'1',	'off'),
@@ -466,7 +466,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (370,	'grw_revupd_cron',	'1',	'auto'),
 (371,	'widget_grw_widget',	'a:1:{s:12:\"_multiwidget\";i:1;}',	'auto'),
 (372,	'rplg_rev_notice_show',	'',	'auto'),
-(374,	'grw_revupd_cron_timeout',	'66090',	'auto'),
+(374,	'grw_revupd_cron_timeout',	'63971',	'auto'),
 (375,	'grw_revupd_cron_log',	'Executed at 1783078314495 in 0ms for feeds: ',	'auto'),
 (376,	'grw_last_error',	'',	'auto'),
 (377,	'grw_save_log',	'1783078409854_ip[ChIJXRS9Mm2TTY8RTJzi_FLzeXQ,Flights Holbox,3.7,6]_ir[Taylor Cloete,5,43,en]_ir[Chris Horton,1,148,en]_ir[Luana Kliesen,1,298,en]_ir[Ali Bug,5,631,en]_ir[Yael Rosales,5,0,]_ir[Oliver H,5,34,en]',	'auto'),
@@ -529,16 +529,32 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (500,	'rg_gforms_key',	'a22e778c2e89e82d328b0e360647af27',	'auto'),
 (501,	'_transient_timeout_GFCache_6385f99988115c5beb58db5d93babb78',	'1783184610',	'off'),
 (502,	'_transient_GFCache_6385f99988115c5beb58db5d93babb78',	's:904:\"O:59:\"Gravity_Forms\\Gravity_Forms\\License\\GF_License_API_Response\":5:{s:4:\"data\";a:1:{i:0;a:19:{s:15:\"license_key_md5\";s:32:\"a22e778c2e89e82d328b0e360647af27\";s:12:\"date_created\";s:19:\"2019-08-29 11:59:20\";s:12:\"date_expires\";s:19:\"2026-09-28 11:58:59\";s:12:\"renewal_date\";s:19:\"2026-08-29 11:58:59\";s:9:\"is_active\";s:1:\"1\";s:24:\"is_subscription_canceled\";s:1:\"0\";s:12:\"product_code\";s:7:\"GFELITE\";s:12:\"product_name\";s:19:\"Gravity Forms Elite\";s:18:\"is_near_expiration\";b:0;s:14:\"days_to_expire\";i:86;s:10:\"is_expired\";b:0;s:8:\"is_valid\";b:1;s:22:\"is_past_renewal_period\";b:0;s:9:\"is_legacy\";b:0;s:12:\"is_perpetual\";b:0;s:9:\"max_sites\";s:9:\"unlimited\";s:12:\"active_sites\";i:60;s:15:\"remaining_seats\";s:9:\"unlimited\";s:20:\"is_multisite_allowed\";b:1;}}s:6:\"errors\";a:0:{}s:6:\"status\";s:9:\"valid_key\";s:4:\"meta\";a:0:{}s:5:\"strat\";O:63:\"Gravity_Forms\\Gravity_Forms\\Transients\\GF_WP_Transient_Strategy\":0:{}}\";',	'off'),
-(507,	'_transient_timeout_GFCache_997ed2dd8feb4392af29772eddcdd626',	'1783098355',	'off'),
-(508,	'_transient_GFCache_997ed2dd8feb4392af29772eddcdd626',	'a:0:{}',	'off'),
-(509,	'_transient_timeout_GFCache_c3356a655ad96c82a5fcaa923d1c309f',	'1783098355',	'off'),
-(510,	'_transient_GFCache_c3356a655ad96c82a5fcaa923d1c309f',	'a:0:{}',	'off'),
-(511,	'_transient_timeout_GFCache_98a35396770b7ad41cb7f68cc6514b74',	'1783098475',	'off'),
-(512,	'_transient_GFCache_98a35396770b7ad41cb7f68cc6514b74',	'1',	'off'),
 (513,	'_transient_timeout_GFCache_ec66c6130c0368a2dda980e97013dbd9',	'1783101925',	'off'),
 (514,	'_transient_GFCache_ec66c6130c0368a2dda980e97013dbd9',	'0',	'off'),
-(515,	'_site_transient_timeout_wp_theme_files_patterns-57ac4a5cc7cfa360d38e9f6869af9357',	'1783100238',	'off'),
-(516,	'_site_transient_wp_theme_files_patterns-57ac4a5cc7cfa360d38e9f6869af9357',	'a:2:{s:7:\"version\";s:1:\"1\";s:8:\"patterns\";a:0:{}}',	'off');
+(521,	'_transient_timeout_GFCache_f2d6a2f893bccb223a52f16de2ed605e',	'1783099365',	'off'),
+(522,	'_transient_GFCache_f2d6a2f893bccb223a52f16de2ed605e',	'1',	'off'),
+(523,	'_transient_timeout_GFCache_61d6aea3ef4af60bcbfcaf8026f6ce20',	'1783099404',	'off'),
+(524,	'_transient_GFCache_61d6aea3ef4af60bcbfcaf8026f6ce20',	'1',	'off'),
+(525,	'_transient_timeout_GFCache_997ed2dd8feb4392af29772eddcdd626',	'1783099297',	'off'),
+(526,	'_transient_GFCache_997ed2dd8feb4392af29772eddcdd626',	'a:0:{}',	'off'),
+(527,	'_transient_timeout_GFCache_c3356a655ad96c82a5fcaa923d1c309f',	'1783099297',	'off'),
+(528,	'_transient_GFCache_c3356a655ad96c82a5fcaa923d1c309f',	'a:0:{}',	'off'),
+(529,	'options_footer_phone',	'0348038274089',	'off'),
+(530,	'_options_footer_phone',	'field_6a47efe02a5d0',	'off'),
+(531,	'options_footer_whatsapp',	'42986739427834',	'off'),
+(532,	'_options_footer_whatsapp',	'field_6a47eff22a5d1',	'off'),
+(533,	'options_footer_email',	'test@test.com',	'off'),
+(534,	'_options_footer_email',	'field_6a47effe2a5d2',	'off'),
+(535,	'options_footer_address',	'THIS IS A TEST\r\nTHIS IS A TEST\r\nTHIS IS A TEST',	'off'),
+(536,	'_options_footer_address',	'field_6a47f00a2a5d3',	'off'),
+(537,	'options_footer_social_facebook',	'https://www.facebook.com/',	'off'),
+(538,	'_options_footer_social_facebook',	'field_6a47f0142a5d4',	'off'),
+(539,	'options_footer_social_instagram',	'https://www.instagram.com/',	'off'),
+(540,	'_options_footer_social_instagram',	'field_6a47f02a2a5d5',	'off'),
+(541,	'options_footer_social_tripadvisor',	'https://www.tripadvisor.co.uk/',	'off'),
+(542,	'_options_footer_social_tripadvisor',	'field_6a47f0452a5d6',	'off'),
+(543,	'_site_transient_timeout_wp_theme_files_patterns-57ac4a5cc7cfa360d38e9f6869af9357',	'1783102069',	'off'),
+(544,	'_site_transient_wp_theme_files_patterns-57ac4a5cc7cfa360d38e9f6869af9357',	'a:2:{s:7:\"version\";s:1:\"1\";s:8:\"patterns\";a:0:{}}',	'off');
 
 DROP TABLE IF EXISTS `wp_postmeta`;
 CREATE TABLE `wp_postmeta` (
@@ -877,7 +893,12 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (476,	210,	'_menu_item_target',	''),
 (477,	210,	'_menu_item_classes',	'a:1:{i:0;s:0:\"\";}'),
 (478,	210,	'_menu_item_xfn',	''),
-(479,	210,	'_menu_item_url',	'https://goholboxtransfers.com/');
+(479,	210,	'_menu_item_url',	'https://goholboxtransfers.com/'),
+(481,	211,	'_edit_last',	'1'),
+(482,	211,	'_edit_lock',	'1783099618:1'),
+(483,	219,	'_wp_trash_meta_status',	'publish'),
+(484,	219,	'_wp_trash_meta_time',	'1783099810'),
+(485,	219,	'_wp_desired_post_slug',	'ui_options_page_6a47f10a115e0');
 
 DROP TABLE IF EXISTS `wp_posts`;
 CREATE TABLE `wp_posts` (
@@ -1070,7 +1091,16 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (207,	1,	'2026-07-03 17:54:29',	'2026-07-03 16:54:29',	'',	'Playa del Carmen - Cancun: 1-2 people',	'',	'publish',	'closed',	'closed',	'',	'playa-del-carmen-cancun-1-2-people',	'',	'',	'2026-07-03 17:54:29',	'2026-07-03 16:54:29',	'',	0,	'http://flightsholboxv1.local/?post_type=prices&#038;p=207',	0,	'prices',	'',	0),
 (208,	1,	'2026-07-03 17:54:56',	'2026-07-03 16:54:56',	'',	'Playa del Carmen - Cozumel: 1-2 people',	'',	'publish',	'closed',	'closed',	'',	'playa-del-carmen-cozumel-1-2-people',	'',	'',	'2026-07-03 17:54:57',	'2026-07-03 16:54:57',	'',	0,	'http://flightsholboxv1.local/?post_type=prices&#038;p=208',	0,	'prices',	'',	0),
 (209,	1,	'2026-07-03 17:55:22',	'2026-07-03 16:55:22',	'',	'Playa del Carmen - Holbox: 1-2 people',	'',	'publish',	'closed',	'closed',	'',	'playa-del-carmen-holbox-1-2-people',	'',	'',	'2026-07-03 17:55:22',	'2026-07-03 16:55:22',	'',	0,	'http://flightsholboxv1.local/?post_type=prices&#038;p=209',	0,	'prices',	'',	0),
-(210,	1,	'2026-07-03 18:07:23',	'2026-07-03 17:07:23',	'',	'Transfers',	'',	'publish',	'closed',	'closed',	'',	'transfers',	'',	'',	'2026-07-03 18:07:23',	'2026-07-03 17:07:23',	'',	0,	'http://flightsholboxv1.local/?p=210',	2,	'nav_menu_item',	'',	0);
+(210,	1,	'2026-07-03 18:07:23',	'2026-07-03 17:07:23',	'',	'Transfers',	'',	'publish',	'closed',	'closed',	'',	'transfers',	'',	'',	'2026-07-03 18:07:23',	'2026-07-03 17:07:23',	'',	0,	'http://flightsholboxv1.local/?p=210',	2,	'nav_menu_item',	'',	0),
+(211,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:11:{s:8:\"location\";a:1:{i:0;a:1:{i:0;a:3:{s:5:\"param\";s:12:\"options_page\";s:8:\"operator\";s:2:\"==\";s:5:\"value\";s:18:\"acf-options-footer\";}}}s:8:\"position\";s:6:\"normal\";s:5:\"style\";s:7:\"default\";s:15:\"label_placement\";s:3:\"top\";s:21:\"instruction_placement\";s:5:\"label\";s:14:\"hide_on_screen\";s:0:\"\";s:11:\"description\";s:0:\"\";s:12:\"show_in_rest\";i:0;s:13:\"display_title\";s:0:\"\";s:15:\"allow_ai_access\";b:0;s:14:\"ai_description\";s:0:\"\";}',	'Footer Information',	'footer-information',	'publish',	'closed',	'closed',	'',	'group_6a47efe0a1386',	'',	'',	'2026-07-03 18:28:15',	'2026-07-03 17:28:15',	'',	0,	'http://flightsholboxv1.local/?post_type=acf-field-group&#038;p=211',	0,	'acf-field-group',	'',	0),
+(212,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:12:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:4:\"text\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:9:\"maxlength\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:11:\"placeholder\";s:0:\"\";s:7:\"prepend\";s:0:\"\";s:6:\"append\";s:0:\"\";}',	'Phone',	'footer_phone',	'publish',	'closed',	'closed',	'',	'field_6a47efe02a5d0',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=212',	0,	'acf-field',	'',	0),
+(213,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:12:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:4:\"text\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:9:\"maxlength\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:11:\"placeholder\";s:0:\"\";s:7:\"prepend\";s:0:\"\";s:6:\"append\";s:0:\"\";}',	'Whatsapp',	'footer_whatsapp',	'publish',	'closed',	'closed',	'',	'field_6a47eff22a5d1',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=213',	1,	'acf-field',	'',	0),
+(214,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:12:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:4:\"text\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:9:\"maxlength\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:11:\"placeholder\";s:0:\"\";s:7:\"prepend\";s:0:\"\";s:6:\"append\";s:0:\"\";}',	'Email',	'footer_email',	'publish',	'closed',	'closed',	'',	'field_6a47effe2a5d2',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=214',	2,	'acf-field',	'',	0),
+(215,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:12:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:8:\"textarea\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:9:\"maxlength\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:4:\"rows\";s:0:\"\";s:11:\"placeholder\";s:0:\"\";s:9:\"new_lines\";s:0:\"\";}',	'Address',	'footer_address',	'publish',	'closed',	'closed',	'',	'field_6a47f00a2a5d3',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=215',	3,	'acf-field',	'',	0),
+(216,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:9:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:3:\"url\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:11:\"placeholder\";s:0:\"\";}',	'Facebook URL',	'footer_social_facebook',	'publish',	'closed',	'closed',	'',	'field_6a47f0142a5d4',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=216',	4,	'acf-field',	'',	0),
+(217,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:9:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:3:\"url\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:11:\"placeholder\";s:0:\"\";}',	'Instagram URL',	'footer_social_instagram',	'publish',	'closed',	'closed',	'',	'field_6a47f02a2a5d5',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=217',	5,	'acf-field',	'',	0),
+(218,	1,	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'a:9:{s:10:\"aria-label\";s:0:\"\";s:4:\"type\";s:3:\"url\";s:12:\"instructions\";s:0:\"\";s:8:\"required\";i:0;s:17:\"conditional_logic\";i:0;s:7:\"wrapper\";a:3:{s:5:\"width\";s:0:\"\";s:5:\"class\";s:0:\"\";s:2:\"id\";s:0:\"\";}s:13:\"default_value\";s:0:\"\";s:17:\"allow_in_bindings\";i:0;s:11:\"placeholder\";s:0:\"\";}',	'Tripadvisor URL',	'footer_social_tripadvisor',	'publish',	'closed',	'closed',	'',	'field_6a47f0452a5d6',	'',	'',	'2026-07-03 18:24:44',	'2026-07-03 17:24:44',	'',	211,	'http://flightsholboxv1.local/?post_type=acf-field&p=218',	6,	'acf-field',	'',	0),
+(219,	1,	'2026-07-03 18:27:38',	'2026-07-03 17:27:38',	'a:16:{s:10:\"page_title\";s:18:\"Footer Information\";s:9:\"menu_slug\";s:18:\"footer-information\";s:11:\"parent_slug\";s:4:\"none\";s:22:\"advanced_configuration\";b:0;s:8:\"icon_url\";s:0:\"\";s:10:\"menu_title\";s:0:\"\";s:8:\"position\";N;s:8:\"redirect\";b:0;s:11:\"description\";s:0:\"\";s:9:\"menu_icon\";a:0:{}s:13:\"update_button\";s:6:\"Update\";s:15:\"updated_message\";s:15:\"Options Updated\";s:10:\"capability\";s:10:\"edit_posts\";s:12:\"data_storage\";s:7:\"options\";s:7:\"post_id\";s:0:\"\";s:8:\"autoload\";b:0;}',	'Footer Information',	'footer-information',	'trash',	'closed',	'closed',	'',	'ui_options_page_6a47f10a115e0__trashed',	'',	'',	'2026-07-03 18:30:10',	'2026-07-03 17:30:10',	'',	0,	'http://flightsholboxv1.local/?post_type=acf-ui-options-page&#038;p=219',	0,	'acf-ui-options-page',	'',	0);
 
 DROP TABLE IF EXISTS `wp_term_relationships`;
 CREATE TABLE `wp_term_relationships` (
@@ -1175,7 +1205,9 @@ INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `desc
 (15,	15,	'locations_to',	'',	0,	4),
 (16,	16,	'locations_to',	'',	0,	4),
 (17,	17,	'locations_to',	'',	0,	2),
-(18,	18,	'locations_to',	'',	0,	4);
+(18,	18,	'locations_to',	'',	0,	4),
+(19,	19,	'nav_menu',	'',	0,	0),
+(20,	20,	'nav_menu',	'',	0,	0);
 
 DROP TABLE IF EXISTS `wp_termmeta`;
 CREATE TABLE `wp_termmeta` (
@@ -1188,6 +1220,21 @@ CREATE TABLE `wp_termmeta` (
   KEY `meta_key` (`meta_key`(191))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
+INSERT INTO `wp_termmeta` (`meta_id`, `term_id`, `meta_key`, `meta_value`) VALUES
+(1,	19,	'footer_phone',	'0798237492367'),
+(2,	19,	'_footer_phone',	'field_6a47efe02a5d0'),
+(3,	19,	'footer_whatsapp',	'02374897234873'),
+(4,	19,	'_footer_whatsapp',	'field_6a47eff22a5d1'),
+(5,	19,	'footer_email',	'test@test.com'),
+(6,	19,	'_footer_email',	'field_6a47effe2a5d2'),
+(7,	19,	'footer_address',	'THIS IS A TEST\r\nTHIS IS A TEST\r\nTHIS IS A TEST\r\nTHIS IS A TEST'),
+(8,	19,	'_footer_address',	'field_6a47f00a2a5d3'),
+(9,	19,	'footer_social_facebook',	''),
+(10,	19,	'_footer_social_facebook',	'field_6a47f0142a5d4'),
+(11,	19,	'footer_social_instagram',	''),
+(12,	19,	'_footer_social_instagram',	'field_6a47f02a2a5d5'),
+(13,	19,	'footer_social_tripadvisor',	''),
+(14,	19,	'_footer_social_tripadvisor',	'field_6a47f0452a5d6');
 
 DROP TABLE IF EXISTS `wp_terms`;
 CREATE TABLE `wp_terms` (
@@ -1216,7 +1263,9 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (15,	'Cancun',	'cancun',	0),
 (16,	'Cozumel',	'cozumel',	0),
 (17,	'Merida',	'merida',	0),
-(18,	'Playa del Carmen',	'playa-del-carmen',	0);
+(18,	'Playa del Carmen',	'playa-del-carmen',	0),
+(19,	'Footer Menu 1',	'footer-menu-1',	0),
+(20,	'Footer Menu - Popular Pick Ups',	'footer-menu-popular-pick-ups',	0);
 
 DROP TABLE IF EXISTS `wp_usermeta`;
 CREATE TABLE `wp_usermeta` (
@@ -1255,8 +1304,10 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (24,	1,	'metaboxhidden_prices',	'a:0:{}'),
 (25,	1,	'meta-box-order_prices',	'a:4:{s:6:\"normal\";s:21:\"acf-group_prices_main\";s:8:\"advanced\";s:0:\"\";s:15:\"acf_after_title\";s:0:\"\";s:4:\"side\";s:0:\"\";}'),
 (26,	1,	'session_tokens',	'a:1:{s:64:\"784997e42de1fddc3ebcb95a14dcec881e2f7f682a2770061f7b96e0ce191862\";a:4:{s:10:\"expiration\";i:1783263641;s:2:\"ip\";s:9:\"127.0.0.1\";s:2:\"ua\";s:117:\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36\";s:5:\"login\";i:1783090841;}}'),
-(27,	1,	'nav_menu_recently_edited',	'3'),
-(28,	1,	'gform_recent_forms',	'a:1:{i:0;s:1:\"1\";}');
+(27,	1,	'nav_menu_recently_edited',	'20'),
+(28,	1,	'gform_recent_forms',	'a:1:{i:0;s:1:\"1\";}'),
+(29,	1,	'manageedit-acf-ui-options-pagecolumnshidden',	'a:1:{i:0;s:7:\"acf-key\";}'),
+(30,	1,	'acf_user_settings',	'a:1:{s:23:\"options-pages-first-run\";b:1;}');
 
 DROP TABLE IF EXISTS `wp_users`;
 CREATE TABLE `wp_users` (
@@ -1279,4 +1330,4 @@ CREATE TABLE `wp_users` (
 INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
 (1,	'admin',	'$wp$2y$10$/Bt8eYlS.U5xQhw4Dz/2cOdnKlNMWv6QhYKqyWR9vBRedLCDiqG5W',	'admin',	'jacob@nsmdigital.com',	'http://flightsholboxv1.local',	'2026-06-12 20:00:14',	'',	0,	'admin');
 
--- 2026-07-03 17:11:01 UTC
+-- 2026-07-03 17:45:52 UTC

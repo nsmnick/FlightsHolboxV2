@@ -56,7 +56,9 @@ class Theme_Setup
     public function registerNavMenus()
     {
         register_nav_menu('primary-menu', 'Primary Menu');
-        register_nav_menu('footer-menu', 'Footer Menu');
+        register_nav_menu('footer-menu', 'Footer Menu — Information');
+        register_nav_menu('footer-menu-pickups', 'Footer Menu — Popular Pick Ups');
+        register_nav_menu('footer-menu-destinations', 'Footer Menu — Popular Destinations');
     }
 
     public function enqueueScripts()
@@ -355,6 +357,78 @@ function fh_register_post_types()
  * @param string $all_label  Text for the default "Select" option.
  * @return string            HTML <select> element.
  */
+// ─── Gravity Forms: Transfer Booking Form (ID 1) ──────────────────────────────
+
+add_filter('gform_pre_render_1',            'fh_gf_inject_booking_summary');
+add_filter('gform_pre_validation_1',        'fh_gf_inject_booking_summary');
+add_filter('gform_pre_submission_filter_1', 'fh_gf_inject_booking_summary');
+function fh_gf_inject_booking_summary($form) {
+    $price_id  = isset($_GET['price_id'])  ? (int) $_GET['price_id']  : 0;
+    $trip_type = (isset($_GET['trip_type']) && in_array($_GET['trip_type'], ['one_way', 'round_trip']))
+        ? $_GET['trip_type'] : '';
+
+    if (!$price_id || !$trip_type) return $form;
+
+    $post = get_post($price_id);
+    if (!$post || $post->post_type !== 'prices') return $form;
+
+    $froms  = get_the_terms($price_id, 'locations_from');
+    $tos    = get_the_terms($price_id, 'locations_to');
+    $people = get_the_terms($price_id, 'number_of_people');
+    $from   = (!empty($froms)  && !is_wp_error($froms))  ? $froms[0]->name  : '';
+    $to     = (!empty($tos)    && !is_wp_error($tos))    ? $tos[0]->name    : '';
+    $ppl    = (!empty($people) && !is_wp_error($people)) ? $people[0]->name : '';
+    $base   = $trip_type === 'one_way'
+        ? (float) get_field('price_one_way',   $price_id)
+        : (float) get_field('price_round_trip', $price_id);
+    $tax    = (float) (get_field('federal_tax_rate', $price_id) ?: 16);
+    $inc    = round($base * (1 + $tax / 100), 2);
+    $label  = $trip_type === 'one_way' ? 'One Way' : 'Round Trip';
+
+    $html  = '<div class="booking-summary-block">';
+    $html .= '<div class="booking-summary-block__row"><strong>Transfer:</strong> ' . esc_html($label) . '</div>';
+    $html .= '<div class="booking-summary-block__row"><strong>From:</strong> ' . esc_html($from) . '</div>';
+    $html .= '<div class="booking-summary-block__row"><strong>To:</strong> ' . esc_html($to) . '</div>';
+    $html .= '<div class="booking-summary-block__row"><strong>Group size:</strong> ' . esc_html($ppl) . '</div>';
+    $html .= '<div class="booking-summary-block__row"><strong>Cost (ex. ' . $tax . '% federal tax):</strong> $' . number_format($base, 2) . '</div>';
+    $html .= '<div class="booking-summary-block__row booking-summary-block__row--total"><strong>Total inc. tax:</strong> $' . number_format($inc, 2) . '</div>';
+    $html .= '</div>';
+
+    foreach ($form['fields'] as &$field) {
+        if ((int) $field->id === 16) {
+            $field->content = $html;
+            break;
+        }
+    }
+
+    return $form;
+}
+
+add_filter('gform_notification_1', 'fh_gf_booking_notification', 10, 3);
+function fh_gf_booking_notification($notification, $form, $entry) {
+    if ($notification['name'] !== 'Admin Notification') return $notification;
+
+    $price_id  = isset($_GET['price_id'])  ? (int) $_GET['price_id']  : 0;
+    $trip_type = isset($_GET['trip_type']) ? sanitize_key($_GET['trip_type']) : '';
+
+    if (!$price_id) return $notification;
+
+    $froms = get_the_terms($price_id, 'locations_from');
+    $tos   = get_the_terms($price_id, 'locations_to');
+    $from  = (!empty($froms) && !is_wp_error($froms)) ? $froms[0]->name : '';
+    $to    = (!empty($tos)   && !is_wp_error($tos))   ? $tos[0]->name   : '';
+    $label = $trip_type === 'one_way' ? 'One Way' : 'Round Trip';
+
+    if ($from && $to) {
+        $notification['subject'] = 'New Booking Request: ' . $label . ' – ' . $from . ' → ' . $to;
+    }
+
+    return $notification;
+}
+
+
+// ─── Categories dropdown helper ────────────────────────────────────────────────
+
 function fh_get_categories_dropdown(string $taxonomy, array $args = [], string $all_label = 'Select', int $selected_id = 0): string
 {
     $terms = get_terms($taxonomy, array_merge(['hide_empty' => false], $args));

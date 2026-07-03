@@ -8,15 +8,14 @@
   top: 0;
   z-index: 500;
 
-  // Badge logo target — the logo's permanent resting spot in the menu bar.
+  // Badge logo target — the logo's permanent resting spot in the menu bar,
+  // pinned to the left of the bar itself (not the narrower .container),
+  // so it sits at the true left edge like the original site logo did.
   // Invisible while the hero morph clone (below) is travelling toward it;
   // JS reveals it once the clone lands, and it's the only visible logo at
   // all on pages with no hero to morph from (see badge-logo-morph.js).
   .site-badge-logo-target {
     position: absolute;
-    // Fluid rather than a breakpoint swap, for the same reason as the morph
-    // clone's size below — ramps from the mobile position/size to the
-    // desktop one across an 1100–1250px window instead of popping at 1250px.
     top: clamp(16px, 1.33vw + 1px, 18px);
     left: clamp(18px, 9.33vw - 85px, 32px);
     z-index: 4;
@@ -150,7 +149,7 @@
     .header-detail-container {
       display: flex;
       justify-content: flex-end;
-      align-items: flex-start;
+      align-items: center;
       position: relative;
     }
 
