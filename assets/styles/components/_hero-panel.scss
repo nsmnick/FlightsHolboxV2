@@ -1,26 +1,37 @@
 .hero-panel {
   position: relative;
   width: 100%;
-  height: 100svh;
-  min-height: 500px;
+  // Shorter on mobile so the panel below (e.g. the booking form) peeks
+  // into view on load without scrolling.
+  height: 60svh;
+  min-height: 380px;
   overflow: hidden;
+
+  @include bp(lap) {
+    height: 75svh;
+    min-height: 420px;
+  }
 
   // Swiper container fills the full hero
   .hero-slider__slides-wrapper {
+    position: relative;
     width: 100%;
     height: 100%;
 
-    // Swiper wrapper
+    // Swiper wrapper — must be relative so absolute fade slides are contained
     .hero-slider__slides {
+      position: relative;
+      width: 100%;
       height: 100%;
     }
 
     // Each slide is a full-bleed background image
     .hero-slider__slide {
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
-      height: 100%;
     }
   }
 

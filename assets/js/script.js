@@ -9,6 +9,8 @@ import initSliders from "./sliders";
 import initAccordion from "./accordion";
 import initFaqAccordions from "./faq-accordion";
 import initToggleContent from "./toggle-content";
+import initImageColumnPanel from "./image-column-panel";
+import initBadgeLogoMorph from "./badge-logo-morph";
 
 function ready(fn) {
   if (document.readyState !== "loading") {
@@ -28,19 +30,6 @@ ready(() => {
   initAccordion();
   initFaqAccordions();
   initToggleContent();
-
-  let lastScrollY = window.scrollY;
-  const navbar = document.getElementById("page-header");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-      // scrolling down
-      if (window.scrollY > 1) navbar.classList.add("hide");
-    } else {
-      // scrolling up
-      navbar.classList.remove("hide");
-    }
-
-    lastScrollY = window.scrollY;
-  });
+  initImageColumnPanel();
+  initBadgeLogoMorph();
 });

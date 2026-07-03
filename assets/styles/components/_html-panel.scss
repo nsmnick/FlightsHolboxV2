@@ -1,0 +1,9 @@
+// Content here is arbitrary user-pasted HTML, so only guard against
+// common embeds (iframes/images/video) overflowing their container.
+.html-panel {
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+}

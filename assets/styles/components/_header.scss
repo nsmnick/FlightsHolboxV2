@@ -8,11 +8,70 @@
   top: 0;
   z-index: 500;
 
-  transition: all 0.2s ease-in-out;
+  // Badge logo target — the logo's permanent resting spot in the menu bar.
+  // Invisible while the hero morph clone (below) is travelling toward it;
+  // JS reveals it once the clone lands, and it's the only visible logo at
+  // all on pages with no hero to morph from (see badge-logo-morph.js).
+  .site-badge-logo-target {
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    z-index: 4;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url("../images/flights-holbox-logo-border2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
 
-  &.hide {
-    transition: all 0.2s ease-in-out;
-    transform: translateY(-100%);
+    &.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @include bp($mobile-menu-snap) {
+      top: 18px;
+      left: 32px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  // Badge logo morph clone — the element actually visible while travelling
+  // from the hero centre to the target above. Position/scale are set from
+  // JS on every scroll frame to stay glued to the live scroll position, so
+  // deliberately no CSS transition on transform/top/left here.
+  .site-badge-logo-morph {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 900;
+    display: block;
+    transform-origin: top left;
+    transition: opacity 0.15s ease;
+
+    &__img {
+      display: block;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background-image: url("../images/flights-holbox-logo-border2.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+
+      @include bp(lap) {
+        width: 180px;
+        height: 180px;
+      }
+    }
   }
 
   .header-container-banner {
@@ -80,54 +139,21 @@
   .header-container {
     // Translucent by default — appears over hero images
     background-color: transparent;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease,
+      backdrop-filter 0.4s ease;
 
-    padding: 10px 0px;
+    padding: 18px 0px;
     @include bp($mobile-menu-snap) {
-      padding: 10px 0px 5px;
+      padding: 22px 0px;
     }
 
     .header-detail-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: flex-start;
       position: relative;
-
-      &__col1 {
-        flex: 0 0 0px;
-
-        @include bp($mobile-menu-snap) {
-          padding-top: 5px;
-          flex: 0 0 200px;
-          display: flex;
-          align-items: center;
-        }
-
-        text-align: left;
-
-        .site-header-logo {
-          z-index: 800;
-          position: relative;
-          display: block;
-          background-image: url("../images/logo-black.svg");
-          //background-image: url("../images/logo-white.svg");
-
-          background-size: contain;
-          background-repeat: no-repeat;
-          margin: 0 auto;
-
-          width: 152px;
-          height: 48px;
-
-          @include bp($mobile-menu-snap) {
-            width: 180px;
-            height: 57px;
-          }
-        }
-      }
-      &__col2 {
-        flex: 1 1 auto;
-      }
     }
 
     .header-container-main {
@@ -138,9 +164,9 @@
       position: absolute;
       z-index: 500;
 
-      top: 35px;
+      top: 40px;
 
-      right: 10px;
+      right: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -261,25 +287,16 @@
     }
   }
 
-  // Solid frosted-glass header once the user scrolls
+  // Solid frosted-glass header once the user scrolls — desktop only.
+  // On mobile the header stays fully transparent at all scroll positions
+  // (no white bar), and the hamburger icon stays white throughout.
   &--scrolled {
-    .header-container {
-      background-color: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    // Swap to dark hamburger over white bg
-    .mobile-menu-toggle {
-      &__left,
-      &__right {
-        background-color: getcolor("black");
-
-        &::before,
-        &::after {
-          background-color: getcolor("black");
-        }
+    @include bp($mobile-menu-snap) {
+      .header-container {
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
       }
     }
   }
@@ -289,15 +306,6 @@
       .container {
         max-width: none;
         padding: 0;
-      }
-
-      .header-detail-container {
-        &__col1 {
-          .site-header-logo {
-            margin-left: 16px;
-            background-image: url("../images/logo-black.svg");
-          }
-        }
       }
     }
   }

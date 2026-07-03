@@ -20,7 +20,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
 ?>
 
 <section class="video-panel <?php echo $generic_block_settings_classes; ?>">
-    <div class="container">
+    <div class="container <?php echo $generic_container_class; ?>">
         <div class="video-panel__embed">
             <iframe
                 src="<?php echo esc_url($embed_url); ?>"

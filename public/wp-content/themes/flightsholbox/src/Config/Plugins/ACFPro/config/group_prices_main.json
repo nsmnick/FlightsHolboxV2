@@ -1,0 +1,82 @@
+{
+    "key": "group_prices_main",
+    "title": "Price Details",
+    "fields": [
+        {
+            "key": "field_price_amount",
+            "label": "Price",
+            "name": "price",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Enter the price as a number only, e.g. 150",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "step": "",
+            "prepend": "£",
+            "append": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_price_note",
+            "label": "Price Note",
+            "name": "price_note",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Optional label shown under the price, e.g. \"per person\" or \"per group\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "per person",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "per person",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "prices"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "revisions",
+        "slug",
+        "author",
+        "format",
+        "featured_image",
+        "send-trackbacks"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1751500000
+}

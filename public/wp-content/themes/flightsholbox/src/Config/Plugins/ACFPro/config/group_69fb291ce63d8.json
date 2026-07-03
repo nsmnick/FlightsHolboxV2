@@ -18,15 +18,17 @@
             },
             "choices": {
                 "white": "White",
-                "crimson": "Crimson",
-                "brand-black": "Brand Black",
-                "porcelain": "Porcelain",
-                "brand-grey": "Brand Grey"
+                "light-grey": "Light Grey",
+                "grey": "Grey",
+                "gold": "Gold",
+                "navy": "Navy",
+                "dark": "Dark",
+                "charcoal": "Charcoal"
             },
-            "default_value": "white",
+            "default_value": "",
             "return_format": "value",
             "multiple": 0,
-            "allow_null": 0,
+            "allow_null": 1,
             "allow_in_bindings": 0,
             "ui": 0,
             "ajax": 0,
@@ -53,10 +55,10 @@
                 "medium": "Medium",
                 "large": "Large"
             },
-            "default_value": false,
+            "default_value": "",
             "return_format": "value",
             "multiple": 0,
-            "allow_null": 0,
+            "allow_null": 1,
             "allow_in_bindings": 0,
             "ui": 0,
             "ajax": 0,
@@ -86,5 +88,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783003040
+    "modified": 1783080122
 }

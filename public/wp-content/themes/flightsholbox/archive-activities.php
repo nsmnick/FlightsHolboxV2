@@ -12,9 +12,11 @@
         <div class="cpt-archive__grid">
             <?php while (have_posts()) : the_post();
                 $hero_image = get_field('hero_image');
-                $thumb_url  = $hero_image
-                    ? wp_get_attachment_image_url($hero_image, 'medium_large')
-                    : get_the_post_thumbnail_url(null, 'medium_large');
+                $thumb_url  = !empty($hero_image['sizes']['medium_large'])
+                    ? $hero_image['sizes']['medium_large']
+                    : (!empty($hero_image['url'])
+                        ? $hero_image['url']
+                        : get_the_post_thumbnail_url(null, 'medium_large'));
             ?>
                 <a href="<?php the_permalink(); ?>" class="cpt-card">
                     <div class="cpt-card__image" <?php if ($thumb_url) : ?>style="background-image: url('<?php echo esc_url($thumb_url); ?>')"<?php endif; ?>></div>

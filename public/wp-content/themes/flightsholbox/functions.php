@@ -97,6 +97,12 @@ class Theme_Setup
 
     public function enqueueStyles()
     {
+        // Remove WordPress block/global styles — this theme manages all its own CSS
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('global-styles');
+        wp_dequeue_style('classic-theme-styles');
+
         if (
             !$this->isViteHMRAvailable() &&
             array_key_exists('assets/index.js', $this->assets_map) &&
@@ -349,16 +355,17 @@ function fh_register_post_types()
  * @param string $all_label  Text for the default "Select" option.
  * @return string            HTML <select> element.
  */
-function fh_get_categories_dropdown(string $taxonomy, array $args = [], string $all_label = 'Select'): string
+function fh_get_categories_dropdown(string $taxonomy, array $args = [], string $all_label = 'Select', int $selected_id = 0): string
 {
     $terms = get_terms($taxonomy, array_merge(['hide_empty' => false], $args));
 
     $html  = '<select id="' . esc_attr($taxonomy) . '" name="' . esc_attr($taxonomy) . '" class="search-form__select" data-taxonomy="' . esc_attr($taxonomy) . '">';
-    $html .= '<option value="0" selected="selected">' . esc_html($all_label) . '</option>';
+    $html .= '<option value="0"' . ($selected_id === 0 ? ' selected="selected"' : '') . '>' . esc_html($all_label) . '</option>';
 
     if (!is_wp_error($terms)) {
         foreach ($terms as $term) {
-            $html .= '<option value="' . esc_attr($term->term_id) . '">' . esc_html($term->name) . '</option>';
+            $selected = $selected_id === (int) $term->term_id ? ' selected="selected"' : '';
+            $html .= '<option value="' . esc_attr($term->term_id) . '"' . $selected . '>' . esc_html($term->name) . '</option>';
         }
     }
 

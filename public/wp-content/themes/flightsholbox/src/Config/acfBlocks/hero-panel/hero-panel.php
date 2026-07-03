@@ -10,12 +10,12 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
 ?>
 
 <section class="hero-panel">
-    <div class="hero-slider__slides-wrapper">
-        <div class="hero-slider__slides">
+    <div class="hero-slider__slides-wrapper swiper">
+        <div class="hero-slider__slides swiper-wrapper">
             <?php if ($slides) : ?>
                 <?php foreach ($slides as $slide) : ?>
                     <div
-                        class="hero-slider__slide"
+                        class="hero-slider__slide swiper-slide"
                         style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($slide['slide_image'], 'full')); ?>')"
                         role="img"
                         aria-label="<?php echo esc_attr(get_post_meta($slide['slide_image'], '_wp_attachment_image_alt', true)); ?>"

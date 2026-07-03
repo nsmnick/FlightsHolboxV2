@@ -1,10 +1,3 @@
-// Two hand-drawn blob outlines used as CSS masks — layered and rotated
-// differently per item so the "watercolor" edge reads as organic rather
-// than a perfect ring. Fill must be white: mask luminance treats white
-// as fully opaque, black as fully transparent.
-$image-column-panel-blob-1: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='white' d='M100,8 C136,4 172,24 186,58 C200,90 194,128 172,154 C150,180 114,196 80,190 C46,184 14,160 6,126 C-2,90 10,52 40,28 C58,14 80,11 100,8 Z'/%3E%3C/svg%3E";
-$image-column-panel-blob-2: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='white' d='M96,4 C130,10 168,30 184,64 C198,96 188,134 162,158 C136,182 98,192 64,182 C30,172 4,144 2,108 C0,74 20,40 52,20 C66,10 80,2 96,4 Z'/%3E%3C/svg%3E";
-
 .image-column-panel {
   padding: 60px 0;
 
@@ -43,48 +36,101 @@ $image-column-panel-blob-2: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     max-width: 320px;
     aspect-ratio: 1 / 1;
 
-    &:nth-child(2) .image-column-panel__watercolor {
-      transform: rotate(12deg) scale(1.03);
-    }
+    &.has-text {
+      cursor: pointer;
 
-    &:nth-child(3) .image-column-panel__watercolor {
-      transform: rotate(-14deg) scale(0.97);
+      &:hover .image-column-panel__badge {
+        transform: scale(1.15);
+      }
+
+      &.is-active {
+        .image-column-panel__text-overlay {
+          opacity: 1;
+          pointer-events: all;
+        }
+        .image-column-panel__badge {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
     }
   }
 
+  &__badge {
+    position: absolute;
+    bottom: 14%;
+    right: 14%;
+    z-index: 4;
+    width: 32px;
+    height: 32px;
+    background: $color-fh-gold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-fh-dark;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    pointer-events: none;
+
+    svg {
+      display: block;
+    }
+  }
+
+  &__text-overlay {
+    position: absolute;
+    z-index: 3;
+    left: 10%;
+    top: 10%;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background: rgba(0, 70, 123, 0.93);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18%;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  &__overlay-heading {
+    color: $color-white;
+    font-size: to-rem(16);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 6px;
+  }
+
+  &__overlay-meta {
+    color: $color-fh-gold;
+    font-size: to-rem(11);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+
+  &__overlay-paragraph {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: to-rem(11);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  // Thin circular ring behind the photo, in the panel's border colour
   &__watercolor {
     position: absolute;
-    inset: -8%;
+    inset: 8%;
     z-index: 1;
-    filter: blur(3px);
-    opacity: 0.92;
-
-    mask-image: url($image-column-panel-blob-1);
-    mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    -webkit-mask-image: url($image-column-panel-blob-1);
-    -webkit-mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 6%;
-      background-color: inherit;
-      opacity: 0.65;
-      transform: rotate(24deg);
-
-      mask-image: url($image-column-panel-blob-2);
-      mask-size: 100% 100%;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      -webkit-mask-image: url($image-column-panel-blob-2);
-      -webkit-mask-size: 100% 100%;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-    }
+    border-radius: 50%;
 
     &.bgc-gold {
       background-color: getcolor("fh-gold");

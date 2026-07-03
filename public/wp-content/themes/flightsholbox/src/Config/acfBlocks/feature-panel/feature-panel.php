@@ -18,7 +18,9 @@ if (!$preview_popup_image && !$hide_panel) {
     <?php foreach (array_slice($features, 0, 3) as $feature) :
         $image_id = $feature['feature_image'] ?? null;
         $heading  = $feature['feature_heading'] ?? '';
-        $link     = $feature['button']['link'] ?? null;
+        $link      = $feature['button']['button_link'] ?? null;
+        $colour    = $feature['button']['button_colour'] ?? 'gold';
+        $btn_class = 'button' . ($colour !== 'gold' ? ' button--' . $colour : '');
         $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'large') : '';
     ?>
         <div
@@ -32,7 +34,7 @@ if (!$preview_popup_image && !$hide_panel) {
                 <?php endif; ?>
                 <?php if ($link && !empty($link['url'])) : ?>
                     <a
-                        class="feature-panel__btn btn btn--primary"
+                        class="<?php echo esc_attr($btn_class); ?>"
                         href="<?php echo esc_url($link['url']); ?>"
                         <?php if (!empty($link['target'])) : ?>target="<?php echo esc_attr($link['target']); ?>" rel="noopener noreferrer"<?php endif; ?>
                     >

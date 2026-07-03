@@ -21,29 +21,26 @@
     <header>
         <div id="page-header" class="page-header">
             <div class="header-container">
+
+                <a href="<?php echo site_url(); ?>/" id="badgeLogoTarget" class="site-badge-logo-target" aria-label="<?php bloginfo('name'); ?>"></a>
+
+                <a href="<?php echo site_url(); ?>/" id="badgeLogoMorph" class="site-badge-logo-morph" aria-hidden="true" tabindex="-1">
+                    <span class="site-badge-logo-morph__img"></span>
+                </a>
+
                 <div class="container">
                     <div class="header-detail-container">
-
-                        <div class="header-detail-container__col1">
-                            <a href="<?php echo site_url(); ?>/">
-                                <div class="site-header-logo"></div>
-                            </a>
-                        </div>
-
-                        <div class="header-detail-container__col2">
-                            <nav id="main-menu" class="main-menu main-menu--unscrolled">
-                                <ul>
-                                    <?php
-                                    wp_nav_menu([
-                                        'theme_location' => 'primary-menu',
-                                        'container' => '',
-                                        'items_wrap' => '%3$s'
-                                    ]);
-                                    ?>
-                                </ul>
-                            </nav>
-                        </div>
-
+                        <nav id="main-menu" class="main-menu main-menu--unscrolled">
+                            <ul>
+                                <?php
+                                wp_nav_menu([
+                                    'theme_location' => 'primary-menu',
+                                    'container' => '',
+                                    'items_wrap' => '%3$s'
+                                ]);
+                                ?>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
 

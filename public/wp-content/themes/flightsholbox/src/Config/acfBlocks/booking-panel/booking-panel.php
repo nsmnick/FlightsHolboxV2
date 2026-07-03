@@ -8,12 +8,12 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
 ?>
 
 <section class="booking-panel">
-    <div class="container">
+    <div class="container <?php echo $generic_container_class; ?>">
         <div class="booking-panel__inner">
 
             <form
                 role="search"
-                method="POST"
+                method="GET"
                 id="search-embedded-form"
                 class="search-form"
                 action="<?php echo esc_url(site_url('/flights')); ?>"

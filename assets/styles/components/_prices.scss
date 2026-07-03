@@ -1,0 +1,283 @@
+// ─── Shared prices page shell ──────────────────────────────────────────────────
+
+.prices-page {
+
+  &__hero {
+    position: relative;
+    height: 340px;
+    background-color: $color-fh-navy;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 30, 70, 0.4) 100%);
+  }
+
+  &__hero-content {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  &__title {
+    color: $color-white;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+
+  &__subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: to-rem(15);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  // ─── Inline search bar (results page) ──────────────────────────────────────
+
+  &__search-bar {
+    background: $color-fh-dark;
+    padding: 24px 0;
+
+    .search-form--inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .search-form__group {
+      flex: 1 1 160px;
+    }
+
+    .search-form__group--button {
+      flex: 0 0 auto;
+    }
+  }
+
+  // ─── Body ──────────────────────────────────────────────────────────────────
+
+  &__body {
+    padding: 60px 0 80px;
+    background: $color-light-grey;
+  }
+
+  &__container {
+    max-width: 1060px;
+  }
+
+  &__summary {
+    font-size: to-rem(15);
+    color: $color-fh-charcoal;
+    margin: 0 0 32px;
+    padding: 14px 20px;
+    background: $color-white;
+    border-left: 3px solid $color-fh-gold;
+    border-radius: 0 4px 4px 0;
+
+    strong {
+      color: $color-fh-navy;
+    }
+  }
+
+  &__cta {
+    margin-bottom: 40px;
+    font-size: to-rem(15);
+    color: $color-fh-charcoal;
+
+    a {
+      color: $color-fh-navy;
+      font-weight: 600;
+
+      &:hover {
+        color: $color-fh-gold;
+      }
+    }
+  }
+
+  &__no-results,
+  &__prompt {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: to-rem(16);
+    color: $color-fh-charcoal;
+
+    a {
+      color: $color-fh-navy;
+      font-weight: 600;
+
+      &:hover { color: $color-fh-gold; }
+    }
+
+    .button {
+      margin-top: 20px;
+    }
+  }
+}
+
+// ─── Price result cards (search results page) ──────────────────────────────────
+
+.price-results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @include bp(lap) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+.price-card {
+  background: $color-white;
+  border-radius: 8px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__route {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__location {
+    font-size: to-rem(16);
+    font-weight: 700;
+    color: $color-fh-navy;
+  }
+
+  &__arrow {
+    color: $color-fh-gold;
+    font-size: to-rem(18);
+  }
+
+  &__people {
+    font-size: to-rem(12);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: $color-fh-charcoal;
+    margin: 0;
+  }
+
+  &__price {
+    margin-top: 12px;
+    padding-top: 16px;
+    border-top: 1px solid $color-grey;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  &__amount {
+    font-size: to-rem(36);
+    font-weight: 800;
+    color: $color-fh-dark;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  &__note {
+    font-size: to-rem(13);
+    color: $color-fh-charcoal;
+  }
+}
+
+// ─── Price table (all-prices page) ────────────────────────────────────────────
+
+.price-table-group {
+  margin-bottom: 56px;
+
+  &__heading {
+    font-size: to-rem(22);
+    font-weight: 700;
+    color: $color-fh-dark;
+    margin: 0 0 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  &__label {
+    font-size: to-rem(11);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-fh-gold;
+  }
+}
+
+.price-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: $color-white;
+  font-size: to-rem(14);
+
+  th {
+    background: $color-fh-navy;
+    color: $color-white;
+    font-weight: 600;
+    font-size: to-rem(12);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid $color-light-grey;
+    vertical-align: middle;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:nth-child(even) td {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  &__destination-head,
+  &__destination {
+    font-weight: 600;
+    color: $color-fh-charcoal;
+    min-width: 160px;
+  }
+
+  &__destination {
+    color: $color-fh-dark;
+    font-weight: 700;
+  }
+
+  &__price {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  &__amount {
+    font-weight: 700;
+    color: $color-fh-navy;
+    font-size: to-rem(15);
+  }
+
+  &__unavailable {
+    color: $color-grey;
+  }
+}

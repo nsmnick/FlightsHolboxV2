@@ -46,10 +46,15 @@ function clickMobileSubMenu(e) {
   const currMenu = e.currentTarget;
   document.location.href = currMenu.value;
 }
+// Must match $mobile-menu-snap in assets/styles/setup/_global.scss —
+// that's the breakpoint where CSS switches from the mobile overlay
+// nav to the desktop horizontal/hover nav.
+const MOBILE_MENU_SNAP = 1250;
+
 function toggleSubMenu(e) {
   const currMenu = e.currentTarget;
 
-  if (window.innerWidth > 950) {
+  if (window.innerWidth > MOBILE_MENU_SNAP) {
     return;
   }
 

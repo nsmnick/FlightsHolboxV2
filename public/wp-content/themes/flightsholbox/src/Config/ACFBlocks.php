@@ -27,6 +27,11 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/image-column-panel');
         register_block_type(__DIR__ . '/acfBlocks/feature-panel');
         register_block_type(__DIR__ . '/acfBlocks/testimonial-panel');
+        register_block_type(__DIR__ . '/acfBlocks/html-panel');
+        register_block_type(__DIR__ . '/acfBlocks/slider-panel');
+        register_block_type(__DIR__ . '/acfBlocks/activities-slider');
+        register_block_type(__DIR__ . '/acfBlocks/two-column-panel');
+        register_block_type(__DIR__ . '/acfBlocks/contact-details-panel');
     }
 
     // Remove WP default blocks and allocate which blocks can be used by pages and posts by default.
@@ -50,6 +55,11 @@ class ACFBlocks
                     'acf/image-column-panel',
                     'acf/feature-panel',
                     'acf/testimonial-panel',
+                    'acf/html-panel',
+                    'acf/slider-panel',
+                    'acf/activities-slider',
+                    'acf/two-column-panel',
+                    'acf/contact-details-panel',
                 );
             }
         }

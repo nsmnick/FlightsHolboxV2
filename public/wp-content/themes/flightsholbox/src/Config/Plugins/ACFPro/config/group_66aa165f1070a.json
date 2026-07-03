@@ -34,40 +34,11 @@
                 "id": ""
             },
             "choices": {
-                "green": "Green",
-                "transparent": "Transparent"
+                "gold": "Gold",
+                "white": "White outline",
+                "navy": "Navy"
             },
-            "default_value": "transparent",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_69fb15b2489e9",
-            "label": "Button Icon",
-            "name": "button_icon",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "none": "None",
-                "right_arrow": "Right Arrow",
-                "left_arrow": "Left Arrow"
-            },
-            "default_value": "none",
+            "default_value": "white",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -100,5 +71,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783001440
+    "modified": 1783083920
 }

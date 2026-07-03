@@ -92,6 +92,15 @@ class Utils
         return $generic_block_class;
     }
 
+    public static function get_container_size_class($generic_block_settings)
+    {
+        $size = isset($generic_block_settings['container_size']) ? $generic_block_settings['container_size'] : '';
+        if (!$size || $size === 'default') {
+            return '';
+        }
+        return 'container--' . $size;
+    }
+
     public static function get_link_url($link_url, $link_page)
     {
         if ($link_page) {

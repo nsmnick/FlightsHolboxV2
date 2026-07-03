@@ -1,0 +1,231 @@
+.activities-slider {
+  padding: 60px 0 80px;
+  background-color: $color-fh-dark;
+  overflow: hidden;
+  position: relative;
+
+  // Fade previous slide out as it moves off the left edge
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 320px;
+    background: linear-gradient(to right, $color-fh-dark 40%, transparent 100%);
+    z-index: 10;
+    pointer-events: none;
+    display: none;
+
+    @include bp(lap) {
+      display: block;
+    }
+  }
+
+  @include bp(desk) {
+    padding: 80px 0 100px;
+  }
+
+  &__intro {
+    margin-bottom: 48px;
+    max-width: 640px;
+    padding-left: 20px;
+
+    @include bp(lap) {
+      padding-left: max(40px, calc(50vw - 530px));
+    }
+  }
+
+  &__heading {
+    color: $color-white;
+    font-size: to-rem(28);
+    font-weight: 700;
+    margin: 0 0 16px;
+
+    @include bp(lap) {
+      font-size: to-rem(36);
+    }
+  }
+
+  &__subheading {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: to-rem(16);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  // ─── Track — left-anchored, aligned to container edge ────────────────────
+
+  &__track {
+    position: relative;
+    margin-top: 0;
+    // Align left edge to where .container would start
+    padding-left: 20px;
+
+    @include bp(lap) {
+      padding-left: max(40px, calc(50vw - 530px));
+    }
+  }
+
+  .activities-swiper {
+    overflow: visible;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: content-box;
+    transition-property: transform;
+    transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+  }
+
+  // ─── Scale cascade — from left origin ────────────────────────────────────
+
+  &__slide {
+    flex-shrink: 0;
+
+    .activities-slider__card {
+      transform-origin: left center;
+      transform: scale(0.56);
+      opacity: 0.4;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    &.swiper-slide-active .activities-slider__card {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    &.swiper-slide-next .activities-slider__card {
+      transform: scale(0.76) translateX(12%);
+      opacity: 0.75;
+    }
+  }
+
+  // ─── Card — full-bleed image with overlay text ────────────────────────────
+
+  &__card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 8 / 9;
+
+    &-image {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 10, 30, 0.1) 0%,
+        rgba(0, 10, 30, 0.5) 40%,
+        rgba(0, 10, 30, 0.93) 100%
+      );
+      pointer-events: none;
+    }
+
+    &-body {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 26px 26px;
+      gap: 6px;
+    }
+
+    &-heading {
+      font-size: to-rem(11);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $color-fh-gold;
+      margin: 0;
+    }
+
+    &-name {
+      font-size: to-rem(26);
+      font-weight: 800;
+      line-height: 1.1;
+      color: $color-white;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    &-desc {
+      font-size: to-rem(13);
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.78);
+      margin: 4px 0 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    &-btn {
+      align-self: flex-start;
+      font-size: to-rem(12);
+      padding: 8px 18px;
+      margin-top: 8px;
+    }
+  }
+
+  // ─── Navigation — left-aligned under the first card ──────────────────────
+
+  &__nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    justify-content: center;
+
+    @include bp(lap) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: $color-fh-gold;
+    border: none;
+    color: $color-fh-dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    padding: 0;
+    flex-shrink: 0;
+
+    svg {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+}

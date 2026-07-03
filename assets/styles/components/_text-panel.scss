@@ -1,4 +1,24 @@
+.text-panel.content {
+    padding: 20px 0;
+    margin: 0;
+}
+
 .text-panel {
-  // Typography and heading styles come from .wysiwyg-container in core-components
-  // Padding comes from .content
+    &--left .wysiwyg-container {
+        text-align: left;
+        margin-left: 0;
+        margin-right: auto;
+    }
+
+    &--center .wysiwyg-container {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &--right .wysiwyg-container {
+        text-align: right;
+        margin-left: auto;
+        margin-right: 0;
+    }
 }
