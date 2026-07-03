@@ -12,8 +12,25 @@ function easeInOut(t) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
+function clamp01(t) {
+  return Math.max(0, Math.min(1, t));
+}
+
 // Must match $mobile-menu-snap in assets/styles/setup/_global.scss.
 const MOBILE_MENU_SNAP = 1250;
+
+// Range the vertical anchor ramps smoothly across, instead of snapping at
+// a single breakpoint — avoids a visible pop while the window is resized
+// through this width.
+const ANCHOR_MIN_WIDTH = 390;
+const ANCHOR_MAX_WIDTH = 900;
+const ANCHOR_MOBILE = 0.22;
+const ANCHOR_DESKTOP = 0.5;
+
+function heroAnchorFor(width) {
+  const t = clamp01((width - ANCHOR_MIN_WIDTH) / (ANCHOR_MAX_WIDTH - ANCHOR_MIN_WIDTH));
+  return lerp(ANCHOR_MOBILE, ANCHOR_DESKTOP, t);
+}
 
 export default function initBadgeLogoMorph() {
   const target = document.getElementById("badgeLogoTarget");
@@ -65,11 +82,18 @@ export default function initBadgeLogoMorph() {
     const targetCenterX = targetRect.left + targetRect.width / 2;
     const targetCenterY = targetRect.top + targetRect.height / 2;
 
-    // Live hero-centre position — heroTopDocY/heroHeight are fixed
+    // Live hero starting-point position — heroTopDocY/heroHeight are fixed
     // document coordinates, so subtracting scrollY reproduces exactly
     // how a normally-flowing element would move as the page scrolls.
+    //
+    // The hero's own heading/intro text is anchored to its bottom edge and,
+    // on short mobile heroes, can take up most of the hero's height — a
+    // true dead-centre badge would sit right on top of that text. So on
+    // mobile we anchor higher up (clear of the text), and only truly
+    // centre it once there's enough headroom on larger screens.
+    const heroAnchor = heroAnchorFor(window.innerWidth);
     const heroCenterX = window.innerWidth / 2;
-    const heroCenterY = heroTopDocY + heroHeight / 2 - scrollY;
+    const heroCenterY = heroTopDocY + heroHeight * heroAnchor - scrollY;
 
     const scaleEnd = navSize / heroImgSize;
     const currentScale = lerp(1, scaleEnd, p);
@@ -109,12 +133,22 @@ export default function initBadgeLogoMorph() {
 
   window.addEventListener("scroll", update, { passive: true });
 
-  let resizeTimeout;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      measure();
-      update();
-    }, 150);
-  });
+  // Recompute on every animation frame while the window is actively being
+  // resized, not after a debounce delay — otherwise the logo stays frozen
+  // at its old position/scale for the whole drag and then snaps into place
+  // once you stop, instead of tracking the resize live.
+  let resizeTicking = false;
+  window.addEventListener(
+    "resize",
+    () => {
+      if (resizeTicking) return;
+      resizeTicking = true;
+      requestAnimationFrame(() => {
+        measure();
+        update();
+        resizeTicking = false;
+      });
+    },
+    { passive: true },
+  );
 }

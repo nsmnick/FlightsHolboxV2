@@ -1,0 +1,113 @@
+.contact-details-panel {
+  padding: 60px 0;
+
+  @include bp(desk) {
+    padding: 100px 0;
+  }
+
+  &__heading {
+    text-align: center;
+    color: getcolor("fh-navy");
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+  }
+
+  &__methods {
+    text-align: center;
+
+    p {
+      font-size: to-rem(20);
+      color: getcolor("dark-grey");
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-transform: uppercase;
+      font-size: to-rem(12);
+      font-weight: 700;
+      color: getcolor("fh-charcoal");
+      margin-bottom: 4px;
+    }
+
+    a {
+      color: getcolor("fh-navy");
+
+      &:hover {
+        color: getcolor("fh-gold");
+      }
+    }
+  }
+
+  &__address {
+    text-align: center;
+    font-size: to-rem(20);
+    color: getcolor("dark-grey");
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      text-transform: uppercase;
+      font-size: to-rem(12);
+      font-weight: 700;
+      color: getcolor("fh-charcoal");
+      margin-bottom: 4px;
+    }
+
+    span {
+      display: block;
+      font-size: to-rem(14);
+      margin-bottom: 8px;
+    }
+  }
+
+  &__maps-link {
+    display: inline-block;
+    color: getcolor("fh-navy");
+    text-decoration: underline;
+    font-size: to-rem(14);
+
+    &:hover {
+      color: getcolor("fh-gold");
+    }
+  }
+
+  &__notice {
+    text-align: center;
+    margin-top: 30px;
+    font-size: to-rem(16);
+    color: getcolor("dark-grey");
+  }
+
+  &__socials {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  &__socials-heading {
+    text-transform: uppercase;
+    font-size: to-rem(12);
+    font-weight: 700;
+    color: getcolor("dark-grey");
+    margin-bottom: 10px;
+  }
+
+  &__social-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    padding: 0 12px;
+    border-radius: 13px;
+    background-color: getcolor("fh-navy");
+    color: getcolor("white");
+    font-size: to-rem(12);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .social-channels {
+    justify-content: center;
+  }
+}

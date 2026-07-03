@@ -68,7 +68,7 @@
   }
 
   &__container {
-    max-width: 1060px;
+    max-width: 1100px;
   }
 
   &__summary {
@@ -93,10 +93,7 @@
     a {
       color: $color-fh-navy;
       font-weight: 600;
-
-      &:hover {
-        color: $color-fh-gold;
-      }
+      &:hover { color: $color-fh-gold; }
     }
   }
 
@@ -110,13 +107,10 @@
     a {
       color: $color-fh-navy;
       font-weight: 600;
-
       &:hover { color: $color-fh-gold; }
     }
 
-    .button {
-      margin-top: 20px;
-    }
+    .button { margin-top: 20px; }
   }
 }
 
@@ -125,38 +119,47 @@
 .price-results {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
-
-  @include bp(lap) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
+  gap: 32px;
+  // A single, generous column rather than a multi-up tile grid — search
+  // results are usually one specific route, so let that result take up a
+  // large, easy-to-read portion of the page instead of a small tile.
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .price-card {
   background: $color-white;
-  border-radius: 8px;
-  padding: 28px 28px 24px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  border-radius: 12px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
+
+  @include bp(lap) {
+    padding: 40px 44px 36px;
+  }
 
   &__route {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
   }
 
   &__location {
-    font-size: to-rem(16);
+    font-size: to-rem(20);
     font-weight: 700;
     color: $color-fh-navy;
+
+    @include bp(lap) {
+      font-size: to-rem(24);
+    }
   }
 
   &__arrow {
     color: $color-fh-gold;
-    font-size: to-rem(18);
+    font-size: to-rem(20);
   }
 
   &__people {
@@ -168,39 +171,122 @@
     margin: 0;
   }
 
-  &__price {
-    margin-top: 12px;
-    padding-top: 16px;
-    border-top: 1px solid $color-grey;
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
+  // ─── Price breakdown: One Way and Return as separate, clearly labelled
+  // containers side by side, instead of two rows crammed into one table ──
+
+  &__breakdown {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 10px;
+
+    @include bp(tab) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
-  &__amount {
-    font-size: to-rem(36);
-    font-weight: 800;
-    color: $color-fh-dark;
-    letter-spacing: -0.02em;
+  &__fare {
+    border-radius: 10px;
+    padding: 18px 20px 16px;
+    border: 1px solid $color-light-grey;
+    border-top: 4px solid transparent;
+
+    &--one-way {
+      border-top-color: $color-fh-gold;
+      background: rgba(230, 175, 42, 0.06);
+    }
+
+    &--return {
+      border-top-color: $color-fh-navy;
+      background: rgba(0, 70, 123, 0.05);
+    }
+  }
+
+  &__fare-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  &__fare-icon {
+    font-size: to-rem(16);
     line-height: 1;
+
+    .price-card__fare--one-way & {
+      color: $color-fh-gold;
+    }
+
+    .price-card__fare--return & {
+      color: $color-fh-navy;
+    }
+  }
+
+  &__fare-label {
+    font-size: to-rem(13);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $color-fh-dark;
+  }
+
+  &__fare-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__fare-tax-label {
+    font-size: to-rem(12);
+    color: $color-fh-charcoal;
+  }
+
+  &__fare-amount {
+    font-weight: 700;
+    color: $color-fh-dark;
+    font-size: to-rem(17);
+    white-space: nowrap;
+
+    &--inc {
+      color: $color-fh-navy;
+      font-size: to-rem(19);
+    }
+  }
+
+  &__tax-explainer {
+    font-size: to-rem(12.5);
+    line-height: 1.6;
+    color: $color-fh-charcoal;
+    margin: 4px 0 0;
+
+    strong {
+      color: $color-fh-dark;
+    }
   }
 
   &__note {
-    font-size: to-rem(13);
+    font-size: to-rem(12);
     color: $color-fh-charcoal;
+    margin: 4px 0 0;
   }
 }
 
 // ─── Price table (all-prices page) ────────────────────────────────────────────
 
 .price-table-group {
-  margin-bottom: 56px;
+  margin-bottom: 60px;
 
   &__heading {
     font-size: to-rem(22);
     font-weight: 700;
     color: $color-fh-dark;
-    margin: 0 0 20px;
+    margin: 0 0 24px;
     display: flex;
     align-items: baseline;
     gap: 10px;
@@ -213,6 +299,19 @@
     letter-spacing: 0.08em;
     color: $color-fh-gold;
   }
+
+  &__type {
+    font-size: to-rem(14);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $color-fh-navy;
+    margin: 28px 0 10px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
 }
 
 .price-table-wrap {
@@ -220,28 +319,58 @@
   -webkit-overflow-scrolling: touch;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  margin-bottom: 20px;
 }
 
 .price-table {
   width: 100%;
   border-collapse: collapse;
   background: $color-white;
-  font-size: to-rem(14);
+  font-size: to-rem(13);
 
-  th {
+  // Main header row (navy background)
+  thead tr:first-child th {
     background: $color-fh-navy;
     color: $color-white;
-    font-weight: 600;
-    font-size: to-rem(12);
+    font-weight: 700;
+    font-size: to-rem(11);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    padding: 12px 16px;
-    text-align: left;
+    padding: 12px 14px;
+    text-align: center;
     white-space: nowrap;
+
+    &.price-table__destination-head {
+      text-align: left;
+      min-width: 160px;
+    }
+  }
+
+  // Sub-header row (ex. / inc. tax labels)
+  &__subhead th {
+    background: rgba(0, 70, 123, 0.08);
+    font-size: to-rem(10);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 6px 14px;
+    color: $color-fh-charcoal;
+    text-align: right;
+    white-space: nowrap;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+
+  &__tax-head {
+    &--inc {
+      color: $color-fh-navy;
+    }
   }
 
   td {
-    padding: 14px 16px;
+    padding: 12px 14px;
     border-bottom: 1px solid $color-light-grey;
     vertical-align: middle;
   }
@@ -251,30 +380,32 @@
   }
 
   tr:nth-child(even) td {
-    background: rgba(0, 0, 0, 0.02);
-  }
-
-  &__destination-head,
-  &__destination {
-    font-weight: 600;
-    color: $color-fh-charcoal;
-    min-width: 160px;
+    background: rgba(0, 0, 0, 0.018);
   }
 
   &__destination {
-    color: $color-fh-dark;
     font-weight: 700;
+    color: $color-fh-dark;
+    min-width: 140px;
   }
 
   &__price {
     text-align: right;
     white-space: nowrap;
+
+    &--inc {
+      background: rgba(0, 70, 123, 0.04);
+    }
   }
 
   &__amount {
     font-weight: 700;
-    color: $color-fh-navy;
-    font-size: to-rem(15);
+    color: $color-fh-charcoal;
+    font-size: to-rem(14);
+
+    &--inc {
+      color: $color-fh-navy;
+    }
   }
 
   &__unavailable {

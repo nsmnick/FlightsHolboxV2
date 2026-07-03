@@ -14,12 +14,15 @@
   // all on pages with no hero to morph from (see badge-logo-morph.js).
   .site-badge-logo-target {
     position: absolute;
-    top: 16px;
-    left: 18px;
+    // Fluid rather than a breakpoint swap, for the same reason as the morph
+    // clone's size below — ramps from the mobile position/size to the
+    // desktop one across an 1100–1250px window instead of popping at 1250px.
+    top: clamp(16px, 1.33vw + 1px, 18px);
+    left: clamp(18px, 9.33vw - 85px, 32px);
     z-index: 4;
     display: block;
-    width: 40px;
-    height: 40px;
+    width: clamp(40px, 5.33vw - 19px, 48px);
+    height: clamp(40px, 5.33vw - 19px, 48px);
     border-radius: 50%;
     background-image: url("../images/flights-holbox-logo-border2.png");
     background-size: contain;
@@ -33,13 +36,6 @@
     &.is-visible {
       opacity: 1;
       pointer-events: auto;
-    }
-
-    @include bp($mobile-menu-snap) {
-      top: 18px;
-      left: 32px;
-      width: 48px;
-      height: 48px;
     }
   }
 
@@ -58,19 +54,21 @@
 
     &__img {
       display: block;
-      width: 140px;
-      height: 140px;
+      // Smaller on mobile — the hero's own heading/intro text is anchored
+      // to the bottom of a short hero, so there isn't room for a large
+      // dead-centre badge without it sitting on top of that text. Fluid
+      // (not a breakpoint swap) so it ramps smoothly from 90px at a 390px
+      // viewport to 180px at 900px+, instead of popping at one exact width
+      // — the JS reads this size live, so a discrete jump here would show
+      // up as a visible snap while the window is being resized.
+      width: clamp(90px, 17.65vw + 21px, 180px);
+      height: clamp(90px, 17.65vw + 21px, 180px);
       border-radius: 50%;
       background-image: url("../images/flights-holbox-logo-border2.png");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-
-      @include bp(lap) {
-        width: 180px;
-        height: 180px;
-      }
     }
   }
 

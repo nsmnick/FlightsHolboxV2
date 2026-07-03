@@ -3,25 +3,57 @@
     "title": "Price Details",
     "fields": [
         {
-            "key": "field_price_amount",
-            "label": "Price",
-            "name": "price",
+            "key": "field_price_one_way",
+            "label": "One Way Price (ex. tax)",
+            "name": "price_one_way",
             "aria-label": "",
             "type": "number",
-            "instructions": "Enter the price as a number only, e.g. 150",
+            "instructions": "Base one-way price before federal tax",
             "required": 1,
             "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
+            "wrapper": { "width": "33", "class": "", "id": "" },
             "default_value": "",
             "min": 0,
             "max": "",
             "step": "",
-            "prepend": "£",
+            "prepend": "$",
             "append": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_price_round_trip",
+            "label": "Round Trip Price (ex. tax)",
+            "name": "price_round_trip",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Base round-trip price before federal tax",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": { "width": "33", "class": "", "id": "" },
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "step": "",
+            "prepend": "$",
+            "append": "",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_price_federal_tax_rate",
+            "label": "Federal Tax Rate (%)",
+            "name": "federal_tax_rate",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Tax percentage applied to calculate inc. tax prices (e.g. 16 for 16% IVA)",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": { "width": "33", "class": "", "id": "" },
+            "default_value": "16",
+            "min": 0,
+            "max": 100,
+            "step": 0.01,
+            "prepend": "",
+            "append": "%",
             "allow_in_bindings": 0
         },
         {
@@ -30,18 +62,14 @@
             "name": "price_note",
             "aria-label": "",
             "type": "text",
-            "instructions": "Optional label shown under the price, e.g. \"per person\" or \"per group\"",
+            "instructions": "Optional note shown under prices, e.g. \"per group\" — leave blank to omit",
             "required": 0,
             "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "per person",
+            "wrapper": { "width": "", "class": "", "id": "" },
+            "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
-            "placeholder": "per person",
+            "placeholder": "e.g. per group",
             "prepend": "",
             "append": ""
         }
@@ -78,5 +106,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1751500000
+    "modified": 1751500001
 }

@@ -1,14 +1,13 @@
 <?php get_header(); ?>
 
 <?php
-// Pull all published prices and index them for fast lookup
+// Build price index: $index[$from][$to][$people] = ['one_way' => ..., 'round_trip' => ..., 'tax_rate' => ...]
 $all_prices = new WP_Query([
     'post_type'      => 'prices',
     'posts_per_page' => -1,
     'post_status'    => 'publish',
 ]);
 
-// $price_index[$from_id][$to_id][$people_id] = ['price' => ..., 'note' => ...]
 $price_index = [];
 if ($all_prices->have_posts()) {
     foreach ($all_prices->posts as $p) {
@@ -23,17 +22,25 @@ if ($all_prices->have_posts()) {
         $to_id     = $tos[0]->term_id;
         $people_id = (!empty($people) && !is_wp_error($people)) ? $people[0]->term_id : 0;
 
+        $one_way_base = (float) get_field('price_one_way',    $p->ID);
+        $rt_base      = (float) get_field('price_round_trip', $p->ID);
+        $tax_rate     = (float) (get_field('federal_tax_rate', $p->ID) ?: 16);
+        $note         = get_field('price_note', $p->ID);
+
         $price_index[$from_id][$to_id][$people_id] = [
-            'price' => get_field('price', $p->ID),
-            'note'  => get_field('price_note', $p->ID) ?: 'per person',
+            'one_way_ex'  => $one_way_base ? '$' . number_format($one_way_base, 2) : null,
+            'one_way_inc' => $one_way_base ? '$' . number_format($one_way_base * (1 + $tax_rate / 100), 2) : null,
+            'rt_ex'       => $rt_base      ? '$' . number_format($rt_base, 2) : null,
+            'rt_inc'      => $rt_base      ? '$' . number_format($rt_base * (1 + $tax_rate / 100), 2) : null,
+            'tax_rate'    => $tax_rate,
+            'note'        => $note,
         ];
     }
 }
 wp_reset_postdata();
 
-// All taxonomy terms for headers/rows
-$from_terms   = get_terms(['taxonomy' => 'locations_from',   'hide_empty' => true, 'orderby' => 'name']);
-$to_terms     = get_terms(['taxonomy' => 'locations_to',     'hide_empty' => true, 'orderby' => 'name']);
+$from_terms   = get_terms(['taxonomy' => 'locations_from',   'hide_empty' => true,  'orderby' => 'name']);
+$to_terms     = get_terms(['taxonomy' => 'locations_to',     'hide_empty' => true,  'orderby' => 'name']);
 $people_terms = get_terms(['taxonomy' => 'number_of_people', 'hide_empty' => false, 'orderby' => 'name']);
 ?>
 
@@ -57,7 +64,6 @@ $people_terms = get_terms(['taxonomy' => 'number_of_people', 'hide_empty' => fal
             <?php if (!empty($from_terms) && !is_wp_error($from_terms) && !empty($people_terms) && !is_wp_error($people_terms)) : ?>
 
                 <?php foreach ($from_terms as $from) :
-                    // Check this from has any prices before rendering a section
                     if (empty($price_index[$from->term_id])) continue;
                 ?>
                     <div class="price-table-group">
@@ -66,46 +72,75 @@ $people_terms = get_terms(['taxonomy' => 'number_of_people', 'hide_empty' => fal
                             <?php echo esc_html($from->name); ?>
                         </h2>
 
-                        <div class="price-table-wrap">
-                            <table class="price-table">
-                                <thead>
-                                    <tr>
-                                        <th class="price-table__destination-head">Destination</th>
-                                        <?php foreach ($people_terms as $people) : ?>
-                                            <th><?php echo esc_html($people->name); ?></th>
-                                        <?php endforeach; ?>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($to_terms as $to) :
-                                        // Skip rows with no data for this from→to
-                                        if (empty($price_index[$from->term_id][$to->term_id])) continue;
-                                        $row = $price_index[$from->term_id][$to->term_id];
-                                    ?>
+                        <?php foreach (['one_way' => 'One Way', 'round_trip' => 'Round Trip'] as $type => $type_label) :
+                            // Check whether any prices of this type exist for this from
+                            $has_type = false;
+                            foreach ($price_index[$from->term_id] as $to_prices) {
+                                foreach ($to_prices as $entry) {
+                                    if ($entry[$type . '_ex']) { $has_type = true; break 2; }
+                                }
+                            }
+                            if (!$has_type) continue;
+                        ?>
+                            <h3 class="price-table-group__type"><?php echo $type_label; ?></h3>
+
+                            <div class="price-table-wrap">
+                                <table class="price-table">
+                                    <thead>
                                         <tr>
-                                            <td class="price-table__destination"><?php echo esc_html($to->name); ?></td>
-                                            <?php foreach ($people_terms as $people) :
-                                                $entry = $row[$people->term_id] ?? null;
-                                            ?>
-                                                <td class="price-table__price">
-                                                    <?php if ($entry && $entry['price'] !== '' && $entry['price'] !== null) : ?>
-                                                        <span class="price-table__amount">£<?php echo number_format((float) $entry['price'], 2); ?></span>
-                                                    <?php else : ?>
-                                                        <span class="price-table__unavailable">—</span>
-                                                    <?php endif; ?>
-                                                </td>
+                                            <th class="price-table__destination-head">Destination</th>
+                                            <?php foreach ($people_terms as $people) : ?>
+                                                <th colspan="2"><?php echo esc_html($people->name); ?></th>
                                             <?php endforeach; ?>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                        <tr class="price-table__subhead">
+                                            <th></th>
+                                            <?php foreach ($people_terms as $people) : ?>
+                                                <th class="price-table__tax-head">Ex. tax</th>
+                                                <th class="price-table__tax-head price-table__tax-head--inc">Inc. tax</th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($to_terms as $to) :
+                                            if (empty($price_index[$from->term_id][$to->term_id])) continue;
+                                            $row = $price_index[$from->term_id][$to->term_id];
+                                        ?>
+                                            <tr>
+                                                <td class="price-table__destination"><?php echo esc_html($to->name); ?></td>
+                                                <?php foreach ($people_terms as $people) :
+                                                    $entry = $row[$people->term_id] ?? null;
+                                                    $ex    = $entry ? $entry[$type . '_ex']  : null;
+                                                    $inc   = $entry ? $entry[$type . '_inc'] : null;
+                                                ?>
+                                                    <td class="price-table__price">
+                                                        <?php if ($ex) : ?>
+                                                            <span class="price-table__amount"><?php echo $ex; ?></span>
+                                                        <?php else : ?>
+                                                            <span class="price-table__unavailable">—</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td class="price-table__price price-table__price--inc">
+                                                        <?php if ($inc) : ?>
+                                                            <span class="price-table__amount price-table__amount--inc"><?php echo $inc; ?></span>
+                                                        <?php else : ?>
+                                                            <span class="price-table__unavailable">—</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endforeach; ?>
+
                     </div>
                 <?php endforeach; ?>
 
             <?php else : ?>
                 <div class="prices-page__no-results">
-                    <p>No prices have been added yet. <a href="<?php echo esc_url(admin_url('post-new.php?post_type=prices')); ?>">Add some prices</a> in the admin.</p>
+                    <p>No prices have been added yet.</p>
                 </div>
             <?php endif; ?>
 

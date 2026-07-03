@@ -8,7 +8,7 @@ if (!$preview_popup_image && !$hide_panel) {
     $whatsapp       = get_field('whatsapp');
     $email          = get_field('email');
     $address        = get_field('address');
-    $maps_url       = get_field('maps_url');
+    $maps_link      = get_field('maps_link');
     $booking_notice = get_field('booking_notice');
     $social_links   = get_field('social_links') ?: [];
 
@@ -52,9 +52,9 @@ if (!$preview_popup_image && !$hide_panel) {
             <p class="contact-details-panel__address">
                 <label>Office Address</label>
                 <span><?php echo nl2br(esc_html($address)); ?></span>
-                <?php if ($maps_url && !empty($maps_url['url'])) : ?>
-                    <a class="contact-details-panel__maps-link" target="_blank" rel="noopener" href="<?php echo esc_url($maps_url['url']); ?>">
-                        <?php echo esc_html($maps_url['title'] ?: 'View on Google Maps'); ?>
+                <?php if ($maps_link && !empty($maps_link['url'])) : ?>
+                    <a class="contact-details-panel__maps-link" target="_blank" rel="noopener" href="<?php echo esc_url($maps_link['url']); ?>">
+                        <?php echo esc_html($maps_link['title'] ?: 'View on Google Maps'); ?>
                     </a>
                 <?php endif; ?>
             </p>
@@ -64,20 +64,33 @@ if (!$preview_popup_image && !$hide_panel) {
             <p class="contact-details-panel__notice"><?php echo esc_html($booking_notice); ?></p>
         <?php endif; ?>
 
-        <?php if ($social_links) : ?>
+        <?php
+        // Each repeater row can carry any combination of these four platform URLs.
+        $platform_labels = [
+            'facebook' => 'Facebook',
+            'instagram' => 'Instagram',
+            'trip_advisor' => 'TripAdvisor',
+            'whatsapp' => 'WhatsApp',
+        ];
+        $social_urls = [];
+        foreach ($social_links as $row) {
+            foreach ($platform_labels as $platform => $label) {
+                if (!empty($row[$platform])) {
+                    $social_urls[$platform] = $row[$platform];
+                }
+            }
+        }
+        ?>
+        <?php if ($social_urls) : ?>
             <div class="contact-details-panel__socials">
                 <p class="contact-details-panel__socials-heading">Follow us on social media</p>
                 <div class="social-channels social-channels--row">
-                    <?php foreach ($social_links as $link) :
-                        $platform = $link['platform'] ?? '';
-                        $url      = $link['url'] ?? '';
-                        if (!$platform || !$url) continue;
-                    ?>
-                        <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr(ucfirst($platform)); ?>">
-                            <?php if (in_array($platform, ['facebook', 'instagram', 'x', 'whatsapp', 'email'], true)) : ?>
-                                <span class="social-icon social-icon--<?php echo esc_attr($platform); ?>"></span>
+                    <?php foreach ($social_urls as $platform => $url) : ?>
+                        <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($platform_labels[$platform]); ?>">
+                            <?php if ($platform === 'trip_advisor') : ?>
+                                <span class="contact-details-panel__social-badge">TripAdvisor</span>
                             <?php else : ?>
-                                <span class="contact-details-panel__social-badge"><?php echo esc_html(ucfirst($platform)); ?></span>
+                                <span class="social-icon social-icon--<?php echo esc_attr($platform === 'trip_advisor' ? '' : $platform); ?>"></span>
                             <?php endif; ?>
                         </a>
                     <?php endforeach; ?>
