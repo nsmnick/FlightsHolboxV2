@@ -1,0 +1,152 @@
+.page-content {
+
+  &__header {
+    background: $color-fh-navy;
+    padding: 60px 0 50px;
+
+    @include bp(lap) {
+      padding: 80px 0 70px;
+    }
+  }
+
+  &__title {
+    color: $color-white;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  &__body {
+    background: $color-light-grey;
+    padding: 52px 0 80px;
+
+    @include bp(lap) {
+      padding: 64px 0 100px;
+    }
+  }
+
+  &__prose {
+    background: $color-white;
+    border-radius: 8px;
+    padding: 36px 28px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    max-width: 760px;
+
+    @include bp(lap) {
+      padding: 52px 60px;
+    }
+
+    // Headings
+    h1, h2, h3, h4 {
+      color: $color-fh-dark;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 1.8em 0 0.6em;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    h1 { font-size: to-rem(26); }
+
+    h2 {
+      font-size: to-rem(20);
+      padding-bottom: 10px;
+      border-bottom: 2px solid $color-fh-gold;
+    }
+
+    h3 {
+      font-size: to-rem(16);
+      color: $color-fh-navy;
+    }
+
+    h4 { font-size: to-rem(15); }
+
+    // Body text
+    p {
+      font-size: to-rem(15);
+      line-height: 1.75;
+      color: $color-fh-charcoal;
+      margin: 0 0 1em;
+    }
+
+    // Lists
+    ul, ol {
+      font-size: to-rem(15);
+      line-height: 1.75;
+      color: $color-fh-charcoal;
+      margin: 0 0 1.2em;
+      padding-left: 1.4em;
+
+      li {
+        margin-bottom: 0.4em;
+      }
+    }
+
+    ul li {
+      list-style-type: disc;
+    }
+
+    // Links
+    a {
+      color: $color-fh-navy;
+      font-weight: 600;
+      text-underline-offset: 3px;
+
+      &:hover {
+        color: $color-fh-gold;
+      }
+    }
+
+    // Strong
+    strong {
+      font-weight: 700;
+      color: $color-fh-dark;
+    }
+
+    // Tables (used in cookie policy)
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: to-rem(13);
+      margin: 1.2em 0;
+      border-radius: 6px;
+      overflow: hidden;
+
+      thead th {
+        background: $color-fh-navy;
+        color: $color-white;
+        font-weight: 700;
+        text-align: left;
+        padding: 10px 14px;
+        font-size: to-rem(12);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      tbody td {
+        padding: 10px 14px;
+        border-bottom: 1px solid $color-light-grey;
+        color: $color-fh-charcoal;
+        vertical-align: top;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:nth-child(even) td {
+        background: rgba(0, 0, 0, 0.02);
+      }
+    }
+
+    // Horizontal rule
+    hr {
+      border: none;
+      border-top: 1px solid $color-light-grey;
+      margin: 2em 0;
+    }
+  }
+}

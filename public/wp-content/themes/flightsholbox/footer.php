@@ -83,7 +83,7 @@ $footer_tripadvisor = get_field('footer_social_tripadvisor', 'option');
                 <?php endif; ?>
                 <?php if ($footer_tripadvisor) : ?>
                   <a href="<?php echo esc_url($footer_tripadvisor); ?>" target="_blank" rel="noopener" aria-label="TripAdvisor">
-                    <span class="footer-social-badge">TripAdvisor</span>
+                    <span class="social-icon social-icon--tripadvisor"></span>
                   </a>
                 <?php endif; ?>
               </div>
@@ -91,49 +91,36 @@ $footer_tripadvisor = get_field('footer_social_tripadvisor', 'option');
           <?php endif; ?>
         </div>
 
-        <div class="two-col-container__col2">
-          <div class="footer-menu-container footer-menu-container--three">
-            <div class="footer-menu-container__col">
-              <h3>Information</h3>
-              <ul>
-                <?php
-                wp_nav_menu([
-                  'theme_location' => 'footer-menu',
-                  'container' => '',
-                  'items_wrap' => '%3$s',
-                  'fallback_cb' => false,
-                ]);
-                ?>
-              </ul>
-            </div>
-            <div class="footer-menu-container__col">
-              <h3>Popular Pick Ups</h3>
-              <ul>
-                <?php
-                wp_nav_menu([
-                  'theme_location' => 'footer-menu-pickups',
-                  'container' => '',
-                  'items_wrap' => '%3$s',
-                  'fallback_cb' => false,
-                ]);
-                ?>
-              </ul>
-            </div>
-            <div class="footer-menu-container__col">
-              <h3>Popular Destinations</h3>
-              <ul>
-                <?php
-                wp_nav_menu([
-                  'theme_location' => 'footer-menu-destinations',
-                  'container' => '',
-                  'items_wrap' => '%3$s',
-                  'fallback_cb' => false,
-                ]);
-                ?>
-              </ul>
+        <?php
+        $footer_menu_locations = [
+          'footer-menu' => 'Information',
+          'footer-menu-pickups' => 'Popular Pick Ups',
+          'footer-menu-destinations' => 'Popular Destinations',
+        ];
+        $active_footer_menus = array_filter(array_keys($footer_menu_locations), 'has_nav_menu');
+        ?>
+
+        <?php if ($active_footer_menus) : ?>
+          <div class="two-col-container__col2">
+            <div class="footer-menu-container footer-menu-container--<?php echo count($active_footer_menus) === 3 ? 'three' : 'two'; ?>">
+              <?php foreach ($active_footer_menus as $location) : ?>
+                <div class="footer-menu-container__col">
+                  <h3><?php echo esc_html($footer_menu_locations[$location]); ?></h3>
+                  <ul>
+                    <?php
+                    wp_nav_menu([
+                      'theme_location' => $location,
+                      'container' => '',
+                      'items_wrap' => '%3$s',
+                      'fallback_cb' => false,
+                    ]);
+                    ?>
+                  </ul>
+                </div>
+              <?php endforeach; ?>
             </div>
           </div>
-        </div>
+        <?php endif; ?>
 
       </div>
     </div>

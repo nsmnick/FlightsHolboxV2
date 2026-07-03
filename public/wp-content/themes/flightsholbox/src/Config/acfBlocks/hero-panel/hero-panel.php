@@ -27,8 +27,8 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
 
     <div class="hero-panel__overlay" aria-hidden="true"></div>
 
-    <div class="hero-panel__content">
-        <?php if ($logo) : ?>
+    <?php if ($logo) : ?>
+        <div class="hero-panel__logo-wrap">
             <a href="<?php echo esc_url(site_url()); ?>" class="hero-panel__logo-link">
                 <img
                     class="hero-panel__logo"
@@ -36,8 +36,10 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                     alt="<?php echo esc_attr(get_post_meta($logo, '_wp_attachment_image_alt', true) ?: get_bloginfo('name')); ?>"
                 >
             </a>
-        <?php endif; ?>
+        </div>
+    <?php endif; ?>
 
+    <div class="hero-panel__content">
         <?php if ($heading) : ?>
             <h1 class="hero-panel__heading"><?php echo esc_html($heading); ?></h1>
         <?php endif; ?>

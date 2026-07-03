@@ -85,13 +85,11 @@ if (!$preview_popup_image && !$hide_panel) {
             <div class="contact-details-panel__socials">
                 <p class="contact-details-panel__socials-heading">Follow us on social media</p>
                 <div class="social-channels social-channels--row">
-                    <?php foreach ($social_urls as $platform => $url) : ?>
+                    <?php foreach ($social_urls as $platform => $url) :
+                        $icon_class = $platform === 'trip_advisor' ? 'tripadvisor' : $platform;
+                    ?>
                         <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($platform_labels[$platform]); ?>">
-                            <?php if ($platform === 'trip_advisor') : ?>
-                                <span class="contact-details-panel__social-badge">TripAdvisor</span>
-                            <?php else : ?>
-                                <span class="social-icon social-icon--<?php echo esc_attr($platform === 'trip_advisor' ? '' : $platform); ?>"></span>
-                            <?php endif; ?>
+                            <span class="social-icon social-icon--<?php echo esc_attr($icon_class); ?>"></span>
                         </a>
                     <?php endforeach; ?>
                 </div>

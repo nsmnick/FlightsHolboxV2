@@ -93,20 +93,6 @@
     margin-bottom: 10px;
   }
 
-  &__social-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 26px;
-    padding: 0 12px;
-    border-radius: 13px;
-    background-color: getcolor("fh-navy");
-    color: getcolor("white");
-    font-size: to-rem(12);
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
   .social-channels {
     justify-content: center;
   }

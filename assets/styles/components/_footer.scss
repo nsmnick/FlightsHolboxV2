@@ -251,26 +251,6 @@
         }
       }
 
-      .footer-social-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 26px;
-        padding: 0 12px;
-        border-radius: 13px;
-        background-color: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: rgba(255, 255, 255, 0.85);
-        font-size: to-rem(12);
-        font-weight: 700;
-        text-transform: uppercase;
-        transition: border-color 0.2s ease, color 0.2s ease;
-
-        &:hover {
-          border-color: $color-fh-gold;
-          color: $color-fh-gold;
-        }
-      }
     }
     &__col2 {
       @include bp(1000px) {
@@ -306,6 +286,15 @@
 
             @include bp(lap) {
               flex: 0 0 30%;
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        &--two {
+          .footer-menu-container__col {
+            @include bp(700px) {
+              flex: 0 0 45%;
               margin-bottom: 0;
             }
           }

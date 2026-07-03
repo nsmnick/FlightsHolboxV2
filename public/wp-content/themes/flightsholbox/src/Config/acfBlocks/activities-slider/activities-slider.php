@@ -7,6 +7,12 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     $slider_intro   = get_field('slider_intro');
     $slider_items   = get_field('slider_items') ?: [];
 
+    // Drop rows where no post has been selected yet, so an in-progress
+    // repeater row never renders as a blank slide.
+    $slider_items = array_values(array_filter($slider_items, function ($slide) {
+        return !empty($slide['slide_post']);
+    }));
+
     if (!$slider_items) {
         return;
     }
