@@ -1,0 +1,41 @@
+.text-column-panel {
+  padding: 60px 0;
+
+  @include bp(desk) {
+    padding: 100px 0;
+  }
+
+  &__heading {
+    text-align: center;
+    color: getcolor("fh-navy");
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+  }
+
+  &__columns {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    @include bp(lap) {
+      flex-direction: row;
+      gap: 60px;
+    }
+  }
+
+  &__columns--3 {
+    max-width: 1200px;
+  }
+
+  &__col {
+    flex: 1 1 0;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

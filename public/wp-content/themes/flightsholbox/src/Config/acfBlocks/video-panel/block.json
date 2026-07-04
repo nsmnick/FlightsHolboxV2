@@ -6,7 +6,7 @@
   "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='2' y='4' width='20' height='16' rx='2' stroke='#000' stroke-width='2'/><path d='M10 9l5 3-5 3V9z' fill='#000'/></svg>",
   "keywords": ["video", "youtube", "vimeo", "embed"],
   "acf": {
-    "mode": "preview",
+    "mode": "edit",
     "renderTemplate": "video-panel.php"
   },
   "supports": {

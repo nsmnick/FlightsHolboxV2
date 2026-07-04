@@ -1,0 +1,17 @@
+{
+  "name": "acf/route-map-panel",
+  "title": "Route Map Panel",
+  "description": "An illustrated map with a pin for each location. Clicking a route line shows that route's prices.",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z' stroke='#000' stroke-width='2' stroke-linejoin='round'/><circle cx='12' cy='9' r='2.5' stroke='#000' stroke-width='2'/></svg>",
+  "keywords": ["map", "route", "routes", "prices", "locations", "pins"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "route-map-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

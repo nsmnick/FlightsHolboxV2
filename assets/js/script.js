@@ -11,6 +11,7 @@ import initFaqAccordions from "./faq-accordion";
 import initToggleContent from "./toggle-content";
 import initImageColumnPanel from "./image-column-panel";
 import initBadgeLogoMorph from "./badge-logo-morph";
+import initRouteMap from "./route-map";
 
 function ready(fn) {
   if (document.readyState !== "loading") {
@@ -32,4 +33,5 @@ ready(() => {
   initToggleContent();
   initImageColumnPanel();
   initBadgeLogoMorph();
+  initRouteMap();
 });

@@ -242,4 +242,11 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
 
 </div>
 
+<?php
+// Anything added to this page in the block editor (FAQ, testimonials,
+// features, another booking form, etc.) renders here, below the search
+// bar and results.
+the_content();
+?>
+
 <?php get_footer(); ?>

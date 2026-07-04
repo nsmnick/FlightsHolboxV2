@@ -1,13 +1,13 @@
 {
-    "key": "group_6a47b04e57e32",
-    "title": "HTML Panel",
+    "key": "group_6a48d13ccebf0",
+    "title": "Route Map Panel",
     "fields": [
         {
-            "key": "field_6a47b04e4ef49",
-            "label": "HTML",
-            "name": "html",
+            "key": "field_6a48d13da37d5",
+            "label": "Map Image",
+            "name": "map_image",
             "aria-label": "",
-            "type": "textarea",
+            "type": "image",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,12 +16,17 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
             "allow_in_bindings": 0,
-            "rows": "",
-            "placeholder": "",
-            "new_lines": ""
+            "preview_size": "medium"
         }
     ],
     "location": [
@@ -29,7 +34,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/html-panel"
+                "value": "acf\/route-map-panel"
             }
         ]
     ],
@@ -45,5 +50,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783154859
+    "modified": 1783157106
 }

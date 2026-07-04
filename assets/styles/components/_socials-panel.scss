@@ -1,0 +1,19 @@
+.socials-panel {
+  padding: 40px 0;
+
+  @include bp(desk) {
+    padding: 60px 0;
+  }
+
+  &__heading {
+    text-align: center;
+    color: getcolor("fh-navy");
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+  &__row {
+    justify-content: center;
+  }
+}

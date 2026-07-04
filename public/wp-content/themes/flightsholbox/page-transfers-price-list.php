@@ -149,4 +149,10 @@ $people_terms = get_terms(['taxonomy' => 'number_of_people', 'hide_empty' => fal
 
 </div>
 
+<?php
+// Anything added to this page in the block editor (FAQ, testimonials,
+// features, another booking form, etc.) renders here, below the price tables.
+the_content();
+?>
+
 <?php get_footer(); ?>

@@ -88,31 +88,38 @@ h3 {
 }
 
 h4 {
-  font-size: to-rem(40);
-  font-weight: 400;
+  font-family: get-font-family("main");
+  font-size: to-rem(17);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
 
-  @include bp(desk) {
-    font-size: to-rem(64);
+  @include bp(lap) {
+    font-size: to-rem(18);
   }
 }
 
 h5 {
-  font-size: to-rem(30);
-  font-weight: 400;
+  font-family: get-font-family("main");
+  font-size: to-rem(15);
+  font-weight: 600;
   margin: 0;
-  line-height: 1;
+  line-height: 1.2;
 
-  @include bp(desk) {
-    font-size: to-rem(56);
+  @include bp(lap) {
+    font-size: to-rem(16);
   }
 }
 
 h6 {
-  font-size: to-rem(20);
-  font-weight: 400;
+  font-family: get-font-family("main");
+  font-size: to-rem(13);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
 
-  @include bp(desk) {
-    font-size: to-rem(40);
+  @include bp(lap) {
+    font-size: to-rem(14);
   }
 }
 

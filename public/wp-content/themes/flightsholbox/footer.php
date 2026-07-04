@@ -1,23 +1,3 @@
-<div class="wave">
-  <svg viewBox="0 0 2000 130" preserveAspectRatio="xMidYMid meet">
-    <path
-      d="
-        M0 95
-        C300 55, 600 50, 900 75
-        C1200 110, 1550 140, 2000 90
-        L2000 260
-        L0 260
-        Z"
-      class="wave-fill" />
-    <path
-      d="
-        M0 95
-        C300 55, 600 50, 900 75
-        C1200 110, 1550 140, 2000 90"
-      class="wave-stroke" />
-  </svg>
-</div>
-
 <?php
 $footer_phone       = get_field('footer_phone', 'option');
 $footer_whatsapp    = get_field('footer_whatsapp', 'option');

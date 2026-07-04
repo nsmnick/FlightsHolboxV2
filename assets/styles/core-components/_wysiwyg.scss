@@ -39,8 +39,18 @@
   }
 
   h4 {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  h5 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  h6 {
+    margin-top: 16px;
+    margin-bottom: 8px;
   }
 
   p {
@@ -205,16 +215,19 @@
           font-weight: 400;
 
           &:before {
-            content: "-";
+            content: "";
             display: block;
             height: 5px;
             width: 5px;
-            background-color: inherit;
-            border-radius: none;
-            background: $c-body-text;
+            border-radius: 0;
+            background: getcolor("black");
             position: absolute;
-            top: 0;
+            top: 8px;
             left: 0;
+
+            @include bp(lap) {
+              top: 10px;
+            }
           }
         }
       }

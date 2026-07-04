@@ -31,30 +31,6 @@
     aspect-ratio: 1/0.046;
   }
 }
-.wave {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-}
-
-.wave svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.wave-fill {
-  fill: getcolor("light-grey");
-}
-
-.wave-stroke {
-  fill: none;
-  stroke: $color-fh-gold;
-  stroke-width: 6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
 
 .footer-top {
   background-color: $color-fh-charcoal;

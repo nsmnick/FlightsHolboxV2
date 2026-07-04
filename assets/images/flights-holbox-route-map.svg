@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620">
+  <defs>
+    <linearGradient id="sea" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#005a99" />
+      <stop offset="100%" stop-color="#00365f" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sea -->
+  <rect x="0" y="0" width="900" height="620" fill="url(#sea)" />
+
+  <!-- Mainland (NE Yucatan Peninsula: Merida inland west, Cancun tip NE) -->
+  <path
+    d="
+      M 40 600
+      C 20 500, 45 400, 120 320
+      C 165 273, 205 235, 260 205
+      C 320 172, 400 158, 470 145
+      C 550 130, 630 112, 695 92
+      C 750 76, 815 82, 845 122
+      C 868 153, 852 195, 812 216
+      C 775 235, 748 265, 726 305
+      C 705 344, 694 392, 684 445
+      C 674 500, 662 552, 636 596
+      C 560 604, 480 606, 400 604
+      C 300 602, 190 602, 110 600
+      C 82 599, 58 600, 40 600
+      Z"
+    fill="#f2e3bd"
+    stroke="#e6af2a"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+
+  <!-- Coastal shading for depth -->
+  <path
+    d="
+      M 636 596
+      C 662 552, 674 500, 684 445
+      C 694 392, 705 344, 726 305
+      C 748 265, 775 235, 812 216
+      C 792 250, 772 300, 756 355
+      C 738 415, 726 470, 706 525
+      C 690 560, 668 585, 636 596
+      Z"
+    fill="#e9d4a3"
+    opacity="0.6"
+  />
+
+  <!-- Holbox island (north coast, west of Cancun) -->
+  <ellipse cx="505" cy="108" rx="70" ry="16" fill="#f2e3bd" stroke="#e6af2a" stroke-width="3" transform="rotate(-8 505 108)" />
+
+  <!-- Cozumel island (east coast, off Playa del Carmen) -->
+  <ellipse cx="792" cy="252" rx="34" ry="52" fill="#f2e3bd" stroke="#e6af2a" stroke-width="3" transform="rotate(6 792 252)" />
+
+  <!-- Subtle wave texture in the sea -->
+  <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="3" fill="none">
+    <path d="M0 60 C120 40, 240 80, 360 55 C480 30, 600 65, 720 45" />
+    <path d="M0 480 C100 460, 220 500, 340 475" />
+    <path d="M550 550 C640 530, 720 560, 800 540" />
+  </g>
+</svg>

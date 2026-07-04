@@ -1,0 +1,231 @@
+.route-map {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include bp(lap) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+
+.route-map__stage {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  flex: 1 1 auto;
+
+  @include bp(lap) {
+    flex: 1 1 62%;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.route-map__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.route-map__route {
+  cursor: pointer;
+
+  &-hit {
+    fill: none;
+    stroke: transparent;
+    // Much wider than the visible line — a generous, forgiving tap/click
+    // target, especially on touch devices, without looking clunky.
+    stroke-width: 22;
+    pointer-events: stroke;
+  }
+
+  &-line {
+    fill: none;
+    stroke: $color-fh-gold;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+    transition: stroke 0.25s ease, stroke-width 0.25s ease, filter 0.25s ease;
+  }
+
+  &:hover &-line,
+  &:focus-visible &-line {
+    stroke: $color-fh-navy;
+    stroke-width: 3.5;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  &.is-active &-line {
+    stroke: $color-fh-navy;
+    stroke-width: 4.5;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+  }
+
+  // Selection is already shown on the line itself (colour/thickness/shadow
+  // above) — no need for the browser's default bounding-box focus outline
+  // on top of that.
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.route-map__pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 2;
+
+  &-dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $color-fh-navy;
+    border: 2px solid $color-white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+
+  &-label {
+    font-size: to-rem(10);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $color-fh-dark;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+
+    @include bp(lap) {
+      font-size: to-rem(11);
+    }
+  }
+}
+
+.route-map__info {
+  flex: 1 1 auto;
+  background: $color-white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+
+  @include bp(lap) {
+    flex: 1 1 320px;
+    position: sticky;
+    top: 100px;
+  }
+}
+
+.route-map__info-prompt {
+  font-size: to-rem(14);
+  color: $color-fh-charcoal;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.route-map__info-route {
+  font-size: to-rem(18);
+  font-weight: 700;
+  color: $color-fh-navy;
+  margin: 0 0 16px;
+}
+
+.route-map__fares {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.route-map__fare {
+  border-radius: 10px;
+  padding: 14px 16px 12px;
+  border: 1px solid $color-light-grey;
+  border-top: 4px solid transparent;
+
+  &--one-way {
+    border-top-color: $color-fh-gold;
+    background: rgba(230, 175, 42, 0.06);
+  }
+
+  &--return {
+    border-top-color: $color-fh-navy;
+    background: rgba(0, 70, 123, 0.05);
+  }
+}
+
+.route-map__fare-header {
+  margin-bottom: 8px;
+}
+
+.route-map__fare-label {
+  font-size: to-rem(12);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-fh-dark;
+}
+
+.route-map__fare-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: to-rem(12);
+  color: $color-fh-charcoal;
+
+  &--inc {
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  }
+}
+
+.route-map__fare-amount {
+  font-weight: 700;
+  color: $color-fh-dark;
+  font-size: to-rem(15);
+  white-space: nowrap;
+
+  &--inc {
+    color: $color-fh-navy;
+    font-size: to-rem(16);
+  }
+}
+
+.route-map__book-btn {
+  display: block;
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: $color-fh-navy;
+  color: $color-white;
+  font-size: to-rem(13);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: $color-fh-gold;
+    color: $color-fh-dark;
+  }
+}
