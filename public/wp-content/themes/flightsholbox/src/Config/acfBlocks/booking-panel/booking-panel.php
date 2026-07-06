@@ -7,7 +7,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     $sister_site_label = get_field('sister_site_label') ?: 'Search for land transfers';
 ?>
 
-<section class="booking-panel">
+<section class="booking-panel animate fade-in">
     <div class="container <?php echo $generic_container_class; ?>">
         <div class="booking-panel__inner">
 
@@ -41,7 +41,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
             </form>
 
             <div class="search-options">
-                <a class="search-link" href="<?php echo esc_url(site_url('/flights')); ?>">
+                <a class="search-link" href="<?php echo esc_url(site_url('/flight-prices')); ?>">
                     See all prices
                 </a>
                 <?php if ($sister_site_url) : ?>

@@ -31,6 +31,7 @@
             rgba(0, 0, 0, 0.2) 50%,
             rgba(0, 0, 0, 0.1) 100%
         );
+        transition: background-color 0.3s ease;
     }
 
     &__content {
@@ -52,7 +53,25 @@
         line-height: 1.2;
         margin: 0;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
     }
 
+    &__item:hover &__overlay {
+        background-color: rgba(0, 0, 0, 0.15);
+    }
 
+    &__item:hover &__heading {
+        transform: translateY(-4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &__overlay,
+        &__heading {
+            transition: none;
+        }
+
+        &__item:hover &__heading {
+            transform: none;
+        }
+    }
 }

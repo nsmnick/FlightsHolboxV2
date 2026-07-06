@@ -1,0 +1,162 @@
+@import "../setup/colors";
+
+.table-panel {
+    padding: 60px 0;
+    scroll-margin-top: 140px;
+
+    &__heading {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        font-weight: 700;
+        color: $color-fh-navy;
+        margin: 0 0 1.5rem;
+        text-align: center;
+        position: relative;
+        padding-bottom: 18px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56px;
+            height: 3px;
+            border-radius: 2px;
+            background: $color-fh-gold;
+        }
+    }
+
+    &__intro {
+        max-width: 720px;
+        margin: 0 auto 2.5rem;
+        text-align: center;
+        color: $color-fh-charcoal;
+        line-height: 1.7;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    //
+    // Colours (Panel Settings > Background Colour)
+    //
+
+    &.bgc-white {
+        background-color: $color-white;
+    }
+
+    &.bgc-light-grey {
+        background-color: $color-light-grey;
+    }
+
+    &.bgc-grey {
+        background-color: $color-grey;
+    }
+
+    &.bgc-gold {
+        background-color: $color-fh-gold;
+    }
+
+    &.bgc-navy {
+        background-color: $color-fh-navy;
+    }
+
+    &.bgc-dark {
+        background-color: $color-fh-dark;
+    }
+
+    &.bgc-charcoal {
+        background-color: $color-fh-charcoal;
+    }
+
+    // Dark backgrounds need the heading/intro flipped to light text —
+    // otherwise the default navy/charcoal copy disappears into them.
+    &.bgc-navy,
+    &.bgc-dark,
+    &.bgc-charcoal {
+        .table-panel__heading {
+            color: $color-white;
+        }
+
+        .table-panel__intro {
+            color: rgba(255, 255, 255, 0.85);
+        }
+    }
+
+    &__table {
+        width: 100%;
+        border-collapse: collapse;
+        background: $color-white;
+        font-size: to-rem(15);
+
+        @include bp(lap) {
+            font-size: to-rem(16);
+        }
+
+        thead th {
+            background: $color-fh-navy;
+            color: $color-white;
+            font-weight: 700;
+            font-size: to-rem(13);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 16px 14px;
+            text-align: center;
+
+            @include bp(lap) {
+                font-size: to-rem(14);
+            }
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid $color-light-grey;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    }
+
+    &__col-sub {
+        display: block;
+        margin-top: 4px;
+        font-size: to-rem(12);
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: normal;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    &__row-label {
+        font-weight: 700;
+        color: $color-fh-dark;
+        min-width: 140px;
+        text-align: left;
+
+        tbody tr:nth-child(even) & {
+            background: rgba(0, 70, 123, 0.03);
+        }
+    }
+
+    &__value {
+        text-align: center;
+        font-weight: 700;
+        color: $color-fh-charcoal;
+        white-space: nowrap;
+        font-size: to-rem(16);
+
+        @include bp(lap) {
+            font-size: to-rem(18);
+        }
+    }
+}

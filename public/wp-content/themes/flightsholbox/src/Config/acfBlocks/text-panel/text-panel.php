@@ -11,7 +11,7 @@ if (!$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="text-panel content text-panel--<?php echo esc_attr($alignment); ?> <?php echo $generic_block_settings_classes; ?>">
+<section class="text-panel content text-panel--<?php echo esc_attr($alignment); ?> animate fade-in <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
         <div class="wysiwyg-container">
             <?php echo $content; ?>

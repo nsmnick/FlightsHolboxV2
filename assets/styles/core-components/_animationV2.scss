@@ -7,6 +7,24 @@
   opacity: 1;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate {
+    opacity: 1;
+    transition: none;
+  }
+
+  .scrolled.fade-in,
+  .scrolled.zoom,
+  .scrolled.fade-in-slow,
+  .scrolled.fade-up,
+  .scrolled.slide-up,
+  .scrolled.fade-up-large,
+  .scrolled.slide-left,
+  .scrolled.slide-right {
+    animation: none;
+  }
+}
+
 .scrolled.scribble {
   &::before {
     animation: draw-underline 1s forwards ease-out;

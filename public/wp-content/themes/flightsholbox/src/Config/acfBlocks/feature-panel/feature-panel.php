@@ -14,7 +14,7 @@ if (!$preview_popup_image && !$hide_panel) {
     $count_class = ['', 'one', 'two', 'three'][$count];
 ?>
 
-<section class="feature-panel feature-panel--<?php echo $count_class; ?> <?php echo $generic_block_settings_classes; ?>">
+<section class="feature-panel feature-panel--<?php echo $count_class; ?> animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <?php foreach (array_slice($features, 0, 3) as $feature) :
         $image_id = $feature['feature_image'] ?? null;
         $heading  = $feature['feature_heading'] ?? '';

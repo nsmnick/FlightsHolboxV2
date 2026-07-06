@@ -109,4 +109,45 @@ class Utils
             return $link_url;
         }
     }
+
+    /**
+     * Recursively find all blocks of a given name within a parsed block tree
+     * (as returned by parse_blocks()), including blocks nested inside
+     * containers like Group or Columns.
+     */
+    public static function find_blocks_by_name(array $blocks, string $block_name): array
+    {
+        $found = [];
+
+        foreach ($blocks as $block) {
+            if (($block['blockName'] ?? null) === $block_name) {
+                $found[] = $block;
+            }
+
+            if (!empty($block['innerBlocks'])) {
+                $found = array_merge($found, self::find_blocks_by_name($block['innerBlocks'], $block_name));
+            }
+        }
+
+        return $found;
+    }
+
+    /**
+     * The anchor id a Table Panel is reachable at: its manually-set HTML anchor
+     * if one was given, otherwise a slug derived from its heading, otherwise a
+     * fallback based on the block's own id. Shared so the Table Panel and the
+     * Hyperlink Panel that jumps to it always agree on the same id.
+     */
+    public static function get_table_panel_anchor(string $heading, string $explicit_anchor = '', string $block_id = ''): string
+    {
+        if ($explicit_anchor !== '') {
+            return $explicit_anchor;
+        }
+
+        if ($heading !== '') {
+            return sanitize_title($heading);
+        }
+
+        return 'table-' . preg_replace('/[^a-zA-Z0-9_-]/', '', $block_id);
+    }
 }

@@ -11,7 +11,7 @@ if (!$preview_popup_image && !$hide_panel) {
     }
 ?>
 
-<section class="testimonial-panel <?php echo $generic_block_settings_classes; ?>">
+<section class="testimonial-panel animate fade-in <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
         <?php echo do_shortcode($embed_code); ?>
     </div>

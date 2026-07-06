@@ -1,0 +1,17 @@
+{
+  "name": "acf/table-panel",
+  "title": "Table Panel",
+  "description": "A heading with a two-column information table — rows are added via a repeater",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='3' y='4' width='18' height='16' rx='1' stroke='#000' stroke-width='2'/><path d='M3 9h18M9 9v11' stroke='#000' stroke-width='2'/></svg>",
+  "keywords": ["table", "prices", "list", "repeater", "columns"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "table-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

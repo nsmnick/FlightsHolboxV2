@@ -26,7 +26,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="activities-slider <?php echo $generic_block_settings_classes; ?>">
+<section class="activities-slider animate fade-in <?php echo $generic_block_settings_classes; ?>">
 
     <?php if ($slider_heading || $slider_intro) : ?>
     <div class="activities-slider__intro">

@@ -7,7 +7,7 @@ if (!$preview_popup_image && !$hide_panel) {
     $questions = get_field('questions') ?: [];
 ?>
 
-<section class="faq-panel <?php echo $generic_block_settings_classes; ?>">
+<section class="faq-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
 
         <?php if ($heading) : ?>

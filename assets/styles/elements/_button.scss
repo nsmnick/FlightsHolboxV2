@@ -44,7 +44,7 @@ div.button {
   background: $color-fh-gold;
   cursor: pointer;
   border-radius: 6px;
-  transition: 0.15s all ease-in-out;
+  transition: 0.15s all ease-in-out, 0.2s transform ease-out, 0.2s box-shadow ease-out;
 
   padding: 11px 20px 12px;
   font-size: to-rem(15);
@@ -59,6 +59,22 @@ div.button {
     border-color: getcolor("black");
     color: $color-fh-gold;
     text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: 0.15s background-color ease-in-out, 0.15s border-color ease-in-out, 0.15s color ease-in-out;
+
+    &:hover,
+    &:active {
+      transform: none;
+    }
   }
 
   &--fixed {

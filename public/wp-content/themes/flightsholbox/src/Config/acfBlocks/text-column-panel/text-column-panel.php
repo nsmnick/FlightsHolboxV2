@@ -18,7 +18,7 @@ if (!$preview_popup_image && !$hide_panel) {
     $count = min(count($columns), 3);
 ?>
 
-<section class="text-column-panel <?php echo $generic_block_settings_classes; ?>">
+<section class="text-column-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <div class="container">
 
         <?php if ($heading) : ?>

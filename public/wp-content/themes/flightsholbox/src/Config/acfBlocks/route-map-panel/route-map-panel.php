@@ -83,7 +83,7 @@ if (!$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="route-map-panel content <?php echo $generic_block_settings_classes; ?>">
+<section class="route-map-panel content animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
         <div class="route-map">
 

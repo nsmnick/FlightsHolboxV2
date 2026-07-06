@@ -26,7 +26,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="airport-slider <?php echo $generic_block_settings_classes; ?>">
+<section class="airport-slider animate fade-in <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
         <?php if ($slider_heading || $slider_intro) : ?>
             <div class="airport-slider__intro">

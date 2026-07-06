@@ -18,7 +18,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="image-column-panel <?php echo $generic_block_settings_classes; ?>">
+<section class="image-column-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
         <div class="image-column-panel__grid image-column-panel__grid--cols-<?php echo $column_count; ?>">
             <?php foreach ($images as $row) :

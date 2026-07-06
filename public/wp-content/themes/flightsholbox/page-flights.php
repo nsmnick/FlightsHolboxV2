@@ -226,14 +226,14 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
 
                 <?php else : ?>
                     <div class="prices-page__no-results">
-                        <p>No prices found for that combination. Try adjusting your search or <a href="<?php echo esc_url(site_url('/transfers-price-list')); ?>">view all prices</a>.</p>
+                        <p>No prices found for that combination. Try adjusting your search or <a href="<?php echo esc_url(site_url('/flight-prices')); ?>">view all prices</a>.</p>
                     </div>
                 <?php endif; ?>
 
             <?php else : ?>
                 <div class="prices-page__prompt">
                     <p>Choose your departure, destination and number of people above to see prices.</p>
-                    <a href="<?php echo esc_url(site_url('/transfers-price-list')); ?>" class="button">View all prices</a>
+                    <a href="<?php echo esc_url(site_url('/flight-prices')); ?>" class="button">View all prices</a>
                 </div>
             <?php endif; ?>
 

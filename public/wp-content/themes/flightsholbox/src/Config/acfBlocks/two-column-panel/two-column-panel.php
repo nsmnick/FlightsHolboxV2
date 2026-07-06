@@ -15,7 +15,7 @@ if (!$preview_popup_image && !$hide_panel) {
     }
 ?>
 
-<section class="two-column-panel <?php echo $generic_block_settings_classes; ?>">
+<section class="two-column-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <div class="container">
 
         <?php if ($heading) : ?>

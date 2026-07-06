@@ -1,0 +1,17 @@
+{
+  "name": "acf/hyperlink-panel",
+  "title": "Hyperlink Panel",
+  "description": "Automatically lists every Table Panel on this page as a jump link",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 15l6-6M10 6l1-1a4 4 0 015.66 5.66l-1 1M14 18l-1 1A4 4 0 017.34 13.34l1-1' stroke='#000' stroke-width='2' stroke-linecap='round'/></svg>",
+  "keywords": ["links", "jump", "anchor", "table of contents", "navigation"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "hyperlink-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

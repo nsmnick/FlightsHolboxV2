@@ -67,6 +67,14 @@
     opacity: 1;
   }
 
+  // Compound selector (.main-menu.main-menu--open, not just .main-menu--open)
+  // so this reliably outweighs the "ul .menu-item" hidden-state specificity
+  // below regardless of source order.
+  &.main-menu--open ul .menu-item {
+    opacity: 1;
+    transform: none;
+  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -77,16 +85,41 @@
       max-width: 275px;
       margin: 0 auto;
 
+      // Staggered reveal as the mobile drawer opens — reset to a plain
+      // visible state on desktop, where the drawer itself never animates.
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          transition-delay: #{$i * 0.05}s;
+        }
+      }
+
       &:first-of-type {
         border-top: none;
       }
 
       @include bp($mobile-menu-snap) {
         border-top: none;
+        opacity: 1;
+        transform: none;
+        transition: none;
+
+        &:nth-child(n) {
+          transition-delay: 0s;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        transition-delay: 0s !important;
       }
 
       a {
         display: block;
+        position: relative;
         color: getcolor("black");
         text-decoration: none;
         user-select: none;
@@ -113,7 +146,35 @@
 
           &:hover {
             color: getcolor("black");
-            text-decoration: underline;
+          }
+        }
+      }
+
+      // Animated underline on hover — desktop text links only, not the CTA
+      // button variant below (which has its own solid hover treatment).
+      &:not(.button) a {
+        @include bp($mobile-menu-snap) {
+          &::after {
+            content: "";
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 8px;
+            height: 2px;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease-out;
+          }
+
+          &:hover::after {
+            transform: scaleX(1);
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            &::after {
+              transition: none;
+            }
           }
         }
       }
