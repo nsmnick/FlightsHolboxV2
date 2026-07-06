@@ -6,7 +6,6 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     $slides  = get_field('hero_slides');
     $heading = get_field('hero_heading');
     $intro   = get_field('hero_intro');
-    $logo    = get_field('hero_logo');
 ?>
 
 <?php if ($slides) : ?>
@@ -35,18 +34,6 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     </div>
 
     <div class="hero-panel__overlay" aria-hidden="true"></div>
-
-    <?php if ($logo) : ?>
-        <div class="hero-panel__logo-wrap">
-            <a href="<?php echo esc_url(site_url()); ?>" class="hero-panel__logo-link">
-                <img
-                    class="hero-panel__logo"
-                    src="<?php echo esc_url(wp_get_attachment_image_url($logo, 'full')); ?>"
-                    alt="<?php echo esc_attr(get_post_meta($logo, '_wp_attachment_image_alt', true) ?: get_bloginfo('name')); ?>"
-                >
-            </a>
-        </div>
-    <?php endif; ?>
 
     <div class="hero-panel__content">
         <?php if ($heading) : ?>
