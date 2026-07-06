@@ -9,6 +9,15 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     $logo    = get_field('hero_logo');
 ?>
 
+<?php if ($slides) : ?>
+    <link
+        rel="preload"
+        as="image"
+        fetchpriority="high"
+        href="<?php echo esc_url(wp_get_attachment_image_url($slides[0]['slide_image'], 'hero-slide')); ?>"
+    >
+<?php endif; ?>
+
 <section class="hero-panel">
     <div class="hero-slider__slides-wrapper swiper">
         <div class="hero-slider__slides swiper-wrapper">
@@ -16,7 +25,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                 <?php foreach ($slides as $slide) : ?>
                     <div
                         class="hero-slider__slide swiper-slide"
-                        style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($slide['slide_image'], 'full')); ?>')"
+                        style="background-image: url('<?php echo esc_url(wp_get_attachment_image_url($slide['slide_image'], 'hero-slide')); ?>')"
                         role="img"
                         aria-label="<?php echo esc_attr(get_post_meta($slide['slide_image'], '_wp_attachment_image_alt', true)); ?>"
                     ></div>

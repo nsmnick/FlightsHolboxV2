@@ -8,6 +8,8 @@ $footer_instagram   = get_field('footer_social_instagram', 'option');
 $footer_tripadvisor = get_field('footer_social_tripadvisor', 'option');
 ?>
 
+</main>
+
 <footer>
 
   <section class="footer-top">

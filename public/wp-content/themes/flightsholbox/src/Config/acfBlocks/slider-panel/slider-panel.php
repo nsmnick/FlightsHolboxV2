@@ -85,6 +85,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                                         <?php if (!empty($link['target'])) : ?>target="<?php echo esc_attr($link['target']); ?>" rel="noopener noreferrer"<?php endif; ?>
                                     >
                                         <?php echo esc_html($link['title'] ?: 'Find out more'); ?>
+                                        <?php if ($post_id) : ?><span class="sr-only"> about <?php echo esc_html(get_the_title($post_id)); ?></span><?php endif; ?>
                                     </a>
                                 <?php endif; ?>
                             </div>

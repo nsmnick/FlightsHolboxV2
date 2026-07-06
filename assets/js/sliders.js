@@ -1,12 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Swiper from "swiper";
-import {
-  Navigation,
-  Pagination,
-  EffectFade,
-  Autoplay,
-  Thumbs,
-} from "swiper/modules";
+import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 

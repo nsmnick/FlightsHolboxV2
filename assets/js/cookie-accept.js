@@ -264,7 +264,6 @@ export default function initCookieAccept(customConfig) {
   );
 
   if (elCookieAccept === undefined) {
-    console.error("Cookie accept element not found!");
     return;
   }
 

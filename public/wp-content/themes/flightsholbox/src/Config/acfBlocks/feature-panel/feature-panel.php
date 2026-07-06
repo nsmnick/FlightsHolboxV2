@@ -30,7 +30,7 @@ if (!$preview_popup_image && !$hide_panel) {
             <div class="feature-panel__overlay" aria-hidden="true"></div>
             <div class="feature-panel__content">
                 <?php if ($heading) : ?>
-                    <h3 class="feature-panel__heading"><?php echo esc_html($heading); ?></h3>
+                    <h2 class="feature-panel__heading"><?php echo esc_html($heading); ?></h2>
                 <?php endif; ?>
                 <?php if ($link && !empty($link['url'])) : ?>
                     <a

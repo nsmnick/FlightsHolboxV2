@@ -28,7 +28,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                 $has_text     = $heading || $meta_heading || $paragraph;
             ?>
                 <div class="image-column-panel__item<?php echo $has_text ? ' has-text' : ''; ?>"
-                     <?php if ($has_text) : ?>role="button" tabindex="0" aria-expanded="false"<?php endif; ?>>
+                     <?php if ($has_text) : ?>role="button" tabindex="0" aria-expanded="false" aria-label="<?php echo esc_attr($heading ?: 'Show details'); ?>"<?php endif; ?>>
                     <span class="image-column-panel__watercolor bgc-<?php echo esc_attr($border_colour); ?>" aria-hidden="true"></span>
                     <span class="image-column-panel__photo">
                         <?php echo Theme\Utils::get_image_html($row['image'], $column_count); ?>
@@ -39,7 +39,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                         </span>
                         <div class="image-column-panel__text-overlay">
                             <?php if ($heading) : ?>
-                                <h3 class="image-column-panel__overlay-heading"><?php echo esc_html($heading); ?></h3>
+                                <h2 class="image-column-panel__overlay-heading"><?php echo esc_html($heading); ?></h2>
                             <?php endif; ?>
                             <?php if ($meta_heading) : ?>
                                 <p class="image-column-panel__overlay-meta"><?php echo esc_html($meta_heading); ?></p>

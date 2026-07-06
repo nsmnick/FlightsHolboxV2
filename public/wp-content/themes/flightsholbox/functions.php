@@ -12,6 +12,7 @@ require_once get_stylesheet_directory() . '/src/Autoloader.php';
 class Theme_Setup
 {
     public array $assets_map;
+    private ?bool $viteHMRAvailable = null;
 
     public function __construct()
     {
@@ -51,6 +52,9 @@ class Theme_Setup
     {
         add_theme_support('html5', ['gallery', 'caption']);
         add_theme_support('post-thumbnails');
+        add_theme_support('title-tag');
+
+        add_image_size('hero-slide', 1280, 720, true);
     }
 
     public function registerNavMenus()
@@ -105,20 +109,35 @@ class Theme_Setup
         wp_dequeue_style('global-styles');
         wp_dequeue_style('classic-theme-styles');
 
-        if (
-            !$this->isViteHMRAvailable() &&
-            array_key_exists('assets/index.js', $this->assets_map) &&
-            array_key_exists('css', $this->assets_map['assets/index.js'])
-        ) {
-            foreach ($this->assets_map['assets/index.js']["css"] as $style_path) {
-                wp_enqueue_style(
-                    'theme-styles',
-                    get_stylesheet_directory_uri() . '/dist/' . $style_path,
-                    [],
-                    false,
-                    'all'
-                );
+        if (!$this->isViteHMRAvailable()) {
+            if (
+                array_key_exists('assets/index.js', $this->assets_map) &&
+                array_key_exists('css', $this->assets_map['assets/index.js'])
+            ) {
+                foreach ($this->assets_map['assets/index.js']["css"] as $style_path) {
+                    wp_enqueue_style(
+                        'theme-styles',
+                        get_stylesheet_directory_uri() . '/dist/' . $style_path,
+                        [],
+                        false,
+                        'all'
+                    );
+                }
             }
+        } else {
+            // Request the compiled stylesheet directly (rather than relying on
+            // Vite's JS-injected <style> tag) so it arrives as a real blocking
+            // <link>, matching production and avoiding a flash-of-unstyled-content
+            // layout shift while still hot-reloading through Vite's dev server.
+            $theme_path = parse_url(get_stylesheet_directory_uri(), PHP_URL_PATH);
+
+            wp_enqueue_style(
+                'theme-styles',
+                $this->getViteDevServerAddress() . $theme_path . '/dist/assets/styles/styles.scss?direct',
+                [],
+                null,
+                'all'
+            );
         }
     }
 
@@ -214,13 +233,55 @@ class Theme_Setup
 
     public function isViteHMRAvailable()
     {
-        return !empty($this->getViteDevServerAddress()) &&
-            defined('WP_ENVIRONMENT_TYPE') &&
-            WP_ENVIRONMENT_TYPE === 'local';
+        if ($this->viteHMRAvailable === null) {
+            $this->viteHMRAvailable = $this->checkViteHMRAvailable();
+        }
+
+        return $this->viteHMRAvailable;
+    }
+
+    /**
+     * Beyond checking that we're in local dev, also confirms the Vite dev
+     * server is actually reachable — so if `npm run dev` isn't running,
+     * the theme silently falls back to the built /dist assets instead of
+     * emitting <script> tags that 404 against a dead dev server.
+     */
+    private function checkViteHMRAvailable(): bool
+    {
+        $address = $this->getViteDevServerAddress();
+
+        if (empty($address) || !defined('WP_ENVIRONMENT_TYPE') || WP_ENVIRONMENT_TYPE !== 'local') {
+            return false;
+        }
+
+        $parts = parse_url($address);
+        $host = $parts['host'] ?? '127.0.0.1';
+        $port = $parts['port'] ?? (($parts['scheme'] ?? 'http') === 'https' ? 443 : 80);
+
+        $connection = @fsockopen($host, $port, $errno, $errstr, 0.2);
+
+        if (!$connection) {
+            return false;
+        }
+
+        fclose($connection);
+
+        return true;
     }
 }
 
 new Theme_Setup();
+
+
+// ─── Images: generate WebP sub-sizes instead of bloated PNG/JPEG ───────────
+// Only affects the generated thumbnail/medium/large/etc. sizes, not the
+// original upload — keeps media-library originals untouched.
+
+add_filter('image_editor_output_format', function (array $formats): array {
+    $formats['image/png'] = 'image/webp';
+    $formats['image/jpeg'] = 'image/webp';
+    return $formats;
+});
 
 
 // ─── TinyMCE: enable text colour picker in all wysiwyg fields ──────────────
