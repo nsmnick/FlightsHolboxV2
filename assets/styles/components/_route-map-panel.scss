@@ -1,3 +1,31 @@
+@keyframes route-map-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+.route-map-panel__heading {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: $color-fh-navy;
+  margin: 0 0 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 18px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 3px;
+    border-radius: 2px;
+    background: $color-fh-gold;
+  }
+}
+
 .route-map {
   display: flex;
   flex-direction: column;
@@ -13,19 +41,18 @@
 .route-map__stage {
   position: relative;
   width: 100%;
+  aspect-ratio: 900 / 500;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   flex: 1 1 auto;
+  background-image: url("../images/map_background.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   @include bp(lap) {
     flex: 1 1 62%;
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
   }
 }
 
@@ -54,9 +81,15 @@
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
+    stroke-dasharray: 6 10;
     pointer-events: none;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     transition: stroke 0.25s ease, stroke-width 0.25s ease, filter 0.25s ease;
+    animation: route-map-flow 1.2s linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   &:hover &-line,

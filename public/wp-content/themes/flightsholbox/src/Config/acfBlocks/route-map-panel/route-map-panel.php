@@ -3,15 +3,22 @@ include __DIR__ . '/../_block-generics.php';
 include __DIR__ . '/../_block-preview.php';
 
 if (!$hide_panel && !$preview_popup_image) {
-    $map_image = get_field('map_image');
+    $heading = get_field('route_map_heading');
 
-    if (!$map_image) {
-        return;
-    }
+    // The geographic bounding box assets/images/map_background.webp covers
+    // (bundled as a theme asset — see _route-map-panel.scss). Hardcoded
+    // alongside the image itself, since one is meaningless without the
+    // other — if the image is ever replaced, these four must change with
+    // it, or every pin below will be mispositioned. Confirmed against real
+    // coordinates for all five current locations before locking in.
+    $map_bounds_north = 21.90549;
+    $map_bounds_south = 20.03626;
+    $map_bounds_west  = -90.03953;
+    $map_bounds_east  = -86.43567;
 
     // Walk every priced route and group by from+to term pair, collecting
-    // one fare row per number_of_people option. Locations without a pin
-    // position set (map_x/map_y on the taxonomy term) are left off the map.
+    // one fare row per number_of_people option. Locations without real
+    // coordinates (map_lat/map_lng on the taxonomy term) are left off the map.
     $prices_query = new WP_Query([
         'post_type'      => 'prices',
         'posts_per_page' => -1,
@@ -33,16 +40,27 @@ if (!$hide_panel && !$preview_popup_image) {
             $from = $froms[0];
             $to   = $tos[0];
 
-            $from_x = get_field('map_x', $from);
-            $from_y = get_field('map_y', $from);
-            $to_x   = get_field('map_x', $to);
-            $to_y   = get_field('map_y', $to);
+            $from_pos = Theme\Utils::latlng_to_percent(
+                get_field('map_lat', $from),
+                get_field('map_lng', $from),
+                $map_bounds_north,
+                $map_bounds_south,
+                $map_bounds_west,
+                $map_bounds_east
+            );
+            $to_pos = Theme\Utils::latlng_to_percent(
+                get_field('map_lat', $to),
+                get_field('map_lng', $to),
+                $map_bounds_north,
+                $map_bounds_south,
+                $map_bounds_west,
+                $map_bounds_east
+            );
 
-            if ($from_x === '' || $from_x === null || $from_y === '' || $from_y === null) continue;
-            if ($to_x   === '' || $to_x   === null || $to_y   === '' || $to_y   === null) continue;
+            if ($from_pos === null || $to_pos === null) continue;
 
-            $pins[$from->term_id] = ['name' => $from->name, 'x' => (float) $from_x, 'y' => (float) $from_y];
-            $pins[$to->term_id]   = ['name' => $to->name,   'x' => (float) $to_x,   'y' => (float) $to_y];
+            $pins[$from->term_id] = ['name' => $from->name, 'x' => $from_pos['x'], 'y' => $from_pos['y']];
+            $pins[$to->term_id]   = ['name' => $to->name,   'x' => $to_pos['x'],   'y' => $to_pos['y']];
 
             $route_key = $from->term_id . '-' . $to->term_id;
 
@@ -85,11 +103,14 @@ if (!$hide_panel && !$preview_popup_image) {
 
 <section class="route-map-panel content animate fade-up <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
+
+        <?php if ($heading) : ?>
+            <h2 class="route-map-panel__heading"><?php echo esc_html($heading); ?></h2>
+        <?php endif; ?>
+
         <div class="route-map">
 
-            <div class="route-map__stage">
-                <?php echo Theme\Utils::get_image_html($map_image, 1); ?>
-
+            <div class="route-map__stage" role="img" aria-label="Map of the Yucatán Peninsula showing our destinations">
                 <svg class="route-map__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                     <?php foreach ($routes as $route) :
                         $from_pin = $pins[$route['from']->term_id];

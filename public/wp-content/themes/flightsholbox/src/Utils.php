@@ -150,4 +150,62 @@ class Utils
 
         return 'table-' . preg_replace('/[^a-zA-Z0-9_-]/', '', $block_id);
     }
+
+    /**
+     * Web Mercator latitude -> linear "Mercator Y" — the y-coordinate used by
+     * every standard web map projection (Mapbox, Google Maps, OSM tiles), not
+     * plain latitude. Needed because latitude spacing is non-linear in Mercator;
+     * naive linear interpolation would silently drift pins off true position.
+     */
+    private static function mercator_y(float $lat_deg): float
+    {
+        $lat_deg = max(-85.05112878, min(85.05112878, $lat_deg));
+        return log(tan(M_PI / 4 + deg2rad($lat_deg) / 2));
+    }
+
+    /**
+     * Convert a lat/lng pair into an x/y percent position (0-100) within a
+     * static map image, given the geographic bounding box the image was
+     * exported to cover. Returns null (skip rendering) if any input is
+     * missing/non-numeric or the bounds are degenerate — mirrors the old
+     * map_x/map_y empty-value skip behaviour used before real coordinates.
+     *
+     * Deliberately uses is_numeric() rather than checking against '' / null:
+     * ACF's get_field() returns false (not '' or null) for a field that
+     * doesn't exist yet or has never been saved for a given term, and a
+     * bare === check would let that fall through to (float) false === 0.0
+     * — a real coordinate in the Gulf of Guinea, not "missing".
+     */
+    public static function latlng_to_percent($lat, $lng, $north, $south, $west, $east): ?array
+    {
+        if (!is_numeric($lat) || !is_numeric($lng)) {
+            return null;
+        }
+        if (!is_numeric($north) || !is_numeric($south) || !is_numeric($west) || !is_numeric($east)) {
+            return null;
+        }
+
+        $lat = (float) $lat;
+        $lng = (float) $lng;
+        $north = (float) $north;
+        $south = (float) $south;
+        $west = (float) $west;
+        $east = (float) $east;
+
+        if ($north <= $south || $east <= $west) {
+            return null;
+        }
+
+        // Longitude is linear in Mercator (meridians evenly spaced horizontally).
+        $x = ($lng - $west) / ($east - $west) * 100;
+
+        // Latitude must go through the Mercator transform first, then flip
+        // (image y grows downward, latitude grows upward).
+        $merc_lat = self::mercator_y($lat);
+        $merc_north = self::mercator_y($north);
+        $merc_south = self::mercator_y($south);
+        $y = (1 - (($merc_lat - $merc_south) / ($merc_north - $merc_south))) * 100;
+
+        return ['x' => $x, 'y' => $y];
+    }
 }

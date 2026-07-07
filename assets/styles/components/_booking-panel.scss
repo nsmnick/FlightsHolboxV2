@@ -1,11 +1,12 @@
 .booking-panel {
-  background-color: $color-fh-navy;
   position: relative;
   z-index: 10;
-  padding: 28px 0 24px;
+  margin-top: -36px;
+  padding-bottom: 24px;
 
   @include bp(lap) {
-    padding: 30px 0;
+    margin-top: -52px;
+    padding-bottom: 40px;
   }
 
   .container {
@@ -16,6 +17,14 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    background-color: $color-white;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    padding: 20px;
+
+    @include bp(lap) {
+      padding: 26px 32px;
+    }
   }
 }
 
@@ -27,7 +36,7 @@
   @include bp(lap) {
     flex-direction: row;
     align-items: flex-end;
-    gap: 10px;
+    gap: 12px;
   }
 
   &__group {
@@ -43,7 +52,7 @@
 
   &__label {
     display: block;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba($color-fh-navy, 0.65);
     font-family: get-font-family("main");
     font-size: to-rem(11);
     font-weight: 700;
@@ -55,25 +64,30 @@
   select,
   &__select {
     width: 100%;
-    background-color: $color-white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    color: #888;
+    background-color: getcolor("light-grey");
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: $color-fh-dark;
     font-family: get-font-family("main");
     font-size: to-rem(15);
-    padding: 12px 36px 12px 12px;
+    padding: 12px 36px 12px 14px;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
 
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px 7px;
 
+    &:hover {
+      background-color: getcolor("grey");
+    }
+
     &:focus {
       outline: none;
+      background-color: $color-white;
       border-color: $color-fh-gold;
     }
 
@@ -88,7 +102,7 @@
     background-color: $color-fh-gold;
     color: $color-black;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     font-family: get-font-family("main");
     font-size: to-rem(14);
     font-weight: 700;
@@ -96,17 +110,18 @@
     text-transform: uppercase;
     padding: 13px 28px;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
     white-space: nowrap;
 
     &:hover {
-      background-color: $color-black;
+      background-color: $color-fh-dark;
       color: $color-fh-gold;
+      transform: translateY(-1px);
     }
 
     @include bp(lap) {
       width: auto;
-      padding: 12px 36px;
+      padding: 12.5px 36px;
     }
   }
 }
@@ -115,9 +130,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  padding-top: 2px;
 
   .search-link {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba($color-fh-navy, 0.75);
     font-family: get-font-family("main");
     font-size: to-rem(13);
     font-weight: 700;
@@ -135,7 +151,7 @@
     }
 
     &:hover {
-      color: $color-white;
+      color: $color-fh-navy;
     }
   }
 }
