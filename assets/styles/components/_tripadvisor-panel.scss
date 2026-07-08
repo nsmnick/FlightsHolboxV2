@@ -1,0 +1,60 @@
+.tripadvisor-panel {
+  background-color: $color-tripadvisor-green;
+  padding: 50px 0;
+  text-align: center;
+
+  @include bp(lap) {
+    padding: 70px 0;
+  }
+
+  &__inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    display: block;
+    max-width: 160px;
+    height: auto;
+    margin: 0 auto 20px;
+  }
+
+  &__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: $color-white;
+    margin: 0 auto 20px;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    span {
+      font-size: to-rem(22);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  &__heading {
+    color: $color-white;
+    font-size: to-rem(24);
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 16px;
+
+    @include bp(lap) {
+      font-size: to-rem(28);
+    }
+  }
+
+  &__description {
+    color: $color-white;
+    font-size: to-rem(16);
+    line-height: 1.6;
+    margin: 0 0 28px;
+    opacity: 0.9;
+  }
+}

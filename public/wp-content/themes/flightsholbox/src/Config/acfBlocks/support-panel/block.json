@@ -1,0 +1,17 @@
+{
+  "name": "acf/support-panel",
+  "title": "Support Panel",
+  "description": "Topic-switching support/FAQ hub with live search — a sidebar of topics, each with its own accordion of questions and answers",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='12' cy='12' r='10' stroke='#000' stroke-width='2'/><path d='M12 8v1m0 3v4' stroke='#000' stroke-width='2' stroke-linecap='round'/></svg>",
+  "keywords": ["support", "faq", "help", "search", "topics"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "support-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

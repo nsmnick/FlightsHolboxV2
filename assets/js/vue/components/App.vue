@@ -5,9 +5,13 @@
 </template>
 
 <script>
+import PostsGallery from "./PostsGallery.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    PostsGallery,
+  },
   props: {
     component: {
       type: String,

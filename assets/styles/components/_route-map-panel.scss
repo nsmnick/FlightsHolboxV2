@@ -31,7 +31,10 @@
   flex-direction: column;
   gap: 24px;
 
-  @include bp(lap) {
+  // Side-by-side needs real room to breathe — the map's pin labels start
+  // overlapping if it's squeezed to ~62% width below desk, so this stays
+  // stacked (info below map) further than most two-column layouts do.
+  @include bp(desk) {
     flex-direction: row;
     align-items: flex-start;
     gap: 32px;
@@ -51,7 +54,16 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  @include bp(lap) {
+  // Taller on phones — the wide landscape crop leaves the map small and the
+  // pins cramped on narrow screens. background-size:cover reframes to this
+  // ratio without stretching the source image, and since pins are
+  // positioned by percentage relative to this box, they stay exactly on
+  // their correct geographic spot regardless of the crop.
+  @media (max-width: 480px) {
+    aspect-ratio: 4 / 5;
+  }
+
+  @include bp(desk) {
     flex: 1 1 62%;
   }
 }
@@ -61,6 +73,13 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  // Above the pins (z-index 2 below) — pin labels are wide opaque boxes
+  // that were sitting on top of the SVG in DOM order by default, blocking
+  // entire route segments that happened to pass under a label. Pins are
+  // pointer-events:none (only the route paths themselves are clickable),
+  // so raising the lines above them is purely visual and doesn't affect
+  // any hit target.
+  z-index: 3;
 }
 
 .route-map__route {
@@ -99,9 +118,17 @@
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   }
 
+  // A selected route needs to read as clearly "chosen" — the flowing dash
+  // animation is an ambient effect for the idle routes, and leaving it
+  // running on the active one too meant both the selected and unselected
+  // lines were visibly moving at once, with nothing making the selection
+  // stand out. Stopping the animation and switching to a solid stroke here
+  // makes the active route the one steady, settled thing on the map.
   &.is-active &-line {
     stroke: $color-fh-navy;
     stroke-width: 4.5;
+    stroke-dasharray: none;
+    animation: none;
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
   }
 
@@ -111,6 +138,17 @@
   &:focus,
   &:focus-visible {
     outline: none;
+  }
+}
+
+.route-map__plane {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+
+  // The <animateMotion> driving these is SMIL, not CSS, so it can't be
+  // paused with animation-play-state — hiding the element outright is the
+  // only way to honour reduced-motion here.
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
   }
 }
 
@@ -164,7 +202,7 @@
   padding: 24px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 
-  @include bp(lap) {
+  @include bp(desk) {
     flex: 1 1 320px;
     position: sticky;
     top: 100px;

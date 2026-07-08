@@ -1,0 +1,301 @@
+@import "../setup/colors";
+
+.news-gallery-panel {
+  padding: 60px 0;
+
+  &__heading {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: $color-fh-navy;
+    margin: 0 0 1rem;
+    text-align: center;
+  }
+
+  &__intro {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: $color-fh-charcoal;
+    line-height: 1.7;
+  }
+
+  //
+  // Colours (Panel Settings > Background Colour)
+  //
+
+  &.bgc-white {
+    background-color: $color-white;
+  }
+
+  &.bgc-light-grey {
+    background-color: $color-light-grey;
+  }
+
+  &.bgc-grey {
+    background-color: $color-grey;
+  }
+
+  &.bgc-gold {
+    background-color: $color-fh-gold;
+  }
+
+  &.bgc-navy {
+    background-color: $color-fh-navy;
+  }
+
+  &.bgc-dark {
+    background-color: $color-fh-dark;
+  }
+
+  &.bgc-charcoal {
+    background-color: $color-fh-charcoal;
+  }
+
+  // Gold is light enough that the default teal heading loses contrast
+  // against it — same fix as the intro text already gets by default from
+  // its charcoal colour, just made explicit here for the heading too.
+  &.bgc-gold {
+    .news-gallery-panel__heading {
+      color: $color-fh-dark;
+    }
+  }
+
+  &.bgc-navy,
+  &.bgc-dark,
+  &.bgc-charcoal {
+    .news-gallery-panel__heading {
+      color: $color-white;
+    }
+
+    .news-gallery-panel__intro {
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+
+  // The category filter dropdown, "no results" message, and loading spinner
+  // all sit directly on this section's own background (unlike the gallery
+  // cards, which are always white regardless) — so they need the same
+  // per-background treatment as the heading/intro above. On bgc-navy in
+  // particular, the default teal is the *exact* background colour, making
+  // the dropdown's border and text invisible without this.
+  &.bgc-gold {
+    .posts-gallery__select-wrap {
+      border-color: $color-fh-dark;
+
+      &::after {
+        border-color: $color-fh-dark;
+      }
+    }
+
+    .posts-gallery__select {
+      color: $color-fh-dark;
+    }
+
+    .posts-gallery__no-results {
+      color: $color-fh-dark;
+    }
+  }
+
+  &.bgc-navy,
+  &.bgc-dark,
+  &.bgc-charcoal {
+    .posts-gallery__select-wrap {
+      border-color: $color-white;
+
+      &::after {
+        border-color: $color-white;
+      }
+    }
+
+    .posts-gallery__select {
+      color: $color-white;
+
+      option {
+        color: $color-fh-dark;
+      }
+    }
+
+    .posts-gallery__no-results {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .posts-gallery__loading-spinner::after {
+      border-color: rgba(255, 255, 255, 0.25);
+      border-top-color: $color-fh-gold;
+    }
+  }
+}
+
+//
+// Vue-rendered gallery + filter UI (mounted into #vue-app inside this block)
+//
+
+.posts-gallery {
+  &__form {
+    margin: 0 0 32px;
+    text-align: center;
+  }
+
+  &__select-wrap {
+    position: relative;
+    display: inline-block;
+    border: 1px solid $color-fh-navy;
+    border-radius: 30px;
+    padding: 0 36px 0 18px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid $color-fh-navy;
+      border-bottom: 2px solid $color-fh-navy;
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+    }
+  }
+
+  &__select {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: $color-fh-navy;
+    font-weight: 600;
+    font-size: to-rem(14);
+    padding: 10px 0;
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__no-results {
+    text-align: center;
+    color: $color-fh-charcoal;
+    padding: 20px 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+
+    @include bp(tab) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp(desk) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  &__image-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: $color-light-grey;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease-out;
+    }
+  }
+
+  &__link:hover &__image-wrap img {
+    transform: scale(1.06);
+  }
+
+  &__content {
+    padding: 16px 18px 20px;
+    background: $color-white;
+  }
+
+  &__category {
+    margin: 0 0 6px;
+    font-size: to-rem(11);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $color-fh-gold;
+  }
+
+  &__title {
+    margin: 0 0 8px;
+    font-size: to-rem(17);
+    font-weight: 700;
+    line-height: 1.3;
+    color: $color-fh-dark;
+  }
+
+  &__date {
+    margin: 0;
+    font-size: to-rem(13);
+    color: $color-dark-grey;
+  }
+
+  &__load-more {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  &__loading-spinner {
+    width: 30px;
+    height: 30px;
+    margin: 30px auto 0;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 3px solid $color-light-grey;
+      border-top-color: $color-fh-navy;
+      border-radius: 50%;
+      animation: news-gallery-spin 0.8s linear infinite;
+    }
+  }
+}
+
+@keyframes news-gallery-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+//
+// TransitionGroup fade for newly-loaded posts
+//
+
+.posts-gallery-fade-enter-active {
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.posts-gallery-fade-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.posts-gallery-fade-leave-active {
+  transition: opacity 0.2s ease-out;
+}
+
+.posts-gallery-fade-leave-to {
+  opacity: 0;
+}

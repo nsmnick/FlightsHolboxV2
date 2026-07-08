@@ -8,6 +8,7 @@ require_once get_stylesheet_directory() . '/src/Autoloader.php';
 \Theme\Config\ACFBlocks::init();
 \Theme\Config\Plugins\ACFPro\ACFPro::init();
 \Theme\Config\GoogleReviews::init();
+\Theme\Config\RestAPI::init();
 
 class Theme_Setup
 {

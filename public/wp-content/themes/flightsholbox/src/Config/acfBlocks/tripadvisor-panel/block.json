@@ -1,0 +1,17 @@
+{
+  "name": "acf/tripadvisor-panel",
+  "title": "TripAdvisor Panel",
+  "description": "Green TripAdvisor-style call-out with a heading, description and link button",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='7' cy='12' r='5' stroke='#00a680' stroke-width='2'/><circle cx='17' cy='12' r='5' stroke='#00a680' stroke-width='2'/><circle cx='7' cy='12' r='1.5' fill='#00a680'/><circle cx='17' cy='12' r='1.5' fill='#00a680'/></svg>",
+  "keywords": ["tripadvisor", "reviews", "widget", "cta"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "tripadvisor-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}
