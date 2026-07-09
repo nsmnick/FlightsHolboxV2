@@ -145,19 +145,31 @@ class Theme_Setup
     public function enqueueBlockEditorAssets()
     {
         // Load compiled theme CSS inside the block editor so ACF blocks render correctly
-        if (
-            array_key_exists('assets/index.js', $this->assets_map) &&
-            array_key_exists('css', $this->assets_map['assets/index.js'])
-        ) {
-            foreach ($this->assets_map['assets/index.js']["css"] as $style_path) {
-                wp_enqueue_style(
-                    'theme-editor-styles',
-                    get_stylesheet_directory_uri() . '/dist/' . $style_path,
-                    [],
-                    false,
-                    'all'
-                );
+        if (!$this->isViteHMRAvailable()) {
+            if (
+                array_key_exists('assets/index.js', $this->assets_map) &&
+                array_key_exists('css', $this->assets_map['assets/index.js'])
+            ) {
+                foreach ($this->assets_map['assets/index.js']["css"] as $style_path) {
+                    wp_enqueue_style(
+                        'theme-editor-styles',
+                        get_stylesheet_directory_uri() . '/dist/' . $style_path,
+                        [],
+                        false,
+                        'all'
+                    );
+                }
             }
+        } else {
+            $theme_path = parse_url(get_stylesheet_directory_uri(), PHP_URL_PATH);
+
+            wp_enqueue_style(
+                'theme-editor-styles',
+                $this->getViteDevServerAddress() . $theme_path . '/dist/assets/styles/styles.scss?direct',
+                [],
+                null,
+                'all'
+            );
         }
     }
 

@@ -1,0 +1,42 @@
+// Block-editor-only chrome. Gutenberg wraps every rendered block in the
+// canvas with `.wp-block[data-type="acf/<name>"] [data-title="<Title>"]` —
+// attributes injected by the editor JS itself, never emitted by our own
+// render templates — so these rules only ever match inside wp-admin and
+// can't leak onto the frontend.
+//
+// Why: with ~20 ACF panel blocks stacked in a page, they all rendered as
+// plain white boxes with no boundary or label, making it hard to tell where
+// one block ends and the next begins, or which block you're looking at.
+
+.wp-block[data-type^="acf/"] {
+  position: relative;
+  margin: 0 0 32px !important;
+  padding-top: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+
+  &::before {
+    content: attr(data-title);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 14px;
+    background: $color-fh-dark;
+    color: $color-white;
+    font-size: to-rem(11);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    pointer-events: none;
+  }
+
+  &.is-selected,
+  &:hover {
+    border-color: $color-fh-navy;
+  }
+}

@@ -134,10 +134,14 @@
     }
   }
   .header-container {
-    // Translucent by default — appears over hero images
+    // Translucent by default — appears over hero images. A subtle dark
+    // gradient keeps the logo/nav legible over bright hero images before
+    // the frosted-glass scrolled state kicks in.
     background-color: transparent;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.35) 100%);
     transition:
       background-color 0.4s ease,
+      background-image 0.4s ease,
       box-shadow 0.4s ease,
       backdrop-filter 0.4s ease;
 
@@ -291,6 +295,7 @@
     @include bp($mobile-menu-snap) {
       .header-container {
         background-color: rgba(255, 255, 255, 0.92);
+        background-image: none;
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -304,6 +309,17 @@
         max-width: none;
         padding: 0;
       }
+    }
+
+    // The badge logo (resting spot + morph clone) sits above the mobile
+    // drawer's own z-index, so without this it stays visibly pinned on top
+    // of the open full-screen menu. !important because badge-logo-morph.js
+    // drives .site-badge-logo-morph's opacity via inline style on every
+    // scroll frame, which a plain class rule can't outrank.
+    .site-badge-logo-target,
+    .site-badge-logo-morph {
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
   }
 }
