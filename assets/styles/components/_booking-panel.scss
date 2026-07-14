@@ -9,6 +9,17 @@
     padding-bottom: 40px;
   }
 
+  // The generic .fade-in reveal (core-components/_animationV2.scss) animates
+  // `transform` too, and its `both` fill-mode leaves that transform (even a
+  // harmless translateY(0)) permanently applied once the animation finishes.
+  // A transform on any ancestor of a native <select> is a known mobile
+  // Safari/Chrome bug that mispositions the OS dropdown picker — this
+  // block's From/To/People selects need a transform-free ancestor, so give
+  // it its own opacity-only reveal instead of the generic transform-based one.
+  &.scrolled.fade-in {
+    animation: booking-panel-fade-in 0.5s ease-out both;
+  }
+
   .container {
     max-width: 1100px;
   }
@@ -29,11 +40,17 @@
 }
 
 .search-form {
-  display: flex;
-  flex-direction: column;
+  // Paired 2-up on mobile (From+To, People+Search) instead of one field per
+  // row — stacking all four full-width meant the later fields sat far down
+  // a short viewport with little room below, forcing their native dropdown
+  // to flip open upward. Pairing keeps every field's popup close enough to
+  // the top for the browser to open it downward as normal.
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
 
   @include bp(lap) {
+    display: flex;
     flex-direction: row;
     align-items: flex-end;
     gap: 12px;
@@ -43,10 +60,16 @@
     display: flex;
     flex-direction: column;
     gap: 6px;
-    flex: 1;
+    min-width: 0;
+
+    @include bp(lap) {
+      flex: 1;
+    }
 
     &--button {
-      flex: 0 0 auto;
+      @include bp(lap) {
+        flex: 0 0 auto;
+      }
     }
   }
 
@@ -69,8 +92,10 @@
     border-radius: 8px;
     color: $color-fh-dark;
     font-family: get-font-family("main");
-    font-size: to-rem(15);
-    padding: 12px 36px 12px 14px;
+    // Larger on mobile for readability — the closed field's own text size
+    // and, in most browsers, the size of the dropdown's option list too.
+    font-size: to-rem(17);
+    padding: 14px 36px 14px 14px;
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
@@ -80,6 +105,11 @@
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 12px 7px;
+
+    @include bp(lap) {
+      font-size: to-rem(15);
+      padding: 12px 36px 12px 14px;
+    }
 
     &:hover {
       background-color: getcolor("grey");
@@ -94,6 +124,107 @@
     option {
       background-color: $color-white;
       color: $color-black;
+      font-size: to-rem(17);
+      padding: 8px;
+
+      @include bp(lap) {
+        font-size: to-rem(15);
+      }
+    }
+  }
+
+  // Custom dropdown that replaces the native <select> visually (JS adds
+  // .custom-select__native to hide the original select once initialised —
+  // see assets/js/custom-select.js for why). Toggle button is styled to
+  // look identical to the native select it replaces.
+  .custom-select {
+    position: relative;
+    width: 100%;
+
+    &__native {
+      display: none;
+    }
+
+    &__toggle {
+      display: block;
+      width: 100%;
+      background-color: getcolor("light-grey");
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: $color-fh-dark;
+      font-family: get-font-family("main");
+      font-size: to-rem(17);
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 14px 36px 14px 14px;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 12px 7px;
+
+      @include bp(lap) {
+        font-size: to-rem(15);
+        padding: 12px 36px 12px 14px;
+      }
+
+      &:hover {
+        background-color: getcolor("grey");
+      }
+
+      &:focus {
+        outline: none;
+        background-color: $color-white;
+        border-color: $color-fh-gold;
+      }
+    }
+
+    &--open &__toggle {
+      background-color: $color-white;
+      border-color: $color-fh-gold;
+    }
+
+    &__list {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      z-index: 20;
+      margin: 0;
+      padding: 6px;
+      list-style: none;
+      background: $color-white;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    &__option {
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: to-rem(16);
+      color: $color-black;
+      cursor: pointer;
+
+      @include bp(lap) {
+        font-size: to-rem(15);
+      }
+
+      &:hover,
+      &:focus {
+        outline: none;
+        background-color: getcolor("light-grey");
+      }
+
+      &[aria-selected="true"] {
+        font-weight: 700;
+        color: $color-fh-navy;
+      }
     }
   }
 
@@ -108,10 +239,16 @@
     font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    padding: 13px 28px;
+    // Tighter on mobile — sits in a half-width grid column paired with the
+    // People field now, not a full-width row, so less horizontal room.
+    padding: 13px 10px;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
     white-space: nowrap;
+
+    @include bp(lap) {
+      padding: 13px 28px;
+    }
 
     &:hover {
       background-color: $color-fh-dark;
@@ -153,5 +290,14 @@
     &:hover {
       color: $color-fh-navy;
     }
+  }
+}
+
+@keyframes booking-panel-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

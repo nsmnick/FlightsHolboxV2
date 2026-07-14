@@ -16,7 +16,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                 method="GET"
                 id="search-embedded-form"
                 class="search-form"
-                action="<?php echo esc_url(site_url('/flights')); ?>"
+                action="<?php echo esc_url(site_url('/flights') . '#results'); ?>"
             >
                 <div class="search-form__group search-form__group--from">
                     <label class="search-form__label" for="locations_from">FROM</label>

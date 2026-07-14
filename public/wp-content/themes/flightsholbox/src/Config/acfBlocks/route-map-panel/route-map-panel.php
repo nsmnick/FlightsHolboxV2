@@ -84,6 +84,13 @@ if (!$hide_panel && !$preview_popup_image) {
             $tax_rate     = (float) (get_field('federal_tax_rate', $price_post->ID) ?: 16);
             $people_name  = (!empty($people) && !is_wp_error($people)) ? $people[0]->name : '';
 
+            // Plane Info lives on the number_of_people term itself (aircraft
+            // type is shared across every route using that traveler-count
+            // tier), not per Price post.
+            $place_info = (!empty($people) && !is_wp_error($people))
+                ? get_field('plane_info', 'number_of_people_' . $people[0]->term_id)
+                : null;
+
             $routes[$route_key]['fares'][] = [
                 'people'      => $people_name,
                 'one_way_ex'  => $one_way_base ? number_format($one_way_base, 2) : null,
@@ -91,6 +98,7 @@ if (!$hide_panel && !$preview_popup_image) {
                 'rt_ex'       => $rt_base ? number_format($rt_base, 2) : null,
                 'rt_inc'      => $rt_base ? number_format($rt_base * (1 + $tax_rate / 100), 2) : null,
                 'tax_rate'    => $tax_rate,
+                'place_info'  => $place_info ?: null,
             ];
         }
     }

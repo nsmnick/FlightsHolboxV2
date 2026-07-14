@@ -150,35 +150,6 @@
         }
       }
 
-      // Animated underline on hover — desktop text links only, not the CTA
-      // button variant below (which has its own solid hover treatment).
-      &:not(.button) a {
-        @include bp($mobile-menu-snap) {
-          &::after {
-            content: "";
-            position: absolute;
-            left: 10px;
-            right: 10px;
-            bottom: 8px;
-            height: 2px;
-            background-color: currentColor;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.25s ease-out;
-          }
-
-          &:hover::after {
-            transform: scaleX(1);
-          }
-
-          @media (prefers-reduced-motion: reduce) {
-            &::after {
-              transition: none;
-            }
-          }
-        }
-      }
-
       &.c-purple {
         a {
           color: getcolor("purple");
@@ -189,9 +160,27 @@
         > a {
           display: flex;
           align-items: center;
+          justify-content: center;
+          gap: 6px;
           cursor: pointer;
-          display: block;
           text-align: center;
+
+          // Chevron indicating this item expands a submenu — mobile drawer
+          // only; desktop reveals sub-menus on hover with no indicator.
+          &::after {
+            content: "";
+            flex-shrink: 0;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg);
+            transition: transform 0.25s ease;
+
+            @include bp($mobile-menu-snap) {
+              display: none;
+            }
+          }
         }
 
         @include bp($mobile-menu-snap) {
@@ -206,6 +195,10 @@
         &--open {
           > a {
             color: getcolor("black");
+
+            &::after {
+              transform: rotate(-135deg);
+            }
 
             @include bp($mobile-menu-snap) {
               color: getcolor("grey");
@@ -282,7 +275,9 @@
     }
 
     .sub-menu {
-      //background-color: getcolor("grey");
+      // Subtle tint + indent so nested items read as a dropdown rather
+      // than a continuation of the main list — mobile drawer only.
+      background-color: rgba(0, 0, 0, 0.035);
       height: 0;
       overflow: hidden;
       transition: height 0.3s ease-out;
@@ -294,7 +289,15 @@
       }
 
       .menu-item {
-        border-top: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+        &:first-child {
+          border-top: none;
+        }
+
+        @include bp($mobile-menu-snap) {
+          border-top: none;
+        }
 
         a {
           font-size: 14px;
@@ -302,7 +305,7 @@
           line-height: 1.4;
           color: getcolor("black");
           // border-bottom: none;
-          padding: 15px 25px;
+          padding: 15px 25px 15px 40px;
 
           // &:last-of-type {
           //   border-bottom: solid 1px getcolor("black");

@@ -26,6 +26,7 @@ if ($all_prices->have_posts()) {
         $rt_base      = (float) get_field('price_round_trip', $p->ID);
         $tax_rate     = (float) (get_field('federal_tax_rate', $p->ID) ?: 16);
         $note         = get_field('price_note', $p->ID);
+        $place_info   = get_field('place_info', $p->ID);
 
         $price_index[$from_id][$to_id][$people_id] = [
             'one_way_ex'  => $one_way_base ? '$' . number_format($one_way_base, 2) : null,
@@ -34,6 +35,7 @@ if ($all_prices->have_posts()) {
             'rt_inc'      => $rt_base      ? '$' . number_format($rt_base * (1 + $tax_rate / 100), 2) : null,
             'tax_rate'    => $tax_rate,
             'note'        => $note,
+            'place_info'  => $place_info,
         ];
     }
 }
@@ -118,6 +120,12 @@ $people_terms = get_terms(['taxonomy' => 'number_of_people', 'hide_empty' => fal
                                                             <span class="price-table__amount"><?php echo $ex; ?></span>
                                                         <?php else : ?>
                                                             <span class="price-table__unavailable">—</span>
+                                                        <?php endif; ?>
+                                                        <?php if ($entry && $entry['place_info']) : ?>
+                                                            <details class="price-table__place-info">
+                                                                <summary class="price-table__place-info-toggle">Plane Info</summary>
+                                                                <div class="price-table__place-info-content"><?php echo nl2br(esc_html($entry['place_info'])); ?></div>
+                                                            </details>
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="price-table__price price-table__price--inc">

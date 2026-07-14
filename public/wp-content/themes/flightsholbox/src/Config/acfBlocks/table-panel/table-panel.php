@@ -54,12 +54,21 @@ if (!$preview_popup_image && !$hide_panel) {
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $row) :
-                        $row_label = $row['row_label'] ?? '';
-                        $value_1   = $row['column_1_value'] ?? '';
-                        $value_2   = $row['column_2_value'] ?? '';
+                        $row_label  = $row['row_label'] ?? '';
+                        $value_1    = $row['column_1_value'] ?? '';
+                        $value_2    = $row['column_2_value'] ?? '';
+                        $plane_info = $row['row_plane_info'] ?? '';
                     ?>
                         <tr>
-                            <td class="table-panel__row-label"><?php echo esc_html($row_label); ?></td>
+                            <td class="table-panel__row-label">
+                                <?php echo esc_html($row_label); ?>
+                                <?php if ($plane_info) : ?>
+                                    <details class="table-panel__place-info">
+                                        <summary class="table-panel__place-info-toggle">Plane Info</summary>
+                                        <div class="table-panel__place-info-content"><?php echo nl2br(esc_html($plane_info)); ?></div>
+                                    </details>
+                                <?php endif; ?>
+                            </td>
                             <td class="table-panel__value"><?php echo esc_html($value_1); ?></td>
                             <td class="table-panel__value"><?php echo esc_html($value_2); ?></td>
                         </tr>

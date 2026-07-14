@@ -1,10 +1,10 @@
 .hero-panel {
   position: relative;
   width: 100%;
-  // Shorter on mobile so the panel below (e.g. the booking form) peeks
-  // into view on load without scrolling.
-  height: 60svh;
-  min-height: 380px;
+  // Shorter on mobile so the panel below (e.g. the booking form) is
+  // actually visible on load without scrolling, not just peeking in.
+  height: 42svh;
+  min-height: 320px;
   overflow: hidden;
 
   @include bp(lap) {

@@ -1,4 +1,16 @@
 function renderRouteInfo(infoEl, data) {
+  const placeInfoBlocks = data.fares
+    .filter((fare) => fare.place_info)
+    .map(
+      (fare) => `
+        <details class="route-map__place-info">
+          <summary class="route-map__place-info-toggle">Plane Info${fare.people ? ` &middot; ${fare.people}` : ""}</summary>
+          <div class="route-map__place-info-content">${fare.place_info.replace(/\n/g, "<br>")}</div>
+        </details>
+      `,
+    )
+    .join("");
+
   const fareBlocks = data.fares
     .map((fare) => {
       const rows = [];
@@ -46,6 +58,7 @@ function renderRouteInfo(infoEl, data) {
   infoEl.innerHTML = `
     <p class="route-map__info-route">${data.from} <span aria-hidden="true">&rarr;</span> ${data.to}</p>
     <div class="route-map__fares">${fareBlocks}</div>
+    ${placeInfoBlocks}
     <a class="route-map__book-btn" href="${data.url}">See full details &amp; book</a>
   `;
 }

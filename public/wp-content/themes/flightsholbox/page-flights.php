@@ -31,6 +31,19 @@ if ($searched) {
     wp_reset_postdata();
 }
 
+// Split this page's block-editor content so the Booking Panel renders above
+// the results, while everything else (FAQ, testimonials, etc.) still renders
+// at the very bottom of the page, below the results.
+$booking_panel_blocks = [];
+$other_blocks         = [];
+foreach (parse_blocks(get_the_content()) as $block) {
+    if ($block['blockName'] === 'acf/booking-panel') {
+        $booking_panel_blocks[] = $block;
+    } else {
+        $other_blocks[] = $block;
+    }
+}
+
 function fh_format_price(float $base, float $tax_rate): array {
     $inc = $base * (1 + $tax_rate / 100);
     return [
@@ -60,29 +73,11 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
         </div>
     </div>
 
-    <div class="prices-page__search-bar">
-        <div class="container">
-            <form role="search" method="GET" class="search-form search-form--inline" action="<?php echo esc_url(site_url('/flights')); ?>">
-                <div class="search-form__group search-form__group--from">
-                    <label class="search-form__label" for="locations_from">FROM</label>
-                    <?php echo fh_get_categories_dropdown('locations_from', [], 'Any', $from_id); ?>
-                </div>
-                <div class="search-form__group search-form__group--to">
-                    <label class="search-form__label" for="locations_to">TO</label>
-                    <?php echo fh_get_categories_dropdown('locations_to', [], 'Any', $to_id); ?>
-                </div>
-                <div class="search-form__group search-form__group--people">
-                    <label class="search-form__label" for="number_of_people">PEOPLE</label>
-                    <?php echo fh_get_categories_dropdown('number_of_people', [], 'Any', $people_id); ?>
-                </div>
-                <div class="search-form__group search-form__group--button">
-                    <button class="search-form__button" type="submit">SEARCH</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <?php foreach ($booking_panel_blocks as $block) : ?>
+        <?php echo render_block($block); ?>
+    <?php endforeach; ?>
 
-    <div class="prices-page__body">
+    <div id="results" class="prices-page__body">
         <div class="container prices-page__container">
 
             <?php if ($searched) : ?>
@@ -114,6 +109,13 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
                             $route_from  = (!empty($post_from)   && !is_wp_error($post_from))   ? $post_from[0]->name   : '';
                             $route_to    = (!empty($post_to)     && !is_wp_error($post_to))     ? $post_to[0]->name     : '';
                             $route_ppl   = (!empty($post_people) && !is_wp_error($post_people)) ? $post_people[0]->name : '';
+
+                            // Plane Info lives on the number_of_people term itself (aircraft
+                            // type is shared across every route using that traveler-count
+                            // tier), not per Price post.
+                            $place_info = (!empty($post_people) && !is_wp_error($post_people))
+                                ? get_field('plane_info', 'number_of_people_' . $post_people[0]->term_id)
+                                : null;
                         ?>
                             <div class="price-card">
                                 <div class="price-card__route">
@@ -127,6 +129,12 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
                                 </div>
                                 <?php if ($route_ppl) : ?>
                                     <p class="price-card__people"><?php echo esc_html($route_ppl); ?></p>
+                                <?php endif; ?>
+                                <?php if ($place_info) : ?>
+                                    <details class="price-card__place-info">
+                                        <summary class="price-card__place-info-toggle">Plane Information</summary>
+                                        <div class="price-card__place-info-content"><?php echo nl2br(esc_html($place_info)); ?></div>
+                                    </details>
                                 <?php endif; ?>
 
                                 <div class="price-card__breakdown">
@@ -242,11 +250,8 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
 
 </div>
 
-<?php
-// Anything added to this page in the block editor (FAQ, testimonials,
-// features, another booking form, etc.) renders here, below the search
-// bar and results.
-the_content();
-?>
+<?php foreach ($other_blocks as $block) : ?>
+    <?php echo render_block($block); ?>
+<?php endforeach; ?>
 
 <?php get_footer(); ?>

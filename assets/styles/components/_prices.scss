@@ -10,6 +10,22 @@
     background-position: center;
     display: flex;
     align-items: flex-end;
+
+    // .booking-panel floats up over whatever precedes it (margin-top:
+    // -36px / -52px on lap+) to overlap a hero's bottom clearance — that's
+    // the intended look. This hero's title/subtitle normally sit close to
+    // its bottom edge though, so when the Booking Panel is what follows,
+    // reserve extra clearance to keep the overlap landing below the text
+    // instead of on top of it. Scoped with :has() so a different, non­
+    // overlapping block placed here later isn't affected and the hero
+    // just keeps its normal (tighter) bottom spacing.
+    &:has(+ .booking-panel) {
+      padding-bottom: 20px;
+
+      @include bp(lap) {
+        padding-bottom: 36px;
+      }
+    }
   }
 
   &__hero-overlay {
@@ -65,6 +81,7 @@
   &__body {
     padding: 60px 0 80px;
     background: $color-light-grey;
+    scroll-margin-top: 80px;
   }
 
   &__container {
@@ -169,6 +186,65 @@
     letter-spacing: 0.07em;
     color: $color-fh-charcoal;
     margin: 0;
+  }
+
+  &__place-info {
+    border: 1px solid $color-light-grey;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &[open] {
+      .price-card__place-info-toggle {
+        color: $color-fh-navy;
+        background: rgba(0, 70, 123, 0.05);
+
+        &::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__place-info-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    font-size: to-rem(13);
+    font-weight: 600;
+    color: $color-fh-charcoal;
+    background: $color-light-grey;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      color: $color-fh-navy;
+    }
+  }
+
+  &__place-info-content {
+    padding: 12px 14px 14px;
+    font-size: to-rem(14);
+    line-height: 1.5;
+    color: $color-fh-charcoal;
+    border-top: 1px solid $color-light-grey;
   }
 
   // ─── Price breakdown: One Way and Return as separate, clearly labelled
@@ -504,5 +580,63 @@
 
   &__unavailable {
     color: $color-grey;
+  }
+
+  &__place-info {
+    display: block;
+    margin-top: 4px;
+    text-align: left;
+    white-space: normal;
+
+    &[open] {
+      .price-table__place-info-toggle {
+        color: $color-fh-navy;
+
+        &::after {
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+
+  &__place-info-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    list-style: none;
+    font-size: to-rem(10);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $color-dark-grey;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "";
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      color: $color-fh-navy;
+    }
+  }
+
+  &__place-info-content {
+    margin-top: 4px;
+    font-size: to-rem(12);
+    line-height: 1.4;
+    font-weight: 400;
+    color: $color-fh-charcoal;
+    max-width: 160px;
   }
 }

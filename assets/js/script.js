@@ -14,6 +14,7 @@ import initBadgeLogoMorph from "./badge-logo-morph";
 import initRouteMap, { initRouteMapPlanes } from "./route-map";
 import initVideoFacade from "./video-facade";
 import initSupportPanel from "./support-panel";
+import initCustomSelects from "./custom-select";
 
 function ready(fn) {
   if (document.readyState !== "loading") {
@@ -39,4 +40,5 @@ ready(() => {
   initRouteMapPlanes();
   initVideoFacade();
   initSupportPanel();
+  initCustomSelects();
 });

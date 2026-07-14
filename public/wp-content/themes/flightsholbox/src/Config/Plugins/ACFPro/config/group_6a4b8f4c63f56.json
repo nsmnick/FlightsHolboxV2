@@ -215,6 +215,28 @@
                     "prepend": "",
                     "append": "",
                     "parent_repeater": "field_6a4b8fbf65ba3"
+                },
+                {
+                    "key": "field_6a561d47c8b6f",
+                    "label": "Plane Info",
+                    "name": "plane_info",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "rows": "",
+                    "placeholder": "",
+                    "new_lines": "",
+                    "parent_repeater": "field_6a4b8fbf65ba3"
                 }
             ]
         },
@@ -262,5 +284,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783337324
+    "modified": 1784028520
 }
