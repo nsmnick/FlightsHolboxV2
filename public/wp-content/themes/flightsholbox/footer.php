@@ -112,7 +112,7 @@ $footer_tripadvisor = get_field('footer_social_tripadvisor', 'option');
     <div class="container">
       <div class="two-col-container">
         <div class="two-col-container__col">
-          <div class="copyright-message">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></div>
+          <div class="copyright-message">&copy; <?php echo date('Y'); ?> FlightsHolbox</div>
         </div>
         <div class="two-col-container__col">
           <div class="privacy-message">

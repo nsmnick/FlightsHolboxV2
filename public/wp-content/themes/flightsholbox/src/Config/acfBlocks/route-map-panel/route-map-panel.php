@@ -120,34 +120,7 @@ if (!$hide_panel && !$preview_popup_image) {
 
             <div class="route-map__stage" role="img" aria-label="Map of the Yucatán Peninsula showing our destinations">
                 <svg class="route-map__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                    <defs>
-                        <?php
-                        // Positioned so the plane artwork's own visual centre
-                        // (not the square image's centre — the silhouette
-                        // sits off-centre in its source canvas) lands on the
-                        // path point animateMotion moves it to, and rotated
-                        // 45° to correct for the artwork's nose pointing
-                        // up-right rather than along the local +x axis that
-                        // animateMotion's rotate="auto" measures from.
-                        ?>
-                        <image
-                            id="route-map-plane-icon"
-                            href="<?php echo esc_url(THEMEROOT . '/images/route-map-plane.png'); ?>"
-                            x="-2.25"
-                            y="-1.9425"
-                            width="4.2"
-                            height="4.2"
-                        />
-                    </defs>
-                    <?php
-                    // Phase 1: draw every route's line, and queue one flight
-                    // per unordered city pair (a pair priced in both
-                    // directions still gets two clickable lines, but only
-                    // one plane — otherwise it'd double up visually).
-                    $flight_queue         = [];
-                    $rendered_plane_pairs = [];
-
-                    foreach ($routes as $route_key => $route) :
+                    <?php foreach ($routes as $route_key => $route) :
                         $from_pin = $pins[$route['from']->term_id];
                         $to_pin   = $pins[$route['to']->term_id];
 
@@ -182,67 +155,6 @@ if (!$hide_panel && !$preview_popup_image) {
                         <g class="route-map__route" data-route="<?php echo $route_data; ?>" tabindex="0" role="button" aria-label="<?php echo $route_label; ?>">
                             <path class="route-map__route-hit" d="<?php echo esc_attr($path_d); ?>" vector-effect="non-scaling-stroke" />
                             <path id="<?php echo $path_id; ?>" class="route-map__route-line" d="<?php echo esc_attr($path_d); ?>" vector-effect="non-scaling-stroke" />
-                        </g>
-                    <?php
-                        $pair_key = implode('-', [
-                            min($route['from']->term_id, $route['to']->term_id),
-                            max($route['from']->term_id, $route['to']->term_id),
-                        ]);
-
-                        if (!isset($rendered_plane_pairs[$pair_key])) {
-                            $rendered_plane_pairs[$pair_key] = true;
-                            $flight_queue[] = [
-                                'path_id'  => $path_id,
-                                // Flight duration scales gently with route
-                                // distance so longer hops take longer to fly.
-                                'duration' => $fmt(min(max($dist * 0.045, 2.8), 6)),
-                            ];
-                        }
-                    endforeach;
-
-                    // Phase 2: only a small, fixed number of planes fly at
-                    // once rather than one per route — with a couple dozen
-                    // routes, one each was a wall of planes. Every route
-                    // still gets flown eventually though: routes are dealt
-                    // round-robin across the plane slots, each plane flies
-                    // its assigned routes in turn, forever. A pure-SMIL
-                    // version of that hand-off (chaining <animateMotion>
-                    // elements via "id.end", looping the last back to the
-                    // first) turned out unreliable — browsers wouldn't
-                    // consistently keep the loop alive past the first lap.
-                    // Server renders the first leg of each plane's route so
-                    // motion still starts immediately even before JS runs;
-                    // route-map.js (initRouteMapPlanes) takes over from
-                    // there via the SMIL endEvent + beginElement() DOM API,
-                    // advancing each plane to its next assigned route.
-                    $max_planes  = 4;
-                    $plane_count = min($max_planes, count($flight_queue));
-                    $plane_slots = array_fill(0, $plane_count, []);
-
-                    foreach ($flight_queue as $i => $flight) {
-                        $plane_slots[$i % $plane_count][] = $flight;
-                    }
-
-                    foreach ($plane_slots as $slot_index => $slot_flights) :
-                        if (!$slot_flights) continue;
-                        $first  = $slot_flights[0];
-                        $single = count($slot_flights) === 1;
-                    ?>
-                        <g
-                            class="route-map__plane"
-                            transform="rotate(45)"
-                            <?php if (!$single) : ?>data-flights="<?php echo esc_attr(wp_json_encode($slot_flights)); ?>"<?php endif; ?>
-                            aria-hidden="true"
-                        >
-                            <use href="#route-map-plane-icon" />
-                            <animateMotion
-                                dur="<?php echo $first['duration']; ?>s"
-                                begin="<?php echo $fmt($slot_index * 0.6); ?>s"
-                                repeatCount="<?php echo $single ? 'indefinite' : '1'; ?>"
-                                rotate="auto"
-                            >
-                                <mpath href="#<?php echo $first['path_id']; ?>" xlink:href="#<?php echo $first['path_id']; ?>" />
-                            </animateMotion>
                         </g>
                     <?php endforeach; ?>
                 </svg>

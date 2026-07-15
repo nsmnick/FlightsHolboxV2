@@ -38,7 +38,11 @@ class CustomSelect {
       item.textContent = option.textContent;
       item.setAttribute("role", "option");
       item.tabIndex = -1;
-      item.addEventListener("click", () => this.selectIndex(index, true));
+      item.addEventListener("click", () => {
+        this.selectIndex(index, true);
+        this.close();
+        this.toggle.focus();
+      });
       this.list.appendChild(item);
       this.optionEls.push(item);
     });

@@ -3,8 +3,20 @@ include __DIR__ . '/../_block-generics.php';
 include __DIR__ . '/../_block-preview.php';
 
 if (!$preview_popup_image && !$hide_panel) {
-    $heading   = get_field('faq_heading');
-    $questions = get_field('questions') ?: [];
+    $heading       = get_field('faq_heading');
+    $selected_faqs = get_field('selected_faqs') ?: [];
+
+    // Prefer FAQs picked from the real "faq" CPT (shared with the Support
+    // page) — the manually-typed "questions" repeater only kicks in as a
+    // fallback for existing blocks that haven't been switched over yet.
+    if ($selected_faqs) {
+        $questions = array_map(fn($post) => [
+            'question' => $post->post_title,
+            'answer'   => apply_filters('the_content', $post->post_content),
+        ], $selected_faqs);
+    } else {
+        $questions = get_field('questions') ?: [];
+    }
 ?>
 
 <section class="faq-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">

@@ -5,29 +5,79 @@ include __DIR__ . '/../_block-preview.php';
 if (!$preview_popup_image && !$hide_panel) {
     $heading = get_field('heading');
     $intro   = get_field('intro');
-    $topics  = get_field('topics') ?: [];
 
-    // Drop topics with no name and no FAQs — keeps a half-filled-in repeater
-    // row from rendering an empty tab. Each topic also needs a stable slug
-    // for the nav button/panel pairing and the search-visibility toggling.
-    $topics = array_values(array_filter(array_map(function ($topic, $index) {
-        $name = $topic['topic_name'] ?? '';
-        $faqs = array_values(array_filter($topic['faqs'] ?: [], fn($faq) => !empty($faq['question'])));
+    // Topics are the faq_topic taxonomy terms, and each topic's FAQs are real
+    // "faq" CPT posts assigned to that term — not a manually-entered
+    // repeater — so this block (and the FAQ Panel block's "select FAQs"
+    // picker) both draw from the same real content instead of duplicating it.
+    //
+    // "Select FAQs" lets an editor restrict this instance to specific FAQs
+    // (grouped by whichever topic each one belongs to) instead of always
+    // showing every published FAQ — leave it empty to keep the default
+    // "show everything" hub behaviour.
+    $selected_faqs = get_field('selected_faqs') ?: [];
+    $topics        = [];
 
-        if (!$name || !$faqs) {
-            return null;
+    if ($selected_faqs) {
+        $topics_by_term = [];
+
+        foreach ($selected_faqs as $post) {
+            $terms = get_the_terms($post->ID, 'faq_topic');
+            $term  = (!empty($terms) && !is_wp_error($terms)) ? $terms[0] : null;
+            $key   = $term ? $term->term_id : 0;
+
+            if (!isset($topics_by_term[$key])) {
+                $topics_by_term[$key] = [
+                    'slug'  => $term ? $term->slug : 'general',
+                    'name'  => $term ? $term->name : 'General',
+                    'intro' => $term ? $term->description : '',
+                    'faqs'  => [],
+                ];
+            }
+
+            $topics_by_term[$key]['faqs'][] = [
+                'question' => $post->post_title,
+                'answer'   => apply_filters('the_content', $post->post_content),
+            ];
         }
 
-        return [
-            'slug'  => sanitize_title($name) ?: ('topic-' . $index),
-            'name'  => $name,
-            'intro' => $topic['topic_intro'] ?? '',
-            'faqs'  => $faqs,
-        ];
-    }, $topics, array_keys($topics))));
+        $topics = array_values($topics_by_term);
+    } else {
+        $faq_topics = get_terms(['taxonomy' => 'faq_topic', 'hide_empty' => true]);
+
+        if (!is_wp_error($faq_topics)) {
+            foreach ($faq_topics as $term) {
+                $faq_posts = get_posts([
+                    'post_type'      => 'faq',
+                    'posts_per_page' => -1,
+                    'orderby'        => 'menu_order title',
+                    'order'          => 'ASC',
+                    'tax_query'      => [[
+                        'taxonomy' => 'faq_topic',
+                        'field'    => 'term_id',
+                        'terms'    => $term->term_id,
+                    ]],
+                ]);
+
+                if (!$faq_posts) {
+                    continue;
+                }
+
+                $topics[] = [
+                    'slug'  => $term->slug,
+                    'name'  => $term->name,
+                    'intro' => $term->description,
+                    'faqs'  => array_map(fn($post) => [
+                        'question' => $post->post_title,
+                        'answer'   => apply_filters('the_content', $post->post_content),
+                    ], $faq_posts),
+                ];
+            }
+        }
+    }
 
     if (!$topics) {
-        echo '<p style="padding:2rem;opacity:0.4;font-style:italic;">No topics added yet — edit the block to add support topics.</p>';
+        echo '<p style="padding:2rem;opacity:0.4;font-style:italic;">No FAQ topics with published FAQs yet — add FAQs and assign them an FAQ Topic.</p>';
         return;
     }
 ?>

@@ -141,17 +141,6 @@
   }
 }
 
-.route-map__plane {
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
-
-  // The <animateMotion> driving these is SMIL, not CSS, so it can't be
-  // paused with animation-play-state — hiding the element outright is the
-  // only way to honour reduced-motion here.
-  @media (prefers-reduced-motion: reduce) {
-    display: none;
-  }
-}
-
 .route-map__pin {
   // The dot itself sits exactly on the coordinate (centered, not the
   // bottom of a dot+label stack) — the label is positioned relative to

@@ -11,7 +11,7 @@ import initFaqAccordions from "./faq-accordion";
 import initToggleContent from "./toggle-content";
 import initImageColumnPanel from "./image-column-panel";
 import initBadgeLogoMorph from "./badge-logo-morph";
-import initRouteMap, { initRouteMapPlanes } from "./route-map";
+import initRouteMap from "./route-map";
 import initVideoFacade from "./video-facade";
 import initSupportPanel from "./support-panel";
 import initCustomSelects from "./custom-select";
@@ -37,7 +37,6 @@ ready(() => {
   initImageColumnPanel();
   initBadgeLogoMorph();
   initRouteMap();
-  initRouteMapPlanes();
   initVideoFacade();
   initSupportPanel();
   initCustomSelects();

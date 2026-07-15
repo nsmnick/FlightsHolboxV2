@@ -33,13 +33,12 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/two-column-panel');
         register_block_type(__DIR__ . '/acfBlocks/contact-details-panel');
         register_block_type(__DIR__ . '/acfBlocks/text-column-panel');
-        register_block_type(__DIR__ . '/acfBlocks/socials-panel');
         register_block_type(__DIR__ . '/acfBlocks/route-map-panel');
         register_block_type(__DIR__ . '/acfBlocks/table-panel');
         register_block_type(__DIR__ . '/acfBlocks/hyperlink-panel');
         register_block_type(__DIR__ . '/acfBlocks/news-gallery-panel');
         register_block_type(__DIR__ . '/acfBlocks/support-panel');
-        register_block_type(__DIR__ . '/acfBlocks/tripadvisor-panel');
+        register_block_type(__DIR__ . '/acfBlocks/social-panel');
     }
 
     // Remove WP default blocks and allocate which blocks can be used by pages and posts by default.
@@ -69,13 +68,12 @@ class ACFBlocks
                     'acf/two-column-panel',
                     'acf/contact-details-panel',
                     'acf/text-column-panel',
-                    'acf/socials-panel',
                     'acf/route-map-panel',
                     'acf/table-panel',
                     'acf/hyperlink-panel',
                     'acf/news-gallery-panel',
                     'acf/support-panel',
-                    'acf/tripadvisor-panel',
+                    'acf/social-panel',
                 );
             }
         }

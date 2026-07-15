@@ -1,10 +1,25 @@
-.tripadvisor-panel {
-  background-color: $color-tripadvisor-green;
+.social-panel {
   padding: 50px 0;
   text-align: center;
+  // Falls back to TripAdvisor green if the platform modifier below somehow
+  // isn't present — the modifier classes are what actually drive colour.
+  background-color: $color-tripadvisor-green;
 
   @include bp(lap) {
     padding: 70px 0;
+  }
+
+  &--tripadvisor {
+    background-color: $color-tripadvisor-green;
+  }
+
+  &--facebook {
+    background-color: $color-facebook-blue;
+  }
+
+  &--instagram {
+    // Instagram's own brand gradient rather than a single flat colour.
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
   }
 
   &__inner {

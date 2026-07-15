@@ -421,6 +421,41 @@ function fh_register_post_types()
         'menu_position' => 9,
         'show_in_rest'  => true,
     ]);
+
+    // Question = post title, Answer = native post content (WYSIWYG) — no ACF
+    // fields needed on the FAQ post itself. Grouped by faq_topic so the
+    // Support Panel block can render its topic tabs, and so the FAQ Panel
+    // block can offer a "select FAQs" picker scoped to real content.
+    register_post_type('faq', [
+        'labels' => [
+            'name'          => __('FAQs'),
+            'singular_name' => __('FAQ'),
+            'menu_name'     => __('FAQs'),
+            'add_new'       => __('Add New FAQ'),
+            'add_new_item'  => __('Add New FAQ'),
+            'edit_item'     => __('Edit FAQ'),
+            'all_items'     => __('All FAQs'),
+            'not_found'     => __('No FAQs found.'),
+        ],
+        'menu_icon'     => 'dashicons-editor-help',
+        'public'        => true,
+        'has_archive'   => false,
+        'supports'      => ['title', 'editor', 'page-attributes'],
+        'menu_position' => 10,
+        'show_in_rest'  => true,
+    ]);
+
+    register_taxonomy('faq_topic', 'faq', [
+        'labels' => [
+            'name'         => 'FAQ Topic',
+            'add_new_item' => 'Add New Topic',
+        ],
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_tagcloud'     => false,
+        'hierarchical'      => true,
+        'show_in_rest'      => true,
+    ]);
 }
 
 /**

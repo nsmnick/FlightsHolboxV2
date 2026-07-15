@@ -32,13 +32,17 @@ if ($searched) {
 }
 
 // Split this page's block-editor content so the Booking Panel renders above
+// the results and the Route Map Panel renders between the Booking Panel and
 // the results, while everything else (FAQ, testimonials, etc.) still renders
 // at the very bottom of the page, below the results.
 $booking_panel_blocks = [];
+$route_map_blocks     = [];
 $other_blocks         = [];
 foreach (parse_blocks(get_the_content()) as $block) {
     if ($block['blockName'] === 'acf/booking-panel') {
         $booking_panel_blocks[] = $block;
+    } elseif ($block['blockName'] === 'acf/route-map-panel') {
+        $route_map_blocks[] = $block;
     } else {
         $other_blocks[] = $block;
     }
@@ -74,6 +78,10 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
     </div>
 
     <?php foreach ($booking_panel_blocks as $block) : ?>
+        <?php echo render_block($block); ?>
+    <?php endforeach; ?>
+
+    <?php foreach ($route_map_blocks as $block) : ?>
         <?php echo render_block($block); ?>
     <?php endforeach; ?>
 

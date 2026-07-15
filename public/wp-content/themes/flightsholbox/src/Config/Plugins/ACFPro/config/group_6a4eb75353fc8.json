@@ -1,13 +1,13 @@
 {
     "key": "group_6a4eb75353fc8",
-    "title": "TripAdvisor Panel",
+    "title": "Socials Panel",
     "fields": [
         {
-            "key": "field_6a4ebb2519022",
-            "label": "Logo",
-            "name": "logo",
+            "key": "field_6a57946f95a8a",
+            "label": "Platform",
+            "name": "platform",
             "aria-label": "",
-            "type": "image",
+            "type": "button_group",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,59 +16,16 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "id",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_6a4eb753d02cb",
-            "label": "Heading",
-            "name": "heading",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
+            "choices": {
+                "tripadvisor": "TripAdvisor",
+                "facebook": "Facebook",
+                "instagram": "Instagram"
             },
             "default_value": "",
-            "maxlength": "",
+            "return_format": "value",
+            "allow_null": 0,
             "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6a4eb96ad02cc",
-            "label": "Description",
-            "name": "description",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "rows": "",
-            "placeholder": "",
-            "new_lines": ""
+            "layout": "horizontal"
         },
         {
             "key": "field_6a4eb972d02cd",
@@ -120,7 +77,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/tripadvisor-panel"
+                "value": "acf\/social-panel"
             }
         ]
     ],
@@ -136,5 +93,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1783544625
+    "modified": 1784125329
 }

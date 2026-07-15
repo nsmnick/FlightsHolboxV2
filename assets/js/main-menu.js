@@ -110,9 +110,13 @@ export default function initMenu() {
   // Run once in case page is already scrolled.
   scrolledState(true);
 
-  document.addEventListener("scroll", () => {
-    scrolledState();
-  });
+  document.addEventListener(
+    "scroll",
+    () => {
+      scrolledState();
+    },
+    { passive: true },
+  );
 
   // Toggle mobile menu.
   mobileMenuButton.addEventListener("click", (e) => {
