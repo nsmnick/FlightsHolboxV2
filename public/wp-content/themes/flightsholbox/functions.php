@@ -9,8 +9,7 @@ require_once get_stylesheet_directory() . '/src/Autoloader.php';
 \Theme\Config\Plugins\ACFPro\ACFPro::init();
 \Theme\Config\GoogleReviews::init();
 \Theme\Config\RestAPI::init();
-use Theme\Config\Lockdown;
-Lockdown::init();
+\Theme\Config\Lockdown::init();
 
 class Theme_Setup
 {
