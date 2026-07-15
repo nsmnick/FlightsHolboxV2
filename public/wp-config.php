@@ -1,7 +1,7 @@
 <?php
 
 define('VITE_DEV_SERVER_URL', 'http://localhost:5274');
-
+define('WP_ENVIRONMENT_TYPE', 'prod');
 /**
  * The base configuration for WordPress
  *
@@ -26,16 +26,29 @@ define('VITE_DEV_SERVER_URL', 'http://localhost:5274');
 
 // JACOB
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'local' );
+// define( 'DB_NAME', 'local' );
 
-/** Database username */
-define( 'DB_USER', 'root' );
+// /** Database username */
+// define( 'DB_USER', 'root' );
 
-/** Database password */
-define( 'DB_PASSWORD', 'root' );
+// /** Database password */
+// define( 'DB_PASSWORD', 'root' );
 
-/** Database hostname */
+// /** Database hostname */
+// define( 'DB_HOST', 'localhost' );
+
+
+define( 'DB_NAME', 'dbu32roeclecl4' );
+
+define( 'DB_USER', 'ubswb8w8qmacu' );
+
+define( 'DB_PASSWORD', 'b533gij4bxoj' );
+
 define( 'DB_HOST', 'localhost' );
+
+define( 'DB_CHARSET', 'utf8' );
+
+define( 'DB_COLLATE', '' );
 
 // Nick
 //define('DB_NAME', 'flightsholbox');
