@@ -31,15 +31,19 @@ if ($searched) {
     wp_reset_postdata();
 }
 
-// Split this page's block-editor content so the Booking Panel renders above
-// the results and the Route Map Panel renders between the Booking Panel and
-// the results, while everything else (FAQ, testimonials, etc.) still renders
-// at the very bottom of the page, below the results.
+// Split this page's block-editor content so the Hero Panel renders at the
+// very top, the Booking Panel renders above the results, and the Route Map
+// Panel renders between the Booking Panel and the results, while everything
+// else (FAQ, testimonials, etc.) still renders at the very bottom of the
+// page, below the results.
+$hero_panel_blocks    = [];
 $booking_panel_blocks = [];
 $route_map_blocks     = [];
 $other_blocks         = [];
 foreach (parse_blocks(get_the_content()) as $block) {
-    if ($block['blockName'] === 'acf/booking-panel') {
+    if ($block['blockName'] === 'acf/hero-panel') {
+        $hero_panel_blocks[] = $block;
+    } elseif ($block['blockName'] === 'acf/booking-panel') {
         $booking_panel_blocks[] = $block;
     } elseif ($block['blockName'] === 'acf/route-map-panel') {
         $route_map_blocks[] = $block;
@@ -69,13 +73,9 @@ function fh_book_url(int $price_id, string $trip_type, int $from_id, int $to_id,
 
 <div class="prices-page">
 
-    <div class="prices-page__hero">
-        <div class="prices-page__hero-overlay" aria-hidden="true"></div>
-        <div class="container prices-page__hero-content">
-            <h1 class="prices-page__title">Flight Prices</h1>
-            <p class="prices-page__subtitle">Search for your route below</p>
-        </div>
-    </div>
+    <?php foreach ($hero_panel_blocks as $block) : ?>
+        <?php echo render_block($block); ?>
+    <?php endforeach; ?>
 
     <?php foreach ($booking_panel_blocks as $block) : ?>
         <?php echo render_block($block); ?>
