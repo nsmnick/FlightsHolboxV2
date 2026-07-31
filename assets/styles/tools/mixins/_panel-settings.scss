@@ -1,0 +1,149 @@
+// Modifier classes generated from the shared "Panel Settings" ACF field
+// group (panel_settings: top_padding, bottom_padding, panel_decoration,
+// background_colour — see Theme\Utils::get_generic_block_settings_classes()).
+//
+// Deliberately NOT bundled under a single global `.content` selector like
+// _content.scss's version — most panels already define their own tuned
+// default padding directly on their own root class (e.g. `.activities-slider
+// { padding: 60px 0 80px; }`), and a shared `.content` base rule of the same
+// specificity would silently win/lose that fight based on stylesheet import
+// order alone. Each panel instead does `@include panel-settings-modifiers;`
+// inside its own root selector, so the *modifier* classes (tp-small, br-all,
+// bgc-white, etc.) take that panel's own specificity and never clash with
+// its base padding — the block's own default padding is left completely
+// alone unless a CMS field explicitly overrides it.
+// Padding + corner-decoration only, no background colour — for panels whose
+// look is built around one fixed background (e.g. activities-slider's dark
+// backdrop with a gradient edge-fade hardcoded to that exact colour, or any
+// panel whose text was only ever styled for one specific background and
+// would lose contrast against an arbitrary CMS-picked colour).
+@mixin panel-spacing-modifiers {
+  &.tp-none {
+    padding-top: 0;
+  }
+
+  &.tp-small {
+    padding-top: 40px;
+
+    @include bp(lap) {
+      padding-top: 60px;
+    }
+  }
+
+  &.tp-medium {
+    padding-top: 40px;
+
+    @include bp(lap) {
+      padding-top: 60px;
+    }
+  }
+
+  &.tp-large {
+    padding-top: 80px;
+
+    @include bp(lap) {
+      padding-top: 180px;
+    }
+
+    @include bp(desk) {
+      padding-top: 360px;
+    }
+  }
+
+  &.tp-extra-large {
+    padding-top: 100px;
+
+    @include bp(lap) {
+      padding-top: 160px;
+    }
+  }
+
+  &.bp-none {
+    padding-bottom: 0;
+  }
+
+  &.bp-small {
+    padding-bottom: 40px;
+
+    @include bp(lap) {
+      padding-bottom: 60px;
+    }
+  }
+
+  &.bp-medium {
+    padding-bottom: 40px;
+
+    @include bp(lap) {
+      padding-bottom: 60px;
+    }
+  }
+
+  &.bp-large {
+    padding-bottom: 80px;
+
+    @include bp(lap) {
+      padding-bottom: 180px;
+    }
+
+    @include bp(desk) {
+      padding-bottom: 360px;
+    }
+  }
+
+  &.bp-extra-large {
+    padding-bottom: 100px;
+
+    @include bp(lap) {
+      padding-bottom: 160px;
+    }
+  }
+
+  &.br-all {
+    border-radius: $border-radius-lg;
+  }
+
+  &.br-top {
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+  }
+
+  &.br-bottom {
+    border-radius: 0 0 $border-radius-lg $border-radius-lg;
+  }
+}
+
+@mixin panel-colour-modifiers {
+  &.bgc-white {
+    background-color: $color-white;
+  }
+
+  &.bgc-light-grey {
+    background-color: $color-light-grey;
+  }
+
+  &.bgc-grey {
+    background-color: $color-grey;
+  }
+
+  &.bgc-gold {
+    background-color: $color-fh-gold;
+  }
+
+  &.bgc-navy {
+    background-color: $color-fh-navy;
+  }
+
+  &.bgc-dark {
+    background-color: $color-fh-dark;
+  }
+
+  &.bgc-charcoal {
+    background-color: $color-fh-charcoal;
+  }
+}
+
+// Full set — padding, decoration and background colour. Use this unless the
+// panel has a reason to opt out of one piece (see panel-spacing-modifiers).
+@mixin panel-settings-modifiers {
+  @include panel-spacing-modifiers;
+  @include panel-colour-modifiers;
+}

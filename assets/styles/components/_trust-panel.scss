@@ -1,0 +1,112 @@
+.trust-panel {
+  @include panel-settings-modifiers;
+
+  // Fixed widths matching the supplied design exactly — deliberately not
+  // using the shared .container/container_size object, since those max-
+  // widths (800/1100/1300px) don't match the 1120/620px given here.
+  &__container {
+    width: min(1120px, calc(100% - 40px));
+    margin: 72px auto 0;
+
+    @media (max-width: 700px) {
+      width: min(620px, calc(100% - 30px));
+      margin-top: 54px;
+    }
+
+    @media (max-width: 480px) {
+      width: calc(100% - 28px);
+      margin-top: 46px;
+    }
+  }
+
+  // Grid breakpoints match the container's own (980/700/480) rather than
+  // the theme's tab/lap scale — otherwise the container would narrow before
+  // the grid re-flows, cramming too many columns into too little width.
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+
+    @media (max-width: 980px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    min-height: 132px;
+    padding: 24px 18px;
+    background: $color-white;
+    border: 1px solid rgba($color-fh-navy, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba($color-fh-dark, 0.09);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba($color-fh-dark, 0.13);
+    }
+
+    // The last odd card spans both columns at 2-up; not needed once
+    // we're down to a single column, but harmless since it still applies.
+    &:last-child {
+      @media (max-width: 700px) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      min-height: 112px;
+    }
+  }
+
+  &__icon {
+    display: block;
+    margin-bottom: 11px;
+    line-height: 1;
+
+    img {
+      display: block;
+      width: 26px;
+      height: 26px;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    display: block;
+    color: $color-fh-navy;
+    font-family: get-font-family("main");
+    font-size: to-rem(18);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  &__subtitle {
+    display: block;
+    margin-top: 4px;
+    color: $color-fh-dark;
+    font-family: get-font-family("main");
+    font-size: to-rem(15);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+}

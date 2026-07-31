@@ -1,0 +1,17 @@
+{
+  "name": "acf/button-panel",
+  "title": "Button Panel",
+  "description": "One, two or three call-to-action buttons grouped together inside a card",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='2' y='10' width='6' height='6' rx='3' stroke='#000' stroke-width='2'/><rect x='9' y='10' width='6' height='6' rx='3' stroke='#000' stroke-width='2'/><rect x='16' y='10' width='6' height='6' rx='3' stroke='#000' stroke-width='2'/></svg>",
+  "keywords": ["button", "cta", "card", "link"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "button-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

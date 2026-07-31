@@ -52,31 +52,51 @@ export default function initSliders() {
     });
   }
 
-  const imageAndTextSlider = new Swiper(
-    ".text-and-image-slider__slides-wrapper",
-    {
-      modules: [Autoplay, Pagination],
-      slidesPerView: 1,
-      spaceBetween: 50,
-      loop: true,
-      wrapperClass: "text-and-image-slider__slides",
-      slideClass: "text-and-image-slider__slide",
+  // Text and Image Panel's image slider — looped over so multiple panel
+  // instances on the same page each get their own independent Swiper,
+  // scoped to that instance's own arrows/dots/counter rather than a
+  // single global selector (which would only ever wire up the first one).
+  document
+    .querySelectorAll(".text-and-image-slider__slides-wrapper")
+    .forEach((wrapperEl) => {
+      const root = wrapperEl.closest(".text-and-image-panel__image");
+      if (!root) return;
 
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".text-and-image-slider__pagination",
-        clickable: true,
-        type: "bullets",
-        bulletActiveClass: "text-and-image-slider__pagination__bullet--active",
-        bulletClass: "text-and-image-slider__pagination__bullet",
-        bulletElement: "div",
-      },
-      navigation: false,
-    },
-  );
+      const counterCurrent = root.querySelector(
+        ".text-and-image-slider__counter-current",
+      );
+
+      new Swiper(wrapperEl, {
+        modules: [Navigation, Pagination, EffectFade],
+        slidesPerView: 1,
+        loop: true,
+        effect: "fade",
+        fadeEffect: {
+          crossFade: true,
+        },
+        wrapperClass: "text-and-image-slider__slides",
+        slideClass: "text-and-image-slider__slide",
+        navigation: {
+          nextEl: root.querySelector(".text-and-image-slider__arrow--next"),
+          prevEl: root.querySelector(".text-and-image-slider__arrow--prev"),
+        },
+        pagination: {
+          el: root.querySelector(".text-and-image-slider__pagination"),
+          clickable: true,
+          type: "bullets",
+          bulletActiveClass: "text-and-image-slider__pagination__bullet--active",
+          bulletClass: "text-and-image-slider__pagination__bullet",
+          bulletElement: "button",
+        },
+        on: {
+          slideChange(swiper) {
+            if (counterCurrent) {
+              counterCurrent.textContent = swiper.realIndex + 1;
+            }
+          },
+        },
+      });
+    });
 
   const heroSlider = new Swiper(".hero-slider__slides-wrapper", {
     modules: [EffectFade, Autoplay],

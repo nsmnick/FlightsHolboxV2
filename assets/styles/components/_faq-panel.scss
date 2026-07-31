@@ -3,6 +3,8 @@
 .faq-panel {
     padding: 60px 0;
 
+    @include panel-settings-modifiers;
+
     &__title {
         font-size: clamp(1.5rem, 3vw, 2.25rem);
         font-weight: 700;
@@ -14,6 +16,38 @@
     &__accordion {
         max-width: 760px;
         margin: 0 auto;
+    }
+
+    // Title/question/content/border colours below are tuned for a light
+    // background — swap them for light-on-dark once a dark Background
+    // Colour is picked, so the CMS field actually stays readable instead of
+    // rendering dark text on a dark panel.
+    &.bgc-navy,
+    &.bgc-dark,
+    &.bgc-charcoal {
+        .faq-panel__title {
+            color: $color-white;
+        }
+
+        .faq-item {
+            border-top-color: rgba(255, 255, 255, 0.15);
+
+            &:last-child {
+                border-bottom-color: rgba(255, 255, 255, 0.15);
+            }
+
+            &__question {
+                color: $color-white;
+            }
+
+            &__content {
+                color: rgba(255, 255, 255, 0.75);
+
+                a {
+                    color: $color-white;
+                }
+            }
+        }
     }
 }
 
@@ -34,8 +68,18 @@
         cursor: pointer;
         user-select: none;
         gap: 16px;
+        // Matches __question's font-size so the icon's `em`-based offset
+        // below tracks the first line's height even when the question wraps.
+        font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
 
         &::-webkit-details-marker { display: none; }
+        // `list-style: none` above only ever suppressed the marker in
+        // Firefox — WebKit needs the pseudo-element above, and current
+        // Chromium/Safari additionally expose the disclosure triangle as
+        // the standard `::marker`. Without this, the native triangle can
+        // still reserve/render its own space on some engines, nudging that
+        // particular question's text out of line with the others.
+        &::marker { display: none; content: ''; }
 
         // Gold plus / minus icon
         &::before,
@@ -49,7 +93,10 @@
             background-color: $color-fh-gold;
             position: absolute;
             right: 0;
-            top: 50%;
+            // Anchored to the first line of the question (padding-top + half
+            // its line-height), not 50% of the whole summary — otherwise the
+            // icon drifts down between lines when a question wraps.
+            top: calc(20px + 0.7em);
             transform: translateY(-50%);
         }
 

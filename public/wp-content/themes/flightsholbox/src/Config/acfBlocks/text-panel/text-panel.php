@@ -9,12 +9,33 @@ if (!$hide_panel && !$preview_popup_image) {
     if (!$content) {
         return;
     }
+
+    // The card (background/rounded corners) is deliberately kept separate
+    // from the section's own tp-/bp- spacing classes below — those control
+    // the gap between this panel and its neighbours on the page, while the
+    // card classes size/decorate only the boxed content area inside.
+    $top_padding    = $generic_block_settings['top_padding'] ?? 'default';
+    $bottom_padding = $generic_block_settings['bottom_padding'] ?? 'default';
+    $decoration     = $generic_block_settings['panel_decoration'] ?? 'none';
+    $bg_colour      = $generic_block_settings['background_colour'] ?? '';
+
+    $section_classes = trim(
+        ($top_padding !== 'default' ? ' tp-' . $top_padding : '') .
+        ($bottom_padding !== 'default' ? ' bp-' . $bottom_padding : '')
+    );
+
+    $card_classes = trim(
+        ($decoration !== 'none' ? ' ' . $decoration : '') .
+        ($bg_colour ? ' bgc-' . $bg_colour : '')
+    );
 ?>
 
-<section class="text-panel content text-panel--<?php echo esc_attr($alignment); ?> animate fade-in <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo $generic_container_class; ?>">
-        <div class="wysiwyg-container">
-            <?php echo $content; ?>
+<section class="text-panel content text-panel--<?php echo esc_attr($alignment); ?> animate fade-in <?php echo esc_attr($section_classes); ?>">
+    <div class="container <?php echo esc_attr($generic_container_class); ?>">
+        <div class="text-panel__card <?php echo esc_attr($card_classes); ?>">
+            <div class="wysiwyg-container">
+                <?php echo $content; ?>
+            </div>
         </div>
     </div>
 </section>

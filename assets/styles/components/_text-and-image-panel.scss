@@ -1,0 +1,379 @@
+.text-and-image-panel {
+  padding: 60px 0;
+
+  @include bp(desk) {
+    padding: 100px 0;
+  }
+
+  @include panel-settings-modifiers;
+
+  // Card wrapper — bg/border/shadow/radius match the supplied design,
+  // reusing this theme's own colour tokens instead of its one-off hex.
+  &__columns {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: $color-white;
+    border: 1px solid rgba($color-fh-navy, 0.1);
+    border-radius: 22px;
+    box-shadow: 0 16px 42px rgba($color-fh-dark, 0.09);
+    overflow: hidden;
+
+    @include bp(lap) {
+      flex-direction: row;
+    }
+
+    &--image-left {
+      @include bp(lap) {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  &__text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 36px 24px;
+
+    @include bp(tab) {
+      padding: 46px 38px;
+    }
+
+    @include bp(lap) {
+      flex: 1.08 1 0;
+      padding: 55px 50px;
+    }
+
+    // Typography scoped to this panel only — matches the supplied design's
+    // look without touching the shared .wysiwyg-container used elsewhere.
+    .wysiwyg-container {
+      h2 {
+        margin: 0 0 14px;
+        color: $color-fh-navy;
+        font-size: to-rem(33);
+        font-weight: 300;
+        line-height: 1.18;
+
+        @include bp(lap) {
+          font-size: to-rem(42);
+        }
+      }
+
+      h3,
+      h4 {
+        color: $color-fh-navy;
+        font-weight: 600;
+      }
+
+      p {
+        color: $color-dark-grey;
+        font-size: to-rem(16);
+        line-height: 1.85;
+
+        @include bp(lap) {
+          font-size: to-rem(17);
+        }
+
+        strong {
+          color: $color-fh-navy;
+        }
+      }
+
+      // Checklist look — circled tick instead of the shared wysiwyg dot bullet.
+      ul {
+        display: grid;
+        gap: 15px;
+        list-style: none;
+        margin: 0 0 20px;
+        padding-left: 0;
+
+        li {
+          position: relative;
+          padding-left: 33px;
+          color: $color-dark-grey;
+          font-size: to-rem(16);
+          line-height: 1.65;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: rgba($color-fh-navy, 0.05);
+            border: 2px solid $color-fh-navy;
+            border-radius: 50%;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            width: 8px;
+            height: 5px;
+            border-left: 2px solid $color-fh-navy;
+            border-bottom: 2px solid $color-fh-navy;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+
+      // "Read More" expandable section, if a <details> is added via the
+      // WYSIWYG's Custom HTML/code view.
+      details {
+        margin-top: 8px;
+        border-top: 1px solid $color-light-grey;
+        border-bottom: 1px solid $color-light-grey;
+
+        summary {
+          position: relative;
+          padding: 22px 44px 22px 0;
+          color: $color-fh-navy;
+          font-size: to-rem(16);
+          font-weight: 600;
+          cursor: pointer;
+          list-style: none;
+
+          &::-webkit-details-marker {
+            display: none;
+          }
+
+          &::marker {
+            display: none;
+            content: '';
+          }
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 4px;
+            width: 18px;
+            height: 2px;
+            background: $color-fh-navy;
+            transform: translateY(-50%);
+            transition: transform 0.25s ease;
+          }
+
+          &::after {
+            transform: translateY(-50%) rotate(90deg);
+          }
+        }
+
+        &[open] summary::after {
+          transform: translateY(-50%) rotate(0deg);
+        }
+
+        &-content,
+        > div {
+          padding: 4px 0 28px;
+        }
+      }
+
+      // Safety-note style callout — apply the "note" class in the WYSIWYG's
+      // Custom HTML/code view to get this treatment on any paragraph/div.
+      .note {
+        position: relative;
+        margin: 25px 0 0;
+        padding: 20px 22px;
+        color: $color-fh-navy;
+        background: $color-light-grey;
+        border-left: 3px solid $color-fh-navy;
+        border-radius: 9px;
+        font-size: to-rem(15);
+        line-height: 1.75;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    width: 100%;
+    min-height: 310px;
+    overflow: hidden;
+    background: $color-light-grey;
+
+    @include bp(tab) {
+      min-height: 470px;
+    }
+
+    @include bp(lap) {
+      flex: 0.92 1 0;
+      min-height: 610px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba($color-fh-dark, 0.28) 0%,
+        rgba($color-fh-dark, 0.04) 50%,
+        transparent 78%
+      );
+      pointer-events: none;
+    }
+  }
+
+  // flex-wrap (not a forced breakpoint) is enough here — buttons are narrow
+  // enough to naturally stay side by side until they no longer fit, then
+  // wrap onto their own line.
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+  }
+}
+
+// Optional image slider (Swiper — wired up in assets/js/sliders.js) used
+// in place of the plain <img> inside &__image when "Use Image Slider" is
+// enabled. Sits inside the same &__image container, so it inherits that
+// element's sizing/gradient-overlay/min-height already defined above.
+.text-and-image-slider {
+  &__slides-wrapper,
+  &__slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-fh-navy;
+    background: rgba($color-white, 0.92);
+    border: 0;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba($color-fh-dark, 0.18);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      color: $color-white;
+      background: $color-fh-navy;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba($color-fh-navy, 0.3);
+      outline-offset: 3px;
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    &--prev {
+      left: 18px;
+
+      @media (max-width: 600px) {
+        left: 12px;
+      }
+    }
+
+    &--next {
+      right: 18px;
+
+      @media (max-width: 600px) {
+        right: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__pagination {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transform: translateX(-50%);
+
+    &__bullet {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      background: rgba($color-white, 0.7);
+      border: 1px solid rgba($color-fh-navy, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      transition:
+        width 0.25s ease,
+        border-radius 0.25s ease,
+        background 0.25s ease;
+
+      &--active {
+        width: 27px;
+        background: $color-white;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  &__counter {
+    position: absolute;
+    z-index: 5;
+    top: 20px;
+    left: 20px;
+    padding: 8px 13px;
+    color: $color-fh-navy;
+    background: rgba($color-white, 0.9);
+    border-radius: 30px;
+    font-family: get-font-family("main");
+    font-size: to-rem(13);
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    @media (max-width: 600px) {
+      top: 14px;
+      left: 14px;
+    }
+  }
+}

@@ -140,7 +140,12 @@ if (!$preview_popup_image && !$hide_panel) {
                                         <span class="faq-item__question"><?php echo esc_html($question); ?></span>
                                     </summary>
                                     <div class="faq-item__content">
-                                        <?php echo wp_kses_post($answer); ?>
+                                        <?php
+                                        // force_balance_tags() guards against a stray/unmatched
+                                        // closing tag inside an answer's rich content (e.g. an
+                                        // extra </div>) prematurely closing a surrounding wrapper.
+                                        echo wp_kses_post(force_balance_tags($answer));
+                                        ?>
                                     </div>
                                 </details>
                             <?php endforeach; ?>

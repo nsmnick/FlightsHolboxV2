@@ -10,40 +10,48 @@ if (!$preview_popup_image && !$hide_panel) {
         return;
     }
 
-    $count = min(count($features), 3);
-    $count_class = ['', 'one', 'two', 'three'][$count];
+    $features = array_slice($features, 0, 3);
+    $count_modifier = [1 => '', 2 => ' feature-panel__grid--two', 3 => ' feature-panel__grid--three'][count($features)] ?? '';
 ?>
 
-<section class="feature-panel feature-panel--<?php echo $count_class; ?> animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <?php foreach (array_slice($features, 0, 3) as $feature) :
-        $image_id = $feature['feature_image'] ?? null;
-        $heading  = $feature['feature_heading'] ?? '';
-        $link      = $feature['button']['button_link'] ?? null;
-        $colour    = $feature['button']['button_colour'] ?? 'gold';
-        $btn_class = 'button' . ($colour !== 'gold' ? ' button--' . $colour : '');
-        $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'large') : '';
-    ?>
-        <div
-            class="feature-panel__item"
-            <?php if ($image_url) : ?>style="background-image: url('<?php echo esc_url($image_url); ?>')"<?php endif; ?>
-        >
-            <div class="feature-panel__overlay" aria-hidden="true"></div>
-            <div class="feature-panel__content">
-                <?php if ($heading) : ?>
-                    <h2 class="feature-panel__heading"><?php echo esc_html($heading); ?></h2>
-                <?php endif; ?>
-                <?php if ($link && !empty($link['url'])) : ?>
-                    <a
-                        class="<?php echo esc_attr($btn_class); ?>"
-                        href="<?php echo esc_url($link['url']); ?>"
-                        <?php if (!empty($link['target'])) : ?>target="<?php echo esc_attr($link['target']); ?>" rel="noopener noreferrer"<?php endif; ?>
-                    >
-                        <?php echo esc_html($link['title'] ?: 'Find out more'); ?>
-                    </a>
-                <?php endif; ?>
-            </div>
+<section class="feature-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
+    <div class="container">
+        <div class="feature-panel__grid<?php echo esc_attr($count_modifier); ?>">
+            <?php foreach ($features as $feature) :
+                $image_id   = $feature['feature_image'] ?? null;
+                $heading    = $feature['feature_heading'] ?? '';
+                $subheading = $feature['feature_subheading'] ?? '';
+                $link       = $feature['button']['button_link'] ?? null;
+                $colour     = $feature['button']['button_colour'] ?? 'gold';
+                $btn_class  = 'button' . ($colour !== 'gold' ? ' button--' . $colour : '');
+                $image_url  = $image_id ? wp_get_attachment_image_url($image_id, 'large') : '';
+            ?>
+                <div
+                    class="feature-panel__card"
+                    <?php if ($image_url) : ?>style="background-image: url('<?php echo esc_url($image_url); ?>')"<?php endif; ?>
+                >
+                    <div class="feature-panel__overlay" aria-hidden="true"></div>
+                    <div class="feature-panel__content">
+                        <?php if ($heading) : ?>
+                            <h2 class="feature-panel__heading"><?php echo esc_html($heading); ?></h2>
+                        <?php endif; ?>
+                        <?php if ($subheading) : ?>
+                            <p class="feature-panel__subheading"><?php echo esc_html($subheading); ?></p>
+                        <?php endif; ?>
+                        <?php if ($link && !empty($link['url'])) : ?>
+                            <a
+                                class="<?php echo esc_attr($btn_class); ?>"
+                                href="<?php echo esc_url($link['url']); ?>"
+                                <?php if (!empty($link['target'])) : ?>target="<?php echo esc_attr($link['target']); ?>" rel="noopener noreferrer"<?php endif; ?>
+                            >
+                                <?php echo esc_html($link['title'] ?: 'Find out more'); ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
+    </div>
 </section>
 
 <?php

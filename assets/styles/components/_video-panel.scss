@@ -1,6 +1,8 @@
 .video-panel {
     padding: 60px 0;
 
+    @include panel-settings-modifiers;
+
     &__embed {
         width: 100%;
         max-width: 760px;

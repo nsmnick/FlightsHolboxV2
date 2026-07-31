@@ -1,5 +1,8 @@
 .animate {
-  opacity: 0.2;
+  // Matches the 0% keyframe of the reveal animations below — if this
+  // doesn't match, the transition and the animation fight over the
+  // starting opacity and the block visibly flickers as it comes into view.
+  opacity: 0;
   transition: opacity 0.3s;
 }
 
@@ -38,9 +41,10 @@
   }
 }
 
-.scrolled.fade-in {
+.scrolled.fade-in,
+.scrolled.fade-up {
   @include bp(lap) {
-    animation: fade-in 0.5s ease-out both;
+    animation: flow-down 1s ease-out both;
   }
 }
 
@@ -53,12 +57,6 @@
 .scrolled.fade-in-slow {
   @include bp(lap) {
     animation: fade-in 1.5s ease-out both;
-  }
-}
-
-.scrolled.fade-up {
-  @include bp(lap) {
-    animation: fade-up 0.5s ease-out both;
   }
 }
 
@@ -132,19 +130,6 @@
   }
 }
 
-@keyframes fade-up {
-  0% {
-    -webkit-transform: translateY(10px);
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @keyframes fade-up-large {
   0% {
     -webkit-transform: translateY(200px);
@@ -164,6 +149,17 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes flow-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

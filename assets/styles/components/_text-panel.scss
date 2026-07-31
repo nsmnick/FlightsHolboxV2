@@ -21,4 +21,64 @@
         margin-left: auto;
         margin-right: 0;
     }
+
+    // Card style — driven by the shared Panel Settings' "Panel Decoration"
+    // and "Background Colour" fields. Sized automatically by whatever
+    // "Container Size" the panel settings picked, since this sits inside
+    // the already-sized .container div. Deliberately separate from
+    // .content's tp-/bp- rules (_content.scss) — those size the gap
+    // between panels, not this box's own padding.
+    &__card {
+        padding: 32px 24px;
+
+        @include bp(lap) {
+            padding: 56px 64px;
+        }
+
+        &.br-all {
+            border-radius: $border-radius-lg;
+        }
+
+        &.br-top {
+            border-radius: $border-radius-lg $border-radius-lg 0 0;
+        }
+
+        &.br-bottom {
+            border-radius: 0 0 $border-radius-lg $border-radius-lg;
+        }
+
+        &.bgc-white {
+            background-color: $color-white;
+        }
+
+        &.bgc-light-grey {
+            background-color: $color-light-grey;
+        }
+
+        &.bgc-grey {
+            background-color: $color-grey;
+        }
+
+        &.bgc-gold {
+            background-color: $color-fh-gold;
+        }
+
+        &.bgc-navy {
+            background-color: $color-fh-navy;
+        }
+
+        &.bgc-dark {
+            background-color: $color-fh-dark;
+        }
+
+        &.bgc-charcoal {
+            background-color: $color-fh-charcoal;
+        }
+
+        // Only lift with a shadow once there's actually a fill to lift —
+        // an empty box casting a shadow reads as a rendering bug.
+        &[class*="bgc-"] {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+    }
 }

@@ -1,8 +1,18 @@
 .activities-slider {
   padding: 60px 0 80px;
-  background-color: $color-fh-dark;
   overflow: hidden;
   position: relative;
+
+  @include panel-spacing-modifiers;
+
+  // Background is deliberately fixed, not CMS-controlled — the ::before
+  // edge-fade below is hardcoded to this exact colour, and the heading/nav
+  // button rely on it for contrast. Using panel-spacing-modifiers (not the
+  // full panel-settings-modifiers) means no .bgc-* selector is even
+  // generated here, so a stray Background Colour value saved in the CMS —
+  // even one saved before this field had any visual effect on this panel —
+  // can never override it.
+  background-color: $color-fh-dark;
 
   // Fade previous slide out as it moves off the left edge
   &::before {

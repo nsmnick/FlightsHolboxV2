@@ -1,0 +1,125 @@
+.card-panel {
+  // Top/bottom spacing comes from the .content class (_content.scss) now
+  // that the section carries it — same default 60px/100px, but also wired
+  // up to the Panel Settings' Top/Bottom Padding fields via the tp-/bp-
+  // classes, unlike a value hardcoded here.
+
+  // Grid so 2/3 cards are equal-width columns, but align-items: start keeps
+  // each card its own natural height rather than the default grid stretch
+  // behaviour. Columns only appear (repeat(N, 1fr)) at `lap`+ via the
+  // --two/--three modifier — below that, everything is a single stacked
+  // column regardless of card count or the chosen Container Size.
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    justify-items: center;
+    gap: 28px;
+
+    &--two {
+      @include bp(lap) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    &--three {
+      @include bp(lap) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+
+  &__card {
+    width: 100%;
+    max-width: 500px;
+    background: $color-white;
+    border: 1px solid rgba($color-fh-navy, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba($color-fh-dark, 0.08);
+    overflow: hidden;
+  }
+
+  &__header {
+    background: $color-fh-navy;
+    padding: 16px 22px 14px;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-white;
+    font-family: get-font-family("main");
+    font-size: to-rem(20);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  &__accent {
+    display: block;
+    width: 26px;
+    height: 2px;
+    margin-top: 9px;
+    background: $color-fh-gold;
+    border-radius: 10px;
+  }
+
+  &__body {
+    padding: 24px 28px 26px;
+  }
+
+  &__item {
+    margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+  }
+
+  &__step-number {
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    background: $color-fh-gold;
+    color: $color-white;
+    border-radius: 50%;
+    font-family: get-font-family("main");
+    font-size: to-rem(13);
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  &__item-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__item-heading {
+    margin: 0 0 5px;
+    color: $color-fh-navy;
+    font-family: get-font-family("main");
+    font-size: to-rem(16);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  &__item-text {
+    color: $color-dark-grey;
+    font-family: get-font-family("main");
+    font-size: to-rem(14);
+    line-height: 1.55;
+
+    p {
+      margin: 0;
+    }
+
+    strong {
+      color: $color-fh-dark;
+    }
+  }
+}

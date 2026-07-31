@@ -1,0 +1,64 @@
+.button-panel {
+  // Top/bottom spacing + background/decoration come from the .content class
+  // (_content.scss) via the Panel Settings clone field, same as card-panel.
+
+  &__card {
+    // No max-width here — the card fills whatever width the Panel Settings
+    // Container Size resolves to on the .container it sits inside, rather
+    // than fighting it with its own cap.
+    padding: 32px 24px;
+    text-align: center;
+    background: $color-white;
+    border: 1px solid rgba($color-fh-navy, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba($color-fh-dark, 0.08);
+
+    @include bp(lap) {
+      padding: 40px;
+    }
+  }
+
+  &__heading {
+    margin: 0 0 12px;
+    color: $color-fh-navy;
+    font-family: get-font-family("main");
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  &__intro {
+    max-width: 640px;
+    margin: 0 auto 24px;
+    color: $color-dark-grey;
+    line-height: 1.6;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    &--two,
+    &--three {
+      @include bp(lap) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+
+    @include bp(lap) {
+      width: auto;
+    }
+  }
+}

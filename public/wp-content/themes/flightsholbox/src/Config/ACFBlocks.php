@@ -39,7 +39,49 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/news-gallery-panel');
         register_block_type(__DIR__ . '/acfBlocks/support-panel');
         register_block_type(__DIR__ . '/acfBlocks/social-panel');
+        register_block_type(__DIR__ . '/acfBlocks/trust-panel');
+        register_block_type(__DIR__ . '/acfBlocks/card-panel');
+        register_block_type(__DIR__ . '/acfBlocks/text-and-image-panel');
+        register_block_type(__DIR__ . '/acfBlocks/button-panel');
     }
+
+    // The set of custom ACF panel blocks available on post types below —
+    // one shared list so every post type using them stays in sync automatically.
+    const ACF_PANEL_BLOCKS = [
+        'acf/example-text-panel',
+        'acf/hero-panel',
+        'acf/booking-panel',
+        'acf/text-panel',
+        'acf/video-panel',
+        'acf/faq-panel',
+        'acf/image-column-panel',
+        'acf/feature-panel',
+        'acf/testimonial-panel',
+        'acf/html-panel',
+        'acf/slider-panel',
+        'acf/activities-slider',
+        'acf/two-column-panel',
+        'acf/contact-details-panel',
+        'acf/text-column-panel',
+        'acf/route-map-panel',
+        'acf/table-panel',
+        'acf/hyperlink-panel',
+        'acf/news-gallery-panel',
+        'acf/support-panel',
+        'acf/social-panel',
+        'acf/trust-panel',
+        'acf/card-panel',
+        'acf/text-and-image-panel',
+        'acf/button-panel',
+    ];
+
+    // Post types restricted to ONLY the custom ACF panel blocks above (no
+    // core blocks — paragraph, heading, custom HTML, etc. — are available).
+    // Existing content built from core blocks (e.g. FAQ answers written with
+    // Custom HTML/Paragraph blocks) keeps rendering fine on the frontend and
+    // still opens in the editor — this only stops NEW core blocks being
+    // inserted going forward.
+    const ACF_ONLY_POST_TYPES = ['page', 'activities', 'faq'];
 
     // Remove WP default blocks and allocate which blocks can be used by pages and posts by default.
     public static function set_allowed_block_types($block_editor_context, $editor_context)
@@ -51,30 +93,8 @@ class ACFBlocks
                 );
             }
 
-            if ('page' === $editor_context->post->post_type) {
-                return array(
-                    'acf/example-text-panel',
-                    'acf/hero-panel',
-                    'acf/booking-panel',
-                    'acf/text-panel',
-                    'acf/video-panel',
-                    'acf/faq-panel',
-                    'acf/image-column-panel',
-                    'acf/feature-panel',
-                    'acf/testimonial-panel',
-                    'acf/html-panel',
-                    'acf/slider-panel',
-                    'acf/activities-slider',
-                    'acf/two-column-panel',
-                    'acf/contact-details-panel',
-                    'acf/text-column-panel',
-                    'acf/route-map-panel',
-                    'acf/table-panel',
-                    'acf/hyperlink-panel',
-                    'acf/news-gallery-panel',
-                    'acf/support-panel',
-                    'acf/social-panel',
-                );
+            if (in_array($editor_context->post->post_type, self::ACF_ONLY_POST_TYPES, true)) {
+                return self::ACF_PANEL_BLOCKS;
             }
         }
 
