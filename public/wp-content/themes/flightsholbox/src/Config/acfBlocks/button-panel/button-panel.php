@@ -34,8 +34,8 @@ if (!$preview_popup_image && !$hide_panel) {
     $count_modifier = [1 => '', 2 => ' button-panel__row--two', 3 => ' button-panel__row--three'][count($buttons)] ?? '';
 ?>
 
-<section class="button-panel content animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo esc_attr($generic_container_class); ?>">
+<section class="button-panel content <?php echo $generic_block_settings_classes; ?>">
+     <div class="container <?php echo esc_attr($generic_container_class); ?>">
         <div class="button-panel__card">
             <?php if ($heading) : ?>
                 <h2 class="button-panel__heading"><?php echo esc_html($heading); ?></h2>

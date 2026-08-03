@@ -1,0 +1,17 @@
+{
+  "name": "acf/contact-cards-panel",
+  "title": "Contact Us Cards Panel",
+  "description": "A heading/intro, a flexible row of contact/support cards (icon, heading, subheading, text, checklist, contact details, up to two buttons), and an optional policy callout box underneath.",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='2' y='5' width='6' height='9' rx='1.5' stroke='#000' stroke-width='2'/><rect x='9' y='5' width='6' height='9' rx='1.5' stroke='#000' stroke-width='2'/><rect x='16' y='5' width='6' height='9' rx='1.5' stroke='#000' stroke-width='2'/><rect x='4' y='17' width='16' height='4' rx='1' fill='#000' fill-opacity='0.2'/></svg>",
+  "keywords": ["contact", "support", "cards", "faq", "booking"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "contact-cards-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

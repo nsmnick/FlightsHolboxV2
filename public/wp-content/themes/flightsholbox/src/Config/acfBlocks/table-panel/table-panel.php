@@ -22,7 +22,7 @@ if (!$preview_popup_image && !$hide_panel) {
     $table_anchor = Theme\Utils::get_table_panel_anchor($heading ?: '', $block['anchor'] ?? '', $block['id'] ?? '');
 ?>
 
-<section id="<?php echo esc_attr($table_anchor); ?>" class="table-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
+<section id="<?php echo esc_attr($table_anchor); ?>" class="table-panel <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
 
         <?php if ($heading) : ?>

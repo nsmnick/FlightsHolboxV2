@@ -1,6 +1,6 @@
 <?php
 
-define('VITE_DEV_SERVER_URL', 'http://localhost:5274');
+define('VITE_DEV_SERVER_URL', 'https://localhost:5274');
 //define('WP_ENVIRONMENT_TYPE', 'local');
 /**
  * The base configuration for WordPress

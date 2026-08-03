@@ -34,8 +34,8 @@ if (!$preview_popup_image && !$hide_panel) {
     }
 ?>
 
-<section class="text-and-image-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo esc_attr($generic_container_class); ?>">
+<section class="text-and-image-panel <?php echo $generic_block_settings_classes; ?>">
+     <div class="container <?php echo esc_attr($generic_container_class); ?>">
         <div class="<?php echo esc_attr($columns_class); ?>">
 
             <div class="text-and-image-panel__text">
@@ -60,15 +60,11 @@ if (!$preview_popup_image && !$hide_panel) {
 
             <?php if ($slider_images) : ?>
                 <div class="text-and-image-panel__image">
-                    <div class="text-and-image-slider__slides-wrapper">
-                        <div class="text-and-image-slider__slides">
+                    <div class="text-and-image-slider__slides-wrapper swiper">
+                        <div class="text-and-image-slider__slides swiper-wrapper">
                             <?php foreach ($slider_images as $slide_image) : ?>
-                                <div class="text-and-image-slider__slide">
-                                    <img
-                                        src="<?php echo esc_url($slide_image['sizes']['large'] ?? $slide_image['url']); ?>"
-                                        alt="<?php echo esc_attr($slide_image['alt'] ?: ''); ?>"
-                                        loading="lazy"
-                                    >
+                                <div class="text-and-image-slider__slide swiper-slide">
+                                    <?php echo wp_get_attachment_image($slide_image, 'full'); ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -93,11 +89,7 @@ if (!$preview_popup_image && !$hide_panel) {
                 </div>
             <?php elseif ($image) : ?>
                 <div class="text-and-image-panel__image">
-                    <img
-                        src="<?php echo esc_url($image['sizes']['large'] ?? $image['url']); ?>"
-                        alt="<?php echo esc_attr($image['alt'] ?: ''); ?>"
-                        loading="lazy"
-                    >
+                    <?php echo wp_get_attachment_image($image, 'full'); ?>
                 </div>
             <?php endif; ?>
 

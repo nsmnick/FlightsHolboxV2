@@ -30,8 +30,8 @@ if (!$hide_panel && !$preview_popup_image) {
     );
 ?>
 
-<section class="text-panel content text-panel--<?php echo esc_attr($alignment); ?> animate fade-in <?php echo esc_attr($section_classes); ?>">
-    <div class="container <?php echo esc_attr($generic_container_class); ?>">
+<section class="text-panel content text-panel--<?php echo esc_attr($alignment); ?> <?php echo esc_attr($section_classes); ?>">
+    <div class="container animate fade-up <?php echo esc_attr($generic_container_class); ?>">
         <div class="text-panel__card <?php echo esc_attr($card_classes); ?>">
             <div class="wysiwyg-container">
                 <?php echo $content; ?>

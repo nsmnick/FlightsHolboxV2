@@ -10,8 +10,8 @@ if (!$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="html-panel content animate fade-in <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo $generic_container_class; ?>">
+<section class="html-panel content <?php echo $generic_block_settings_classes; ?>">
+     <div class="container <?php echo $generic_container_class; ?>">
         <?php echo $html; ?>
     </div>
 </section>

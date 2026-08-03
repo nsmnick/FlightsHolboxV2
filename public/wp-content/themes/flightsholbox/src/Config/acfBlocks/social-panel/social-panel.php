@@ -14,14 +14,15 @@ if (!$preview_popup_image && !$hide_panel) {
     // Heading and button text are fixed per platform rather than editable —
     // keeps this consistent everywhere the block is used instead of relying
     // on whatever text an editor happens to type in. The badge SVG + label
-    // is the fallback shown when no custom "Logo" image is uploaded (that
-    // field still works the same for any platform).
+    // (or bundled "image", for platforms that have one) is the fallback
+    // shown when no custom "Logo" image is uploaded (that field still works
+    // the same for any platform and always takes priority).
     $platforms = [
         'tripadvisor' => [
             'label'   => 'TripAdvisor',
             'heading' => 'See Our Reviews On TripAdvisor',
             'button'  => 'See Reviews',
-            'badge'   => '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="12" r="5.5" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="12" r="5.5" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="12" r="2" fill="currentColor"/><circle cx="17" cy="12" r="2" fill="currentColor"/></svg>',
+            'image'   => THEMEROOT . '/images/trip-advisor.png',
         ],
         'facebook' => [
             'label'   => 'Facebook',
@@ -40,16 +41,18 @@ if (!$preview_popup_image && !$hide_panel) {
     $config = $platforms[$platform] ?? $platforms['tripadvisor'];
 ?>
 
-<section class="social-panel social-panel--<?php echo esc_attr($platform); ?> animate fade-up <?php echo $generic_block_settings_classes; ?>">
+<section class="social-panel social-panel--<?php echo esc_attr($platform); ?> <?php echo $generic_block_settings_classes; ?>">
     <div class="container <?php echo $generic_container_class; ?>">
         <div class="social-panel__inner">
 
             <?php if ($logo) : ?>
-                <img
-                    class="social-panel__logo"
-                    src="<?php echo esc_url(wp_get_attachment_image_url($logo, 'medium')); ?>"
-                    alt="<?php echo esc_attr(get_post_meta($logo, '_wp_attachment_image_alt', true) ?: $config['label']); ?>"
-                >
+                <span class="social-panel__logo">
+                    <?php echo wp_get_attachment_image($logo, 'full'); ?>
+                </span>
+            <?php elseif (!empty($config['image'])) : ?>
+                <span class="social-panel__logo">
+                    <img src="<?php echo esc_url($config['image']); ?>" alt="<?php echo esc_attr($config['label']); ?>">
+                </span>
             <?php else : ?>
                 <div class="social-panel__badge" aria-hidden="true">
                     <?php echo $config['badge']; ?>

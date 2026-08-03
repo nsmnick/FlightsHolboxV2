@@ -1,0 +1,17 @@
+{
+  "name": "acf/plain-text-panel",
+  "title": "Plain Text Panel",
+  "description": "A WYSIWYG text area with no card/box styling — same as Text Panel but plain, full-width content.",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 6h16M4 12h16M4 18h10' stroke='#000' stroke-width='2' stroke-linecap='round'/></svg>",
+  "keywords": ["text", "wysiwyg", "plain", "content"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "plain-text-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

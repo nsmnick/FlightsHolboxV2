@@ -82,8 +82,8 @@ if (!$preview_popup_image && !$hide_panel) {
     }
 ?>
 
-<section class="support-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo $generic_container_class; ?>">
+<section class="support-panel <?php echo $generic_block_settings_classes; ?>">
+     <div class="container <?php echo $generic_container_class; ?>">
 
         <?php if ($heading) : ?>
             <h1 class="support-panel__heading"><?php echo esc_html($heading); ?></h1>

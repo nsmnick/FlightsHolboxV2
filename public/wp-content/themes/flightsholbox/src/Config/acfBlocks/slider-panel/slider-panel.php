@@ -26,8 +26,8 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="airport-slider animate fade-in <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo $generic_container_class; ?>">
+<section class="airport-slider <?php echo $generic_block_settings_classes; ?>">
+     <div class="container <?php echo $generic_container_class; ?>">
         <?php if ($slider_heading || $slider_intro) : ?>
             <div class="airport-slider__intro">
                 <?php if ($slider_heading) : ?>
@@ -43,7 +43,17 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     <div class="airport-slider__track">
         <div class="airport-swiper swiper">
             <div class="swiper-wrapper airport-slider__wrapper">
-                <?php foreach ($slides as $slide) :
+                <?php $slide_count = count($slides); ?>
+                <?php foreach ($slides as $i => $slide) :
+                    // Swiper's loop clones the last slide to sit in front of
+                    // slide 0 so it can display as "previous" from the very
+                    // first paint. Rotate the reveal order by one slot to
+                    // match that visual order — previous, then current
+                    // (index 0), then next — instead of the raw array index,
+                    // which put current first and left previous fading in
+                    // dead last.
+                    $reveal_rank = ($i + 1) % $slide_count;
+
                     $post_obj = $slide['slide_post'] ?? null;
                     $post_id  = $post_obj ? $post_obj->ID : 0;
 
@@ -61,7 +71,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                     $colour    = $slide['button']['button_colour'] ?? 'gold';
                     $btn_class = 'button' . ($colour !== 'gold' ? ' button--' . $colour : '');
                 ?>
-                    <div class="swiper-slide airport-slider__slide">
+                    <div class="swiper-slide airport-slider__slide animate slide-left" style="animation-delay: <?php echo esc_attr($reveal_rank * 0.08); ?>s;">
                         <div class="airport-slider__card">
                             <?php if ($img_id) : ?>
                                 <div class="airport-slider__card-image">

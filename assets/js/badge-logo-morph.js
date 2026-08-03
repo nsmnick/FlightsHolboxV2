@@ -131,7 +131,23 @@ export default function initBadgeLogoMorph() {
   measure();
   update();
 
-  window.addEventListener("scroll", update, { passive: true });
+  // rAF-coalesced: Lenis (see smooth-scroll.js) can dispatch the native
+  // "scroll" event more than once per animation frame while easing — this
+  // ensures update() (which forces a layout read via getBoundingClientRect)
+  // never runs more than once per frame regardless.
+  let scrollTicking = false;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        scrollTicking = false;
+        update();
+      });
+    },
+    { passive: true },
+  );
 
   // Recompute on every animation frame while the window is actively being
   // resized, not after a debounce delay — otherwise the logo stays frozen

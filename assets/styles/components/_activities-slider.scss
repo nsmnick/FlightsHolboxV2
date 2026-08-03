@@ -3,16 +3,56 @@
   overflow: hidden;
   position: relative;
 
-  @include panel-spacing-modifiers;
-
-  // Background is deliberately fixed, not CMS-controlled — the ::before
-  // edge-fade below is hardcoded to this exact colour, and the heading/nav
-  // button rely on it for contrast. Using panel-spacing-modifiers (not the
-  // full panel-settings-modifiers) means no .bgc-* selector is even
-  // generated here, so a stray Background Colour value saved in the CMS —
-  // even one saved before this field had any visual effect on this panel —
-  // can never override it.
   background-color: $color-fh-dark;
+  --slider-edge-colour: #{$color-fh-dark};
+
+  @include panel-settings-modifiers;
+
+  // The ::before edge-fade always reads from this variable rather than a
+  // fixed colour, so it blends into whichever Background Colour the CMS
+  // panel setting actually renders instead of leaving a mismatched patch.
+  &.bgc-white { --slider-edge-colour: #{$color-white}; }
+  &.bgc-light-grey { --slider-edge-colour: #{$color-light-grey}; }
+  &.bgc-grey { --slider-edge-colour: #{$color-grey}; }
+  &.bgc-gold { --slider-edge-colour: #{$color-fh-gold}; }
+  &.bgc-navy { --slider-edge-colour: #{$color-fh-navy}; }
+  &.bgc-dark { --slider-edge-colour: #{$color-fh-dark}; }
+  &.bgc-charcoal { --slider-edge-colour: #{$color-fh-charcoal}; }
+
+  // The intro heading/subheading sit directly on this flat background —
+  // unlike the per-card text, which always has its own dark image overlay
+  // (see .activities-slider__card::after below) and never needs this. Swap
+  // to dark text on the lighter background options so it stays readable
+  // regardless of which colour is picked in the CMS.
+  &.bgc-white,
+  &.bgc-light-grey,
+  &.bgc-grey,
+  &.bgc-gold {
+    .activities-slider__heading {
+      color: $color-fh-dark;
+    }
+
+    .activities-slider__subheading {
+      color: rgba($color-fh-dark, 0.7);
+    }
+  }
+
+  // Nav button colours default to the gold-circle/dark-icon combo, which
+  // reads fine against the panel's own dark/navy/charcoal backgrounds. On
+  // the lighter CMS-selectable backgrounds that pairing loses contrast (a
+  // gold circle nearly disappears into a gold background, and a dark icon
+  // on a light background is fine but the gold circle itself gets muddy) —
+  // so those swap to a solid navy circle with a white icon instead.
+  --slider-nav-bg: #{$color-fh-gold};
+  --slider-nav-icon: #{$color-fh-dark};
+
+  &.bgc-white,
+  &.bgc-light-grey,
+  &.bgc-grey,
+  &.bgc-gold {
+    --slider-nav-bg: #{$color-fh-navy};
+    --slider-nav-icon: #{$color-white};
+  }
 
   // Fade previous slide out as it moves off the left edge
   &::before {
@@ -22,7 +62,7 @@
     left: 0;
     bottom: 0;
     width: 320px;
-    background: linear-gradient(to right, $color-fh-dark 40%, transparent 100%);
+    background: linear-gradient(to right, var(--slider-edge-colour) 40%, transparent 100%);
     z-index: 10;
     pointer-events: none;
     display: none;
@@ -120,6 +160,9 @@
     overflow: hidden;
     aspect-ratio: 8 / 9;
 
+    // Zoom the image (not the card itself) on hover, since the card's own
+    // transform is already driven by the Swiper active/next scale cascade
+    // above.
     &-image {
       position: absolute;
       inset: 0;
@@ -131,7 +174,12 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
+        transition: transform 0.4s ease;
       }
+    }
+
+    &:hover &-image img {
+      transform: scale(1.08);
     }
 
     &::after {
@@ -213,9 +261,9 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: $color-fh-gold;
+    background: var(--slider-nav-bg);
     border: none;
-    color: $color-fh-dark;
+    color: var(--slider-nav-icon);
     display: flex;
     align-items: center;
     justify-content: center;

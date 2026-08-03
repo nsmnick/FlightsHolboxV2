@@ -41,10 +41,18 @@
   }
 }
 
-.scrolled.fade-in,
-.scrolled.fade-up {
+.scrolled.fade-in {
   @include bp(lap) {
     animation: flow-down 1s ease-out both;
+  }
+}
+
+// Classic reveal — fades in while rising slightly into place, as opposed
+// to fade-in's flow-down (which falls from above, tuned for hero-style
+// entrances rather than a general scroll-reveal).
+.scrolled.fade-up {
+  @include bp(lap) {
+    animation: fade-up 0.6s ease-out both;
   }
 }
 
@@ -125,6 +133,17 @@
   }
   100% {
     -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  100% {
     transform: translateY(0);
     opacity: 1;
   }

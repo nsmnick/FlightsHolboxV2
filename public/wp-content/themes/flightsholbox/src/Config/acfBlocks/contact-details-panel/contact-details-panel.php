@@ -18,8 +18,8 @@ if (!$preview_popup_image && !$hide_panel) {
     }
 ?>
 
-<section class="contact-details-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="container">
+<section class="contact-details-panel <?php echo $generic_block_settings_classes; ?>">
+     <div class="container">
 
         <?php if ($heading) : ?>
             <h2 class="contact-details-panel__heading"><?php echo esc_html($heading); ?></h2>

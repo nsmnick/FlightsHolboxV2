@@ -11,34 +11,18 @@ if (!$preview_popup_image && !$hide_panel) {
     }
 ?>
 
-<section class="trust-panel animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="trust-panel__container">
+<section class="trust-panel <?php echo $generic_block_settings_classes; ?>">
+    <div class="trust-panel__container animate fade-up">
         <div class="trust-panel__grid">
             <?php foreach ($items as $item) :
                 $icon     = $item['icon'] ?? null;
                 $title    = $item['title'] ?? '';
                 $subtitle = $item['subtitle'] ?? '';
-
-                // The Icon field's Return Format may be set to either
-                // "Image Array" or "Image ID" in the CMS — handle both so
-                // rendering doesn't break depending on which was picked.
-                $icon_url = '';
-                if (is_array($icon)) {
-                    $icon_url = $icon['sizes']['thumbnail'] ?? $icon['url'] ?? '';
-                } elseif ($icon) {
-                    $icon_url = wp_get_attachment_image_url($icon, 'thumbnail') ?: '';
-                }
             ?>
                 <div class="trust-panel__card">
-                    <?php if ($icon_url) : ?>
+                    <?php if ($icon) : ?>
                         <span class="trust-panel__icon" aria-hidden="true">
-                            <img
-                                src="<?php echo esc_url($icon_url); ?>"
-                                alt=""
-                                loading="lazy"
-                                width="32"
-                                height="32"
-                            >
+                            <?php echo wp_get_attachment_image($icon, 'full'); ?>
                         </span>
                     <?php endif; ?>
 

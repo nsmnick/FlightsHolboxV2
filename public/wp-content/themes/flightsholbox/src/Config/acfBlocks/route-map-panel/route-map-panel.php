@@ -25,8 +25,9 @@ if (!$hide_panel && !$preview_popup_image) {
         'post_status'    => 'publish',
     ]);
 
-    $pins   = [];
-    $routes = [];
+    $pins          = [];
+    $routes        = [];
+    $departure_ids = [];
 
     if ($prices_query->have_posts()) {
         foreach ($prices_query->posts as $price_post) {
@@ -61,6 +62,12 @@ if (!$hide_panel && !$preview_popup_image) {
 
             $pins[$from->term_id] = ['name' => $from->name, 'x' => $from_pos['x'], 'y' => $from_pos['y']];
             $pins[$to->term_id]   = ['name' => $to->name,   'x' => $to_pos['x'],   'y' => $to_pos['y']];
+
+            // Every "from" location becomes a selectable departure pin on
+            // the map — this is what gates which routes are even eligible
+            // to render, so nothing (paths, fares, animation) exists for a
+            // route until a visitor has picked its departure airport.
+            $departure_ids[$from->term_id] = true;
 
             $route_key = $from->term_id . '-' . $to->term_id;
 
@@ -109,8 +116,8 @@ if (!$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="route-map-panel content animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo $generic_container_class; ?>">
+<section class="route-map-panel content <?php echo $generic_block_settings_classes; ?>">
+     <div class="container <?php echo $generic_container_class; ?>">
 
         <?php if ($heading) : ?>
             <h2 class="route-map-panel__heading"><?php echo esc_html($heading); ?></h2>
@@ -118,7 +125,8 @@ if (!$hide_panel && !$preview_popup_image) {
 
         <div class="route-map">
 
-            <div class="route-map__stage" role="img" aria-label="Map of the Yucatán Peninsula showing our destinations">
+            <div class="route-map__stage-scroll">
+            <div class="route-map__stage" role="img" aria-label="Map of the Yucatán Peninsula — select a departure airport to see its routes">
                 <svg class="route-map__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                     <?php foreach ($routes as $route_key => $route) :
                         $from_pin = $pins[$route['from']->term_id];
@@ -152,23 +160,50 @@ if (!$hide_panel && !$preview_popup_image) {
                         $route_label = esc_attr($route['from']->name . ' to ' . $route['to']->name);
                         $path_id     = 'route-map-path-' . esc_attr($route_key);
                     ?>
-                        <g class="route-map__route" data-route="<?php echo $route_data; ?>" tabindex="0" role="button" aria-label="<?php echo $route_label; ?>">
+                        <g
+                            class="route-map__route"
+                            data-route="<?php echo $route_data; ?>"
+                            data-from="<?php echo esc_attr($route['from']->term_id); ?>"
+                            tabindex="0"
+                            role="button"
+                            aria-label="<?php echo $route_label; ?>"
+                            hidden
+                        >
                             <path class="route-map__route-hit" d="<?php echo esc_attr($path_d); ?>" vector-effect="non-scaling-stroke" />
                             <path id="<?php echo $path_id; ?>" class="route-map__route-line" d="<?php echo esc_attr($path_d); ?>" vector-effect="non-scaling-stroke" />
                         </g>
                     <?php endforeach; ?>
                 </svg>
 
-                <?php foreach ($pins as $pin) : ?>
-                    <span class="route-map__pin" style="left: <?php echo $pin['x']; ?>%; top: <?php echo $pin['y']; ?>%;">
-                        <span class="route-map__pin-dot" aria-hidden="true"></span>
-                        <span class="route-map__pin-label"><?php echo esc_html($pin['name']); ?></span>
-                    </span>
+                <?php foreach ($pins as $pin_id => $pin) :
+                    $is_departure = isset($departure_ids[$pin_id]);
+                ?>
+                    <?php if ($is_departure) : ?>
+                        <button
+                            type="button"
+                            class="route-map__pin route-map__pin--departure"
+                            style="left: <?php echo $pin['x']; ?>%; top: <?php echo $pin['y']; ?>%;"
+                            data-airport="<?php echo esc_attr($pin_id); ?>"
+                            aria-pressed="false"
+                        >
+                            <span class="route-map__pin-dot" aria-hidden="true"></span>
+                            <span class="route-map__pin-label"><?php echo esc_html($pin['name']); ?></span>
+                        </button>
+                    <?php else : ?>
+                        <span class="route-map__pin" style="left: <?php echo $pin['x']; ?>%; top: <?php echo $pin['y']; ?>%;">
+                            <span class="route-map__pin-dot" aria-hidden="true"></span>
+                            <span class="route-map__pin-label"><?php echo esc_html($pin['name']); ?></span>
+                        </span>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
+            </div>
+
+            <p class="route-map__scroll-hint" aria-hidden="true">← Swipe to explore the map →</p>
 
             <div class="route-map__info">
-                <p class="route-map__info-prompt">Click a route on the map to see prices for that trip.</p>
+                <p class="route-map__info-prompt" data-prompt-default>Select your departure airport above to see its routes.</p>
+                <p class="route-map__info-prompt" data-prompt-routes hidden>Click a route on the map to see prices for that trip.</p>
             </div>
 
         </div>

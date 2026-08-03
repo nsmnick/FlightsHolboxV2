@@ -9,10 +9,10 @@
     padding: 70px 0;
   }
 
-  // Higher specificity than the platform-colour modifiers below, so this
-  // only takes effect if a Background Colour is deliberately picked in the
-  // CMS — leave it unset to keep the platform's own brand colour.
-  @include panel-settings-modifiers;
+  // Padding/decoration only, deliberately not the full panel-settings-modifiers
+  // — this panel's look is built around each platform's own brand colour, so
+  // a CMS-picked Background Colour must never be able to override it.
+  @include panel-spacing-modifiers;
 
   &--tripadvisor {
     background-color: $color-tripadvisor-green;
@@ -37,6 +37,18 @@
     max-width: 160px;
     height: auto;
     margin: 0 auto 20px;
+
+    // The width constraint above is on this wrapper, not the image itself —
+    // without this, an image wider than 160px (e.g. the TripAdvisor
+    // wordmark's natural 289px) just overflows past the wrapper's right
+    // edge at full size instead of scaling down, leaving the visible logo
+    // off-centre even though the wrapper itself is correctly centred.
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
   }
 
   &__badge {

@@ -43,6 +43,13 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/card-panel');
         register_block_type(__DIR__ . '/acfBlocks/text-and-image-panel');
         register_block_type(__DIR__ . '/acfBlocks/button-panel');
+        register_block_type(__DIR__ . '/acfBlocks/image-slider-panel');
+        register_block_type(__DIR__ . '/acfBlocks/card-process-panel');
+        register_block_type(__DIR__ . '/acfBlocks/plain-text-panel');
+        register_block_type(__DIR__ . '/acfBlocks/price-table-panel');
+        register_block_type(__DIR__ . '/acfBlocks/faq-card-panel');
+        register_block_type(__DIR__ . '/acfBlocks/faq-steps-panel');
+        register_block_type(__DIR__ . '/acfBlocks/contact-cards-panel');
     }
 
     // The set of custom ACF panel blocks available on post types below —
@@ -73,6 +80,13 @@ class ACFBlocks
         'acf/card-panel',
         'acf/text-and-image-panel',
         'acf/button-panel',
+        'acf/image-slider-panel',
+        'acf/card-process-panel',
+        'acf/plain-text-panel',
+        'acf/price-table-panel',
+        'acf/faq-card-panel',
+        'acf/faq-steps-panel',
+        'acf/contact-cards-panel',
     ];
 
     // Post types restricted to ONLY the custom ACF panel blocks above (no

@@ -65,10 +65,48 @@ function renderRouteInfo(infoEl, data) {
 
 export default function initRouteMap() {
   document.querySelectorAll(".route-map").forEach((mapEl) => {
-    const routes = mapEl.querySelectorAll(".route-map__route");
+    const routes = Array.from(mapEl.querySelectorAll(".route-map__route"));
+    const departurePins = Array.from(mapEl.querySelectorAll(".route-map__pin--departure"));
     const info = mapEl.querySelector(".route-map__info");
+    const defaultPrompt = mapEl.querySelector("[data-prompt-default]");
+    const routesPrompt = mapEl.querySelector("[data-prompt-routes]");
 
-    if (!info) return;
+    if (!info || !routes.length) return;
+
+    function resetInfoPrompt() {
+      if (!info) return;
+      info.innerHTML = "";
+      if (defaultPrompt) info.appendChild(defaultPrompt);
+      if (routesPrompt) info.appendChild(routesPrompt);
+    }
+
+    function selectAirport(airportId) {
+      departurePins.forEach((pin) => {
+        const isSelected = pin.dataset.airport === airportId;
+        pin.classList.toggle("is-selected", isSelected);
+        pin.setAttribute("aria-pressed", String(isSelected));
+      });
+
+      routes.forEach((routeEl) => {
+        // `.hidden = …` reflects unreliably on SVG elements in some
+        // browsers (the property can appear to update while the actual
+        // attribute — and therefore the `[hidden]` CSS rule — never
+        // changes). toggleAttribute works on any Element regardless.
+        routeEl.toggleAttribute("hidden", routeEl.dataset.from !== airportId);
+        routeEl.classList.remove("is-active");
+      });
+
+      // A new airport means any previously shown fare details no longer
+      // apply — back to the "pick a route" prompt rather than leaving a
+      // stale route's prices on screen.
+      resetInfoPrompt();
+      if (defaultPrompt) defaultPrompt.hidden = true;
+      if (routesPrompt) routesPrompt.hidden = false;
+    }
+
+    departurePins.forEach((pin) => {
+      pin.addEventListener("click", () => selectAirport(pin.dataset.airport));
+    });
 
     routes.forEach((routeEl) => {
       const activate = () => {

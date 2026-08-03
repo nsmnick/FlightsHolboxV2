@@ -9,6 +9,23 @@
 
   @include panel-settings-modifiers;
 
+  // Nav button colours default to the gold-circle/dark-icon combo, which
+  // reads fine against the panel's own dark/navy/charcoal backgrounds. On
+  // the lighter CMS-selectable backgrounds that pairing loses contrast (a
+  // gold circle nearly disappears into a gold background, and a dark icon
+  // on a light background is fine but the gold circle itself gets muddy) —
+  // so those swap to a solid navy circle with a white icon instead.
+  --slider-nav-bg: #{$color-fh-gold};
+  --slider-nav-icon: #{$color-fh-dark};
+
+  &.bgc-white,
+  &.bgc-light-grey,
+  &.bgc-grey,
+  &.bgc-gold {
+    --slider-nav-bg: #{$color-fh-navy};
+    --slider-nav-icon: #{$color-white};
+  }
+
   &__intro {
     text-align: center;
     margin-bottom: 48px;
@@ -182,9 +199,9 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: $color-fh-gold;
+    background: var(--slider-nav-bg);
     border: none;
-    color: $color-fh-dark;
+    color: var(--slider-nav-icon);
     display: flex;
     align-items: center;
     justify-content: center;

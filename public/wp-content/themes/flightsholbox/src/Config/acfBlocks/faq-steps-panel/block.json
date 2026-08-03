@@ -1,0 +1,17 @@
+{
+  "name": "acf/faq-steps-panel",
+  "title": "FAQ Steps Panel",
+  "description": "A callout card with a heading and a repeatable list of numbered steps (title + rich text) — built for FAQ answers, but usable in any content area.",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='5' cy='6' r='3' stroke='#000' stroke-width='2'/><circle cx='5' cy='18' r='3' stroke='#000' stroke-width='2'/><circle cx='5' cy='12' r='3' stroke='#000' stroke-width='2'/><path d='M11 6h11M11 12h11M11 18h11' stroke='#000' stroke-width='2' stroke-linecap='round'/></svg>",
+  "keywords": ["faq", "steps", "process", "card", "how it works"],
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "faq-steps-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

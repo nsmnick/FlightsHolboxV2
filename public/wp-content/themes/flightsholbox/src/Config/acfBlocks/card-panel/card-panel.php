@@ -15,8 +15,8 @@ if (!$preview_popup_image && !$hide_panel) {
     $count_modifier = [1 => '', 2 => ' card-panel__grid--two', 3 => ' card-panel__grid--three'][count($cards)] ?? '';
 ?>
 
-<section class="card-panel content animate fade-up <?php echo $generic_block_settings_classes; ?>">
-    <div class="container <?php echo esc_attr($generic_container_class); ?>">
+<section class="card-panel content <?php echo $generic_block_settings_classes; ?>">
+    <div class="container animate fade-up <?php echo esc_attr($generic_container_class); ?>">
         <div class="card-panel__grid<?php echo esc_attr($count_modifier); ?>">
             <?php foreach ($cards as $card) :
                 $card_title = $card['card_title'] ?? '';

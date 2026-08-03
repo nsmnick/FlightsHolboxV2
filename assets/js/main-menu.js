@@ -110,10 +110,21 @@ export default function initMenu() {
   // Run once in case page is already scrolled.
   scrolledState(true);
 
+  // rAF-throttled: Lenis (see smooth-scroll.js) re-dispatches the native
+  // "scroll" event on every animation frame during its eased momentum
+  // scroll, far more often than a browser's own discrete scroll events —
+  // without this, scrolledState() (cheap on its own) ends up running many
+  // times more often than it needs to, adding up to real per-scroll cost.
+  let scrolledStateQueued = false;
   document.addEventListener(
     "scroll",
     () => {
-      scrolledState();
+      if (scrolledStateQueued) return;
+      scrolledStateQueued = true;
+      requestAnimationFrame(() => {
+        scrolledStateQueued = false;
+        scrolledState();
+      });
     },
     { passive: true },
   );

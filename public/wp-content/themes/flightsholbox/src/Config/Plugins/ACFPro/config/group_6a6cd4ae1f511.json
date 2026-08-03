@@ -166,6 +166,28 @@
             "prefix_name": 1
         },
         {
+            "key": "field_6a6db26243c36",
+            "label": "Button 2",
+            "name": "button_2",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_66aa165f1070a"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 0,
+            "prefix_name": 1
+        },
+        {
             "key": "field_6a6cd51742779",
             "label": "Panel Settings",
             "name": "panel_settings",
@@ -209,5 +231,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1785519867
+    "modified": 1785574039
 }

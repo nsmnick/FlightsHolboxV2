@@ -26,7 +26,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     }
 ?>
 
-<section class="activities-slider animate fade-in <?php echo $generic_block_settings_classes; ?>">
+<section class="activities-slider <?php echo $generic_block_settings_classes; ?>">
 
     <?php if ($slider_heading || $slider_intro) : ?>
     <div class="activities-slider__intro">
@@ -42,7 +42,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     <div class="activities-slider__track">
         <div class="activities-swiper swiper">
             <div class="swiper-wrapper activities-slider__wrapper">
-                <?php foreach ($slides as $slide) :
+                <?php foreach ($slides as $i => $slide) :
                     $post_obj = $slide['slide_post'] ?? null;
                     $post_id  = $post_obj ? $post_obj->ID : 0;
 
@@ -59,7 +59,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
                     $colour    = $slide['button']['button_colour'] ?? 'gold';
                     $btn_class = 'button' . ($colour !== 'gold' ? ' button--' . $colour : '');
                 ?>
-                    <div class="swiper-slide activities-slider__slide">
+                    <div class="swiper-slide activities-slider__slide animate slide-left" style="animation-delay: <?php echo esc_attr($i * 0.08); ?>s;">
                         <div class="activities-slider__card">
                             <?php if ($img_id) : ?>
                                 <div class="activities-slider__card-image">

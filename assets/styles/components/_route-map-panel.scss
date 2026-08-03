@@ -41,30 +41,65 @@
   }
 }
 
+// Wraps .route-map__stage — this is the actual flex item now (not the stage
+// itself), so the flex sizing that used to live on .route-map__stage below
+// has to live here instead, or this wrapper collapses to its unstyled
+// default and takes the whole map layout down with it.
+.route-map__stage-scroll {
+  flex: 1 1 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include bp(desk) {
+    flex: 1 1 62%;
+    overflow-x: visible;
+  }
+}
+
+.route-map__scroll-hint {
+  text-align: center;
+  font-size: to-rem(12);
+  color: $color-fh-charcoal;
+  margin: 6px 0 0;
+
+  // The swipe affordance only matters where the map might actually need
+  // horizontal panning (narrow screens) — desktop has the room to show it
+  // in full, so the hint would just be dead text.
+  @include bp(lap) {
+    display: none;
+  }
+}
+
 .route-map__stage {
   position: relative;
   width: 100%;
   aspect-ratio: 900 / 500;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: clip;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-  flex: 1 1 auto;
   background-image: url("../images/map_background.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  // Taller on phones — the wide landscape crop leaves the map small and the
-  // pins cramped on narrow screens. background-size:cover reframes to this
-  // ratio without stretching the source image, and since pins are
-  // positioned by percentage relative to this box, they stay exactly on
-  // their correct geographic spot regardless of the crop.
-  @media (max-width: 480px) {
-    aspect-ratio: 4 / 5;
-  }
+  // Below desk, hold the map at a fixed minimum width in its natural 900:500
+  // ratio instead of shrinking to fit the viewport — pins are positioned by
+  // percentage against that exact ratio, so squeezing the box (or cropping
+  // it to a different ratio) shifts what part of the image is visible under
+  // background-size:cover and throws every pin out of alignment with the
+  // map underneath. The scroll wrapper above lets you pan across it instead.
+  @media (max-width: 1239px) {
+    width: 640px;
+    min-width: 640px;
 
-  @include bp(desk) {
-    flex: 1 1 62%;
+    // Tulum sits right at the map image's southern edge (its pin label
+    // renders below the dot and has nowhere left to go) — a fixed 640px
+    // mobile box has much less absolute room than the wider desktop layout,
+    // so this is where it actually gets clipped. Lets content spill up to
+    // 24px past the box edge before it's cut off, without affecting the
+    // background-image crop itself (background-size:cover already fits
+    // exactly inside the box, so there's nothing of the image to reveal).
+    overflow-clip-margin: 24px;
   }
 }
 
@@ -75,15 +110,31 @@
   height: 100%;
   // Above the pins (z-index 2 below) — pin labels are wide opaque boxes
   // that were sitting on top of the SVG in DOM order by default, blocking
-  // entire route segments that happened to pass under a label. Pins are
-  // pointer-events:none (only the route paths themselves are clickable),
-  // so raising the lines above them is purely visual and doesn't affect
-  // any hit target.
+  // entire route segments that happened to pass under a label.
   z-index: 3;
+
+  // Departure pins are now clickable buttons underneath this layer — without
+  // this, the SVG's own bounding box (the full stage area, via inset:0)
+  // intercepts clicks meant for those pins even where nothing is drawn,
+  // since a higher z-index element captures pointer events across its whole
+  // box regardless of visible content. Re-enabling pointer-events only on
+  // the route hit-paths below (already pointer-events:stroke) keeps routes
+  // clickable once visible while letting clicks fall through to the pins
+  // everywhere else.
+  pointer-events: none;
 }
 
 .route-map__route {
   cursor: pointer;
+
+  // The browser's default `[hidden] { display: none }` UA rule doesn't
+  // reliably apply to SVG elements in every browser — route-map.js already
+  // works around the unreliable `.hidden` property by toggling the
+  // attribute directly, but that attribute still needs an explicit rule
+  // here to guarantee the hide actually happens.
+  &[hidden] {
+    display: none;
+  }
 
   &-hit {
     fill: none;
@@ -159,6 +210,37 @@
     background: $color-fh-navy;
     border: 2px solid $color-white;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  // Departure pins are real <button> elements (they need to be focusable
+  // and clickable, unlike the plain dots above) — the browser's default
+  // button chrome (border/background/padding box) and the pointer-events:
+  // none inherited from .route-map__pin above both need resetting here.
+  &--departure {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    pointer-events: auto;
+
+    &:hover .route-map__pin-dot {
+      transform: scale(1.15);
+    }
+
+    &.is-selected .route-map__pin-dot {
+      background: $color-fh-gold;
+      transform: scale(1.3);
+      box-shadow: 0 0 0 4px rgba(230, 175, 42, 0.3), 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-fh-gold;
+      outline-offset: 3px;
+      border-radius: 50%;
+    }
   }
 
   &-label {

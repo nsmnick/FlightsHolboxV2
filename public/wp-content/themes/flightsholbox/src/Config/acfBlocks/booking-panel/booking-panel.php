@@ -7,8 +7,8 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     $sister_site_label = get_field('sister_site_label') ?: 'Search for land transfers';
 ?>
 
-<section class="booking-panel animate fade-in">
-    <div class="container <?php echo $generic_container_class; ?>">
+<section class="booking-panel ">
+     <div class="container <?php echo $generic_container_class; ?>">
         <div class="booking-panel__inner">
 
             <form
