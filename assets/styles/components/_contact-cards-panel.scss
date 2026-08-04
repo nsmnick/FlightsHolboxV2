@@ -25,6 +25,18 @@
     }
   }
 
+  // Explicit CMS "Heading Colour" choice, overriding the hardcoded navy
+  // default above when an editor deliberately picks one. The intro text
+  // picks up the same colour as the heading rather than getting its own
+  // separate field.
+  &.htc-white .contact-cards-panel__heading h2, &.htc-white .contact-cards-panel__intro { color: $color-white; }
+  &.htc-light-grey .contact-cards-panel__heading h2, &.htc-light-grey .contact-cards-panel__intro { color: $color-light-grey; }
+  &.htc-grey .contact-cards-panel__heading h2, &.htc-grey .contact-cards-panel__intro { color: $color-grey; }
+  &.htc-gold .contact-cards-panel__heading h2, &.htc-gold .contact-cards-panel__intro { color: $color-fh-gold; }
+  &.htc-navy .contact-cards-panel__heading h2, &.htc-navy .contact-cards-panel__intro { color: $color-fh-navy; }
+  &.htc-dark .contact-cards-panel__heading h2, &.htc-dark .contact-cards-panel__intro { color: $color-fh-dark; }
+  &.htc-charcoal .contact-cards-panel__heading h2, &.htc-charcoal .contact-cards-panel__intro { color: $color-fh-charcoal; }
+
   &__grid {
     display: flex;
     flex-wrap: wrap;

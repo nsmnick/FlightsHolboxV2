@@ -45,6 +45,17 @@
     margin-bottom: 24px;
   }
 
+  // Explicit CMS "Heading Colour" choice (no colour is set by default above,
+  // so this inherits the base black heading colour until an editor picks
+  // one).
+  &.htc-white &__title { color: $color-white; }
+  &.htc-light-grey &__title { color: $color-light-grey; }
+  &.htc-grey &__title { color: $color-grey; }
+  &.htc-gold &__title { color: $color-fh-gold; }
+  &.htc-navy &__title { color: $color-fh-navy; }
+  &.htc-dark &__title { color: $color-fh-dark; }
+  &.htc-charcoal &__title { color: $color-fh-charcoal; }
+
   &__summary {
     display: flex;
     flex-direction: column;

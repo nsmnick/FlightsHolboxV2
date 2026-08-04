@@ -62,6 +62,19 @@
     }
   }
 
+  // Explicit CMS "Heading Colour" choice — wins over the automatic
+  // background-contrast swap above since it comes later in the stylesheet
+  // at the same specificity, letting an editor override the default when
+  // they deliberately pick one. The subheading text picks up the same
+  // colour as the heading rather than getting its own separate field.
+  &.htc-white .image-slider-panel__heading, &.htc-white .image-slider-panel__subheading { color: $color-white; }
+  &.htc-light-grey .image-slider-panel__heading, &.htc-light-grey .image-slider-panel__subheading { color: $color-light-grey; }
+  &.htc-grey .image-slider-panel__heading, &.htc-grey .image-slider-panel__subheading { color: $color-grey; }
+  &.htc-gold .image-slider-panel__heading, &.htc-gold .image-slider-panel__subheading { color: $color-fh-gold; }
+  &.htc-navy .image-slider-panel__heading, &.htc-navy .image-slider-panel__subheading { color: $color-fh-navy; }
+  &.htc-dark .image-slider-panel__heading, &.htc-dark .image-slider-panel__subheading { color: $color-fh-dark; }
+  &.htc-charcoal .image-slider-panel__heading, &.htc-charcoal .image-slider-panel__subheading { color: $color-fh-charcoal; }
+
   // ─── Track ────────────────────────────────────────────────────────────────
 
   &__track {

@@ -69,6 +69,7 @@ class Utils
         $top_padding = (isset($generic_block_settings['top_padding']) ? $generic_block_settings['top_padding'] : '');
         $bottom_padding = (isset($generic_block_settings['bottom_padding']) ? $generic_block_settings['bottom_padding'] : '');
         $background_colour = (isset($generic_block_settings['background_colour']) ? $generic_block_settings['background_colour'] : '');
+        $heading_colour = (isset($generic_block_settings['heading_colour']) ? $generic_block_settings['heading_colour'] : '');
         $panel_decoration_value = (isset($generic_block_settings['panel_decoration']) ? $generic_block_settings['panel_decoration'] : 'br-none');
 
         $generic_block_class = '';
@@ -87,6 +88,10 @@ class Utils
 
         if ($background_colour) {
             $generic_block_class .= ' bgc-' . $background_colour . ' ';
+        }
+
+        if ($heading_colour) {
+            $generic_block_class .= ' htc-' . $heading_colour . ' ';
         }
 
         return $generic_block_class;

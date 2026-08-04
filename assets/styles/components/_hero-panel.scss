@@ -35,17 +35,28 @@
     }
   }
 
-  // Dark gradient to ensure text readability at bottom
+  // Dark gradient to ensure text readability at bottom. Covers the full
+  // hero (inset:0) and sits *below* &__wave — the wave's canvas is mostly
+  // transparent above its own filled ripple shape (see LAYERS in
+  // hero-wave.js), so the gradient still shows through there, while the
+  // text itself sits well above the wave's own band regardless, so this
+  // ordering was never actually the thing hurting its contrast.
   &__overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
+    // An extra stop at 65% so the darkening ramps up well before the very
+    // last pixel — a purely two-point 35%→100% fade left the actual text
+    // zone (which sits a little above the bottom edge, inside &__content's
+    // own padding) only barely darker than before, since linear
+    // interpolation hadn't caught up to the max value yet by that point.
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.25) 0%,
       rgba(0, 0, 0, 0.0) 35%,
-      rgba(0, 0, 0, 0.55) 100%
+      rgba(0, 0, 0, 0.55) 65%,
+      rgba(0, 0, 0, 0.85) 100%
     );
   }
 

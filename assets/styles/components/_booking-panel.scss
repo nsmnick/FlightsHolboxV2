@@ -67,8 +67,18 @@
     }
 
     &--button {
+      // Below bp(lap), this group shares a grid row with the People field —
+      // but unlike that field, it has no label above the button, so with
+      // both columns packed from the top by default the button sits higher
+      // than the dropdown next to it. Push it to the bottom of the row
+      // instead, level with the dropdown. Only needed here: at bp(lap)+ the
+      // form switches to a flex row with align-items:flex-end handling this
+      // for every field at once.
+      justify-content: flex-end;
+
       @include bp(lap) {
         flex: 0 0 auto;
+        justify-content: flex-start;
       }
     }
   }
@@ -92,9 +102,7 @@
     border-radius: 8px;
     color: $color-fh-dark;
     font-family: get-font-family("main");
-    // Larger on mobile for readability — the closed field's own text size
-    // and, in most browsers, the size of the dropdown's option list too.
-    font-size: to-rem(17);
+    font-size: to-rem(15);
     padding: 14px 36px 14px 14px;
     cursor: pointer;
     appearance: none;
@@ -107,7 +115,6 @@
     background-size: 12px 7px;
 
     @include bp(lap) {
-      font-size: to-rem(15);
       padding: 12px 36px 12px 14px;
     }
 
@@ -124,12 +131,8 @@
     option {
       background-color: $color-white;
       color: $color-black;
-      font-size: to-rem(17);
+      font-size: to-rem(15);
       padding: 8px;
-
-      @include bp(lap) {
-        font-size: to-rem(15);
-      }
     }
   }
 
@@ -153,7 +156,7 @@
       border-radius: 8px;
       color: $color-fh-dark;
       font-family: get-font-family("main");
-      font-size: to-rem(17);
+      font-size: to-rem(15);
       text-align: left;
       white-space: nowrap;
       overflow: hidden;
@@ -168,7 +171,6 @@
       background-size: 12px 7px;
 
       @include bp(lap) {
-        font-size: to-rem(15);
         padding: 12px 36px 12px 14px;
       }
 

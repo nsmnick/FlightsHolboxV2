@@ -321,6 +321,27 @@ add_filter('tiny_mce_before_init', function (array $settings): array {
     return $settings;
 });
 
+// The palette above is 7 fixed swatches, but TinyMCE's colour picker still
+// exposes a "Custom colour..." option beyond them — and that writes
+// `rgb(r, g, b)`, not hex. wp_kses_post() (via safecss_filter_attr()) then
+// silently drops the whole `color` declaration: its allowlist of CSS
+// functions that survive sanitization only covers var/calc/min/max/minmax/
+// clamp/repeat, not rgb()/rgba(), so any colour picked outside the 7 presets
+// vanished on the frontend even though it saved and previewed fine in the
+// editor. Explicitly allow the safe, numeric-only rgb()/rgba() pattern
+// through rather than loosening CSS sanitization generally.
+add_filter('safecss_filter_attr_allow_css', function (bool $allow_css, string $css_test_string): bool {
+    if ($allow_css) {
+        return $allow_css;
+    }
+
+    if (preg_match('/^[a-z-]+\s*:\s*rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(?:,\s*(?:0|1|0?\.\d+)\s*)?\)\s*$/i', $css_test_string)) {
+        return true;
+    }
+
+    return $allow_css;
+}, 10, 2);
+
 
 // ─── Flights Holbox: CPT, Taxonomies & Booking helpers ─────────────────────
 

@@ -93,6 +93,20 @@
         }
     }
 
+    // Explicit CMS "Heading Colour" choice — wins over the automatic
+    // background-contrast swap above since it comes later in the
+    // stylesheet at the same specificity, letting an editor override the
+    // default when they deliberately pick one. The intro text picks up the
+    // same colour as the heading rather than getting its own separate
+    // field.
+    &.htc-white &__heading, &.htc-white &__intro { color: $color-white; }
+    &.htc-light-grey &__heading, &.htc-light-grey &__intro { color: $color-light-grey; }
+    &.htc-grey &__heading, &.htc-grey &__intro { color: $color-grey; }
+    &.htc-gold &__heading, &.htc-gold &__intro { color: $color-fh-gold; }
+    &.htc-navy &__heading, &.htc-navy &__intro { color: $color-fh-navy; }
+    &.htc-dark &__heading, &.htc-dark &__intro { color: $color-fh-dark; }
+    &.htc-charcoal &__heading, &.htc-charcoal &__intro { color: $color-fh-charcoal; }
+
     &__table {
         width: 100%;
         border-collapse: collapse;

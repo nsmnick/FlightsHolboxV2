@@ -37,6 +37,19 @@
     }
   }
 
+  // Explicit CMS "Heading Colour" choice — wins over the automatic
+  // background-contrast swap above since it comes later in the stylesheet
+  // at the same specificity, letting an editor override the default when
+  // they deliberately pick one. The intro/subheading text picks up the same
+  // colour as the heading rather than getting its own separate field.
+  &.htc-white .activities-slider__heading, &.htc-white .activities-slider__subheading { color: $color-white; }
+  &.htc-light-grey .activities-slider__heading, &.htc-light-grey .activities-slider__subheading { color: $color-light-grey; }
+  &.htc-grey .activities-slider__heading, &.htc-grey .activities-slider__subheading { color: $color-grey; }
+  &.htc-gold .activities-slider__heading, &.htc-gold .activities-slider__subheading { color: $color-fh-gold; }
+  &.htc-navy .activities-slider__heading, &.htc-navy .activities-slider__subheading { color: $color-fh-navy; }
+  &.htc-dark .activities-slider__heading, &.htc-dark .activities-slider__subheading { color: $color-fh-dark; }
+  &.htc-charcoal .activities-slider__heading, &.htc-charcoal .activities-slider__subheading { color: $color-fh-charcoal; }
+
   // Nav button colours default to the gold-circle/dark-icon combo, which
   // reads fine against the panel's own dark/navy/charcoal backgrounds. On
   // the lighter CMS-selectable backgrounds that pairing loses contrast (a
@@ -111,9 +124,16 @@
     margin-top: 0;
     // Align left edge to where .container would start
     padding-left: 20px;
+    // Matches padding-left so Swiper's mobile centeredSlides (see sliders.js)
+    // centres against the viewport rather than against a box that's only
+    // inset on one side. Removed again at bp(lap), where the track goes
+    // back to being left-anchored on purpose so slides can bleed off the
+    // right edge for the "peek the next card" effect.
+    padding-right: 20px;
 
     @include bp(lap) {
       padding-left: max(40px, calc(50vw - 530px));
+      padding-right: 0;
     }
   }
 

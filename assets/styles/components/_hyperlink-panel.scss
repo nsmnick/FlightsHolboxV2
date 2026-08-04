@@ -15,6 +15,16 @@
         text-align: center;
     }
 
+    // Explicit CMS "Heading Colour" choice, overriding the hardcoded navy
+    // default above when an editor deliberately picks one.
+    &.htc-white .hyperlink-panel__heading { color: $color-white; }
+    &.htc-light-grey .hyperlink-panel__heading { color: $color-light-grey; }
+    &.htc-grey .hyperlink-panel__heading { color: $color-grey; }
+    &.htc-gold .hyperlink-panel__heading { color: $color-fh-gold; }
+    &.htc-navy .hyperlink-panel__heading { color: $color-fh-navy; }
+    &.htc-dark .hyperlink-panel__heading { color: $color-fh-dark; }
+    &.htc-charcoal .hyperlink-panel__heading { color: $color-fh-charcoal; }
+
     &__list {
         list-style: none;
         margin: 0;

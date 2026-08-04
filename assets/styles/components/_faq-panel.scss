@@ -49,6 +49,18 @@
             }
         }
     }
+
+    // Explicit CMS "Heading Colour" choice — wins over the automatic
+    // background-contrast swap above since it comes later in the
+    // stylesheet at the same specificity, letting an editor override the
+    // default when they deliberately pick one.
+    &.htc-white &__title { color: $color-white; }
+    &.htc-light-grey &__title { color: $color-light-grey; }
+    &.htc-grey &__title { color: $color-grey; }
+    &.htc-gold &__title { color: $color-fh-gold; }
+    &.htc-navy &__title { color: $color-fh-navy; }
+    &.htc-dark &__title { color: $color-fh-dark; }
+    &.htc-charcoal &__title { color: $color-fh-charcoal; }
 }
 
 .faq-item {

@@ -37,6 +37,40 @@
             "save_options": 0
         },
         {
+            "key": "field_6a71f3869c9a4",
+            "label": "Heading Colour",
+            "name": "heading_colour",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "white": "White",
+                "light-grey": "Light Grey",
+                "grey": "Grey",
+                "gold": "Gold",
+                "navy": "Navy",
+                "dark": "Dark",
+                "charcoal": "Charcoal"
+            },
+            "default_value": "charcoal",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_6a104fa067637",
             "label": "Container Size",
             "name": "container_size",
@@ -186,5 +220,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1785513667
+    "modified": 1785852884
 }

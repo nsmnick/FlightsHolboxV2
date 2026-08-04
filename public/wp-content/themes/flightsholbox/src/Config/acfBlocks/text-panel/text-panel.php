@@ -18,6 +18,7 @@ if (!$hide_panel && !$preview_popup_image) {
     $bottom_padding = $generic_block_settings['bottom_padding'] ?? 'default';
     $decoration     = $generic_block_settings['panel_decoration'] ?? 'none';
     $bg_colour      = $generic_block_settings['background_colour'] ?? '';
+    $heading_colour = $generic_block_settings['heading_colour'] ?? '';
 
     $section_classes = trim(
         ($top_padding !== 'default' ? ' tp-' . $top_padding : '') .
@@ -26,7 +27,8 @@ if (!$hide_panel && !$preview_popup_image) {
 
     $card_classes = trim(
         ($decoration !== 'none' ? ' ' . $decoration : '') .
-        ($bg_colour ? ' bgc-' . $bg_colour : '')
+        ($bg_colour ? ' bgc-' . $bg_colour : '') .
+        ($heading_colour ? ' htc-' . $heading_colour : '')
     );
 ?>
 

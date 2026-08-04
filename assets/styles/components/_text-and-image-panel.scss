@@ -51,6 +51,13 @@
 
     @include bp(lap) {
       flex: 1.08 1 0;
+      // A flex item's default automatic minimum width is based on its
+      // content's min-content size — normally harmless, but an unusually
+      // long unbroken string (a long URL, a run-on word) can force that
+      // minimum well past this item's intended ~54% share, squeezing
+      // &__image down to a sliver. min-width:0 lets it shrink/wrap normally
+      // instead, so a content edge case can't steal the image's space.
+      min-width: 0;
       padding: 55px 50px;
     }
 
@@ -76,6 +83,7 @@
       }
 
       p {
+        overflow-wrap: break-word;
         color: $color-dark-grey;
         font-size: to-rem(16);
         line-height: 1.85;
@@ -202,20 +210,32 @@
   &__image {
     position: relative;
     width: 100%;
+    // height (not just min-height) below bp(lap) — this is a plain block
+    // box there (the columns are stacked, not a flex row), so min-height
+    // alone left it with no definite height for percentage-height children
+    // to resolve against. At bp(lap)+ it becomes a flex item under
+    // align-items:stretch instead, which already gives it a genuinely
+    // definite resolved height post-layout — height must NOT be set there
+    // too, or it'd override that stretch behaviour instead of just flooring it.
+    height: 310px;
     min-height: 310px;
     overflow: hidden;
     background: $color-light-grey;
 
     @include bp(tab) {
+      height: 470px;
       min-height: 470px;
     }
 
     @include bp(lap) {
       flex: 0.92 1 0;
+      height: auto;
       min-height: 610px;
     }
 
     img {
+      position: absolute;
+      inset: 0;
       display: block;
       width: 100%;
       height: 100%;
@@ -246,6 +266,18 @@
     gap: 16px;
     margin-top: 24px;
   }
+
+  // Explicit CMS "Heading Colour" choice, overriding the hardcoded navy
+  // default set on the WYSIWYG h2 above when an editor deliberately picks
+  // one. Only the h2 (the actual "heading") — h3/h4 stay as in-body
+  // sub-headings regardless.
+  &.htc-white &__text .wysiwyg-container h2 { color: $color-white; }
+  &.htc-light-grey &__text .wysiwyg-container h2 { color: $color-light-grey; }
+  &.htc-grey &__text .wysiwyg-container h2 { color: $color-grey; }
+  &.htc-gold &__text .wysiwyg-container h2 { color: $color-fh-gold; }
+  &.htc-navy &__text .wysiwyg-container h2 { color: $color-fh-navy; }
+  &.htc-dark &__text .wysiwyg-container h2 { color: $color-fh-dark; }
+  &.htc-charcoal &__text .wysiwyg-container h2 { color: $color-fh-charcoal; }
 }
 
 // Optional image slider (Swiper — wired up in assets/js/sliders.js) used

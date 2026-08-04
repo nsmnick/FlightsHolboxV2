@@ -52,6 +52,18 @@
     p { margin: 0; }
   }
 
+  // Explicit CMS "Heading Colour" choice, overriding the hardcoded white
+  // default above when an editor deliberately picks one. The subheading
+  // text picks up the same colour as the heading rather than getting its
+  // own separate field.
+  &.htc-white .airport-slider__heading, &.htc-white .airport-slider__subheading { color: $color-white; }
+  &.htc-light-grey .airport-slider__heading, &.htc-light-grey .airport-slider__subheading { color: $color-light-grey; }
+  &.htc-grey .airport-slider__heading, &.htc-grey .airport-slider__subheading { color: $color-grey; }
+  &.htc-gold .airport-slider__heading, &.htc-gold .airport-slider__subheading { color: $color-fh-gold; }
+  &.htc-navy .airport-slider__heading, &.htc-navy .airport-slider__subheading { color: $color-fh-navy; }
+  &.htc-dark .airport-slider__heading, &.htc-dark .airport-slider__subheading { color: $color-fh-dark; }
+  &.htc-charcoal .airport-slider__heading, &.htc-charcoal .airport-slider__subheading { color: $color-fh-charcoal; }
+
   // ─── Track ────────────────────────────────────────────────────────────────
 
   &__track {

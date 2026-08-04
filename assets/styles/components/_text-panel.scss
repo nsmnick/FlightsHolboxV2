@@ -61,6 +61,18 @@
             }
         }
 
+        // Explicit CMS "Heading Colour" choice — wins over the automatic
+        // background-contrast swap above since it comes later in the
+        // stylesheet at the same specificity, letting an editor override
+        // the default when they deliberately pick one.
+        &.htc-white .wysiwyg-container h1, &.htc-white .wysiwyg-container h2, &.htc-white .wysiwyg-container h3, &.htc-white .wysiwyg-container h4, &.htc-white .wysiwyg-container h5, &.htc-white .wysiwyg-container h6 { color: $color-white; }
+        &.htc-light-grey .wysiwyg-container h1, &.htc-light-grey .wysiwyg-container h2, &.htc-light-grey .wysiwyg-container h3, &.htc-light-grey .wysiwyg-container h4, &.htc-light-grey .wysiwyg-container h5, &.htc-light-grey .wysiwyg-container h6 { color: $color-light-grey; }
+        &.htc-grey .wysiwyg-container h1, &.htc-grey .wysiwyg-container h2, &.htc-grey .wysiwyg-container h3, &.htc-grey .wysiwyg-container h4, &.htc-grey .wysiwyg-container h5, &.htc-grey .wysiwyg-container h6 { color: $color-grey; }
+        &.htc-gold .wysiwyg-container h1, &.htc-gold .wysiwyg-container h2, &.htc-gold .wysiwyg-container h3, &.htc-gold .wysiwyg-container h4, &.htc-gold .wysiwyg-container h5, &.htc-gold .wysiwyg-container h6 { color: $color-fh-gold; }
+        &.htc-navy .wysiwyg-container h1, &.htc-navy .wysiwyg-container h2, &.htc-navy .wysiwyg-container h3, &.htc-navy .wysiwyg-container h4, &.htc-navy .wysiwyg-container h5, &.htc-navy .wysiwyg-container h6 { color: $color-fh-navy; }
+        &.htc-dark .wysiwyg-container h1, &.htc-dark .wysiwyg-container h2, &.htc-dark .wysiwyg-container h3, &.htc-dark .wysiwyg-container h4, &.htc-dark .wysiwyg-container h5, &.htc-dark .wysiwyg-container h6 { color: $color-fh-dark; }
+        &.htc-charcoal .wysiwyg-container h1, &.htc-charcoal .wysiwyg-container h2, &.htc-charcoal .wysiwyg-container h3, &.htc-charcoal .wysiwyg-container h4, &.htc-charcoal .wysiwyg-container h5, &.htc-charcoal .wysiwyg-container h6 { color: $color-fh-charcoal; }
+
         &.br-all {
             border-radius: $border-radius-lg;
         }

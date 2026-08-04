@@ -74,6 +74,12 @@ export default function initSliders() {
       slidesPerView: 1,
       spaceBetween: 24,
       loop: true,
+      // Centred on mobile so the active slide sits in the middle of the
+      // screen instead of flush against the track's left-anchored padding —
+      // that left-anchored "peek the next card" layout is deliberate from
+      // bp(lap) up (see .activities-slider__track), so it's turned back off
+      // there.
+      centeredSlides: true,
       navigation: {
         nextEl: ".activities-slider__btn--next",
         prevEl: ".activities-slider__btn--prev",
@@ -82,6 +88,7 @@ export default function initSliders() {
         769: {
           slidesPerView: 3,
           spaceBetween: 24,
+          centeredSlides: false,
         },
       },
     });
