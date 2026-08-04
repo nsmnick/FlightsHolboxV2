@@ -46,9 +46,12 @@
 
   &__title {
     margin: 0;
+    // Kept white (not navy, unlike Contact Cards Panel's matching heading)
+    // — this sits on the navy &__header band below, so navy text here would
+    // be invisible against it.
     color: $color-white;
     font-family: get-font-family("main");
-    font-size: to-rem(20);
+    font-size: to-rem(26);
     font-weight: 700;
     line-height: 1.25;
   }
@@ -100,12 +103,11 @@
   }
 
   &__item-heading {
-    margin: 0 0 5px;
-    color: $color-fh-navy;
+    margin: 15px 0;
+    color: $color-fh-dark;
     font-family: get-font-family("main");
-    font-size: to-rem(16);
+    font-size: to-rem(20);
     font-weight: 700;
-    line-height: 1.3;
   }
 
   &__item-text {
