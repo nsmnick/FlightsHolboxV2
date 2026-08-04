@@ -1,0 +1,189 @@
+.contact-cards-panel {
+  @include panel-settings-modifiers;
+
+  &__heading {
+    max-width: 760px;
+    margin: 0 auto 45px;
+    text-align: center;
+
+    h2 {
+      margin: 0 0 15px;
+      color: $color-fh-navy;
+      font-family: get-font-family("main");
+      font-size: to-rem(38);
+      font-weight: 300;
+    }
+  }
+
+  &__intro {
+    color: $color-dark-grey;
+    font-size: to-rem(18);
+    line-height: 1.8;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  &__card {
+    display: flex;
+    flex: 1 1 320px;
+    flex-direction: column;
+    max-width: 360px;
+    padding: 35px;
+    background: $color-white;
+    border: 1px solid $color-light-grey;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba($color-fh-navy, 0.08);
+    text-align: center;
+  }
+
+  &__icon,
+  &__policy-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: rgba($color-fh-navy, 0.06);
+    border-radius: 50%;
+
+    img {
+      display: block;
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+  }
+
+  &__card-heading {
+    margin: 0;
+    color: $color-fh-navy;
+    font-family: get-font-family("main");
+    font-size: to-rem(26);
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  &__card-subheading {
+    margin: 15px 0;
+    color: $color-fh-dark;
+    font-family: get-font-family("main");
+    font-size: to-rem(20);
+    font-weight: 700;
+  }
+
+  &__card-text {
+    margin-bottom: 22px;
+    color: $color-dark-grey;
+    font-size: to-rem(16);
+    line-height: 1.8;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__list {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+    color: $color-dark-grey;
+    line-height: 2;
+
+    li {
+      position: relative;
+      padding-left: 24px;
+
+      &::before {
+        content: "\2713";
+        position: absolute;
+        left: 0;
+        color: $color-fh-navy;
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__divider {
+    margin: 24px 0;
+    border: none;
+    border-top: 1px solid $color-light-grey;
+  }
+
+  &__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+    color: $color-dark-grey;
+    font-size: to-rem(15);
+    line-height: 1.7;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 22px;
+
+    // The second CTA in a card (e.g. "See Prices" alongside "Book Online")
+    // reads as the secondary action — outlined rather than filled — purely
+    // by its position here, regardless of which colour is picked in the CMS.
+    .button:nth-child(2) {
+      background: transparent;
+      color: $color-fh-navy;
+
+      &:hover {
+        background: $color-fh-navy;
+        color: $color-white;
+      }
+    }
+  }
+
+  &__policy {
+    max-width: 900px;
+    margin: 70px auto 0;
+    padding: 40px;
+    background: $color-light-grey;
+    border: 1px solid rgba($color-fh-navy, 0.08);
+    border-radius: 18px;
+    text-align: center;
+  }
+
+  &__policy-heading {
+    margin: 0 0 20px;
+    color: $color-fh-navy;
+    font-family: get-font-family("main");
+    font-size: to-rem(30);
+    font-weight: 300;
+  }
+
+  &__policy-text {
+    max-width: 700px;
+    margin: 0 auto;
+    color: $color-dark-grey;
+    font-size: to-rem(16);
+    line-height: 1.8;
+
+    p {
+      margin: 0;
+    }
+
+    strong {
+      color: $color-fh-dark;
+    }
+  }
+}

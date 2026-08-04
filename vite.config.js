@@ -16,8 +16,15 @@ export default defineConfig({
   base: "/wp-content/themes/flightsholbox/dist",
   server: {
     port: 5274,
-    host: "0.0.0.0",
-    origin: "https://localhost:5274",
+    // "::" (not "0.0.0.0") so this dual-stacks to IPv4 too — Local's hosts
+    // file maps flightsholboxv1.local to both 127.0.0.1 and ::1, and a
+    // browser trying the IPv6 address first would get a flat connection
+    // refused against an IPv4-only bind.
+    host: "::",
+    // Must match the cert's hostname (flightsholboxv1.local, not localhost —
+    // see localCertDir above) or the browser silently blocks every asset
+    // served from here as an invalid-cert subresource.
+    origin: "https://flightsholboxv1.local:5274",
     cors: true,
     https: {
       key: readFileSync(`${localCertDir}/flightsholboxv1.local.key`),

@@ -49,13 +49,40 @@
     );
   }
 
+  // The actual image/page border — a filled shape (painted by
+  // assets/js/hero-wave.js) whose top edge ripples, so the hard rectangular
+  // bottom edge of the hero image is replaced by a moving wavy line instead
+  // of decoration merely sitting near it. Deliberately kept *inside*
+  // .hero-panel (not a sibling reaching below it) — its own overflow:hidden
+  // guarantees this can never bleed into whatever panel follows, no matter
+  // that panel's own negative margins/z-index (e.g. .booking-panel pulls
+  // itself up over the hero and sits at z-index:10 — a wave living outside
+  // the hero would end up fighting it for the same space and covering its
+  // content, which isn't fixable in a way that stays generic across every
+  // panel that might come next).
+  &__wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 70px;
+    pointer-events: none;
+
+    @include bp(lap) {
+      height: 110px;
+    }
+  }
+
   // Logo + heading + strapline, anchored to the bottom
   &__content {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 3;
     text-align: center;
     padding: 30px 24px 52px;
 

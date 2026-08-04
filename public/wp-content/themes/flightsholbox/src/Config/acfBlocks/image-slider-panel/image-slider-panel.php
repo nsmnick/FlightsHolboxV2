@@ -39,8 +39,16 @@ if (!$preview_popup_image && !$hide_panel) {
     <div class="image-slider-panel__track">
         <div class="image-slider-panel-swiper">
             <div class="swiper-wrapper image-slider-panel__wrapper">
-                <?php foreach ($slides as $i => $slide_image) : ?>
-                    <div class="swiper-slide image-slider-panel__slide animate slide-left" style="animation-delay: <?php echo esc_attr($i * 0.08); ?>s;">
+                <?php $slide_count = count($slides); ?>
+                <?php foreach ($slides as $i => $slide_image) :
+                    // Swiper's loop clones the last slide to sit in front of
+                    // slide 0 so it can display as "previous" from the very
+                    // first paint — see the Airport Slider Panel for the
+                    // same fix. Rotate the reveal order by one slot to
+                    // match: previous, then current, then next.
+                    $reveal_rank = ($i + 1) % $slide_count;
+                ?>
+                    <div class="swiper-slide image-slider-panel__slide animate slide-left" style="animation-delay: <?php echo esc_attr($reveal_rank * 0.08); ?>s;">
                         <div class="image-slider-panel__card">
                             <?php echo wp_get_attachment_image($slide_image, 'full'); ?>
                         </div>

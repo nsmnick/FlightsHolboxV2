@@ -36,6 +36,31 @@
             padding: 56px 64px;
         }
 
+        // Generic heading boost for whatever the CMS content puts in —
+        // bolder weight and the brand navy accent make headings read as
+        // deliberately prominent rather than default browser h1-h6, no
+        // matter which heading level an editor actually reaches for.
+        .wysiwyg-container {
+            h1, h2, h3, h4, h5, h6 {
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                color: $color-fh-navy;
+            }
+        }
+
+        // Navy text on a navy/dark/charcoal card background would be
+        // unreadable — swap to white on those so the extra boldness stays
+        // legible instead of just disappearing into the fill.
+        &.bgc-navy,
+        &.bgc-dark,
+        &.bgc-charcoal {
+            .wysiwyg-container {
+                h1, h2, h3, h4, h5, h6 {
+                    color: $color-white;
+                }
+            }
+        }
+
         &.br-all {
             border-radius: $border-radius-lg;
         }

@@ -1,0 +1,168 @@
+// Image Slider Panel — a plain image-only carousel (no per-slide text), so
+// the visual language is borrowed from .text-and-image-panel's card/button
+// styling (rounded corners, soft shadow, circular nav buttons) rather than
+// the text-panel-shaped slider layout below.
+.image-slider-panel {
+  padding: 60px 0 80px;
+  overflow: hidden;
+
+  @include bp(desk) {
+    padding: 80px 0 100px;
+  }
+
+  @include panel-settings-modifiers;
+
+  // Nav buttons default to the white-circle/navy-icon combo (lifted from
+  // .text-and-image-slider__arrow), which reads fine on the default/light
+  // CMS Background Colour options. On the panel's dark options that pairing
+  // would blend into the backdrop, so those swap to a navy circle with a
+  // white icon instead.
+  --slider-nav-bg: #{$color-white};
+  --slider-nav-icon: #{$color-fh-navy};
+
+  &.bgc-navy,
+  &.bgc-dark,
+  &.bgc-charcoal {
+    --slider-nav-bg: #{$color-fh-navy};
+    --slider-nav-icon: #{$color-white};
+
+    .image-slider-panel__heading {
+      color: $color-white;
+    }
+
+    .image-slider-panel__subheading {
+      color: rgba($color-white, 0.75);
+    }
+  }
+
+  &__intro {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+
+  &__heading {
+    color: $color-fh-navy;
+    font-size: to-rem(28);
+    font-weight: 700;
+    margin: 0 0 16px;
+
+    @include bp(lap) {
+      font-size: to-rem(36);
+    }
+  }
+
+  &__subheading {
+    color: rgba($color-fh-navy, 0.7);
+    font-size: to-rem(16);
+    line-height: 1.6;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  // ─── Track ────────────────────────────────────────────────────────────────
+
+  &__track {
+    position: relative;
+  }
+
+  .image-slider-panel-swiper {
+    overflow: hidden;
+    padding-bottom: 12px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    box-sizing: content-box;
+    transition-property: transform;
+    transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+  }
+
+  // ─── Scale cascade — same active/prev/next convention as the other slider
+  // panels (airport-slider, activities-slider) ────────────────────────────
+
+  &__slide {
+    flex-shrink: 0;
+
+    .image-slider-panel__card {
+      transform-origin: center center;
+      transform: scale(0.82);
+      opacity: 0.55;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    &.swiper-slide-active .image-slider-panel__card {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    &.swiper-slide-prev .image-slider-panel__card,
+    &.swiper-slide-next .image-slider-panel__card {
+      transform: scale(0.9);
+      opacity: 0.8;
+    }
+  }
+
+  // ─── Card — rounded, shadowed image tile, matching .text-and-image-panel's
+  // card treatment ────────────────────────────────────────────────────────
+
+  &__card {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: $color-light-grey;
+    box-shadow: 0 16px 42px rgba($color-fh-dark, 0.16);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  // ─── Navigation ───────────────────────────────────────────────────────────
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  &__btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--slider-nav-bg);
+    color: var(--slider-nav-icon);
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba($color-fh-dark, 0.18);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+    svg {
+      display: block;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+  }
+}

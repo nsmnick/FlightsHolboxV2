@@ -35,6 +35,8 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
 
     <div class="hero-panel__overlay" aria-hidden="true"></div>
 
+    <canvas class="hero-panel__wave" aria-hidden="true"></canvas>
+
     <div class="hero-panel__content">
         <?php if ($heading) : ?>
             <h1 class="hero-panel__heading"><?php echo esc_html($heading); ?></h1>

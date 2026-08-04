@@ -31,6 +31,14 @@
   }
 
   &__text {
+    // This codebase has no global box-sizing:border-box reset — only
+    // html/body get it — so with the default content-box, this element's
+    // own horizontal padding was being added on top of its 100% width,
+    // overflowing &__columns by 48px on mobile (below bp(lap), where
+    // &__text is sized by this width rather than the flex-basis used at
+    // bp(lap)+). &__columns' overflow:hidden then silently clipped the
+    // right edge instead of wrapping, reading as off-centre/cut-off text.
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     flex-direction: column;

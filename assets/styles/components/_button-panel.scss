@@ -1,22 +1,9 @@
 .button-panel {
   // Top/bottom spacing + background/decoration come from the .content class
   // (_content.scss) via the Panel Settings clone field, same as card-panel.
-
-  &__card {
-    // No max-width here — the card fills whatever width the Panel Settings
-    // Container Size resolves to on the .container it sits inside, rather
-    // than fighting it with its own cap.
-    padding: 32px 24px;
-    text-align: center;
-    background: $color-white;
-    border: 1px solid rgba($color-fh-navy, 0.1);
-    border-radius: 16px;
-    box-shadow: 0 12px 30px rgba($color-fh-dark, 0.08);
-
-    @include bp(lap) {
-      padding: 40px;
-    }
-  }
+  // Content used to sit inside its own white card box — now sits directly
+  // on the panel's own background instead.
+  text-align: center;
 
   &__heading {
     margin: 0 0 12px;

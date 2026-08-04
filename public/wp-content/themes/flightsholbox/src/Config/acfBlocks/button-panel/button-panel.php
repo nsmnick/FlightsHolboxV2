@@ -36,26 +36,24 @@ if (!$preview_popup_image && !$hide_panel) {
 
 <section class="button-panel content <?php echo $generic_block_settings_classes; ?>">
      <div class="container <?php echo esc_attr($generic_container_class); ?>">
-        <div class="button-panel__card">
-            <?php if ($heading) : ?>
-                <h2 class="button-panel__heading"><?php echo esc_html($heading); ?></h2>
-            <?php endif; ?>
+        <?php if ($heading) : ?>
+            <h2 class="button-panel__heading"><?php echo esc_html($heading); ?></h2>
+        <?php endif; ?>
 
-            <?php if ($intro) : ?>
-                <div class="button-panel__intro"><?php echo wp_kses_post($intro); ?></div>
-            <?php endif; ?>
+        <?php if ($intro) : ?>
+            <div class="button-panel__intro"><?php echo wp_kses_post($intro); ?></div>
+        <?php endif; ?>
 
-            <div class="button-panel__row<?php echo esc_attr($count_modifier); ?>">
-                <?php foreach ($buttons as $btn) : ?>
-                    <a
-                        class="<?php echo esc_attr($btn['class']); ?> button-panel__button"
-                        href="<?php echo esc_url($btn['link']['url']); ?>"
-                        <?php if (!empty($btn['link']['target'])) : ?>target="<?php echo esc_attr($btn['link']['target']); ?>" rel="noopener noreferrer"<?php endif; ?>
-                    >
-                        <?php echo esc_html($btn['link']['title'] ?: 'Find out more'); ?>
-                    </a>
-                <?php endforeach; ?>
-            </div>
+        <div class="button-panel__row<?php echo esc_attr($count_modifier); ?>">
+            <?php foreach ($buttons as $btn) : ?>
+                <a
+                    class="<?php echo esc_attr($btn['class']); ?> button-panel__button"
+                    href="<?php echo esc_url($btn['link']['url']); ?>"
+                    <?php if (!empty($btn['link']['target'])) : ?>target="<?php echo esc_attr($btn['link']['target']); ?>" rel="noopener noreferrer"<?php endif; ?>
+                >
+                    <?php echo esc_html($btn['link']['title'] ?: 'Find out more'); ?>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

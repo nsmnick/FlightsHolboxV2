@@ -1,0 +1,187 @@
+// Price Table Panel — deliberately mirrors .table-panel's look (navy
+// underlined heading, navy/white header row, shadowed scroll wrap, same
+// Background Colour handling) rather than inventing its own card treatment,
+// since the two blocks are both "CMS table" panels and should read as the
+// same family.
+.price-table-panel {
+  padding: 60px 0;
+  scroll-margin-top: 140px;
+
+  @include panel-settings-modifiers;
+
+  &__heading {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    color: $color-fh-navy;
+    margin: 0 0 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 18px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 3px;
+      border-radius: 2px;
+      background: $color-fh-gold;
+    }
+  }
+
+  &__table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  }
+
+  //
+  // Colours (Panel Settings > Background Colour)
+  //
+
+  &.bgc-white {
+    background-color: $color-white;
+  }
+
+  &.bgc-light-grey {
+    background-color: $color-light-grey;
+  }
+
+  &.bgc-grey {
+    background-color: $color-grey;
+  }
+
+  &.bgc-gold {
+    background-color: $color-fh-gold;
+  }
+
+  &.bgc-navy {
+    background-color: $color-fh-navy;
+  }
+
+  &.bgc-dark {
+    background-color: $color-fh-dark;
+  }
+
+  &.bgc-charcoal {
+    background-color: $color-fh-charcoal;
+  }
+
+  // Dark backgrounds need the heading flipped to light text — otherwise the
+  // default navy copy disappears into them.
+  &.bgc-navy,
+  &.bgc-dark,
+  &.bgc-charcoal {
+    .price-table-panel__heading {
+      color: $color-white;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: $color-white;
+    font-size: to-rem(15);
+
+    @include bp(lap) {
+      font-size: to-rem(16);
+    }
+
+    thead th {
+      background: $color-fh-navy;
+      color: $color-white;
+      font-weight: 700;
+      font-size: to-rem(13);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 16px 14px;
+      text-align: center;
+
+      @include bp(lap) {
+        font-size: to-rem(14);
+      }
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid $color-light-grey;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(0, 70, 123, 0.03);
+    }
+  }
+
+  &__col--label {
+    font-weight: 700;
+    color: $color-fh-dark;
+    min-width: 140px;
+    text-align: left;
+  }
+
+  &__route {
+    color: $color-fh-charcoal;
+  }
+
+  &__amount {
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    color: $color-fh-charcoal;
+    white-space: nowrap;
+    font-size: to-rem(16);
+
+    @include bp(lap) {
+      font-size: to-rem(18);
+    }
+  }
+
+  &__tax,
+  &__type {
+    display: block;
+    margin-top: 4px;
+    font-size: to-rem(12);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: $color-dark-grey;
+  }
+
+  &__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 720px;
+    margin: 1.5rem auto 0;
+    color: $color-fh-charcoal;
+    line-height: 1.7;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__note-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $color-fh-navy;
+    color: $color-white;
+    font-size: to-rem(12);
+    font-weight: 700;
+    font-style: italic;
+  }
+}
