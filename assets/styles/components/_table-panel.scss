@@ -32,7 +32,7 @@
         max-width: 720px;
         margin: 0 auto 2.5rem;
         text-align: center;
-        color: $color-fh-charcoal;
+        color: rgba($color-fh-navy, 0.75);
         line-height: 1.7;
 
         p:last-child {
@@ -42,9 +42,10 @@
 
     &__wrap {
         overflow-x: auto;
+        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
-        border-radius: 8px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+        border-radius: 20px;
+        box-shadow: 0 16px 40px rgba($color-fh-navy, 0.12);
     }
 
     //
@@ -118,28 +119,37 @@
         }
 
         thead th {
-            background: $color-fh-navy;
+            // Subtle depth rather than a flat fill.
+            background: linear-gradient(135deg, #1c5a8f, $color-fh-navy);
             color: $color-white;
             font-weight: 700;
             font-size: to-rem(13);
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            padding: 16px 14px;
+            padding: 22px 20px;
             text-align: center;
 
             @include bp(lap) {
                 font-size: to-rem(14);
             }
+
+            // "FROM" (the unlabelled row-head column) reads left, matching
+            // its row values below — the value/time columns stay centred.
+            &.table-panel__row-head {
+                text-align: left;
+            }
+        }
+
+        // Zebra striping carries the row apart instead of border lines —
+        // applied to the row itself so it's consistent across every cell,
+        // not just &__row-label.
+        tbody tr:nth-child(even) {
+            background: rgba($color-fh-navy, 0.035);
         }
 
         td {
-            padding: 14px;
-            border-bottom: 1px solid $color-light-grey;
+            padding: 18px 20px;
             vertical-align: middle;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
         }
     }
 
@@ -150,24 +160,20 @@
         font-weight: 400;
         text-transform: none;
         letter-spacing: normal;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255, 255, 255, 0.8);
     }
 
     &__row-label {
-        font-weight: 700;
-        color: $color-fh-dark;
+        font-weight: 500;
+        color: $color-fh-navy;
         min-width: 140px;
         text-align: left;
-
-        tbody tr:nth-child(even) & {
-            background: rgba(0, 70, 123, 0.03);
-        }
     }
 
     &__value {
         text-align: center;
         font-weight: 700;
-        color: $color-fh-charcoal;
+        color: $color-fh-navy;
         white-space: nowrap;
         font-size: to-rem(16);
 

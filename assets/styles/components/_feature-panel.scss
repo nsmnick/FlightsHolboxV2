@@ -43,14 +43,19 @@
         }
     }
 
+    // Darkens continuously top-to-bottom, unlike .hero-panel__overlay (which
+    // clears to fully transparent around its midpoint on purpose, since the
+    // hero is tall enough to show the image clearly there) — these cards
+    // are short enough that the same dip left a bright, undarkened gap.
     &__overlay {
         position: absolute;
         inset: 0;
         background: linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.75) 0%,
-            rgba(0, 0, 0, 0.2) 50%,
-            rgba(0, 0, 0, 0.1) 100%
+            to bottom,
+            rgba(0, 0, 0, 0.35) 0%,
+            rgba(0, 0, 0, 0.25) 35%,
+            rgba(0, 0, 0, 0.55) 65%,
+            rgba(0, 0, 0, 0.85) 100%
         );
         transition: background-color 0.3s ease;
     }
@@ -61,9 +66,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        // Shifted down from true centre via the extra top padding below,
+        // rather than flex-end (anchoring hard to the bottom edge) — on
+        // cards with taller content (heading + subheading + button), a full
+        // bottom anchor overflowed past the card's top and got clipped by
+        // its overflow:hidden.
         justify-content: center;
         width: 100%;
-        padding: 2rem 1.5rem;
+        height: 100%;
+        padding: 6rem 1.5rem 1.5rem;
         text-align: center;
         gap: 0.75rem;
     }
@@ -71,7 +82,7 @@
     &__heading {
         color: $color-white;
         font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-        font-weight: 700;
+        font-weight: 600;
         line-height: 1.2;
         margin: 0;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);

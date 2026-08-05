@@ -5,6 +5,19 @@
   //max-width: 1000px;
   //margin: 0 auto 0;
 
+  // Colour/weight/size are shared across every heading level (bar h4, sized
+  // a step down — see below) so any WYSIWYG content anywhere reads
+  // consistently, instead of each panel (Text Panel, Text and Image Panel,
+  // ...) tuning its own. Margins are left exactly as they were — those are
+  // tuned per level for long-form content (e.g. terms & conditions) and
+  // were never part of what was inconsistent.
+  h1, h2, h3, h4, h5, h6 {
+    color: $color-fh-navy;
+    font-weight: 300;
+    font-size: to-rem(26);
+    line-height: 1.25;
+  }
+
   h1 {
     text-align: left;
     margin-top: 30px;
@@ -19,12 +32,10 @@
     text-align: left;
     margin-top: 26px;
     margin-bottom: 16px;
-    letter-spacing: 3px;
 
     @include bp(lap) {
       margin-top: 34px;
       margin-bottom: 22px;
-      font-size: to-rem(24);
     }
   }
 
@@ -38,9 +49,12 @@
     margin-bottom: 20px;
   }
 
+  // Smaller than the other heading levels but still clearly bigger than
+  // body copy (18px) — sits between the two.
   h4 {
     margin-top: 24px;
     margin-bottom: 12px;
+    font-size: to-rem(21);
   }
 
   h5 {
@@ -55,6 +69,9 @@
 
   p {
     margin-top: 0;
+    color: $color-dark-grey;
+    font-size: to-rem(18);
+    line-height: 1.8;
   }
 
   strong,

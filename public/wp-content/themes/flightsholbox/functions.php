@@ -419,7 +419,11 @@ function fh_register_post_types()
         'public'        => true,
         'has_archive'   => true,
         'rewrite'       => ['slug' => 'airports'],
-        'supports'      => ['title', 'thumbnail'],
+        // 'editor' enables the block editor canvas on Airport posts, so any
+        // ACF block can be added — single-airports.php calls the_content()
+        // to actually render whatever's placed there, below the fixed
+        // hero/introduction/content_sections fields.
+        'supports'      => ['title', 'thumbnail', 'editor'],
         'menu_position' => 8,
         'show_in_rest'  => true,
     ]);
@@ -439,7 +443,11 @@ function fh_register_post_types()
         'public'        => true,
         'has_archive'   => true,
         'rewrite'       => ['slug' => 'activities'],
-        'supports'      => ['title', 'thumbnail'],
+        // 'editor' enables the block editor canvas on Activity posts, so any
+        // ACF block can be added — single-activities.php calls the_content()
+        // to actually render whatever's placed there, below the fixed
+        // hero/introduction/content_sections fields.
+        'supports'      => ['title', 'thumbnail', 'editor'],
         'menu_position' => 9,
         'show_in_rest'  => true,
     ]);

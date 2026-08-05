@@ -30,6 +30,22 @@
   &.htc-navy &__heading, &.htc-navy &__intro { color: $color-fh-navy; }
   &.htc-dark &__heading, &.htc-dark &__intro { color: $color-fh-dark; }
   &.htc-charcoal &__heading, &.htc-charcoal &__intro { color: $color-fh-charcoal; }
+
+  // FAQ question text (.faq-item__question is shared markup, defaulting to
+  // dark in _faq-panel.scss) matches whatever colour the panel heading
+  // above is actually using — including the CMS override, not just the
+  // hardcoded navy default.
+  .faq-item__question {
+    color: $color-fh-navy;
+  }
+
+  &.htc-white .faq-item__question { color: $color-white; }
+  &.htc-light-grey .faq-item__question { color: $color-light-grey; }
+  &.htc-grey .faq-item__question { color: $color-grey; }
+  &.htc-gold .faq-item__question { color: $color-fh-gold; }
+  &.htc-navy .faq-item__question { color: $color-fh-navy; }
+  &.htc-dark .faq-item__question { color: $color-fh-dark; }
+  &.htc-charcoal .faq-item__question { color: $color-fh-charcoal; }
 }
 
 .support-panel__search-wrap {
@@ -112,10 +128,13 @@
     background: $color-grey;
   }
 
+  // Same treatment as the site's gold .button (see elements/_button.scss)
+  // instead of navy, so the selected category reads with the same brand
+  // accent used for primary calls-to-action.
   &.is-active {
-    background: $color-fh-navy;
-    color: $color-white;
-    border-color: $color-fh-navy;
+    color: getcolor("black");
+    background: linear-gradient(135deg, lighten($color-fh-gold, 8%), darken($color-fh-gold, 6%));
+    border-color: $color-fh-gold;
   }
 
   @include bp(desk) {

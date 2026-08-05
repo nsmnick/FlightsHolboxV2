@@ -36,31 +36,17 @@
             padding: 56px 64px;
         }
 
-        // Matches .contact-cards-panel__card-heading's style — same navy
-        // accent, but light weight rather than bold, applied to whatever
-        // heading level the CMS content puts in.
+        // Colour/weight/size come from the shared .wysiwyg-container base
+        // (core-components/_wysiwyg.scss) now — this panel only needs its
+        // own margins, tighter than that base's long-form-content spacing,
+        // matching .contact-cards-panel__card-heading/&__intro.
         .wysiwyg-container {
             h1, h2, h3, h4, h5, h6 {
                 margin: 0 0 15px;
-                color: $color-fh-navy;
-                font-size: to-rem(26);
-                font-weight: 300;
-                line-height: 1.25;
             }
 
-            // Smaller than the other heading levels but still clearly
-            // bigger than body copy (18px) — sits between the two.
-            h4 {
-                font-size: to-rem(21);
-            }
-
-
-            // Matches .contact-cards-panel__intro's style.
             p {
                 margin: 0;
-                color: $color-dark-grey;
-                font-size: to-rem(18);
-                line-height: 1.8;
             }
         }
 

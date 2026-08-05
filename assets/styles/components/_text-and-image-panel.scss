@@ -50,7 +50,7 @@
     }
 
     @include bp(lap) {
-      flex: 1.08 1 0;
+      flex: 0.85 1 0;
       // A flex item's default automatic minimum width is based on its
       // content's min-content size — normally harmless, but an unusually
       // long unbroken string (a long URL, a run-on word) can force that
@@ -61,36 +61,20 @@
       padding: 55px 50px;
     }
 
-    // Typography scoped to this panel only — matches the supplied design's
-    // look without touching the shared .wysiwyg-container used elsewhere.
+    // Colour/weight/size come from the shared .wysiwyg-container base
+    // (core-components/_wysiwyg.scss) now — this panel only needs its own
+    // heading margin (tighter than that base's long-form-content spacing)
+    // and the word-break fix below.
     .wysiwyg-container {
       h2 {
         margin: 0 0 14px;
-        color: $color-fh-navy;
-        font-size: to-rem(33);
-        font-weight: 300;
-        line-height: 1.18;
-
-        @include bp(lap) {
-          font-size: to-rem(42);
-        }
-      }
-
-      h3,
-      h4 {
-        color: $color-fh-navy;
-        font-weight: 600;
       }
 
       p {
+        // A long unbroken string (a long URL, a run-on word) can force
+        // &__text wider than its intended share of the flex row — see the
+        // min-width:0 note above — wrapping normally instead lets it break.
         overflow-wrap: break-word;
-        color: $color-dark-grey;
-        font-size: to-rem(16);
-        line-height: 1.85;
-
-        @include bp(lap) {
-          font-size: to-rem(17);
-        }
 
         strong {
           color: $color-fh-navy;
@@ -228,7 +212,7 @@
     }
 
     @include bp(lap) {
-      flex: 0.92 1 0;
+      flex: 1.15 1 0;
       height: auto;
       min-height: 610px;
     }
@@ -265,6 +249,66 @@
     flex-wrap: wrap;
     gap: 16px;
     margin-top: 24px;
+  }
+
+  // Same chevron-toggle look as the WYSIWYG's own inline <details> pattern
+  // (see .wysiwyg-container details above) — this is the field-driven
+  // equivalent, so it gets its own dedicated classes rather than relying on
+  // an editor hand-typing HTML into the Custom HTML/code view.
+  &__more-info {
+    margin-top: 24px;
+    border-top: 1px solid $color-light-grey;
+
+    &[open] &-toggle::after {
+      transform: translateY(-50%) rotate(0deg);
+    }
+  }
+
+  &__more-info-toggle {
+    position: relative;
+    padding: 18px 44px 18px 0;
+    color: $color-fh-navy;
+    font-size: to-rem(16);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::marker {
+      display: none;
+      content: '';
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 4px;
+      width: 18px;
+      height: 2px;
+      background: $color-fh-navy;
+      transform: translateY(-50%);
+      transition: transform 0.25s ease;
+    }
+
+    &::after {
+      transform: translateY(-50%) rotate(90deg);
+    }
+  }
+
+  &__more-info-content {
+    padding: 4px 0 24px;
+    color: $color-dark-grey;
+    font-size: to-rem(16);
+    line-height: 1.85;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 
   // Explicit CMS "Heading Colour" choice, overriding the hardcoded navy

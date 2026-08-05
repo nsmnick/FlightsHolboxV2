@@ -59,6 +59,12 @@
     </div>
     <?php endif; ?>
 
+    <?php if (get_the_content()) : ?>
+        <div class="cpt-single__blocks">
+            <?php the_content(); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="cpt-single__footer">
         <div class="container">
             <a href="<?php echo esc_url(get_post_type_archive_link('airports')); ?>" class="button">

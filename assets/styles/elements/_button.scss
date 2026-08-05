@@ -36,12 +36,12 @@ div.button {
   text-decoration: none;
   line-height: 1;
   white-space: nowrap;
-  font-weight: 700;
+  font-weight: 400;
   width: fit-content;
 
   color: getcolor("black");
   border: solid 2px $color-fh-gold;
-  background: $color-fh-gold;
+  background: linear-gradient(135deg, lighten($color-fh-gold, 8%), darken($color-fh-gold, 6%));
   cursor: pointer;
   border-radius: 6px;
   transition: 0.15s all ease-in-out, 0.2s transform ease-out, 0.2s box-shadow ease-out;
@@ -99,7 +99,7 @@ div.button {
   &--navy {
     color: getcolor("white");
     border: solid 2px $color-fh-navy;
-    background-color: $color-fh-navy;
+    background: linear-gradient(135deg, lighten($color-fh-navy, 8%), darken($color-fh-navy, 6%));
 
     &:hover {
       background-color: getcolor("white");

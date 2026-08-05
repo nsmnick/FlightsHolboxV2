@@ -52,7 +52,7 @@
     color: $color-white;
     font-family: get-font-family("main");
     font-size: to-rem(26);
-    font-weight: 700;
+    font-weight: 300;
     line-height: 1.25;
   }
 
@@ -85,6 +85,10 @@
 
   &__step-number {
     flex: 0 0 30px;
+    // Matches &__item-heading's own top margin below, so the circle starts
+    // level with the heading text instead of sitting above it (the row's
+    // align-items:flex-start aligns box tops, not text baselines).
+    margin-top: 15px;
     width: 30px;
     height: 30px;
     background: $color-fh-gold;
@@ -109,6 +113,17 @@
     font-size: to-rem(20);
     font-weight: 700;
   }
+
+  // CMS "Heading Colour" applies only to each section's own item heading —
+  // &__title (the main card header on the navy band) is deliberately left
+  // out of this and stays hardcoded white regardless of what's picked here.
+  &.htc-white &__item-heading { color: $color-white; }
+  &.htc-light-grey &__item-heading { color: $color-light-grey; }
+  &.htc-grey &__item-heading { color: $color-grey; }
+  &.htc-gold &__item-heading { color: $color-fh-gold; }
+  &.htc-navy &__item-heading { color: $color-fh-navy; }
+  &.htc-dark &__item-heading { color: $color-fh-dark; }
+  &.htc-charcoal &__item-heading { color: $color-fh-charcoal; }
 
   &__item-text {
     color: $color-dark-grey;

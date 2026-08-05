@@ -5,6 +5,7 @@ include __DIR__ . '/../_block-preview.php';
 if (!$preview_popup_image && !$hide_panel) {
     $heading      = get_field('table_heading');
     $intro        = get_field('table_intro');
+    $row_head     = get_field('row_head_label') ?: 'From';
     $column_1     = get_field('column_1_label');
     $column_1_sub = get_field('column_1_sublabel');
     $column_2     = get_field('column_2_label');
@@ -37,7 +38,7 @@ if (!$preview_popup_image && !$hide_panel) {
             <table class="table-panel__table">
                 <thead>
                     <tr>
-                        <th class="table-panel__row-head"></th>
+                        <th class="table-panel__row-head"><?php echo esc_html($row_head); ?></th>
                         <th>
                             <?php echo esc_html($column_1); ?>
                             <?php if ($column_1_sub) : ?>

@@ -3,11 +3,13 @@ include __DIR__ . '/../_block-generics.php';
 include __DIR__ . '/../_block-preview.php';
 
 if (!$preview_popup_image && !$hide_panel) {
-    $text_content   = get_field('text_content');
-    $image          = get_field('image');
-    $use_slider     = get_field('use_slider');
-    $slider_images  = $use_slider ? (get_field('slider_images') ?: []) : [];
-    $image_position = get_field('image_position') ?: 'right';
+    $text_content     = get_field('text_content');
+    $image            = get_field('image');
+    $use_slider       = get_field('use_slider');
+    $slider_images    = $use_slider ? (get_field('slider_images') ?: []) : [];
+    $image_position   = get_field('image_position') ?: 'right';
+    $more_info_label  = get_field('more_info_label');
+    $more_info_content = get_field('more_info_content');
 
     // A second button is optional — if it's left empty in the CMS, only
     // the first one renders and nothing about the layout changes.
@@ -55,6 +57,17 @@ if (!$preview_popup_image && !$hide_panel) {
                             </a>
                         <?php endforeach; ?>
                     </div>
+                <?php endif; ?>
+
+                <?php if ($more_info_content) : ?>
+                    <details class="text-and-image-panel__more-info">
+                        <summary class="text-and-image-panel__more-info-toggle">
+                            <?php echo esc_html($more_info_label ?: 'More Information'); ?>
+                        </summary>
+                        <div class="text-and-image-panel__more-info-content">
+                            <?php echo wp_kses_post($more_info_content); ?>
+                        </div>
+                    </details>
                 <?php endif; ?>
             </div>
 
