@@ -233,12 +233,12 @@
   &__button {
     width: 100%;
     background-color: $color-fh-gold;
-    color: $color-black;
+    color: $color-fh-navy;
     border: none;
     border-radius: 8px;
     font-family: get-font-family("main");
     font-size: to-rem(14);
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 1.2px;
     text-transform: uppercase;
     // Tighter on mobile — sits in a half-width grid column paired with the

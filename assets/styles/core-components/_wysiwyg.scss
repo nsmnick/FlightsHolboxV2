@@ -5,23 +5,23 @@
   //max-width: 1000px;
   //margin: 0 auto 0;
 
-  // Colour/weight/size are shared across every heading level (bar h4, sized
-  // a step down — see below) so any WYSIWYG content anywhere reads
-  // consistently, instead of each panel (Text Panel, Text and Image Panel,
-  // ...) tuning its own. Margins are left exactly as they were — those are
-  // tuned per level for long-form content (e.g. terms & conditions) and
-  // were never part of what was inconsistent.
+  // Colour/weight are shared across every heading level so any WYSIWYG
+  // content anywhere reads consistently, instead of each panel (Text Panel,
+  // Text and Image Panel, ...) tuning its own — but each level keeps its
+  // own distinct font-size (a real h1 > h2 > h3 > ... hierarchy), not one
+  // flat size for every level. Margins are unchanged from before — those
+  // are tuned per level for long-form content (e.g. terms & conditions).
   h1, h2, h3, h4, h5, h6 {
     color: $color-fh-navy;
     font-weight: 300;
-    font-size: to-rem(26);
-    line-height: 1.25;
   }
 
   h1 {
     text-align: left;
     margin-top: 30px;
     margin-bottom: 60px;
+    font-size: to-rem(32);
+    line-height: 1.2;
 
     @include bp(wide) {
       text-align: left;
@@ -32,6 +32,8 @@
     text-align: left;
     margin-top: 26px;
     margin-bottom: 16px;
+    font-size: to-rem(26);
+    line-height: 1.25;
 
     @include bp(lap) {
       margin-top: 34px;
@@ -47,28 +49,43 @@
   h3 {
     margin-top: 30px;
     margin-bottom: 20px;
+    font-size: to-rem(22);
+    line-height: 1.3;
   }
 
-  // Smaller than the other heading levels but still clearly bigger than
-  // body copy (18px) — sits between the two.
+  // Smaller than h1-h3 but still clearly bigger than body copy (18px) —
+  // sits between the two.
   h4 {
     margin-top: 24px;
     margin-bottom: 12px;
-    font-size: to-rem(21);
+    font-size: to-rem(19);
+    line-height: 1.3;
   }
 
   h5 {
     margin-top: 20px;
     margin-bottom: 10px;
+    font-size: to-rem(17);
+    line-height: 1.35;
   }
 
   h6 {
     margin-top: 16px;
     margin-bottom: 8px;
+    font-size: to-rem(15);
+    line-height: 1.35;
   }
 
   p {
     margin-top: 0;
+    // Explicit, rather than relying on the browser's default ~1em — and a
+    // fractional padding-top so this paragraph's own top/bottom margins
+    // can never collapse "through" it even when it's blank (a <p>&nbsp;</p>
+    // pressed as a spacer line) — without this, a stack of several blank
+    // paragraphs still only ever produces one collapsed gap, regardless of
+    // how many blank lines were actually pressed.
+    margin-bottom: 18px;
+    padding-top: 0.05px;
     color: $color-dark-grey;
     font-size: to-rem(18);
     line-height: 1.8;

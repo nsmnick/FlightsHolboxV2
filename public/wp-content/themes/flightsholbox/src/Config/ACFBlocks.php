@@ -50,6 +50,7 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/faq-card-panel');
         register_block_type(__DIR__ . '/acfBlocks/faq-steps-panel');
         register_block_type(__DIR__ . '/acfBlocks/contact-cards-panel');
+        register_block_type(__DIR__ . '/acfBlocks/tripadvisor-reviews-panel');
     }
 
     // The set of custom ACF panel blocks available on post types below —
@@ -87,6 +88,7 @@ class ACFBlocks
         'acf/faq-card-panel',
         'acf/faq-steps-panel',
         'acf/contact-cards-panel',
+        'acf/tripadvisor-reviews-panel',
     ];
 
     // Post types restricted to ONLY the custom ACF panel blocks above (no

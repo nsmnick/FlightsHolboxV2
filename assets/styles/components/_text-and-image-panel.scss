@@ -192,6 +192,18 @@
   }
 
   &__image {
+    // Image always above the text on mobile, regardless of the "Image
+    // Position" (left/right) field — that field only controls which side
+    // the image sits on at bp(lap)+ (via flex-direction row/row-reverse
+    // above), not DOM order, so below that it still needs its own reorder
+    // here. Reset back to normal order at bp(lap)+ so the row/row-reverse
+    // switch above is what actually determines left/right there.
+    order: -1;
+
+    @include bp(lap) {
+      order: 0;
+    }
+
     position: relative;
     width: 100%;
     // height (not just min-height) below bp(lap) — this is a plain block

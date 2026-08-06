@@ -1,0 +1,189 @@
+.tripadvisor-reviews-panel {
+  padding: 60px 0;
+
+  @include bp(lap) {
+    padding: 80px 0;
+  }
+
+  @include panel-settings-modifiers;
+
+  &__heading {
+    position: relative;
+    margin: 0 0 2rem;
+    padding-bottom: 18px;
+    color: $color-fh-navy;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 400;
+    text-align: center;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 56px;
+      height: 3px;
+      background: $color-fh-gold;
+      border-radius: 2px;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__widget {
+    // TripAdvisor's own script renders its widget at whatever intrinsic
+    // width its content needs — this just keeps it from stretching edge to
+    // edge on wide desktop layouts, matching how the rest of this panel's
+    // content is centred within .container.
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+
+    // TripAdvisor's widget root is a plain block-level <div> — text-align
+    // above only centres inline content, so the block itself needs its own
+    // margin:auto to actually sit centred rather than flush left within
+    // this wrapper. Targets whichever variant's root div is rendered here
+    // without depending on its exact TripAdvisor-generated id.
+    > div {
+      margin: 0 auto;
+    }
+
+    // The outer div above is really just an inert shell TripAdvisor's script
+    // hangs an id on — the actual visible card it renders is this nested
+    // .cdsROW element (a fixed-width block with its own margin:0), shared
+    // across every TripAdvisor CDS widget type, which is why centring the
+    // outer shell alone didn't visibly do anything.
+    .cdsROW {
+      margin: 0 auto;
+    }
+  }
+
+  // The Ratings Summary widget is a single compact card, not a wide
+  // scrolling carousel — the same 900px cap as the default variant leaves
+  // it looking lost in too much empty space either side.
+  &--ratings_only &__widget {
+    max-width: 420px;
+
+    // TripAdvisor's own CSS for this widget (static.tacdn.com) carries no
+    // !important anywhere, and its rating "bubbles" are an icon font sized
+    // via font-size:inherit rather than a fixed-resolution sprite image —
+    // both scale cleanly, so this rebuilds the card at a larger size in our
+    // own card language (matches .trust-panel__card) instead of TripAdvisor's
+    // cramped 136px default.
+    .cdsROW {
+      width: 260px !important;
+      padding: 28px 24px 24px !important;
+      background: $color-white !important;
+      border: 1px solid rgba($color-fh-navy, 0.1) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 12px 30px rgba($color-fh-dark, 0.09) !important;
+    }
+
+    .cdsLocName {
+      padding-bottom: 14px !important;
+
+      // TripAdvisor's base CSS underlines every link in the widget by
+      // default — overridden here to read as a heading (this site's own
+      // font, no underline) rather than a plain inline text link.
+      a {
+        color: $color-fh-navy !important;
+        font-family: get-font-family("main") !important;
+        font-size: to-rem(20) !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: $color-fh-gold !important;
+          text-decoration: none !important;
+        }
+      }
+    }
+
+    .cdsRating {
+      font-size: to-rem(16) !important;
+      color: $color-fh-charcoal !important;
+
+      .ui_bubble_rating {
+        font-size: 26px !important;
+      }
+    }
+
+    .logo img {
+      width: 150px !important;
+      max-width: 150px !important;
+      padding-top: 10px !important;
+    }
+  }
+
+  // The scrolling-reviews widget renders its actual visible card as
+  // #CDSSCROLLINGRAVE, a completely different TripAdvisor widget type from
+  // the ratings-only one above — same "outer shell is centred, the real
+  // card nested inside it isn't" issue, just under a different id, and its
+  // own separate stylesheet (also carries no !important, so fully
+  // overridable the same way).
+  &--scrolling_rave &__widget {
+    #CDSSCROLLINGRAVE {
+      width: 100% !important;
+      max-width: 700px !important;
+      margin: 0 auto !important;
+      padding: 20px 24px !important;
+      background: $color-white !important;
+      border: 1px solid rgba($color-fh-navy, 0.1) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 12px 30px rgba($color-fh-dark, 0.09) !important;
+      font-family: get-font-family("main") !important;
+      font-size: to-rem(15) !important;
+      color: $color-fh-charcoal !important;
+    }
+
+    // TripAdvisor's own bright-green brand tint behind the logo — swapped
+    // for a plain divider so it reads as part of this site instead.
+    .rightBorder {
+      padding: 0 20px 0 0 !important;
+      background: none !important;
+      border-right: 1px solid rgba($color-fh-navy, 0.15) !important;
+
+      img {
+        height: 56px !important;
+        max-width: 110px !important;
+      }
+    }
+
+    marquee {
+      padding: 0 0 0 20px !important;
+    }
+
+    .reviewTitle {
+      color: $color-fh-navy !important;
+      font-size: to-rem(16) !important;
+      font-weight: 700 !important;
+    }
+
+    .reviewContribution {
+      color: $color-fh-charcoal !important;
+    }
+
+    // TripAdvisor's base CSS underlines every link in the widget by
+    // default — overridden to read as this site's own link style.
+    .link a {
+      color: $color-fh-navy !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+
+      &:hover {
+        color: $color-fh-gold !important;
+        text-decoration: none !important;
+      }
+    }
+  }
+
+  // Explicit CMS "Heading Colour" choice, overriding the hardcoded navy
+  // default above when an editor deliberately picks one.
+  &.htc-white &__heading { color: $color-white; }
+  &.htc-light-grey &__heading { color: $color-light-grey; }
+  &.htc-grey &__heading { color: $color-grey; }
+  &.htc-gold &__heading { color: $color-fh-gold; }
+  &.htc-navy &__heading { color: $color-fh-navy; }
+  &.htc-dark &__heading { color: $color-fh-dark; }
+  &.htc-charcoal &__heading { color: $color-fh-charcoal; }
+}

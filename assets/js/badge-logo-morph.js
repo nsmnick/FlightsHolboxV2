@@ -19,17 +19,22 @@ function clamp01(t) {
 // Must match $mobile-menu-snap in assets/styles/setup/_global.scss.
 const MOBILE_MENU_SNAP = 1250;
 
-// Range the vertical anchor ramps smoothly across, instead of snapping at
+// Range the start position ramps smoothly across, instead of snapping at
 // a single breakpoint — avoids a visible pop while the window is resized
 // through this width.
 const ANCHOR_MIN_WIDTH = 390;
 const ANCHOR_MAX_WIDTH = 900;
-const ANCHOR_MOBILE = 0.22;
 const ANCHOR_DESKTOP = 0.5;
 
-function heroAnchorFor(width) {
-  const t = clamp01((width - ANCHOR_MIN_WIDTH) / (ANCHOR_MAX_WIDTH - ANCHOR_MIN_WIDTH));
-  return lerp(ANCHOR_MOBILE, ANCHOR_DESKTOP, t);
+// Where the badge starts on narrow screens — pinned near the top-left
+// (roughly where it'll eventually land in the header) instead of dead
+// centre over the hero, since a large centred badge has nowhere to go on a
+// short mobile hero without sitting on top of the heading/intro text below it.
+const MOBILE_START_LEFT = 20;
+const MOBILE_START_TOP = 20;
+
+function widthRampFor(width) {
+  return clamp01((width - ANCHOR_MIN_WIDTH) / (ANCHOR_MAX_WIDTH - ANCHOR_MIN_WIDTH));
 }
 
 export default function initBadgeLogoMorph() {
@@ -86,14 +91,17 @@ export default function initBadgeLogoMorph() {
     // document coordinates, so subtracting scrollY reproduces exactly
     // how a normally-flowing element would move as the page scrolls.
     //
-    // The hero's own heading/intro text is anchored to its bottom edge and,
-    // on short mobile heroes, can take up most of the hero's height — a
-    // true dead-centre badge would sit right on top of that text. So on
-    // mobile we anchor higher up (clear of the text), and only truly
-    // centre it once there's enough headroom on larger screens.
-    const heroAnchor = heroAnchorFor(window.innerWidth);
-    const heroCenterX = window.innerWidth / 2;
-    const heroCenterY = heroTopDocY + heroHeight * heroAnchor - scrollY;
+    // Blends (by viewport width, not a breakpoint) between a small
+    // top-left inset on narrow screens and dead-centre over the hero on
+    // wider ones — see MOBILE_START_LEFT/TOP above for why mobile doesn't
+    // just centre it too.
+    const t = widthRampFor(window.innerWidth);
+    const mobileCenterX = MOBILE_START_LEFT + heroImgSize / 2;
+    const mobileCenterY = heroTopDocY - scrollY + MOBILE_START_TOP + heroImgSize / 2;
+    const desktopCenterX = window.innerWidth / 2;
+    const desktopCenterY = heroTopDocY + heroHeight * ANCHOR_DESKTOP - scrollY;
+    const heroCenterX = lerp(mobileCenterX, desktopCenterX, t);
+    const heroCenterY = lerp(mobileCenterY, desktopCenterY, t);
 
     const scaleEnd = navSize / heroImgSize;
     const currentScale = lerp(1, scaleEnd, p);

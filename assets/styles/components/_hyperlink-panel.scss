@@ -9,7 +9,7 @@
 
     &__heading {
         font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-        font-weight: 700;
+        font-weight: 400;
         color: $color-fh-navy;
         margin: 0 0 1.25rem;
         text-align: center;
@@ -41,7 +41,7 @@
         border-radius: 30px;
         border: 1px solid $color-fh-navy;
         color: $color-fh-navy;
-        font-weight: 600;
+        font-weight: 400;
         font-size: to-rem(14);
         text-decoration: none;
         transition: background-color 0.2s ease, color 0.2s ease;

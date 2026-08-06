@@ -56,12 +56,12 @@
       // Smaller on mobile — the hero's own heading/intro text is anchored
       // to the bottom of a short hero, so there isn't room for a large
       // dead-centre badge without it sitting on top of that text. Fluid
-      // (not a breakpoint swap) so it ramps smoothly from 90px at a 390px
+      // (not a breakpoint swap) so it ramps smoothly from 56px at a 390px
       // viewport to 180px at 900px+, instead of popping at one exact width
       // — the JS reads this size live, so a discrete jump here would show
       // up as a visible snap while the window is being resized.
-      width: clamp(90px, 17.65vw + 21px, 180px);
-      height: clamp(90px, 17.65vw + 21px, 180px);
+      width: clamp(56px, 24.3vw - 38.8px, 180px);
+      height: clamp(56px, 24.3vw - 38.8px, 180px);
       border-radius: 50%;
       background-image: url("../images/flights-holbox-logo-border2.png");
       background-size: contain;

@@ -3,8 +3,8 @@
   width: 100%;
   // Shorter on mobile so the panel below (e.g. the booking form) is
   // actually visible on load without scrolling, not just peeking in.
-  height: 42svh;
-  min-height: 320px;
+  height: 32svh;
+  min-height: 260px;
   overflow: hidden;
 
   @include bp(lap) {
@@ -142,8 +142,8 @@
 
   &__heading {
     font-family: get-font-family("main");
-    font-size: to-rem(30);
-    font-weight: 700;
+    font-size: to-rem(25);
+    font-weight: 400;
     color: $color-white;
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
     margin: 0 0 10px;
