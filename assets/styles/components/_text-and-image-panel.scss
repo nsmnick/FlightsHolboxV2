@@ -259,8 +259,15 @@
   &__buttons {
     display: flex;
     flex-wrap: wrap;
+    // Centred on mobile; back to left-aligned (matching the text above it)
+    // from bp(lap) up, where this sits in the split text/image layout.
+    justify-content: center;
     gap: 16px;
     margin-top: 24px;
+
+    @include bp(lap) {
+      justify-content: flex-start;
+    }
   }
 
   // Same chevron-toggle look as the WYSIWYG's own inline <details> pattern

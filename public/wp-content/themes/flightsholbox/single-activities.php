@@ -1,8 +1,15 @@
 <?php get_header(); ?>
 
 <?php while (have_posts()) : the_post();
-    $hero_image   = get_field('hero_image');
-    $hero_url     = is_array($hero_image) ? ($hero_image['url'] ?? '') : ($hero_image ? wp_get_attachment_image_url($hero_image, 'full') : '');
+    // Featured Image is the primary source now — falls back to the old
+    // "Hero Image" ACF field only for posts that were set up before this
+    // switch and don't have a featured image assigned yet.
+    $hero_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+
+    if (!$hero_url) {
+        $hero_image = get_field('hero_image');
+        $hero_url   = is_array($hero_image) ? ($hero_image['url'] ?? '') : ($hero_image ? wp_get_attachment_image_url($hero_image, 'full') : '');
+    }
     $introduction = get_field('introduction');
     $sections     = get_field('content_sections') ?: [];
 ?>

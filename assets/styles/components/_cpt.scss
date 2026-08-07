@@ -58,7 +58,7 @@
   &__title {
     color: $color-white;
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
+    font-weight: 400;
     margin: 0;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -176,7 +176,7 @@
   // ─── Footer back link ─────────────────────────────────────────────────────
 
   &__footer {
-    background: $color-fh-navy;
+    background: $color-grey;
     padding: 40px 0;
   }
 
@@ -195,10 +195,6 @@
     .cpt-single__section {
       border-bottom-color: $color-grey;
     }
-
-    .cpt-single__footer {
-      background: $color-fh-dark;
-    }
   }
 }
 
@@ -208,21 +204,52 @@
 
   &__hero {
     position: relative;
-    height: 280px;
+    // Taller than before (was 280px) — .hero-panel__wave is sized for a much
+    // taller hero (32-75svh), so at the old height its ~70-110px band left
+    // barely any clearance above it for the title before this padding bump.
+    height: 320px;
+    overflow: hidden;
     background-color: $color-fh-navy;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: flex-end;
+
+    @include bp(lap) {
+      height: 360px;
+    }
   }
 
+  // Same dark gradient (and stop values) as .hero-panel__overlay, for
+  // text readability against a real photo instead of the flat navy tint
+  // this used before there was a background image to sit behind.
   &__hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 70, 123, 0.6);
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.0) 35%,
+      rgba(0, 0, 0, 0.55) 65%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
   }
 
   &__hero-content {
     position: relative;
-    padding-bottom: 2rem;
+    // Above the wave's own z-index:2 (see .hero-panel__wave), same as
+    // .hero-panel__content — otherwise the wave would paint over the title.
+    z-index: 3;
+    // Clears the wave's own band underneath (70px mobile / 110px desktop,
+    // see .hero-panel__wave) — 2rem left the title overlapping its crest.
+    padding-bottom: 4.5rem;
+
+    @include bp(lap) {
+      padding-bottom: 6rem;
+    }
   }
 
   &__title {
