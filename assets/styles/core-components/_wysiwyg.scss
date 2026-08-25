@@ -32,8 +32,9 @@
     text-align: left;
     margin-top: 26px;
     margin-bottom: 16px;
-    font-size: to-rem(26);
+    font-size: to-rem(28);
     line-height: 1.25;
+    font-weight: 500;
 
     @include bp(lap) {
       margin-top: 34px;

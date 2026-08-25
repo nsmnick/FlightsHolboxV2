@@ -103,17 +103,15 @@ class ACFBlocks
     public static function set_allowed_block_types($block_editor_context, $editor_context)
     {
         if (!empty($editor_context->post)) {
-            if ('post' === $editor_context->post->post_type) {
-                return array(
-                    'core/freeform'
-                );
-            }
-
             if (in_array($editor_context->post->post_type, self::ACF_ONLY_POST_TYPES, true)) {
                 return self::ACF_PANEL_BLOCKS;
             }
         }
 
+        // 'post' falls through to here too — same unrestricted access
+        // (every core block plus every ACF panel block) 'airports' already
+        // gets by not being in ACF_ONLY_POST_TYPES, rather than the old
+        // core/freeform-only restriction that blocked any block at all.
         return $block_editor_context;
     }
 

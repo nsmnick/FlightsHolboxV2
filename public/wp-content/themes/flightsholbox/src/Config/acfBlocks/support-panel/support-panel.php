@@ -86,7 +86,7 @@ if (!$preview_popup_image && !$hide_panel) {
      <div class="container <?php echo $generic_container_class; ?>">
 
         <?php if ($heading) : ?>
-            <h1 class="support-panel__heading"><?php echo esc_html($heading); ?></h1>
+            <h2 class="support-panel__heading"><?php echo esc_html($heading); ?></h2>
         <?php endif; ?>
 
         <?php if ($intro) : ?>

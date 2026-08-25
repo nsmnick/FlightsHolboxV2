@@ -17,6 +17,7 @@
 
     <div class="cpt-single__hero" <?php if ($hero_url) : ?>style="background-image: url('<?php echo esc_url($hero_url); ?>')"<?php endif; ?>>
         <div class="cpt-single__hero-overlay" aria-hidden="true"></div>
+        <canvas class="hero-panel__wave" aria-hidden="true"></canvas>
         <div class="cpt-single__hero-content container">
             <p class="cpt-single__eyebrow">
                 <a href="<?php echo esc_url($news_link); ?>">Latest News</a>

@@ -21,6 +21,8 @@
   &__hero-overlay {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    pointer-events: none;
     background: linear-gradient(
       to top,
       rgba(0, 0, 0, 0.75) 0%,
@@ -31,6 +33,9 @@
 
   &__hero-content {
     position: relative;
+    // Above the wave's own z-index:2 (see .hero-panel__wave) — otherwise
+    // the wave (explicit z-index) would paint over this (implicit/auto).
+    z-index: 3;
     padding-bottom: 3rem;
   }
 
