@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/video-panel",
   "title": "Video Panel",
   "description": "Embeds a YouTube or Vimeo video from a URL",

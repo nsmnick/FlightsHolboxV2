@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/route-map-panel",
   "title": "Route Map Panel",
   "description": "An illustrated map with a pin for each location. Clicking a route line shows that route's prices.",

@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/text-panel",
   "title": "Text Panel",
   "description": "WYSIWYG text block — choose between primary heading, secondary heading, or paragraph, with a custom text colour",

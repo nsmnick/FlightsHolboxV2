@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/tripadvisor-reviews-panel",
   "title": "TripAdvisor Reviews Panel",
   "description": "TripAdvisor's own official review widget (Widget Center embed) — choose between Scrolling Reviews or a compact Ratings Summary — with an optional heading and the shared Panel Settings.",

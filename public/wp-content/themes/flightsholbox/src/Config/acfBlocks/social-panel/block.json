@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/social-panel",
   "title": "Social Media Panel",
   "description": "Branded call-out (Facebook, Instagram or TripAdvisor) with a heading, description and link button — colour scheme and button text follow the selected platform",

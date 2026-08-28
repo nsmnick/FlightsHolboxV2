@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/plain-text-panel",
   "title": "Plain Text Panel",
   "description": "A WYSIWYG text area with no card/box styling — same as Text Panel but plain, full-width content.",

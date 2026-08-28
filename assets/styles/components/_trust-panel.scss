@@ -19,25 +19,47 @@
     }
   }
 
-  // Grid breakpoints match the container's own (980/700/480) rather than
-  // the theme's tab/lap scale — otherwise the container would narrow before
+  // Flex (not grid) so an incomplete last row — any number of cards, not
+  // just a neat multiple of the column count — centres itself instead of
+  // sitting flush left. Grid's fixed 1fr tracks fill the full row width
+  // regardless of how many cells actually have content, leaving no room
+  // for justify-content to centre into; flex-wrap rows are each their own
+  // flex line, which justify-content:center centres independently.
+  // Breakpoints match the container's own (980/700/480) rather than the
+  // theme's tab/lap scale — otherwise the container would narrow before
   // the grid re-flows, cramming too many columns into too little width.
   &__grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
 
+    > * {
+      flex: 0 0 calc((100% - 4 * 16px) / 5);
+      max-width: calc((100% - 4 * 16px) / 5);
+    }
+
     @media (max-width: 980px) {
-      grid-template-columns: repeat(3, 1fr);
+      > * {
+        flex-basis: calc((100% - 2 * 16px) / 3);
+        max-width: calc((100% - 2 * 16px) / 3);
+      }
     }
 
     @media (max-width: 700px) {
-      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
+
+      > * {
+        flex-basis: calc((100% - 14px) / 2);
+        max-width: calc((100% - 14px) / 2);
+      }
     }
 
     @media (max-width: 480px) {
-      grid-template-columns: 1fr;
+      > * {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
     }
   }
 
@@ -64,14 +86,6 @@
       box-shadow: 0 16px 36px rgba($color-fh-dark, 0.13);
     }
 
-    // The last odd card spans both columns at 2-up; not needed once
-    // we're down to a single column, but harmless since it still applies.
-    &:last-child {
-      @media (max-width: 700px) {
-        grid-column: 1 / -1;
-      }
-    }
-
     @media (max-width: 480px) {
       min-height: 0;
       padding: 16px 14px;
@@ -85,14 +99,14 @@
 
     img {
       display: block;
-      width: 26px;
-      height: 26px;
+      width: 40px;
+      height: 40px;
       margin: 0 auto;
       object-fit: contain;
 
       @media (max-width: 480px) {
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
       }
     }
 

@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/text-and-image-panel",
   "title": "Text and Image Panel",
   "description": "A text column with an optional button, side-by-side with an image — image can sit left or right",

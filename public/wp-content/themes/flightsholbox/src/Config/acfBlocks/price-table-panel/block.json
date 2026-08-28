@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/price-table-panel",
   "title": "Price Table Card",
   "description": "A card-style price table — heading, editable column labels, repeatable rows (with an optional tax note and trip-type label per price), and an info note underneath.",

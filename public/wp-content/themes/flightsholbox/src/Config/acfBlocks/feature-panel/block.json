@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/feature-panel",
   "title": "Feature Panel",
   "description": "One, two, or three image features with text and a link button",

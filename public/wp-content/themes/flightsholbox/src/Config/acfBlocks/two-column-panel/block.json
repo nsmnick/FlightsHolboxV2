@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/two-column-panel",
   "title": "Two Column Panel",
   "description": "Centered heading and intro above two WYSIWYG columns, with an optional pullout summary quote below",

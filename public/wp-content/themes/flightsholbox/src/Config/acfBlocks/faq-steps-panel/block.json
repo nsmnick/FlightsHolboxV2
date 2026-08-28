@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/faq-steps-panel",
   "title": "FAQ Steps Panel",
   "description": "A callout card with a heading and a repeatable list of numbered steps (title + rich text) — built for FAQ answers, but usable in any content area.",

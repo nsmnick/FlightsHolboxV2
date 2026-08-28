@@ -1,0 +1,54 @@
+// Block editor (wp-admin) readability — every ACF block's own fields (and
+// the shared Panel Settings clone) render into Gutenberg's Block Settings
+// sidebar, using WordPress/ACF's own default font sizes, which are quite
+// small (~13px) and only get more cramped in that ~280px-wide column. These
+// selectors only exist in wp-admin's block editor screen, never on the
+// front end, so this is safe to include in the main bundle without scoping
+// it to an admin-only stylesheet.
+
+// A bit more breathing room than the ~280px default, so longer field
+// labels (e.g. "Google Reviews Shortcode") and their inputs aren't as
+// cramped.
+.interface-interface-skeleton__sidebar {
+  width: 380px;
+}
+
+.components-panel__body {
+  // ACF field labels (the block's own custom fields — Heading, Style,
+  // Google Reviews Shortcode, ...).
+  .acf-label label {
+    font-size: to-rem(14);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .acf-label .description {
+    font-size: to-rem(13);
+  }
+
+  // ACF field inputs/selects/textareas.
+  .acf-input {
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    input[type="email"],
+    select,
+    textarea {
+      font-size: to-rem(14);
+      line-height: 1.5;
+    }
+  }
+
+  // Native Gutenberg controls (block supports like Anchor, and any
+  // non-ACF sidebar panels) — same treatment for consistency.
+  .components-base-control__label {
+    font-size: to-rem(13);
+    font-weight: 600;
+  }
+
+  .components-select-control__input,
+  .components-text-control__input,
+  .components-textarea-control__input {
+    font-size: to-rem(14);
+  }
+}

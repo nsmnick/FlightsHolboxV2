@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/image-column-panel",
   "title": "Image Column Panel",
   "description": "Displays one, two, or three images side by side, each cropped into a circle with a watercolor border",

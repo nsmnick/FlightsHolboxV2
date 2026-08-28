@@ -54,10 +54,15 @@ div.button {
     font-size: to-rem(16);
   }
 
+  // Darkens the button's own gold tone rather than swapping to a fixed
+  // solid black — buttons appear on every CMS Background Colour option
+  // (including bgc-dark/bgc-charcoal), and a solid-black hover fill nearly
+  // disappears into a section that's already dark. Staying gold-toned means
+  // the hover never depends on guessing what's behind it.
   &:hover {
-    background-color: getcolor("black");
-    border-color: getcolor("black");
-    color: $color-fh-gold;
+    background: linear-gradient(135deg, darken($color-fh-gold, 8%), darken($color-fh-gold, 16%));
+    border-color: darken($color-fh-gold, 10%);
+    color: getcolor("black");
     text-decoration: none;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
@@ -101,10 +106,13 @@ div.button {
     border: solid 2px $color-fh-navy;
     background: linear-gradient(135deg, lighten($color-fh-navy, 8%), darken($color-fh-navy, 6%));
 
+    // Same reasoning as the default gold button's hover — darkens its own
+    // navy rather than inverting to solid white, which would nearly vanish
+    // against a bgc-white/bgc-light-grey section.
     &:hover {
-      background-color: getcolor("white");
-      border-color: $color-fh-navy;
-      color: $color-fh-navy;
+      background: linear-gradient(135deg, darken($color-fh-navy, 10%), darken($color-fh-navy, 18%));
+      border-color: darken($color-fh-navy, 12%);
+      color: getcolor("white");
     }
   }
 

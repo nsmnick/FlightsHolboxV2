@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/slider-panel",
   "title": "Airport Slider Panel",
   "description": "A card slider with image, heading, description and optional link per slide.",

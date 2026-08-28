@@ -1,4 +1,5 @@
 {
+  "apiVersion": 2,
   "name": "acf/card-panel",
   "title": "Card Panel",
   "description": "One, two or three information cards, each with a heading, a list of items, and an option to show numbered step icons",

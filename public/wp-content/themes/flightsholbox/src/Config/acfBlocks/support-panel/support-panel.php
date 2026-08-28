@@ -3,8 +3,9 @@ include __DIR__ . '/../_block-generics.php';
 include __DIR__ . '/../_block-preview.php';
 
 if (!$preview_popup_image && !$hide_panel) {
-    $heading = get_field('heading');
-    $intro   = get_field('intro');
+    $heading       = get_field('heading');
+    $intro         = get_field('intro');
+    $max_questions = (int) (get_field('max_questions_shown') ?: 0);
 
     // Topics are the faq_topic taxonomy terms, and each topic's FAQs are real
     // "faq" CPT posts assigned to that term — not a manually-entered
@@ -121,6 +122,7 @@ if (!$preview_popup_image && !$hide_panel) {
                     <div
                         class="support-panel__topic<?php echo $i === 0 ? ' is-active' : ''; ?>"
                         data-topic="<?php echo esc_attr($topic['slug']); ?>"
+                        <?php if ($max_questions > 0) : ?>data-max-questions="<?php echo esc_attr($max_questions); ?>"<?php endif; ?>
                         <?php if ($i !== 0) : ?>hidden<?php endif; ?>
                     >
                         <h2 class="support-panel__topic-heading"><?php echo esc_html($topic['name']); ?></h2>
@@ -150,6 +152,12 @@ if (!$preview_popup_image && !$hide_panel) {
                                 </details>
                             <?php endforeach; ?>
                         </div>
+
+                        <?php if ($max_questions > 0 && count($topic['faqs']) > $max_questions) : ?>
+                            <button type="button" class="support-panel__show-more">
+                                Show More Questions
+                            </button>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

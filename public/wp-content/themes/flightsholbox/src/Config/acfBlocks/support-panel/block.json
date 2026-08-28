@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/support-panel",
   "title": "Support Panel",
   "description": "Topic-switching support/FAQ hub with live search — a sidebar of topics, each with its own accordion of questions and answers",

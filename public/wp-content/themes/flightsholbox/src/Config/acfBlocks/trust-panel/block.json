@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/trust-panel",
   "title": "Trust Panel",
   "description": "A row of trust/reassurance boxes, each with an icon, title and subtitle — added via a repeater",

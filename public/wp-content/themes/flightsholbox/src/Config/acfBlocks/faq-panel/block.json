@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/faq-panel",
   "title": "FAQ Panel",
   "description": "Accordion FAQ with question and answer repeater",

@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/text-column-panel",
   "title": "Text Column Panel",
   "description": "Two or three columns of WYSIWYG text, side by side",

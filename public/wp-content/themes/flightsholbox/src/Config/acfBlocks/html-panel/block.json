@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/html-panel",
   "title": "HTML Panel",
   "description": "Paste raw HTML to embed custom markup, third-party widgets, or embed codes directly on the page",

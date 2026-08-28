@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/news-gallery-panel",
   "title": "News Gallery Panel",
   "description": "A filterable gallery of blog posts (Posts post type), filterable by category",

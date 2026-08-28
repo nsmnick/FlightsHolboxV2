@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/example-text-panel",
   "title": "Example Text Panel",
   "description": "",

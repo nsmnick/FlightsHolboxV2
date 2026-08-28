@@ -28,17 +28,23 @@
     }
   }
 
+  // Matches the base (non-wysiwyg) h2 in base/_base.scss — same
+  // size/weight/letter-spacing/line-height, so a heading reads identically
+  // whether it's plain markup or typed into a WYSIWYG field. Margins stay
+  // their own — this context's spacing needs differ from a bare page h2.
   h2 {
     text-align: left;
     margin-top: 26px;
     margin-bottom: 16px;
     font-size: to-rem(28);
-    line-height: 1.25;
-    font-weight: 500;
+    line-height: 1.2;
+    font-weight: 550;
+    letter-spacing: -0.65752px;
 
     @include bp(lap) {
       margin-top: 34px;
       margin-bottom: 22px;
+      font-size: to-rem(38);
     }
   }
 

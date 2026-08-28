@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/booking-panel",
   "title": "Booking Panel",
   "description": "Flight search/booking form with From, To, and People dropdowns",

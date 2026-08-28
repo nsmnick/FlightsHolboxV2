@@ -191,3 +191,23 @@
     transition: opacity 0.25s ease;
   }
 }
+
+.support-panel__show-more {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 24px;
+  border: 1px solid $color-fh-navy;
+  border-radius: 30px;
+  background: transparent;
+  color: $color-fh-navy;
+  font-family: get-font-family("main");
+  font-size: to-rem(14);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: $color-fh-navy;
+    color: $color-white;
+  }
+}

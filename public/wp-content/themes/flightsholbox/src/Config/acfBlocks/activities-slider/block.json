@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/activities-slider",
   "title": "Activities Slider Panel",
   "description": "A left-anchored card slider showcasing activities.",

@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/image-slider-panel",
   "title": "Image Slider Panel",
   "description": "An image carousel, same card/scale styling as the Airport Slider Panel but images only — no per-slide heading, description or link.",

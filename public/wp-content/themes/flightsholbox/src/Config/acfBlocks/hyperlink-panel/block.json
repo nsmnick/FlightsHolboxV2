@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/hyperlink-panel",
   "title": "Hyperlink Panel",
   "description": "Automatically lists every Table Panel on this page as a jump link",

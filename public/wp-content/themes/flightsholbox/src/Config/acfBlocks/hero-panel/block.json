@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/hero-panel",
   "title": "Hero Panel",
   "description": "Full-width hero slideshow with heading and strapline",

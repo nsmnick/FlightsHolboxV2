@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/table-panel",
   "title": "Table Panel",
   "description": "A heading with a two-column information table — rows are added via a repeater",

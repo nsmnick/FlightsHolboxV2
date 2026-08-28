@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/contact-details-panel",
   "title": "Contact Details Panel",
   "description": "Phone, WhatsApp, email, office address, Google Maps link, booking notice and social links",

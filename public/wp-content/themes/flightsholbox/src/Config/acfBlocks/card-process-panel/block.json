@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/card-process-panel",
   "title": "Card Process Panel",
   "description": "A heading with an intro, a grid of numbered process step cards (icon, heading, text), and a button.",

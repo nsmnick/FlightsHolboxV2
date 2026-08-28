@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/contact-cards-panel",
   "title": "Contact Us Cards Panel",
   "description": "A heading/intro, a flexible row of contact/support cards (icon, heading, subheading, text, checklist, contact details, up to two buttons), and an optional policy callout box underneath.",

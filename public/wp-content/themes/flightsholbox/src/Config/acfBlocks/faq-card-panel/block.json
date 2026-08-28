@@ -1,4 +1,5 @@
 {
+  "apiVersion": 3,
   "name": "acf/faq-card-panel",
   "title": "FAQ Card Panel",
   "description": "A callout-style info card with an editable heading and rich text body — built for dropping into FAQ answers, but usable in any content area.",
