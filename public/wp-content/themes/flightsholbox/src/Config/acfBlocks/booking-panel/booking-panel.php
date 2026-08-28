@@ -41,7 +41,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
             </form>
 
             <div class="search-options">
-                <a class="search-link" href="<?php echo esc_url(site_url('/flight-prices')); ?>">
+                <a class="search-link" href="<?php echo esc_url(site_url('/private-flight-prices-holbox')); ?>">
                     See all prices
                 </a>
                 <?php if ($sister_site_url) : ?>
