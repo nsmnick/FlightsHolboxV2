@@ -10,6 +10,7 @@ composer.phar
 
 /public/*
 !/public/.htaccess
+!/public/wp-config.php
 !/public/wp-content/
 !/public/wp-salt.php
 
@@ -20,5 +21,3 @@ composer.phar
 /public/wp-content/themes/*
 !/public/wp-content/themes/flightsholbox/
 /public/wp-content/themes/flightsholbox/dist/
-
-vite.config.js
