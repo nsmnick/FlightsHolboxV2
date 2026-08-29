@@ -5,7 +5,12 @@ define('THEMEROOT', get_stylesheet_directory_uri());
 require_once get_stylesheet_directory() . '/src/Autoloader.php';
 \Theme\Autoloader::register();
 
+\Theme\Config\Init::init();
+//\Theme\Config\Lockdown::init();
+
 \Theme\Config\ACFBlocks::init();
+
+
 \Theme\Config\Plugins\ACFPro\ACFPro::init();
 \Theme\Config\GoogleReviews::init();
 \Theme\Config\RestAPI::init();
@@ -308,13 +313,20 @@ add_filter('mce_buttons_2', function (array $buttons): array {
 // Make the colour palette match the FH brand colours
 add_filter('tiny_mce_before_init', function (array $settings): array {
     $settings['textcolor_map'] = json_encode([
-        '000000', 'Black',
-        '1b161c', 'FH Dark',
-        '00467b', 'FH Navy',
-        'e6af2a', 'FH Gold',
-        '464749', 'FH Charcoal',
-        '888888', 'Grey',
-        'ffffff', 'White',
+        '000000',
+        'Black',
+        '1b161c',
+        'FH Dark',
+        '00467b',
+        'FH Navy',
+        'e6af2a',
+        'FH Gold',
+        '464749',
+        'FH Charcoal',
+        '888888',
+        'Grey',
+        'ffffff',
+        'White',
     ]);
     $settings['textcolor_cols'] = '7';
     $settings['textcolor_rows'] = '1';
@@ -501,7 +513,8 @@ function fh_register_post_types()
 add_filter('gform_pre_render_1',            'fh_gf_inject_booking_summary');
 add_filter('gform_pre_validation_1',        'fh_gf_inject_booking_summary');
 add_filter('gform_pre_submission_filter_1', 'fh_gf_inject_booking_summary');
-function fh_gf_inject_booking_summary($form) {
+function fh_gf_inject_booking_summary($form)
+{
     $price_id  = isset($_GET['price_id'])  ? (int) $_GET['price_id']  : 0;
     $trip_type = (isset($_GET['trip_type']) && in_array($_GET['trip_type'], ['one_way', 'round_trip']))
         ? $_GET['trip_type'] : '';
@@ -544,7 +557,8 @@ function fh_gf_inject_booking_summary($form) {
 }
 
 add_filter('gform_notification_1', 'fh_gf_booking_notification', 10, 3);
-function fh_gf_booking_notification($notification, $form, $entry) {
+function fh_gf_booking_notification($notification, $form, $entry)
+{
     if ($notification['name'] !== 'Admin Notification') return $notification;
 
     $price_id  = isset($_GET['price_id'])  ? (int) $_GET['price_id']  : 0;
