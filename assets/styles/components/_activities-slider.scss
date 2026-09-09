@@ -101,13 +101,7 @@
 
   &__heading {
     color: $color-white;
-    font-size: to-rem(28);
-    font-weight: 400;
-    margin: 0 0 16px;
-
-    @include bp(lap) {
-      font-size: to-rem(36);
-    }
+    @include panel-heading;
   }
 
   &__subheading {

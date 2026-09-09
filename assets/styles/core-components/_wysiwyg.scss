@@ -28,23 +28,20 @@
     }
   }
 
-  // Matches the base (non-wysiwyg) h2 in base/_base.scss — same
-  // size/weight/letter-spacing/line-height, so a heading reads identically
-  // whether it's plain markup or typed into a WYSIWYG field. Margins stay
-  // their own — this context's spacing needs differ from a bare page h2.
+  // Same panel-heading size/weight (see tools/mixins/_panel-heading.scss)
+  // as the base (non-wysiwyg) h2 in base/_base.scss, and every panel
+  // heading site-wide — a heading reads identically whether it's plain
+  // markup, a panel heading, or typed into a WYSIWYG field. margin-top
+  // stays its own on top of that: this context needs real space above a
+  // heading that follows body copy, which standalone panel headings don't.
   h2 {
     text-align: left;
-    margin-top: 26px;
-    margin-bottom: 16px;
-    font-size: to-rem(28);
     line-height: 1.2;
-    font-weight: 550;
-    letter-spacing: -0.65752px;
+    @include panel-heading;
+    margin-top: 26px;
 
     @include bp(lap) {
       margin-top: 34px;
-      margin-bottom: 22px;
-      font-size: to-rem(38);
     }
   }
 

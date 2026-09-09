@@ -72,14 +72,8 @@
 
   &__heading {
     color: $color-white;
-    font-size: to-rem(24);
-    font-weight: 700;
     line-height: 1.4;
-    margin: 0 0 16px;
-
-    @include bp(lap) {
-      font-size: to-rem(28);
-    }
+    @include panel-heading;
   }
 
   &__description {

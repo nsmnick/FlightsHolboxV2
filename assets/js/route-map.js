@@ -1,66 +1,115 @@
-function renderRouteInfo(infoEl, data) {
-  const placeInfoBlocks = data.fares
-    .filter((fare) => fare.place_info)
+function renderFareRows(fare) {
+  const rows = [];
+
+  if (fare.one_way_ex) {
+    rows.push(`
+      <div class="route-map__fare route-map__fare--one-way">
+        <div class="route-map__fare-header">
+          <span class="route-map__fare-label">One Way</span>
+        </div>
+        <div class="route-map__fare-row">
+          <span>Excluding tax</span>
+          <span class="route-map__fare-amount">$${fare.one_way_ex}</span>
+        </div>
+        <div class="route-map__fare-row route-map__fare-row--inc">
+          <span>Including tax (${fare.tax_rate}%)</span>
+          <span class="route-map__fare-amount route-map__fare-amount--inc">$${fare.one_way_inc}</span>
+        </div>
+      </div>
+    `);
+  }
+
+  if (fare.rt_ex) {
+    rows.push(`
+      <div class="route-map__fare route-map__fare--return">
+        <div class="route-map__fare-header">
+          <span class="route-map__fare-label">Return</span>
+        </div>
+        <div class="route-map__fare-row">
+          <span>Excluding tax</span>
+          <span class="route-map__fare-amount">$${fare.rt_ex}</span>
+        </div>
+        <div class="route-map__fare-row route-map__fare-row--inc">
+          <span>Including tax (${fare.tax_rate}%)</span>
+          <span class="route-map__fare-amount route-map__fare-amount--inc">$${fare.rt_inc}</span>
+        </div>
+      </div>
+    `);
+  }
+
+  return rows.join("");
+}
+
+// Renders prices for a single traveler-count tier. `showChangeLink` is
+// false when the route only has one tier to begin with — nothing to
+// "change" back to, so the group-size step is skipped entirely for those.
+function renderFareInfo(infoEl, data, fareIndex, showChangeLink) {
+  const fare = data.fares[fareIndex];
+
+  const placeInfo = fare.place_info
+    ? `
+      <details class="route-map__place-info">
+        <summary class="route-map__place-info-toggle">Plane Info</summary>
+        <div class="route-map__place-info-content">${fare.place_info.replace(/\n/g, "<br>")}</div>
+      </details>
+    `
+    : "";
+
+  infoEl.innerHTML = `
+    <p class="route-map__info-route">${data.from} <span aria-hidden="true">&rarr;</span> ${data.to}</p>
+    ${
+      showChangeLink
+        ? `
+          <p class="route-map__info-people">
+            <span>${fare.people}</span>
+            <button type="button" class="route-map__change-people">Change group size</button>
+          </p>
+        `
+        : ""
+    }
+    <div class="route-map__fares">${renderFareRows(fare)}</div>
+    ${placeInfo}
+    <a class="route-map__book-btn" href="${fare.url}">See full details &amp; book</a>
+  `;
+
+  if (showChangeLink) {
+    const changeBtn = infoEl.querySelector(".route-map__change-people");
+    if (changeBtn) {
+      changeBtn.addEventListener("click", () => renderPeopleSelect(infoEl, data));
+    }
+  }
+}
+
+// Quick-select step: ask which group size before showing a price, so a
+// route with several traveler-count tiers doesn't dump every price on
+// screen at once.
+function renderPeopleSelect(infoEl, data) {
+  const options = data.fares
     .map(
-      (fare) => `
-        <details class="route-map__place-info">
-          <summary class="route-map__place-info-toggle">Plane Info${fare.people ? ` &middot; ${fare.people}` : ""}</summary>
-          <div class="route-map__place-info-content">${fare.place_info.replace(/\n/g, "<br>")}</div>
-        </details>
+      (fare, index) => `
+        <button type="button" class="route-map__people-btn" data-fare-index="${index}">${fare.people || "Select"}</button>
       `,
     )
     .join("");
 
-  const fareBlocks = data.fares
-    .map((fare) => {
-      const rows = [];
-
-      if (fare.one_way_ex) {
-        rows.push(`
-          <div class="route-map__fare route-map__fare--one-way">
-            <div class="route-map__fare-header">
-              <span class="route-map__fare-label">One Way${fare.people ? ` &middot; ${fare.people}` : ""}</span>
-            </div>
-            <div class="route-map__fare-row">
-              <span>Excluding tax</span>
-              <span class="route-map__fare-amount">$${fare.one_way_ex}</span>
-            </div>
-            <div class="route-map__fare-row route-map__fare-row--inc">
-              <span>Including tax (${fare.tax_rate}%)</span>
-              <span class="route-map__fare-amount route-map__fare-amount--inc">$${fare.one_way_inc}</span>
-            </div>
-          </div>
-        `);
-      }
-
-      if (fare.rt_ex) {
-        rows.push(`
-          <div class="route-map__fare route-map__fare--return">
-            <div class="route-map__fare-header">
-              <span class="route-map__fare-label">Return${fare.people ? ` &middot; ${fare.people}` : ""}</span>
-            </div>
-            <div class="route-map__fare-row">
-              <span>Excluding tax</span>
-              <span class="route-map__fare-amount">$${fare.rt_ex}</span>
-            </div>
-            <div class="route-map__fare-row route-map__fare-row--inc">
-              <span>Including tax (${fare.tax_rate}%)</span>
-              <span class="route-map__fare-amount route-map__fare-amount--inc">$${fare.rt_inc}</span>
-            </div>
-          </div>
-        `);
-      }
-
-      return rows.join("");
-    })
-    .join("");
-
   infoEl.innerHTML = `
     <p class="route-map__info-route">${data.from} <span aria-hidden="true">&rarr;</span> ${data.to}</p>
-    <div class="route-map__fares">${fareBlocks}</div>
-    ${placeInfoBlocks}
-    <a class="route-map__book-btn" href="${data.url}">See full details &amp; book</a>
+    <p class="route-map__info-prompt route-map__info-prompt--people">How many people are traveling?</p>
+    <div class="route-map__people-select">${options}</div>
   `;
+
+  infoEl.querySelectorAll("[data-fare-index]").forEach((btn) => {
+    btn.addEventListener("click", () => renderFareInfo(infoEl, data, Number(btn.dataset.fareIndex), true));
+  });
+}
+
+function renderRouteInfo(infoEl, data) {
+  if (data.fares.length <= 1) {
+    renderFareInfo(infoEl, data, 0, false);
+    return;
+  }
+
+  renderPeopleSelect(infoEl, data);
 }
 
 export default function initRouteMap() {

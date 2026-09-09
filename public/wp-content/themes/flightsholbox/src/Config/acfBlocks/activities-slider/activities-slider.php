@@ -17,13 +17,6 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
         return;
     }
 
-    // Duplicate slides until we have at least 7 for a clean Swiper loop
-    $slides = $slider_items;
-    if (count($slides) < 7) {
-        while (count($slides) < 7) {
-            $slides = array_merge($slides, $slider_items);
-        }
-    }
 ?>
 
 <section class="activities-slider <?php echo $generic_block_settings_classes; ?>">
@@ -42,7 +35,7 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     <div class="activities-slider__track">
         <div class="activities-swiper swiper">
             <div class="swiper-wrapper activities-slider__wrapper">
-                <?php foreach ($slides as $i => $slide) :
+                <?php foreach ($slider_items as $i => $slide) :
                     $post_obj = $slide['slide_post'] ?? null;
                     $post_id  = $post_obj ? $post_obj->ID : 0;
 

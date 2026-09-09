@@ -81,12 +81,15 @@
 
     &__heading {
         color: $color-white;
-        font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-        font-weight: 400;
         line-height: 1.2;
-        margin: 0;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         transition: transform 0.3s ease;
+        @include panel-heading;
+        // Spacing to the subheading below comes from &__content's flex
+        // `gap`, not the heading's own margin — this card stacks
+        // heading+subheading+button tightly, so the shared panel-heading
+        // margin would double up with that gap.
+        margin: 0;
     }
 
     &__subheading {

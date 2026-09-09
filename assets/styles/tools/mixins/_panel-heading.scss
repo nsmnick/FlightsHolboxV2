@@ -1,0 +1,17 @@
+// Shared panel-heading typography (size/weight/spacing only — colour,
+// alignment, and any decorative treatment like an underline bar stay with
+// each panel, since those are layout choices, not the type scale itself).
+//
+// Standardized on the slider panels' heading style (image-slider-panel,
+// airport-slider, activities-slider), which were the most consistent
+// heading rules already in the codebase before every other panel was
+// audited and brought in line with them.
+@mixin panel-heading {
+  font-size: to-rem(28);
+  font-weight: 400;
+  margin: 0 0 16px;
+
+  @include bp(lap) {
+    font-size: to-rem(36);
+  }
+}

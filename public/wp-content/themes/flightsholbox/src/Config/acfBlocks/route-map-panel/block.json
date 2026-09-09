@@ -8,6 +8,7 @@
   "keywords": ["map", "route", "routes", "prices", "locations", "pins"],
   "acf": {
     "mode": "preview",
+    "hideFieldsInSidebar": true,
     "renderTemplate": "route-map-panel.php"
   },
   "supports": {

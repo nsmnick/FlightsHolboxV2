@@ -7,11 +7,9 @@
     text-align: center;
 
     h2 {
-      margin: 0 0 15px;
       color: $color-fh-navy;
       font-family: get-font-family("main");
-      font-size: to-rem(38);
-      font-weight: 300;
+      @include panel-heading;
     }
   }
 

@@ -72,33 +72,28 @@ if (!$hide_panel && !$preview_popup_image) {
             $route_key = $from->term_id . '-' . $to->term_id;
 
             if (!isset($routes[$route_key])) {
-                $people_id = (!empty($people) && !is_wp_error($people)) ? $people[0]->term_id : '';
-
                 $routes[$route_key] = [
-                    'from'       => $from,
-                    'to'         => $to,
-                    'fares'      => [],
-                    'search_url' => esc_url(site_url('/flights') . '?' . http_build_query(array_filter([
-                        'locations_from'   => $from->term_id,
-                        'locations_to'     => $to->term_id,
-                        'number_of_people' => $people_id,
-                    ]))),
+                    'from'  => $from,
+                    'to'    => $to,
+                    'fares' => [],
                 ];
             }
 
             $one_way_base = (float) get_field('price_one_way', $price_post->ID);
             $rt_base      = (float) get_field('price_round_trip', $price_post->ID);
             $tax_rate     = (float) (get_field('federal_tax_rate', $price_post->ID) ?: 16);
+            $people_id    = (!empty($people) && !is_wp_error($people)) ? $people[0]->term_id : '';
             $people_name  = (!empty($people) && !is_wp_error($people)) ? $people[0]->name : '';
 
             // Plane Info lives on the number_of_people term itself (aircraft
             // type is shared across every route using that traveler-count
             // tier), not per Price post.
-            $place_info = (!empty($people) && !is_wp_error($people))
-                ? get_field('plane_info', 'number_of_people_' . $people[0]->term_id)
+            $place_info = $people_id
+                ? get_field('plane_info', 'number_of_people_' . $people_id)
                 : null;
 
             $routes[$route_key]['fares'][] = [
+                'people_id'   => $people_id,
                 'people'      => $people_name,
                 'one_way_ex'  => $one_way_base ? number_format($one_way_base, 2) : null,
                 'one_way_inc' => $one_way_base ? number_format($one_way_base * (1 + $tax_rate / 100), 2) : null,
@@ -106,6 +101,15 @@ if (!$hide_panel && !$preview_popup_image) {
                 'rt_inc'      => $rt_base ? number_format($rt_base * (1 + $tax_rate / 100), 2) : null,
                 'tax_rate'    => $tax_rate,
                 'place_info'  => $place_info ?: null,
+                // Each traveler-count tier links to its own /flights search
+                // — so once a visitor picks a group size in the panel, the
+                // book link matches that choice instead of always pointing
+                // at whichever fare happened to be indexed first.
+                'url'         => esc_url(site_url('/flights') . '?' . http_build_query(array_filter([
+                    'locations_from'   => $from->term_id,
+                    'locations_to'     => $to->term_id,
+                    'number_of_people' => $people_id,
+                ]))),
             ];
         }
     }
@@ -155,7 +159,6 @@ if (!$hide_panel && !$preview_popup_image) {
                             'from'  => $route['from']->name,
                             'to'    => $route['to']->name,
                             'fares' => $route['fares'],
-                            'url'   => $route['search_url'],
                         ]));
                         $route_label = esc_attr($route['from']->name . ' to ' . $route['to']->name);
                         $path_id     = 'route-map-path-' . esc_attr($route_key);

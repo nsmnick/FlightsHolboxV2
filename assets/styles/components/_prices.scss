@@ -447,19 +447,76 @@
   }
 }
 
+// ─── Booking confirmation page ────────────────────────────────────────────────
+
+.booking-confirmation-page {
+  padding: 60px 0 80px;
+  background: $color-light-grey;
+
+  &__container {
+    max-width: 700px;
+  }
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 800;
+    color: $color-fh-dark;
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+  }
+
+  &__ref {
+    font-size: to-rem(15);
+    color: $color-fh-charcoal;
+    margin: 0;
+
+    strong {
+      color: $color-fh-navy;
+    }
+  }
+
+  &__summary {
+    background: $color-white;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 28px 24px;
+
+    @include bp(lap) {
+      padding: 36px 40px;
+    }
+  }
+
+  &__missing {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: to-rem(16);
+    color: $color-fh-charcoal;
+    background: $color-white;
+    border-radius: 12px;
+
+    a {
+      color: $color-fh-navy;
+      font-weight: 600;
+      &:hover { color: $color-fh-gold; }
+    }
+  }
+}
+
 // ─── Price table (all-prices page) ────────────────────────────────────────────
 
 .price-table-group {
   margin-bottom: 60px;
 
   &__heading {
-    font-size: to-rem(22);
-    font-weight: 700;
     color: $color-fh-dark;
-    margin: 0 0 24px;
     display: flex;
     align-items: baseline;
     gap: 10px;
+    @include panel-heading;
   }
 
   &__label {

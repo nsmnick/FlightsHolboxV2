@@ -8,11 +8,9 @@
     @include panel-settings-modifiers;
 
     &__heading {
-        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-        font-weight: 400;
         color: $color-fh-navy;
-        margin: 0 0 1.25rem;
         text-align: center;
+        @include panel-heading;
     }
 
     // Explicit CMS "Heading Colour" choice, overriding the hardcoded navy

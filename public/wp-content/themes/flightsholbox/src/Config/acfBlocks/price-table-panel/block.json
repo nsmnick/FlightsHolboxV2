@@ -7,7 +7,8 @@
   "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='2' y='4' width='20' height='16' rx='2' stroke='#000' stroke-width='2'/><path d='M2 9h20' stroke='#000' stroke-width='2'/><path d='M9 9v11' stroke='#000' stroke-width='2'/></svg>",
   "keywords": ["price", "table", "card", "aircraft", "route"],
   "acf": {
-    "mode": "edit",
+    "mode": "preview",
+    "hideFieldsInSidebar": true,
     "renderTemplate": "price-table-panel.php"
   },
   "supports": {

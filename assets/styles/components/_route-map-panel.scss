@@ -5,13 +5,11 @@
 }
 
 .route-map-panel__heading {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 700;
   color: $color-fh-navy;
-  margin: 0 0 1.5rem;
   text-align: center;
   position: relative;
   padding-bottom: 18px;
+  @include panel-heading;
 
   &::after {
     content: "";
@@ -293,6 +291,74 @@
   font-weight: 700;
   color: $color-fh-navy;
   margin: 0 0 16px;
+}
+
+.route-map__info-prompt--people {
+  text-align: left;
+  padding: 0 0 12px;
+  font-weight: 600;
+  color: $color-fh-dark;
+}
+
+.route-map__people-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.route-map__people-btn {
+  flex: 1 1 auto;
+  padding: 10px 14px;
+  border: 1px solid $color-light-grey;
+  border-radius: 8px;
+  background: $color-white;
+  color: $color-fh-dark;
+  font: inherit;
+  font-size: to-rem(13);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $color-fh-gold;
+    background: rgba(230, 175, 42, 0.08);
+    color: $color-fh-navy;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-fh-gold;
+    outline-offset: 2px;
+  }
+}
+
+.route-map__info-people {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+  font-size: to-rem(13);
+  font-weight: 700;
+  color: $color-fh-navy;
+}
+
+.route-map__change-people {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: to-rem(12);
+  font-weight: 600;
+  color: $color-fh-charcoal;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-fh-navy;
+  }
 }
 
 .route-map__fares {

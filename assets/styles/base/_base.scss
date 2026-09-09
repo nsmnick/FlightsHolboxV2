@@ -55,24 +55,12 @@ h1 {
 
 h2 {
   font-family: get-font-family("main");
-
   line-height: 1.2;
-  // Matches .wysiwyg-container h2 (core-components/_wysiwyg.scss) — same
-  // weight/size/letter-spacing outside a WYSIWYG field as inside one, so a
-  // plain <h2> reads identically wherever it's used. Margins are left
-  // independent — those serve different layout needs per context.
-  font-weight: 550;
-  margin: 0 0 26px;
-
-  font-size: to-rem(28);
-  letter-spacing: -0.65752px; //background-color: red;
-  @include bp(lap) {
-    font-size: to-rem(38);
-  }
-
-  @include bp(desk) {
-    font-size: to-rem(38);
-  }
+  // Same panel-heading size/weight/margin (see
+  // tools/mixins/_panel-heading.scss) as .wysiwyg-container h2 and every
+  // panel heading site-wide — a plain <h2> reads identically wherever it's
+  // used.
+  @include panel-heading;
 }
 
 h3 {

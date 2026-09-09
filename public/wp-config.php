@@ -27,41 +27,44 @@
 
 // JACOB
 /** The name of the database for WordPress */
-// define( 'DB_NAME', 'local' );
+define( 'DB_NAME', 'local' );
 
 // /** Database username */
-// define( 'DB_USER', 'root' );
+define( 'DB_USER', 'root' );
 
 // /** Database password */
-// define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', 'root' );
 
-// /** Database hostname */
-// define( 'DB_HOST', 'localhost' );
+/** Database hostname */
+define( 'DB_HOST', 'localhost' );
 
 
-// define( 'DB_NAME', 'dbu32roeclecl4' );
+define( 'DB_NAME', 'dbu32roeclecl4' );
 
-// define( 'DB_USER', 'ubswb8w8qmacu' );
+define( 'DB_USER', 'ubswb8w8qmacu' );
 
-// define( 'DB_PASSWORD', 'b533gij4bxoj' );
+define( 'DB_PASSWORD', 'b533gij4bxoj' );
 
-// define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'localhost' );
 
-// define( 'DB_CHARSET', 'utf8' );
+define( 'DB_CHARSET', 'utf8' );
 
-// define( 'DB_COLLATE', '' );
+define( 'DB_COLLATE', '' );
+
+
 
 // Nick
-define('DB_NAME', 'fh01');
-define('DB_USER', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_HOST', 'localhost');
+// define('DB_NAME', 'fh01');
+// define('DB_USER', 'root');
+// define('DB_PASSWORD', 'root');
+// define('DB_HOST', 'localhost');
 
-/** Database charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8');
+// /** Database charset to use in creating database tables. */
+// define('DB_CHARSET', 'utf8');
 
-/** The database collate type. Don't change this if in doubt. */
-define('DB_COLLATE', '');
+// /** The database collate type. Don't change this if in doubt. */
+// define('DB_COLLATE', '');
+
 
 /**#@+
  * Authentication unique keys and salts.

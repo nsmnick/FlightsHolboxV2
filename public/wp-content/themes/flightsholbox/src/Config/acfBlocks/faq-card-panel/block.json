@@ -7,7 +7,8 @@
   "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='2' y='3' width='3' height='18' rx='1.5' fill='#000'/><rect x='8' y='4' width='14' height='16' rx='2' stroke='#000' stroke-width='2'/><path d='M11 9h8M11 13h8M11 17h5' stroke='#000' stroke-width='2' stroke-linecap='round'/></svg>",
   "keywords": ["faq", "card", "callout", "info", "answer"],
   "acf": {
-    "mode": "edit",
+    "mode": "preview",
+    "hideFieldsInSidebar": true,
     "renderTemplate": "faq-card-panel.php"
   },
   "supports": {
