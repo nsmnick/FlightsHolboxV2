@@ -41,6 +41,7 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/social-panel');
         register_block_type(__DIR__ . '/acfBlocks/trust-panel');
         register_block_type(__DIR__ . '/acfBlocks/card-panel');
+        register_block_type(__DIR__ . '/acfBlocks/card-steps-panel');
         register_block_type(__DIR__ . '/acfBlocks/text-and-image-panel');
         register_block_type(__DIR__ . '/acfBlocks/button-panel');
         register_block_type(__DIR__ . '/acfBlocks/image-slider-panel');
@@ -51,6 +52,7 @@ class ACFBlocks
         register_block_type(__DIR__ . '/acfBlocks/faq-steps-panel');
         register_block_type(__DIR__ . '/acfBlocks/contact-cards-panel');
         register_block_type(__DIR__ . '/acfBlocks/tripadvisor-reviews-panel');
+        register_block_type(__DIR__ . '/acfBlocks/block-info-panel');
     }
 
     // The set of custom ACF panel blocks available on post types below —
@@ -79,6 +81,7 @@ class ACFBlocks
         'acf/social-panel',
         'acf/trust-panel',
         'acf/card-panel',
+        'acf/card-steps-panel',
         'acf/text-and-image-panel',
         'acf/button-panel',
         'acf/image-slider-panel',
@@ -89,6 +92,7 @@ class ACFBlocks
         'acf/faq-steps-panel',
         'acf/contact-cards-panel',
         'acf/tripadvisor-reviews-panel',
+        'acf/block-info-panel',
     ];
 
     // Post types restricted to ONLY the custom ACF panel blocks above (no

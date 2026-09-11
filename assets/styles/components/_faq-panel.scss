@@ -18,6 +18,13 @@
         margin: 0 auto;
     }
 
+    // Overrides panel-colour-modifiers' flat $color-fh-navy for this panel
+    // specifically — everything else picking "Navy" still gets the flat
+    // colour, just this one reads a bit richer with the added depth.
+    &.bgc-navy {
+        background: linear-gradient(135deg, $color-fh-navy 0%, shade($color-fh-navy, 20%) 100%);
+    }
+
     // Title/question/content/border colours below are tuned for a light
     // background — swap them for light-on-dark once a dark Background
     // Colour is picked, so the CMS field actually stays readable instead of

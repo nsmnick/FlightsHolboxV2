@@ -1,0 +1,19 @@
+{
+  "apiVersion": 3,
+  "name": "acf/card-steps-panel",
+  "title": "Card Steps Panel",
+  "description": "A row of numbered steps — icon, number, heading and text — connected by a dotted line, with an optional \"completed\" badge per step.",
+  "category": "theme",
+  "icon": "<svg width='24px' height='24px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='5' cy='12' r='3' stroke='#000' stroke-width='2'/><circle cx='12' cy='12' r='3' stroke='#000' stroke-width='2'/><circle cx='19' cy='12' r='3' stroke='#000' stroke-width='2'/><path d='M8.5 12h0M15.5 12h0' stroke='#000' stroke-width='2' stroke-linecap='round' stroke-dasharray='0 4'/></svg>",
+  "keywords": ["steps", "process", "numbered", "how it works", "booking"],
+  "acf": {
+    "mode": "preview",
+    "hideFieldsInSidebar": true,
+    "renderTemplate": "card-steps-panel.php"
+  },
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": false
+  }
+}

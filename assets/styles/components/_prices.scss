@@ -356,7 +356,7 @@
     display: block;
     margin-top: 14px;
     padding: 10px 16px;
-    background: $color-fh-navy;
+    background: linear-gradient(135deg, $color-fh-navy 0%, shade($color-fh-navy, 20%) 100%);
     color: $color-white;
     font-size: to-rem(12);
     font-weight: 700;

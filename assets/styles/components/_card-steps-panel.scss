@@ -1,0 +1,106 @@
+.card-steps-panel {
+  @include panel-settings-modifiers;
+
+  padding: 50px 0;
+}
+
+.card-steps-panel__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @include bp(tab) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+}
+
+.card-steps-panel__step {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 12px;
+
+  // Dotted connector — spans from this step's icon centre to the next
+  // step's icon centre, so it holds regardless of column width. Skipped
+  // on mobile, where steps stack vertically and a horizontal line between
+  // them would be meaningless.
+  &:not(:last-child)::after {
+    content: "";
+    display: none;
+
+    @include bp(tab) {
+      display: block;
+      position: absolute;
+      top: 32px;
+      left: calc(50% + 32px);
+      right: calc(-50% + 32px);
+      border-top: 2px dotted $color-fh-gold;
+    }
+  }
+}
+
+.card-steps-panel__icon-wrap {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.card-steps-panel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+
+  img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+}
+
+.card-steps-panel__badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: $color-fh-gold;
+  border: 2px solid $color-white;
+}
+
+.card-steps-panel__number {
+  color: $color-fh-gold;
+  font-family: get-font-family("main");
+  font-size: to-rem(20);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.card-steps-panel__heading {
+  color: $color-fh-navy;
+  font-family: get-font-family("main");
+  font-size: to-rem(17);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 6px;
+}
+
+.card-steps-panel__text {
+  color: $color-dark-grey;
+  font-family: get-font-family("main");
+  font-size: to-rem(14);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
