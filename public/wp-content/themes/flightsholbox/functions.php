@@ -579,6 +579,48 @@ function fh_gf_booking_notification($notification, $form, $entry)
     return $notification;
 }
 
+// Register "confirmation_token" as searchable Gravity Forms entry meta —
+// required for GFAPI::get_entries()'s field_filters to be able to look an
+// entry up by it, since it isn't a real form field.
+add_filter('gform_entry_meta', 'fh_gf_register_confirmation_token_meta');
+function fh_gf_register_confirmation_token_meta($entry_meta)
+{
+    $entry_meta['confirmation_token'] = [
+        'label'             => 'Confirmation Token',
+        'is_numeric'        => false,
+        'is_default_column' => false,
+    ];
+
+    return $entry_meta;
+}
+
+// A random, unguessable per-entry token — NOT the entry's own (sequential,
+// guessable) ID — is what the booking confirmation page looks entries up
+// by, so a visitor can't view another customer's booking just by editing
+// the URL.
+add_action('gform_after_submission_1', 'fh_gf_generate_confirmation_token', 10, 2);
+function fh_gf_generate_confirmation_token($entry, $form)
+{
+    gform_update_meta($entry['id'], 'confirmation_token', bin2hex(random_bytes(20)));
+}
+
+// Overrides whatever Confirmation is configured in the GF admin for this
+// form — always redirects to the booking confirmation page with this
+// entry's token, never its raw (guessable) ID.
+add_filter('gform_confirmation_1', 'fh_gf_booking_confirmation_redirect', 10, 4);
+function fh_gf_booking_confirmation_redirect($confirmation, $form, $entry, $ajax)
+{
+    $token = gform_get_meta($entry['id'], 'confirmation_token');
+
+    if (!$token) {
+        return $confirmation;
+    }
+
+    return [
+        'redirect' => add_query_arg('token', $token, site_url('/booking-confirmation/')),
+    ];
+}
+
 
 // ─── Categories dropdown helper ────────────────────────────────────────────────
 

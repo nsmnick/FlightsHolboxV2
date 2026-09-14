@@ -1,13 +1,25 @@
 <?php get_header(); ?>
 
 <?php
-$entry_id = isset($_GET['entry_id']) ? (int) $_GET['entry_id'] : 0;
-$entry    = $entry_id ? GFAPI::get_entry($entry_id) : null;
+// Looked up by a random per-entry token (set in functions.php via
+// gform_after_submission_1), never by the entry's own sequential ID — an ID
+// in the URL would let anyone view another customer's booking just by
+// incrementing/decrementing it.
+$token   = isset($_GET['token']) ? sanitize_text_field($_GET['token']) : '';
+$entries = $token ? GFAPI::get_entries(
+    1,
+    [
+        'status'        => 'active',
+        'field_filters' => [
+            ['key' => 'confirmation_token', 'value' => $token],
+        ],
+    ],
+    [],
+    ['page_size' => 1]
+) : [];
 
-$valid = $entry
-    && !is_wp_error($entry)
-    && (int) $entry['form_id'] === 1
-    && $entry['status'] !== 'trash';
+$entry = (!is_wp_error($entries) && !empty($entries)) ? $entries[0] : null;
+$valid = (bool) $entry;
 
 $is_round_trip = $valid && ($entry['44'] ?? '') === 'Round Trip';
 ?>

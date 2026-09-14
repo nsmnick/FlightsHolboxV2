@@ -1,0 +1,56 @@
+.booking-confirmation-page {
+  padding: 60px 0;
+
+  @include bp(desk) {
+    padding: 80px 0;
+  }
+
+  &__container {
+    max-width: 640px;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  &__title {
+    color: $color-fh-navy;
+    @include panel-heading;
+  }
+
+  &__ref {
+    color: $color-fh-charcoal;
+    font-size: to-rem(14);
+    margin: 0;
+
+    strong {
+      color: $color-fh-dark;
+    }
+  }
+
+  // The shared .booking-summary-block (see _prices.scss) already provides
+  // the background/border/row styling used here — this only adds the
+  // larger, page-level type size a full confirmation page needs versus its
+  // original compact use inside the booking form itself.
+  &__summary {
+    font-size: to-rem(15);
+    padding: 24px 28px;
+  }
+
+  &__missing {
+    text-align: center;
+    color: $color-fh-charcoal;
+    font-size: to-rem(16);
+    line-height: 1.6;
+
+    a {
+      color: $color-fh-navy;
+      text-decoration: underline;
+
+      &:hover {
+        color: $color-fh-gold;
+      }
+    }
+  }
+}
