@@ -594,26 +594,24 @@ function fh_gf_register_confirmation_token_meta($entry_meta)
     return $entry_meta;
 }
 
-// A random, unguessable per-entry token — NOT the entry's own (sequential,
-// guessable) ID — is what the booking confirmation page looks entries up
-// by, so a visitor can't view another customer's booking just by editing
-// the URL.
-add_action('gform_after_submission_1', 'fh_gf_generate_confirmation_token', 10, 2);
-function fh_gf_generate_confirmation_token($entry, $form)
-{
-    gform_update_meta($entry['id'], 'confirmation_token', bin2hex(random_bytes(20)));
-}
-
 // Overrides whatever Confirmation is configured in the GF admin for this
-// form — always redirects to the booking confirmation page with this
-// entry's token, never its raw (guessable) ID.
+// form — always redirects to the booking confirmation page with a random,
+// unguessable per-entry token, NOT the entry's own (sequential, guessable)
+// ID, so a visitor can't view another customer's booking just by editing
+// the URL.
+//
+// The token is generated right here rather than in a separate
+// gform_after_submission hook — that hook actually fires AFTER GF has
+// already processed notifications and the confirmation, not before, so a
+// token saved there is never ready in time for this filter to use it.
 add_filter('gform_confirmation_1', 'fh_gf_booking_confirmation_redirect', 10, 4);
 function fh_gf_booking_confirmation_redirect($confirmation, $form, $entry, $ajax)
 {
     $token = gform_get_meta($entry['id'], 'confirmation_token');
 
     if (!$token) {
-        return $confirmation;
+        $token = bin2hex(random_bytes(20));
+        gform_update_meta($entry['id'], 'confirmation_token', $token);
     }
 
     return [

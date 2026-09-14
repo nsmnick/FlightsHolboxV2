@@ -38,14 +38,11 @@ define( 'DB_PASSWORD', 'root' );
 /** Database hostname */
 define( 'DB_HOST', 'localhost' );
 
-
-define( 'DB_NAME', 'dbu32roeclecl4' );
-
-define( 'DB_USER', 'ubswb8w8qmacu' );
-
-define( 'DB_PASSWORD', 'b533gij4bxoj' );
-
-define( 'DB_HOST', 'localhost' );
+// A second, unused set of credentials used to be defined again right here
+// (same four constants, different values) — PHP's define() keeps whichever
+// definition comes first and only warns about the rest, so those never
+// actually took effect; they just produced a "Constant already defined"
+// warning on every single page load. Removed rather than left active-but-dead.
 
 define( 'DB_CHARSET', 'utf8' );
 

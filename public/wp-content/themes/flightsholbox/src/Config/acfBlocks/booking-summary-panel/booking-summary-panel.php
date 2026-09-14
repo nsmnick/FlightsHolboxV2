@@ -1,42 +1,44 @@
-<?php get_header(); ?>
-
 <?php
-// Looked up by a random per-entry token (set in functions.php via
-// gform_after_submission_1), never by the entry's own sequential ID — an ID
-// in the URL would let anyone view another customer's booking just by
-// incrementing/decrementing it.
-$token   = isset($_GET['token']) ? sanitize_text_field($_GET['token']) : '';
-$entries = $token ? GFAPI::get_entries(
-    1,
-    [
-        'status'        => 'active',
-        'field_filters' => [
-            ['key' => 'confirmation_token', 'value' => $token],
+include __DIR__ . '/../_block-generics.php';
+include __DIR__ . '/../_block-preview.php';
+
+if (!$is_preview && !$hide_panel && !$preview_popup_image) {
+    // Looked up by a random per-entry token (set in functions.php via the
+    // gform_confirmation_1 filter), never by the entry's own sequential ID
+    // — an ID in the URL would let anyone view another customer's booking
+    // just by incrementing/decrementing it.
+    $token   = isset($_GET['token']) ? sanitize_text_field($_GET['token']) : '';
+    $entries = $token ? GFAPI::get_entries(
+        1,
+        [
+            'status'        => 'active',
+            'field_filters' => [
+                ['key' => 'confirmation_token', 'value' => $token],
+            ],
         ],
-    ],
-    [],
-    ['page_size' => 1]
-) : [];
+        [],
+        ['page_size' => 1]
+    ) : [];
 
-$entry = (!is_wp_error($entries) && !empty($entries)) ? $entries[0] : null;
-$valid = (bool) $entry;
+    $entry = (!is_wp_error($entries) && !empty($entries)) ? $entries[0] : null;
+    $valid = (bool) $entry;
 
-$is_round_trip = $valid && ($entry['44'] ?? '') === 'Round Trip';
+    $is_round_trip = $valid && ($entry['44'] ?? '') === 'Round Trip';
 ?>
 
-<section class="booking-confirmation-page">
-    <div class="container booking-confirmation-page__container">
+<section class="booking-summary-panel <?php echo $generic_block_settings_classes; ?>">
+    <div class="container <?php echo $generic_container_class; ?>">
 
         <?php if ($valid) : ?>
 
-            <div class="booking-confirmation-page__header">
-                <h1 class="booking-confirmation-page__title">Booking Request Received</h1>
-                <p class="booking-confirmation-page__ref">
+            <div class="booking-summary-panel__header">
+                <h1 class="booking-summary-panel__title">Booking Request Received</h1>
+                <p class="booking-summary-panel__ref">
                     Booking Reference: <strong>#<?php echo esc_html($entry['id']); ?></strong>
                 </p>
             </div>
 
-            <div class="booking-summary-block booking-confirmation-page__summary">
+            <div class="booking-summary-block booking-summary-panel__summary">
                 <div class="booking-summary-block__row">
                     <strong>Route:</strong>
                     <?php echo esc_html($entry['18'] ?? ''); ?> &rarr; <?php echo esc_html($entry['19'] ?? ''); ?>
@@ -79,7 +81,7 @@ $is_round_trip = $valid && ($entry['44'] ?? '') === 'Round Trip';
 
         <?php else : ?>
 
-            <div class="booking-confirmation-page__missing">
+            <div class="booking-summary-panel__missing">
                 <p>
                     We couldn't find that booking. If you've just submitted a request, please check your
                     email for confirmation, or <a href="<?php echo esc_url(site_url('/flights')); ?>">start a new search</a>.
@@ -91,8 +93,6 @@ $is_round_trip = $valid && ($entry['44'] ?? '') === 'Round Trip';
     </div>
 </section>
 
-<?php while (have_posts()) : the_post(); ?>
-    <?php the_content(); ?>
-<?php endwhile; ?>
-
-<?php get_footer(); ?>
+<?php
+}
+?>
