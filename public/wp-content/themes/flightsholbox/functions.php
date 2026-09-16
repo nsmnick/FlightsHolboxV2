@@ -579,6 +579,336 @@ function fh_gf_booking_notification($notification, $form, $entry)
     return $notification;
 }
 
+// Formats a Gravity Forms date field's raw value as "DD / Month / YYYY"
+// (e.g. "25 / December / 2026") — used everywhere a booking date is shown
+// (both notification emails and the Booking Summary Panel block), so the
+// format stays identical across all three.
+//
+// The Transfer Date field's own input mask displays as dd/mm/yyyy, but GF
+// actually stores date field values in the entry as Y-m-d regardless of
+// the display format configured on the field — that's the format that
+// needs parsing here, not the one shown to the person filling in the form.
+function fh_format_booking_date(string $raw_date): string
+{
+    $date = DateTime::createFromFormat('Y-m-d', $raw_date);
+
+    if (!$date) {
+        return esc_html($raw_date);
+    }
+
+    return $date->format('d') . ' / ' . $date->format('F') . ' / ' . $date->format('Y');
+}
+
+// The single source of truth for "what a booking confirmation shows" —
+// used by both notification emails below AND the Booking Summary Panel
+// block (src/Config/acfBlocks/booking-summary-panel/), so the page and the
+// emails can never drift out of sync with each other. Returns an ordered
+// list of [label, value_html] pairs rather than markup directly, since the
+// emails render them as table rows and the page block renders them as
+// .booking-summary-block__row divs.
+function fh_gf_booking_entry_rows(array $entry): array
+{
+    $is_round_trip = ($entry['44'] ?? '') === 'Round Trip';
+
+    $rows   = [];
+    $rows[] = ['Booking ID', '#' . esc_html($entry['id'] ?? '')];
+    $rows[] = ['Trip Type', $is_round_trip ? 'Round Trip' : 'One Way'];
+    $rows[] = ['Route', esc_html($entry['18'] ?? '') . ' &rarr; ' . esc_html($entry['19'] ?? '')];
+    $rows[] = ['Date of Flight', fh_format_booking_date($entry['1'] ?? '') . ' at ' . esc_html($entry['3'] ?? '')];
+
+    if ($is_round_trip) {
+        $rows[] = ['Return Date', fh_format_booking_date($entry['41'] ?? '') . ' at ' . esc_html($entry['42'] ?? '')];
+    }
+
+    $rows[] = ['Passenger Name(s)', nl2br(esc_html($entry['2'] ?? ''))];
+    $rows[] = ['Number of Passengers', esc_html($entry['34'] ?? '')];
+    $rows[] = ['Luggage Pieces', esc_html($entry['45'] ?? '0') . ' carry-on, ' . esc_html($entry['46'] ?? '0') . ' checked'];
+    $rows[] = ['Luggage Weight', esc_html($entry['32'] ?? '') . ' kg'];
+    $rows[] = ['Email', esc_html($entry['6'] ?? '')];
+    $rows[] = ['Phone Number', esc_html($entry['7'] ?? '')];
+    $rows[] = [
+        'Cost',
+        '$' . esc_html(number_format((float) ($entry['22'] ?? 0), 2)) . ' excl. tax &middot; $'
+            . esc_html(number_format((float) ($entry['38'] ?? 0), 2)) . ' incl. tax',
+    ];
+
+    return $rows;
+}
+
+// Renders fh_gf_booking_entry_rows() as <tr> table rows for the two HTML
+// emails below — kept separate from that function since the Booking
+// Summary Panel block renders the same rows as plain divs instead.
+function fh_gf_render_booking_rows_html(array $rows): string
+{
+    $rows_html = '';
+
+    foreach ($rows as $i => [$label, $value]) {
+        $border = $i < count($rows) - 1 ? 'border-bottom:1px solid #f1f1ee;' : '';
+        $rows_html .= '<tr>'
+            . '<td style="padding:10px 16px;' . $border . 'font-size:13px;color:#464749;white-space:nowrap;vertical-align:top;"><strong>' . esc_html($label) . '</strong></td>'
+            . '<td style="padding:10px 16px;' . $border . 'font-size:14px;color:#1b161c;">' . $value . '</td>'
+            . '</tr>';
+    }
+
+    return $rows_html;
+}
+
+// Shared branded HTML shell (navy header, white card, charcoal footer)
+// wrapping whichever heading/intro/rows a specific booking notification
+// needs — keeps the two emails visually consistent without duplicating
+// the table markup.
+function fh_gf_build_branded_email_html(string $heading, string $intro_html, string $rows_html, string $after_rows_html = ''): string
+{
+    $site_name = get_bloginfo('name');
+    $site_url  = site_url('/');
+
+    return <<<HTML
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#f1f1ee;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f1ee;padding:30px 0;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
+<tr>
+<td style="background:#00467b;padding:24px 32px;text-align:center;">
+<span style="color:#ffffff;font-size:22px;font-weight:bold;">{$site_name}</span>
+</td>
+</tr>
+<tr>
+<td style="padding:32px;">
+<h1 style="margin:0 0 8px;color:#00467b;font-size:22px;font-family:Arial,Helvetica,sans-serif;">{$heading}</h1>
+{$intro_html}
+<table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #d9d9d6;border-radius:6px;">
+{$rows_html}
+</table>
+{$after_rows_html}
+</td>
+</tr>
+<tr>
+<td style="background:#464749;padding:20px 32px;text-align:center;">
+<span style="color:#ffffff;font-size:13px;">{$site_name} &middot; <a href="{$site_url}" style="color:#ffffff;">{$site_url}</a></span>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+HTML;
+}
+
+// Both booking notification emails send from the site's admin email (set
+// in Settings > General) rather than Gravity Forms' own hardcoded sender
+// address — read dynamically so it always matches whatever that setting
+// is currently set to, with no code change needed if it's updated later.
+add_filter('gform_notification_1', 'fh_gf_booking_email_sender', 5, 3);
+function fh_gf_booking_email_sender($notification, $form, $entry)
+{
+    if (!in_array($notification['name'], ['Customer Confirmation', 'Admin Notification'], true)) {
+        return $notification;
+    }
+
+    $admin_email = get_option('admin_email');
+
+    $notification['from']     = $admin_email;
+    $notification['fromName'] = get_bloginfo('name');
+
+    if ($notification['name'] === 'Admin Notification') {
+        $notification['to']     = $admin_email;
+        $notification['toType'] = 'email';
+    }
+
+    return $notification;
+}
+
+// Replaces the Customer Confirmation notification's body with a branded
+// HTML summary of the actual booking (previously just a generic "we'll be
+// in touch" message with no booking details, plus a broken image reference
+// left over from the pre-migration site).
+add_filter('gform_notification_1', 'fh_gf_customer_confirmation_email', 10, 3);
+function fh_gf_customer_confirmation_email($notification, $form, $entry)
+{
+    if ($notification['name'] !== 'Customer Confirmation') return $notification;
+
+    $notification['message'] = fh_gf_render_customer_confirmation_html($entry);
+
+    // Otherwise GF converts every newline in the HTML above into an extra
+    // <br /> — its auto-formatting is meant for plain-text messages, not a
+    // fully hand-built HTML email like this one.
+    $notification['disableAutoformat'] = true;
+
+    return $notification;
+}
+
+// The customer-facing confirmation email — visually distinct from the
+// (much simpler) admin notification, matching a design the client's boss
+// supplied. Built entirely from real HTML/inline CSS + two images (hero
+// photo, logo), NOT the shared fh_gf_build_branded_email_html() shell used
+// by the admin email, since this one's structure genuinely diverges: hero
+// photo, success checkmark, and a "What's next" steps panel that email has
+// no equivalent of.
+//
+// The "What's next" steps are built with plain numbered circles and real
+// text — not a single exported graphic — deliberately: a big share of
+// inboxes (Outlook, Gmail) hide images until the recipient clicks "show
+// images", and the step titles/descriptions need to still be readable at
+// that point. The fragile bits a real graphic would help with (overlapping
+// number badges, a dotted connector line) are skipped rather than
+// approximated with unreliable email CSS.
+function fh_gf_render_customer_confirmation_html(array $entry): string
+{
+    $site_name  = get_bloginfo('name');
+    $site_url   = site_url('/');
+    $admin_email = get_option('admin_email');
+    $rows_html  = fh_gf_render_booking_rows_html(fh_gf_booking_entry_rows($entry));
+    $hero_url   = esc_url(THEMEROOT . '/email-assets/hero-holbox.jpg');
+    $logo_url   = esc_url(THEMEROOT . '/email-assets/logo.png');
+
+    $steps = [
+        ['01', 'Request Received', 'We have received your flight details.'],
+        ['02', 'Availability &amp; Payment', 'Our team will confirm availability and send you a secure payment link.'],
+        ['03', 'Flight Confirmed', 'Once payment has been received, we will send your final flight confirmation with all details.'],
+    ];
+
+    $steps_html = '';
+    foreach ($steps as [$number, $title, $description]) {
+        $steps_html .= <<<HTML
+<td class="step-col" width="33%" valign="top" align="center" style="padding:0 10px;">
+<table cellpadding="0" cellspacing="0" style="margin:0 auto 12px;">
+<tr><td width="48" height="48" align="center" valign="middle" style="background:#00467b;border-radius:50%;color:#ffffff;font-size:16px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">{$number}</td></tr>
+</table>
+<p style="margin:0 0 4px;color:#1b161c;font-size:14px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">{$title}</p>
+<p style="margin:0;color:#656565;font-size:12px;line-height:1.5;font-family:Arial,Helvetica,sans-serif;">{$description}</p>
+</td>
+HTML;
+    }
+
+    return <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* Stacks the "What's next" steps to one full-width column per row on
+     phones, instead of staying cramped at ~180px each — most mobile email
+     clients (iOS Mail, the Gmail app, Outlook mobile) respect this. */
+  @media only screen and (max-width: 600px) {
+    .step-col {
+      display: block !important;
+      width: 100% !important;
+      padding: 0 20px 20px !important;
+    }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#f1f1ee;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f1ee;padding:30px 0;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;overflow:hidden;">
+
+<tr>
+<td>
+<img src="{$hero_url}" width="600" alt="{$site_name}" style="display:block;width:100%;max-width:600px;height:auto;">
+</td>
+</tr>
+
+<tr>
+<td align="center" style="padding:20px 0 0;">
+<img src="{$logo_url}" width="90" height="90" alt="{$site_name}" style="display:block;margin-top:-65px;border-radius:50%;border:4px solid #ffffff;">
+</td>
+</tr>
+
+<tr>
+<td align="center" style="padding:16px 32px 0;">
+<span style="display:inline-block;width:40px;height:40px;line-height:40px;border-radius:50%;background:#e6f4ea;color:#2e7d32;font-size:20px;font-weight:bold;">&#10003;</span>
+</td>
+</tr>
+
+<tr>
+<td align="center" style="padding:16px 32px 0;">
+<h1 style="margin:0 0 6px;color:#00467b;font-size:24px;font-family:Arial,Helvetica,sans-serif;">Thank You for Your Booking Request</h1>
+<p style="margin:0;color:#2e7d32;font-size:14px;font-weight:bold;">Your flight request has been successfully submitted.</p>
+</td>
+</tr>
+
+<tr>
+<td align="center" style="padding:16px 40px 0;">
+<p style="margin:0;color:#656565;font-size:14px;line-height:1.7;">
+Thank you for choosing {$site_name}. Our team will now review your flight details and availability. We will contact you within the next 24 hours with the next steps and payment information.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="padding:32px;">
+<h2 style="margin:0 0 20px;color:#00467b;font-size:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;">Booking Request Received</h2>
+<table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #d9d9d6;border-radius:6px;">
+{$rows_html}
+</table>
+</td>
+</tr>
+
+<tr>
+<td style="padding:8px 32px 32px;">
+<h2 style="margin:0 0 20px;color:#00467b;font-size:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;">What's next?</h2>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+{$steps_html}
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td style="padding:8px 32px 32px;text-align:center;">
+<h2 style="margin:0 0 8px;color:#00467b;font-size:18px;font-family:Arial,Helvetica,sans-serif;">Please Review Your Request</h2>
+<p style="margin:0 0 4px;color:#656565;font-size:13px;line-height:1.6;">
+If you notice any mistakes or need to make changes to your request, please contact us at<br>
+<a href="mailto:{$admin_email}" style="color:#00467b;font-weight:bold;">{$admin_email}</a>
+</p>
+<p style="margin:0;color:#656565;font-size:13px;line-height:1.6;">
+or simply submit a new booking request with the correct details.
+</p>
+</td>
+</tr>
+
+<tr>
+<td style="background:#464749;padding:20px 32px;text-align:center;">
+<span style="color:#ffffff;font-size:13px;">{$site_name} &middot; <a href="{$site_url}" style="color:#ffffff;">{$site_url}</a></span>
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+HTML;
+}
+
+// Replaces the Admin Notification's body with the same branded HTML
+// summary as the customer email, addressed internally instead — previously
+// this was Gravity Forms' default plain-text field dump.
+add_filter('gform_notification_1', 'fh_gf_admin_notification_email', 10, 3);
+function fh_gf_admin_notification_email($notification, $form, $entry)
+{
+    if ($notification['name'] !== 'Admin Notification') return $notification;
+
+    $rows_html  = fh_gf_render_booking_rows_html(fh_gf_booking_entry_rows($entry));
+    $intro_html = <<<HTML
+<p style="margin:0 0 24px;color:#464749;font-size:15px;line-height:1.6;">
+A new booking request has just come in — details below.
+</p>
+HTML;
+
+    $notification['message'] = fh_gf_build_branded_email_html('New Booking Request', $intro_html, $rows_html);
+    $notification['disableAutoformat'] = true;
+
+    return $notification;
+}
+
 // Register "confirmation_token" as searchable Gravity Forms entry meta —
 // required for GFAPI::get_entries()'s field_filters to be able to look an
 // entry up by it, since it isn't a real form field.

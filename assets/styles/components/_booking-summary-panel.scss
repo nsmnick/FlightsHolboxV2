@@ -17,16 +17,6 @@
     @include panel-heading;
   }
 
-  &__ref {
-    color: $color-fh-charcoal;
-    font-size: to-rem(14);
-    margin: 0;
-
-    strong {
-      color: $color-fh-dark;
-    }
-  }
-
   // The shared .booking-summary-block (see _prices.scss) already provides
   // the background/border/row styling used here — this only adds the
   // larger, page-level type size and centred max-width a full confirmation

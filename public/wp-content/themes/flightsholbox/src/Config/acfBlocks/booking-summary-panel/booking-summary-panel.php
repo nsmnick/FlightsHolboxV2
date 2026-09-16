@@ -23,7 +23,10 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
     $entry = (!is_wp_error($entries) && !empty($entries)) ? $entries[0] : null;
     $valid = (bool) $entry;
 
-    $is_round_trip = $valid && ($entry['44'] ?? '') === 'Round Trip';
+    // Same row list (and order) as the two booking notification emails —
+    // see fh_gf_booking_entry_rows() in functions.php — so the page and
+    // the emails a customer already received never show different info.
+    $rows = $valid ? fh_gf_booking_entry_rows($entry) : [];
 ?>
 
 <section class="booking-summary-panel <?php echo $generic_block_settings_classes; ?>">
@@ -33,50 +36,17 @@ if (!$is_preview && !$hide_panel && !$preview_popup_image) {
 
             <div class="booking-summary-panel__header">
                 <h1 class="booking-summary-panel__title">Booking Request Received</h1>
-                <p class="booking-summary-panel__ref">
-                    Booking Reference: <strong>#<?php echo esc_html($entry['id']); ?></strong>
-                </p>
             </div>
 
             <div class="booking-summary-block booking-summary-panel__summary">
-                <div class="booking-summary-block__row">
-                    <strong>Route:</strong>
-                    <?php echo esc_html($entry['18'] ?? ''); ?> &rarr; <?php echo esc_html($entry['19'] ?? ''); ?>
-                </div>
-
-                <div class="booking-summary-block__row">
-                    <strong>Transfer Date:</strong>
-                    <?php echo esc_html($entry['1'] ?? ''); ?> at <?php echo esc_html($entry['3'] ?? ''); ?>
-                </div>
-
-                <?php if ($is_round_trip) : ?>
-                    <div class="booking-summary-block__row">
-                        <strong>Return Date:</strong>
-                        <?php echo esc_html($entry['41'] ?? ''); ?> at <?php echo esc_html($entry['42'] ?? ''); ?>
+                <?php foreach ($rows as $i => [$label, $value]) :
+                    $is_last = $i === count($rows) - 1;
+                ?>
+                    <div class="booking-summary-block__row<?php echo $is_last ? ' booking-summary-block__row--total' : ''; ?>">
+                        <strong><?php echo esc_html($label); ?>:</strong>
+                        <?php echo $value; ?>
                     </div>
-                <?php endif; ?>
-
-                <div class="booking-summary-block__row">
-                    <strong>Passenger Names:</strong>
-                    <?php echo nl2br(esc_html($entry['2'] ?? '')); ?>
-                </div>
-
-                <div class="booking-summary-block__row">
-                    <strong>Number of Passengers:</strong>
-                    <?php echo esc_html($entry['34'] ?? ''); ?>
-                </div>
-
-                <div class="booking-summary-block__row">
-                    <strong>Email:</strong>
-                    <?php echo esc_html($entry['6'] ?? ''); ?>
-                </div>
-
-                <div class="booking-summary-block__row booking-summary-block__row--total">
-                    <strong>Cost:</strong>
-                    $<?php echo esc_html(number_format((float) ($entry['22'] ?? 0), 2)); ?> excl. tax
-                    &middot;
-                    $<?php echo esc_html(number_format((float) ($entry['38'] ?? 0), 2)); ?> incl. tax
-                </div>
+                <?php endforeach; ?>
             </div>
 
         <?php else : ?>
