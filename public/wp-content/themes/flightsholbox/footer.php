@@ -126,6 +126,8 @@ $footer_tripadvisor = get_field('footer_social_tripadvisor', 'option');
 
 </footer>
 
+<?php include get_stylesheet_directory() . '/partials/cookie-accept.php'; ?>
+
 <?php wp_footer(); ?>
 
 </body>

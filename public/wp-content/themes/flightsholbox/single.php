@@ -31,11 +31,20 @@
     </div>
 
     <div class="cpt-single__intro-section">
-        <div class="container cpt-single__intro-container">
-            <div class="cpt-single__intro content">
-                <?php the_content(); ?>
+        <?php if (has_blocks()) : ?>
+            <?php // ACF panel blocks manage their own container width via
+            // Panel Settings (Container Size) — nesting them inside the
+            // 860px prose wrapper below would silently cap every block at
+            // that width regardless of what's picked, same fix already
+            // applied to single-activities.php / single-airports.php. ?>
+            <?php the_content(); ?>
+        <?php else : ?>
+            <div class="container cpt-single__intro-container">
+                <div class="cpt-single__intro content">
+                    <?php the_content(); ?>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 
     <div class="cpt-single__footer">

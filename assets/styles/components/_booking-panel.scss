@@ -85,7 +85,9 @@
 
   &__label {
     display: block;
-    color: rgba($color-fh-navy, 0.65);
+    // Solid navy, not a tint — 0.65 alpha only hit ~3.85:1 contrast on
+    // white, below WCAG AA's 4.5:1 minimum for this bold 11px label text.
+    color: $color-fh-navy;
     font-family: get-font-family("main");
     font-size: to-rem(11);
     font-weight: 700;

@@ -27,6 +27,20 @@ class CustomSelect {
     this.toggle.setAttribute("aria-haspopup", "listbox");
     this.toggle.setAttribute("aria-expanded", "false");
 
+    // The native <select> stays in the DOM but gets display:none (removing
+    // it from the accessibility tree), so its <label for="..."> no longer
+    // announces anything — point that same label at this button instead.
+    // Referencing both the label and the button itself (in that order) makes
+    // screen readers announce "FROM, Cancun Airport" rather than just "FROM".
+    this.toggle.id = `${select.id || Math.random().toString(36).slice(2)}-toggle`;
+    const nativeLabel = select.id && document.querySelector(`label[for="${select.id}"]`);
+    if (nativeLabel) {
+      nativeLabel.id = nativeLabel.id || `${select.id}-toggle-label`;
+      this.toggle.setAttribute("aria-labelledby", `${nativeLabel.id} ${this.toggle.id}`);
+    } else if (select.getAttribute("aria-label")) {
+      this.toggle.setAttribute("aria-label", select.getAttribute("aria-label"));
+    }
+
     this.list = document.createElement("ul");
     this.list.className = "custom-select__list";
     this.list.setAttribute("role", "listbox");
