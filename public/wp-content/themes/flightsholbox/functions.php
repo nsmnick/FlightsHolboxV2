@@ -698,10 +698,10 @@ function fh_gf_build_branded_email_html(string $heading, string $intro_html, str
 HTML;
 }
 
-// Both booking notification emails send from the site's admin email (set
-// in Settings > General) rather than Gravity Forms' own hardcoded sender
-// address — read dynamically so it always matches whatever that setting
-// is currently set to, with no code change needed if it's updated later.
+// Both booking notification emails send from FH_BOOKING_NOTIFICATION_EMAIL
+// (wp-config.php) rather than Gravity Forms' own hardcoded sender address —
+// falls back to the site's admin email (Settings > General) if that
+// constant is left blank, so this is a no-op change until someone sets it.
 add_filter('gform_notification_1', 'fh_gf_booking_email_sender', 5, 3);
 function fh_gf_booking_email_sender($notification, $form, $entry)
 {
@@ -710,8 +710,11 @@ function fh_gf_booking_email_sender($notification, $form, $entry)
     }
 
     $admin_email = get_option('admin_email');
+    $from_email  = (defined('FH_BOOKING_NOTIFICATION_EMAIL') && FH_BOOKING_NOTIFICATION_EMAIL)
+        ? FH_BOOKING_NOTIFICATION_EMAIL
+        : $admin_email;
 
-    $notification['from']     = $admin_email;
+    $notification['from']     = $from_email;
     $notification['fromName'] = get_bloginfo('name');
 
     if ($notification['name'] === 'Admin Notification') {
@@ -758,10 +761,12 @@ function fh_gf_customer_confirmation_email($notification, $form, $entry)
 // approximated with unreliable email CSS.
 function fh_gf_render_customer_confirmation_html(array $entry): string
 {
-    $site_name  = get_bloginfo('name');
-    $site_url   = site_url('/');
-    $admin_email = get_option('admin_email');
-    $rows_html  = fh_gf_render_booking_rows_html(fh_gf_booking_entry_rows($entry));
+    $site_name    = get_bloginfo('name');
+    $site_url     = site_url('/');
+    $admin_email  = (defined('FH_BOOKING_NOTIFICATION_EMAIL') && FH_BOOKING_NOTIFICATION_EMAIL)
+        ? FH_BOOKING_NOTIFICATION_EMAIL
+        : get_option('admin_email');
+    $rows_html    = fh_gf_render_booking_rows_html(fh_gf_booking_entry_rows($entry));
     $hero_url   = esc_url(THEMEROOT . '/email-assets/hero-holbox.jpg');
     $logo_url   = esc_url(THEMEROOT . '/email-assets/logo.png');
 

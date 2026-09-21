@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Swiper from "swiper";
-import { Navigation, Pagination, EffectFade, Autoplay } from "swiper/modules";
+import { Navigation, Pagination, EffectFade, Autoplay, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
@@ -109,7 +109,7 @@ export default function initSliders() {
       );
 
       new Swiper(wrapperEl, {
-        modules: [Navigation, Pagination, EffectFade],
+        modules: [Navigation, Pagination, EffectFade, A11y],
         slidesPerView: 1,
         loop: true,
         effect: "fade",
@@ -129,6 +129,12 @@ export default function initSliders() {
           bulletActiveClass: "text-and-image-slider__pagination__bullet--active",
           bulletClass: "text-and-image-slider__pagination__bullet",
           bulletElement: "button",
+        },
+        // A11y module gives the pagination container a valid role (replacing
+        // the plain <div aria-label="Choose an image"> below, which PageSpeed
+        // flags as an invalid ARIA host) and labels each bullet "Go to slide N".
+        a11y: {
+          paginationBulletMessage: "Go to slide {{index}}",
         },
         on: {
           slideChange(swiper) {

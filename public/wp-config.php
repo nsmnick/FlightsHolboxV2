@@ -102,6 +102,14 @@ $table_prefix = 'wp_';
 // Google Cloud Console to this server's IP and to the Places API only.
 define('GOOGLE_PLACES_API_KEY', '');
 
+// Sender address for the booking notification/confirmation emails (see
+// fh_gf_booking_email_sender() in functions.php). Leave blank to fall back
+// to Settings > General's Administration Email, as before. Whatever
+// address goes here must also be set up as the "From Email" (or a verified
+// send-as alias) in Settings > WP Mail SMTP, or the connected mailer may
+// reject/rewrite it.
+define('FH_BOOKING_NOTIFICATION_EMAIL', 'info@flights-holbox.com');
+
 
 
 /**

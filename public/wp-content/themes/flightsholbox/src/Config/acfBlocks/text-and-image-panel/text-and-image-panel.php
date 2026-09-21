@@ -97,7 +97,7 @@ if (!$preview_popup_image && !$hide_panel) {
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
                         </button>
 
-                        <div class="text-and-image-slider__pagination" aria-label="Choose an image"></div>
+                        <div class="text-and-image-slider__pagination" role="group" aria-label="Choose an image"></div>
                     <?php endif; ?>
                 </div>
             <?php elseif ($image) : ?>

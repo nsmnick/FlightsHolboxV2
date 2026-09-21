@@ -115,7 +115,9 @@
             font-size: to-rem(14);
             font-weight: 600;
             letter-spacing: 0.3px;
-            color: rgba(255, 255, 255, 0.5);
+            // 0.5 only hit ~3.7:1 contrast on the charcoal background,
+            // below WCAG AA's 4.5:1 minimum for this text size.
+            color: rgba(255, 255, 255, 0.7);
             white-space: nowrap;
           }
         }
@@ -175,7 +177,9 @@
       }
 
       .footer-address {
-        color: rgba(255, 255, 255, 0.55);
+        // 0.55 only hit ~4.1:1 contrast on the charcoal background, just
+        // under WCAG AA's 4.5:1 minimum.
+        color: rgba(255, 255, 255, 0.7);
         font-size: to-rem(14);
         margin: 0 auto 28px;
         text-align: center;
@@ -198,7 +202,9 @@
           font-size: to-rem(11);
           font-weight: 700;
           letter-spacing: 1.5px;
-          color: rgba(255, 255, 255, 0.4);
+          // 0.4 only hit ~2.9:1 contrast on the charcoal background, well
+          // below WCAG AA's 4.5:1 minimum for this bold uppercase text.
+          color: rgba(255, 255, 255, 0.7);
           margin-bottom: 14px;
         }
 

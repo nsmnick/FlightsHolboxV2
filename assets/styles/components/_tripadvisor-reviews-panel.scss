@@ -224,5 +224,14 @@
     @include bp(lap) {
       flex: 1 1 0;
     }
+
+    // The Rich Showcase for Google Reviews plugin's own CSS reads this
+    // custom property for its "powered by Google" text (falling back to
+    // #777777, which only hits ~4.46:1 on white — just under WCAG AA's
+    // 4.5:1 minimum) — setting it here overrides the value without having
+    // to fight the plugin's own !important rules.
+    .wp-gr {
+      --powered-color: #{$color-fh-charcoal};
+    }
   }
 }

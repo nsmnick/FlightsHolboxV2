@@ -74,6 +74,14 @@
     .search-form__group--button {
       flex: 0 0 auto;
     }
+
+    // .search-form__label is solid navy by default (correct on the white
+    // booking panel it was designed for), but this search bar sits on a
+    // near-black background — navy-on-near-black only hits ~1.8:1 contrast.
+    // Needs its own light colour here instead.
+    .search-form__label {
+      color: rgba($color-white, 0.85);
+    }
   }
 
   // ─── Body ──────────────────────────────────────────────────────────────────

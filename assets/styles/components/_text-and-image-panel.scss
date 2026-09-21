@@ -436,26 +436,49 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    // Gap is 0, not the old 9px — each bullet's own hit area (see &__bullet)
+    // was widened to 24px for a proper touch target, so the buttons now sit
+    // edge-to-edge rather than needing extra gap between them.
+    gap: 0;
     transform: translateX(-50%);
 
     &__bullet {
-      width: 9px;
-      height: 9px;
+      // Visible dot stays 9px, but the clickable button itself is padded out
+      // to a proper touch target (PageSpeed flagged the old 9px/9px-gap dots
+      // as both too small and too close together) — the dot is drawn via
+      // ::before so it stays centred inside the larger invisible hit area.
+      width: 24px;
+      height: 24px;
       padding: 0;
-      background: rgba($color-white, 0.7);
-      border: 1px solid rgba($color-fh-navy, 0.3);
-      border-radius: 50%;
+      background: transparent;
+      border: 0;
       cursor: pointer;
-      transition:
-        width 0.25s ease,
-        border-radius 0.25s ease,
-        background 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.25s ease;
+
+      &::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        background: rgba($color-white, 0.7);
+        border: 1px solid rgba($color-fh-navy, 0.3);
+        border-radius: 50%;
+        transition:
+          width 0.25s ease,
+          border-radius 0.25s ease,
+          background 0.25s ease;
+      }
 
       &--active {
-        width: 27px;
-        background: $color-white;
-        border-radius: 10px;
+        width: 42px;
+
+        &::before {
+          width: 27px;
+          background: $color-white;
+          border-radius: 10px;
+        }
       }
     }
   }
