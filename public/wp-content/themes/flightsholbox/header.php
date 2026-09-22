@@ -9,9 +9,12 @@
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
     <?php wp_head(); ?>
+
+	<?php echo get_field('header_scripts', 'options'); ?>
 </head>
 
 <body <?php body_class(); ?>>
+    <?php echo get_field('body_scripts', 'options'); ?>
 
     <header>
         <div id="page-header" class="page-header">
