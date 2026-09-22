@@ -702,28 +702,28 @@ HTML;
 // (wp-config.php) rather than Gravity Forms' own hardcoded sender address —
 // falls back to the site's admin email (Settings > General) if that
 // constant is left blank, so this is a no-op change until someone sets it.
-add_filter('gform_notification_1', 'fh_gf_booking_email_sender', 5, 3);
-function fh_gf_booking_email_sender($notification, $form, $entry)
-{
-    if (!in_array($notification['name'], ['Customer Confirmation', 'Admin Notification'], true)) {
-        return $notification;
-    }
+// add_filter('gform_notification_1', 'fh_gf_booking_email_sender', 5, 3);
+// function fh_gf_booking_email_sender($notification, $form, $entry)
+// {
+//     if (!in_array($notification['name'], ['Customer Confirmation', 'Admin Notification'], true)) {
+//         return $notification;
+//     }
 
-    $admin_email = get_option('admin_email');
-    $from_email  = (defined('FH_BOOKING_NOTIFICATION_EMAIL') && FH_BOOKING_NOTIFICATION_EMAIL)
-        ? FH_BOOKING_NOTIFICATION_EMAIL
-        : $admin_email;
+//     $admin_email = get_option('admin_email');
+//     $from_email  = (defined('FH_BOOKING_NOTIFICATION_EMAIL') && FH_BOOKING_NOTIFICATION_EMAIL)
+//         ? FH_BOOKING_NOTIFICATION_EMAIL
+//         : $admin_email;
 
-    $notification['from']     = $from_email;
-    $notification['fromName'] = get_bloginfo('name');
+//     $notification['from']     = $from_email;
+//     $notification['fromName'] = get_bloginfo('name');
 
-    if ($notification['name'] === 'Admin Notification') {
-        $notification['to']     = $admin_email;
-        $notification['toType'] = 'email';
-    }
+//     if ($notification['name'] === 'Admin Notification') {
+//         $notification['to']     = $admin_email;
+//         $notification['toType'] = 'email';
+//     }
 
-    return $notification;
-}
+//     return $notification;
+// }
 
 // Replaces the Customer Confirmation notification's body with a branded
 // HTML summary of the actual booking (previously just a generic "we'll be
