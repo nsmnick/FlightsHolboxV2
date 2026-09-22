@@ -27,16 +27,16 @@
 
 // JACOB
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'local' );
+// define( 'DB_NAME', 'local' );
 
-// /** Database username */
-define( 'DB_USER', 'root' );
+// // /** Database username */
+// define( 'DB_USER', 'root' );
 
-// /** Database password */
-define( 'DB_PASSWORD', 'root' );
+// // /** Database password */
+// define( 'DB_PASSWORD', 'root' );
 
-/** Database hostname */
-define( 'DB_HOST', 'localhost' );
+// /** Database hostname */
+// define( 'DB_HOST', 'localhost' );
 
 // A second, unused set of credentials used to be defined again right here
 // (same four constants, different values) — PHP's define() keeps whichever
@@ -48,6 +48,19 @@ define( 'DB_CHARSET', 'utf8' );
 
 define( 'DB_COLLATE', '' );
 
+
+// LIVE
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'db8mjf7lseuglj' );
+
+// /** Database username */
+define( 'DB_USER', 'ud2crcmmnzr3l' );
+
+// /** Database password */
+define( 'DB_PASSWORD', 'k4h3imkvff3z' );
+
+/** Database hostname */
+define( 'DB_HOST', 'localhost' );
 
 
 // Nick
